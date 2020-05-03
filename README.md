@@ -12,12 +12,12 @@
 :spades: :hearts: :clubs: :diamonds:
 
 ### Descripción
-El Carioca digital es la versión para ordenador del juego de naipes tipo rummy Carioca de
+El **Carioca digital** es la versión para ordenador del famoso juego de naipes tipo rummy _Carioca_ de
 origen Chileno. En este se utilizan dos barajas de naipes inglés y como mínimo 2 jugadores de forma
 local. El juego está dividido en 9 rondas o partidas, al inicio de cada una el jugador recibe 12
 naipes, el **objetivo** es formar un número de tríos (3 naipes del mismo número o letra) y/o escalas (4
 o 13 naipes ordenadas pero de la misma pinta, dependiendo de la ronda) de la forma
-que se especifica en cada una, con la particularidad de que el joker es un naipe comodin que puede
+que se especifica en cada una, con la particularidad de que el joker :black_joker: es un naipe comodin que puede
 reemplazar a cualquier carta. Una vez que el jugador haya formado los tríos y/o escalas, este puede
 bajarse (poner en la mesa sus cartas para que los demás jugadores puedan aportar naipes), a continuación el
 jugador se deshace de sus naipes restantes completando tríos o escalas que estén en la mesa que sean o no de él, gana la partida el primero que se quede sin naipes en mano, y a los demás jugadores se les calcula el puntaje de los naipes que quedaron en su mano, sumando así en cada ronda un punataje que se adicionará al total.
