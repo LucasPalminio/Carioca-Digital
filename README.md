@@ -1,6 +1,5 @@
 # Carioca-Digital
-
-![LogoCarioca](/images/Logo_carioca.png)
+<img src="/images/Logo_carioca.png" height="25%" width="25%">
 
 ## Juego de naipes carioca digital
 ## Digital carioca card game
