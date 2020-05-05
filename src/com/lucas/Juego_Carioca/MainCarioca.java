@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainCarioca {
-    static Scanner in = new Scanner(System.in);
+    public static Scanner in = new Scanner(System.in);
     public static final Mazo mazo = new Mazo();
 
     public static final int[][] rondas = {
@@ -39,8 +39,9 @@ public class MainCarioca {
         for (int index = 0; index < jugadores.size(); index++) {
             jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
         }
+        ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
+        pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa
 
-        Carta cartaEnLaMesa = mazo.sacarCarta(); //Se extrae una carta del mazo para dejarla en la mesa
         int turnoActual = (int) Math.random() * jugadores.size(); //y el primer turno se hara de forma aleatoria
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
@@ -51,6 +52,7 @@ public class MainCarioca {
 
         //Por el momento hay un bucle for para ver las cartas de cada jugador (Temporal)
         for (int i = 0; i < jugadores.size(); i++) {
+            Carta cartaEnLaMesa = pozo.get(pozo.size() - 1); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
             Jugador jugadorActual = jugadores.get(turnoActual);
             System.out.println("Turno Actual: " + turnoActual + " Nombre: " + jugadorActual.getNombre());
             System.out.println();
@@ -58,6 +60,7 @@ public class MainCarioca {
             System.out.println();
             System.out.println("Cartas del Jugador: ");
             jugadorActual.imprimirCartas();
+            jugadorActual.menu_SacarCarta(pozo, mazo);
             turnoActual++;
             if (turnoActual == jugadores.size()) {
                 turnoActual = 0;
@@ -66,6 +69,7 @@ public class MainCarioca {
 
         }
     }
+
 
     //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
     //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
@@ -94,27 +98,32 @@ public class MainCarioca {
 
     //Funcion que retorna el numero de jugadores que ingreso el usuario
     private static int ingresarNumeroDeJugadores() {
-        int nroJugadores = 0;
+
+        int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 3): ");
+        in.nextLine();
+        if (nroJugadores >= 3) {
+            return nroJugadores;
+        }
+        System.out.println("Error: el numero de Jugadores no es valido");
+        System.out.println("Por favor Intentelo nuevamente");
+        return ingresarNumeroDeJugadores();
+
+    }
+
+
+    public static int ingresarUnNumero(String mensaje) {
         while (true) {
             try {
-                System.out.print("Ingrese el numero de Jugadores (debe ser minimo 3): ");
-
-                nroJugadores = in.nextInt();
-                in.nextLine();
-                if (nroJugadores >= 3) {
-                    return nroJugadores;
-                } else {
-                    System.out.println("Error: el numero de Jugadores no es valido");
-
-                }
-
+                System.out.print(mensaje);
+                return in.nextInt();
             } catch (Exception e) {
                 System.out.println("Error: usted a introducido un caracter no valiudo: " + e.getMessage());
+                System.out.println("Intentelo nuevamente");
                 in.nextLine();
             }
-            System.out.println("Por favor Intentelo nuevamente");
 
         }
+
 
     }
 
