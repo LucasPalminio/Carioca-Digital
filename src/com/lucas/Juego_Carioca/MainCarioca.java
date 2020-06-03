@@ -40,9 +40,10 @@ public class MainCarioca {
             jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
         }
         ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
-        pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa
 
-        int turnoActual = (int) Math.random() * jugadores.size(); //y el primer turno se hara de forma aleatoria
+        pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa, al principio de la ronda (esta carta nunca sera un JKR)
+
+        int turnoActual = (int) (Math.random() * jugadores.size()); //y el primer turno se hara de forma aleatoria
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
         imprimirTitulo("Comienza el juego nivel " + (nivelActual + 6) + "\n"
@@ -126,7 +127,6 @@ public class MainCarioca {
 
 
     }
-
 
 }
 
