@@ -1,6 +1,7 @@
 package com.lucas.Juego_Carioca;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Jugador {
@@ -54,6 +55,7 @@ public class Jugador {
     public void menu_SacarCarta(ArrayList<Carta> pozo, Mazo mazo){
         System.out.println("(1) Sacar Carta de la mesa");
         System.out.println("(2) Sacar Carta del mazo ");
+        System.out.println("(3) Intercambiar el lugar de dos cartas ");
         System.out.print("Eliga una opcion: ");
         String opcion = in.nextLine();
         switch (opcion){
@@ -69,6 +71,23 @@ public class Jugador {
                 System.out.println("obtuviste esta carta del mazo: "+cartaDelMazo.toStringEC());
                 cartas.add(cartaDelMazo);
                 pozo.add(0,menu_BotarCarta());
+                break;
+            case "3": //Intercambiar dos cartas dentro de la misma mano
+                int primera_carta = 0;
+                int segunda_carta = 0;
+                System.out.println("Primera carta a intercambiar");
+                do {
+                    opcion = in.nextLine();
+                    primera_carta = toInt(opcion);
+                }while(toInt(opcion) > cartas.size()-1);
+                System.out.println("Segunda carta a intercambiar");
+                do {
+                    opcion = in.nextLine();
+                    segunda_carta = toInt(opcion);
+                }while(toInt(opcion) > cartas.size()-1);
+                Collections.swap(cartas,primera_carta,segunda_carta);
+                imprimirCartas();
+                menu_SacarCarta(pozo,mazo);
                 break;
             default:
                 System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
@@ -89,6 +108,9 @@ public class Jugador {
             return menu_BotarCarta();
         }
 
+    }
+    private int toInt(String caracter){
+        return Integer.parseInt(caracter);
     }
 
 }
