@@ -46,7 +46,7 @@ public class Jugador {
             Carta carta = cartas.get(i);
             primeraLinea += carta.toStringEC();
             int numeroEspacios = (carta.toString().length()+2)/2;
-            segundaLinea += " ".repeat(numeroEspacios)+i+" ".repeat(numeroEspacios);
+            segundaLinea += MainCarioca.repetirString(" ",numeroEspacios) +i+MainCarioca.repetirString(" ",numeroEspacios);
         }
         contenido = primeraLinea + "\n" + segundaLinea;
         System.out.println(contenido);
