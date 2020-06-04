@@ -86,6 +86,19 @@ public class MainCarioca {
 
     }
 
+    public static boolean sonNumerosDiferentes(int[] array){
+        int[] array2 = array.clone();
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array2.length; j++) {
+                if(array[j]==array[i] && i!=j){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
 
 

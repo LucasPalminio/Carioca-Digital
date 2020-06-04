@@ -8,6 +8,8 @@ public class Jugador {
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
+    private ArrayList<ArrayList<Carta>> matrizTrios;
+    private ArrayList<ArrayList<Carta>> matrizEscalas;
     public static Scanner in = new Scanner(System.in);
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -122,4 +124,52 @@ public class Jugador {
 
     }
 
+    public void bajarse(int NROTRIOS, int NROESCALAS){
+
+
+    }
+    private int[] ingresarIndices(int nroIndices) { // nroIndices puede ser 3 o 4
+        int[] indices = new int[nroIndices];
+        String EscalaOTrio = "";
+        if (nroIndices == 3) {
+            EscalaOTrio = "trio";
+        } else if (nroIndices == 4) {
+            EscalaOTrio = "escala";
+        }
+
+        System.out.println("Ingrese los indices de las cartas que formaran al " + EscalaOTrio + "(separado por espacios): ");
+        String[] indicesString = in.nextLine().split(" ");
+        if (indicesString.length == nroIndices) {
+            try {
+                for (int i = 0; i < indicesString.length; i++) {
+                    int numero = Integer.parseInt(indicesString[i]);
+
+                    if (numero >= 0 && numero < cartas.size()) {
+                        indices[i] = numero;
+                        if (i == 2) {
+                            if(MainCarioca.sonNumerosDiferentes(indices)) {
+                                return indices;
+                            }else{
+                                System.out.println("Los numeros deben ser diferentes, intentelo nuevamnete");
+                            }
+                        }
+                    } else {
+                        System.out.println("El numero: " + numero + " no esta dentro del rango");
+                        System.out.println("Intentelo nuevamente");
+                        break;
+                    }
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println("Error el caracter ingreado no es un numero");
+            }
+        } else {
+            System.out.println("Usted ingresado mas numero de lo permitido, intentelo nuevamnete");
+        }
+        return ingresarIndices(nroIndices);
+    }
+
+    /*
+    public ArrayList<Carta> crearUnaEscalar(){
+
+    }*/
 }
