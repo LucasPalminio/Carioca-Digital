@@ -3,7 +3,7 @@ package com.lucas.Juego_Carioca;
 import java.util.ArrayList;
 
 public class Ronda {
-    public static final int[][] rondas = {
+    public static final int[][] RONDAS = {
             //{Escala, Trio} ; 6,7,8,9,10,11
             {0, 2}, // 0*4+2*3 = 6 (2 trios)
             {1, 1}, //1*4+1*3 = 7 (1 escala y 1 trio)
@@ -15,17 +15,18 @@ public class Ronda {
     private int nivel;
     private ArrayList<Jugador> jugadores;
     private Mazo mazo;
-
+    private final int NROESCALAS;
+    private final int NROTRIOS;
     public Ronda(ArrayList<Jugador> jugadores, int nivel) {
         this.nivel = nivel;
         this.jugadores = jugadores;
         Mazo mazo = new Mazo();
+        NROESCALAS = RONDAS[nivel][0];
+        NROTRIOS = RONDAS[nivel][1];
     }
 
     public void menuJuego() {
         //Se crea un juego
-        int nroEscala = rondas[nivel][0];
-        int nroTrios = rondas[nivel][1];
         Mazo mazo = new Mazo();
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
@@ -40,7 +41,7 @@ public class Ronda {
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
         MainCarioca.imprimirTitulo("Comienza el juego nivel " + (nivel + 1) + "\n"
-                + "Escala: " + nroEscala + " Trios: " + nroTrios);
+                + "Escala: " + NROESCALAS + " Trios: " + NROTRIOS);
         //Aqui comienza el juego, deberia haber un bucle donde va jugando cada jugador,
         //el juego termina cuando un jugador se queda sin cartas
 
