@@ -53,7 +53,7 @@ public class MainCarioca {
 
         //Por el momento hay un bucle for para ver las cartas de cada jugador (Temporal)
         for (int i = 0; i < jugadores.size(); i++) {
-            Carta cartaEnLaMesa = pozo.get(pozo.size() - 1); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
+            Carta cartaEnLaMesa = pozo.get(0); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
             Jugador jugadorActual = jugadores.get(turnoActual);
             System.out.println("Turno Actual: " + turnoActual + " Nombre: " + jugadorActual.getNombre());
             System.out.println();

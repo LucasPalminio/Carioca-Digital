@@ -38,7 +38,7 @@ public class Jugador {
         return nombre;
     }
 
-    public void imprimirCartas(){
+    public void imprimirCartas(){ //Este metodo imprime las cartas del jugador
         String contenido = "";
         String primeraLinea = "";
         String segundaLinea = "";
@@ -62,13 +62,13 @@ public class Jugador {
                 cartas.add(cartaEnLaMesa);
                 pozo.remove(pozo.size()-1);
                 cartaEnLaMesa = menu_BotarCarta();
-                pozo.add(cartaEnLaMesa);
+                pozo.add(0,cartaEnLaMesa);
                 break;
             case "2": //Sacar Carta del mazo
                 Carta cartaDelMazo = mazo.sacarCarta();
                 System.out.println("obtuviste esta carta del mazo: "+cartaDelMazo.toStringEC());
                 cartas.add(cartaDelMazo);
-                pozo.add(menu_BotarCarta());
+                pozo.add(0,menu_BotarCarta());
                 break;
             default:
                 System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
