@@ -46,7 +46,7 @@ public class MainCarioca {
         int turnoActual = (int) (Math.random() * jugadores.size()); //y el primer turno se hara de forma aleatoria
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
-        imprimirTitulo("Comienza el juego nivel " + (nivelActual + 6) + "\n"
+        imprimirTitulo("Comienza el juego nivel " + (nivelActual + 1) + "\n"
                 + "Escala: " + nroEscala + " Trios: " + nroTrios);
         //Aqui comienza el juego, deberia haber un bucle donde va jugando cada jugador,
         //el juego termina cuando un jugador se queda sin cartas
@@ -100,9 +100,9 @@ public class MainCarioca {
     //Funcion que retorna el numero de jugadores que ingreso el usuario
     private static int ingresarNumeroDeJugadores() {
 
-        int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 3): ");
+        int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 2): ");
         in.nextLine();
-        if (nroJugadores >= 3) {
+        if (nroJugadores >= 2) {
             return nroJugadores;
         }
         System.out.println("Error: el numero de Jugadores no es valido");

@@ -52,7 +52,6 @@ public class Carta {
         return "|"+this.color+toString()+ANSI_RESET+"|";
 
     }
-
     //Cada carta tiene un precio,
     // Cuando el juego finaliza y el jugador tiene cartas en mano la suma de los precios de cada carta se adiciona a su puntaje
     //El objetivo de cada juego es ser el primero en quedar sin cartas, por lo tanto el ganador del Carioca es aquel que tenga el menor puntaje

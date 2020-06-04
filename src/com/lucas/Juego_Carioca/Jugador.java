@@ -58,9 +58,9 @@ public class Jugador {
         String opcion = in.nextLine();
         switch (opcion){
             case "1": //Sacar Carta de la mesa
-                Carta cartaEnLaMesa = pozo.get(pozo.size()-1);
+                Carta cartaEnLaMesa = pozo.get(0);
                 cartas.add(cartaEnLaMesa);
-                pozo.remove(pozo.size()-1);
+                pozo.remove(0);
                 cartaEnLaMesa = menu_BotarCarta();
                 pozo.add(0,cartaEnLaMesa);
                 break;
