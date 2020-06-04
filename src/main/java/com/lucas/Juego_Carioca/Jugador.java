@@ -73,21 +73,7 @@ public class Jugador {
                 pozo.add(0,menu_BotarCarta());
                 break;
             case "3": //Intercambiar dos cartas dentro de la misma mano
-                int primera_carta = 0;
-                int segunda_carta = 0;
-                System.out.println("Primera carta a intercambiar");
-                do {
-                    opcion = in.nextLine();
-                    primera_carta = toInt(opcion);
-                }while(toInt(opcion) > cartas.size()-1);
-                System.out.println("Segunda carta a intercambiar");
-                do {
-                    opcion = in.nextLine();
-                    segunda_carta = toInt(opcion);
-                }while(toInt(opcion) > cartas.size()-1);
-                Collections.swap(cartas,primera_carta,segunda_carta);
-                imprimirCartas();
-                menu_SacarCarta(pozo,mazo);
+                intercambiarCartas(opcion,pozo,mazo);
                 break;
             default:
                 System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
@@ -111,6 +97,29 @@ public class Jugador {
     }
     private int toInt(String caracter){
         return Integer.parseInt(caracter);
+    }
+    private void intercambiarCartas(String opcion,ArrayList<Carta> pozo,Mazo mazo ){
+
+            int primera_carta = 0;
+            int segunda_carta = 0;
+        try {
+            System.out.println("Primera carta a intercambiar:");
+
+            opcion = in.nextLine();
+            primera_carta = toInt(opcion);
+
+            System.out.println("Segunda carta a intercambiar:");
+
+            opcion = in.nextLine();
+            segunda_carta = toInt(opcion);
+            }catch(Exception e){
+            System.out.println("Ingresaste un número de carta inválido,\npor favor inténtalo de nuevo");
+                intercambiarCartas(opcion,pozo,mazo);
+            }
+            Collections.swap(cartas, primera_carta, segunda_carta);
+            imprimirCartas();
+            menu_SacarCarta(pozo, mazo);
+
     }
 
 }
