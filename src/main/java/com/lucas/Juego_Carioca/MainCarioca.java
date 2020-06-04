@@ -10,7 +10,7 @@ public class MainCarioca {
 
         ArrayList<Jugador> jugadores = ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         int nivelActual = 0;// Se comienza desde la ronda 0 pero en Juego es la ronda 1
-        while (nivelActual < Ronda.rondas.length) {
+        while (nivelActual < Ronda.RONDAS.length) {
             Ronda rondaActual = new Ronda(jugadores, nivelActual);
             rondaActual.menuJuego();
             //Agregar: Por cada juego completo, se muestra en pantalla los puntajes de cada jugador y quien lleva la delantera (gana el que tiene menor puntaje)
