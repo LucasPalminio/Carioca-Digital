@@ -53,10 +53,10 @@ public class Ronda {
             System.out.println();
             System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC());
             System.out.println();
-            System.out.println("Cartas del Jugador: ");
+            jugadorActual.setNROTRIOSyNROESCALAS(NROTRIOS,NROESCALAS);
             jugadorActual.imprimirCartas();
-            jugadorActual.menu_SacarCarta(pozo, mazo);
-            if(jugadorActual.getCartas().size()==0){
+            jugadorActual.menu(pozo, mazo);
+            if(jugadorActual.getNroCartas()==0){
                 //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida
                 System.out.println("Fin de la ronda, la ronda gano ");
                 break;
