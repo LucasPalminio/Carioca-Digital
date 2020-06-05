@@ -8,8 +8,8 @@ public class Jugador {
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
-    private ArrayList<ArrayList<Carta>> matrizTrios;
-    private ArrayList<ArrayList<Carta>> matrizEscalas;
+    private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>();
+    private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
     private int NROTRIOS;
     private int NROESCALAS;
     public static Scanner in = new Scanner(System.in);
