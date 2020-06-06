@@ -8,29 +8,20 @@ public class Jugador {
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
+    private boolean seBajo;
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>();
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
-    private int NROTRIOS;
-    private int NROESCALAS;
+    private static int NROTRIOS;
+    private static int NROESCALAS;
     public static Scanner in = new Scanner(System.in);
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
+        this.seBajo = false;
     }
-    public ArrayList<Carta> getCartas() {
-        return cartas;
+    public String getNombre() {
+        return nombre;
     }
-
-    public void setNROTRIOSyNROESCALAS(int NROTRIOS,int NROESCALAS) {
-        this.NROTRIOS = NROTRIOS;
-        this.NROESCALAS = NROESCALAS;
-    }
-
-
-    public void setCartas(ArrayList<Carta> cartas) {
-        this.cartas = cartas;
-    }
-    public int getNroCartas(){ return cartas.size(); }
     public int getPuntaje() {
         return puntaje;
     }
@@ -41,32 +32,24 @@ public class Jugador {
             }
         }
     }
-    public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
+
+    public ArrayList<Carta> getCartas() {
+        return cartas;
+    }
+    public void setCartas(ArrayList<Carta> cartas) {
+        this.cartas = cartas;
+    }
+    public int getNroCartas(){ return cartas.size(); }
+
+    public static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
+        NROTRIOS = nroTriosRonda;
+        NROESCALAS = nroEscalasRonda;
+    }
+    public void limpiarMatriz(){
+        matrizTrios.clear();
+        matrizEscalas.clear();
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void imprimirCartas(){ //Este metodo imprime las cartas del jugador
-        System.out.println("Cartas de "+nombre);
-        imprimirCartas(cartas);
-    }
-    private void imprimirCartas(ArrayList<Carta> cartas){
-        String contenido = "";
-        String primeraLinea = "";
-        String segundaLinea = "";
-        for (int i = 0; i < cartas.size(); i++) {
-            Carta carta = cartas.get(i);
-            primeraLinea += carta.toStringEC();
-            int numeroEspacios = (carta.toString().length()+2)/2;
-            segundaLinea += MainCarioca.repetirString(" ",numeroEspacios) +i+MainCarioca.repetirString(" ",numeroEspacios);
-        }
-        contenido = primeraLinea + "\n" + segundaLinea;
-        System.out.println(contenido);
-
-    }
     public void menu(ArrayList<Carta> pozo, Mazo mazo){
         System.out.println("(1) Sacar Carta de la mesa");
         System.out.println("(2) Sacar Carta del mazo ");
@@ -92,13 +75,32 @@ public class Jugador {
                 intercambiarCartas(opcion,pozo,mazo);
                 break;
             case "4":
-                bajarse();
+                menu_Bajarse();
                 break;
             default:
                 System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
                 menu(pozo,mazo);
 
         }
+    }
+
+    public void imprimirCartas(){ //Este metodo imprime las cartas del jugador
+        System.out.println("Cartas de "+nombre);
+        imprimirCartas(cartas);
+    }
+    private static void imprimirCartas(ArrayList<Carta> cartas){
+        String contenido = "";
+        String primeraLinea = "";
+        String segundaLinea = "";
+        for (int i = 0; i < cartas.size(); i++) {
+            Carta carta = cartas.get(i);
+            primeraLinea += carta.toStringEC();
+            int numeroEspacios = (carta.toString().length()+2)/2;
+            segundaLinea += MainCarioca.repetirString(" ",numeroEspacios) +i+MainCarioca.repetirString(" ",numeroEspacios);
+        }
+        contenido = primeraLinea + "\n" + segundaLinea;
+        System.out.println(contenido);
+
     }
 
     private Carta menu_BotarCarta(){
@@ -140,6 +142,20 @@ public class Jugador {
             menu(pozo, mazo);
 
     }
+    public void menu_Bajarse(){
+        if(NROTRIOS > 0){
+            for (int i = 0; i < NROTRIOS ; i++) {
+                imprimirCartas();
+                System.out.println("Ingrese el trio "+i);
+                matrizTrios.add(crearUnTrio());
+
+            }
+        }
+        if (NROESCALAS > 0){
+
+        }
+
+    }
 
     public ArrayList<Carta> crearUnTrio(){
         int[] indices=ingresarIndicesTrio();
@@ -164,6 +180,7 @@ public class Jugador {
         imprimirCartas(escala);
         return escala;
     }
+
     private  int[] ingresarIndicesTrio(){
         int[] indicesTrio = ingresarIndices(3);
         String valorEsperado = cartas.get(indicesTrio[0]).getValor();
@@ -178,7 +195,6 @@ public class Jugador {
         }
         return indicesTrio;
     }
-
     private int[] ingresarIndicesEscala(){
         int[] indicesEscala = ingresarIndices(4);
         String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
@@ -243,18 +259,5 @@ public class Jugador {
         return ingresarIndices(nroIndices);
     }
 
-    public void bajarse(){
-        if(NROTRIOS > 0){
-            for (int i = 0; i < NROTRIOS ; i++) {
-                imprimirCartas();
-                System.out.println("Ingrese el trio "+i);
-                matrizTrios.add(crearUnTrio());
 
-            }
-        }
-        if (NROESCALAS > 0){
-
-        }
-
-    }
 }

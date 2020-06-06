@@ -23,6 +23,7 @@ public class Ronda {
         Mazo mazo = new Mazo();
         NROESCALAS = RONDAS[nivel][0];
         NROTRIOS = RONDAS[nivel][1];
+        Jugador.setNROTRIOSyNROESCALAS(NROESCALAS,NROTRIOS);
     }
 
     public void menuJuego() {
@@ -53,7 +54,6 @@ public class Ronda {
             System.out.println();
             System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC());
             System.out.println();
-            jugadorActual.setNROTRIOSyNROESCALAS(NROTRIOS,NROESCALAS);
             jugadorActual.imprimirCartas();
             jugadorActual.menu(pozo, mazo);
             if(jugadorActual.getNroCartas()==0){

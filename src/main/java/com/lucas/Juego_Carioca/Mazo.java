@@ -11,7 +11,7 @@ public class Mazo {
     public Mazo() {
         mazo = generarMazoOrdenado(); //generamos un mazo de cartas ordenado
         Collections.shuffle(mazo); //Desordenamos el mazo
-        while(mazo.get(0).getPalo().equals("JKR")) Collections.shuffle(mazo); //Esto es para verificar que la primera carta del mazo no sea un JKR
+        while(mazo.get(0).getPalo().equals("JKR")) {Collections.shuffle(mazo); }//Esto es para verificar que la primera carta del mazo no sea un JKR
     }
 
     public ArrayList<Carta> toArrayList() {
