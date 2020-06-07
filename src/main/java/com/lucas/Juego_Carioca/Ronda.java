@@ -15,28 +15,29 @@ public class Ronda {
     private int nivel;
     private ArrayList<Jugador> jugadores;
     private Mazo mazo;
+    private ArrayList<Carta> pozo = new ArrayList<Carta>();
     private final int NROESCALAS;
     private final int NROTRIOS;
     public Ronda(ArrayList<Jugador> jugadores, int nivel) {
         this.nivel = nivel;
         this.jugadores = jugadores;
-        Mazo mazo = new Mazo();
+        mazo = new Mazo();
+        pozo.add(mazo.sacarCarta());
         NROESCALAS = RONDAS[nivel][0];
         NROTRIOS = RONDAS[nivel][1];
         Jugador.setNROTRIOSyNROESCALAS(NROESCALAS,NROTRIOS);
     }
 
-    public void menuJuego() {
+    public void comenzarRonda() {
         //Se crea un juego
-        Mazo mazo = new Mazo();
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
         for (int index = 0; index < jugadores.size(); index++) {
             jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
         }
-        ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
+        //ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
 
-        pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa, al principio de la ronda (esta carta nunca sera un JKR)
+        //pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa, al principio de la ronda (esta carta nunca sera un JKR)
 
         int turnoActual = (int) (Math.random() * jugadores.size()); //y el primer turno se hara de forma aleatoria
 
@@ -48,26 +49,27 @@ public class Ronda {
 
         //Este Bucle funciona hasta que alguien se quede sin cartas (temporal, lo ideal remplezarlo por un metodo)
         do {
-            Carta cartaEnLaMesa = pozo.get(0); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
-            Jugador jugadorActual = jugadores.get(turnoActual);
-            System.out.println("Turno Actual: " + turnoActual + " Nombre: " + jugadorActual.getNombre());
-            System.out.println();
-            System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC());
-            System.out.println();
-            jugadorActual.imprimirCartas();
-            jugadorActual.menu(pozo, mazo);
-            if(jugadorActual.getNroCartas()==0){
-                //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida
-                System.out.println("Fin de la ronda, la ronda gano ");
-                break;
-            }
-            //De lo contrario sigue el siguiente turno
+            menu_TurnoActual(turnoActual);
             turnoActual++;
             if (turnoActual == jugadores.size()) {
                 turnoActual = 0;
             }
-
-
         }while(true);
+    }
+    public void menu_TurnoActual(int turnoActual){
+        Carta cartaEnLaMesa = pozo.get(0); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
+        Jugador jugadorActual = jugadores.get(turnoActual);
+        System.out.println("Turno Actual: " + turnoActual + " Nombre: " + jugadorActual.getNombre());
+        System.out.println();
+        System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC());
+        System.out.println();
+        jugadorActual.imprimirCartas();
+        jugadorActual.menu(pozo, mazo);
+        if(jugadorActual.getNroCartas()==0){
+            //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida
+            System.out.println("Fin de la ronda, la ronda gano ");
+        }
+
+
     }
 }

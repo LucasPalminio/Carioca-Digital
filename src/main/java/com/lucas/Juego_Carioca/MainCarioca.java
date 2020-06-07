@@ -12,7 +12,7 @@ public class MainCarioca {
         int nivelActual = 0;// Se comienza desde la ronda 0 pero en Juego es la ronda 1
         while (nivelActual < Ronda.RONDAS.length) {
             Ronda rondaActual = new Ronda(jugadores, nivelActual);
-            rondaActual.menuJuego();
+            rondaActual.comenzarRonda();
             //Agregar: Por cada juego completo, se muestra en pantalla los puntajes de cada jugador y quien lleva la delantera (gana el que tiene menor puntaje)
             nivelActual++;
         }
@@ -73,6 +73,20 @@ public class MainCarioca {
 
         }
 
+    }
+    public static int ingresarUnNumero(String mensaje,int min, int max){
+        if (min > max){
+            int aux = min;
+            min = max;
+            max = aux;
+        }
+        int numeroIngresado = ingresarUnNumero(mensaje+"\nIngrese un numero entre "+min+" y "+max);
+        if (numeroIngresado<=max && numeroIngresado>=min){
+            return numeroIngresado;
+        }else{
+            System.out.println("El numero ingresado no es el correcto");
+            return ingresarUnNumero(mensaje,min,max);
+        }
     }
     //Este metodo repite un string una cantidad de veces (es un remplazo al metodo repeat de la clase String)
     public static String repetirString(String stringARepetir,int nro){
