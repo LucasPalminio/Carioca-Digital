@@ -49,12 +49,15 @@ public class Jugador {
     public int getNroCartas(){ return cartas.size(); }
 
     public void limpiarMatriz(){
+        //Este metodo funciona solamente cuando finaliza la ronda,
+        // su funcion es limpia las matrices de trios y escalas que el jugador tenga en la mesa
         matrizTrios.clear();
         matrizEscalas.clear();
     }
 
     public void menu(ArrayList<Carta> pozo, Mazo mazo){
-        if (seBajo){
+
+        if (seBajo){ //Si el jugador se bajo, se desplegara el menu correspondiente con sus respectivas opciones
             menu_SiSeBajo(pozo, mazo);
         }else{
             menu_NoSeBajo(pozo,mazo);
@@ -62,31 +65,44 @@ public class Jugador {
     }
     private void menu_NoSeBajo(ArrayList<Carta> pozo, Mazo mazo){
         String[] opciones = {"Sacar Carta de la mesa","Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea Bajarse?","Finalizar Turno"};
-        for (int i = 0; i < opciones.length; i++) {
-            System.out.println("("+(i+1)+") "+opciones[i]);
-        }
-        System.out.print("Eliga una opcion: ");
-        String opcion = in.nextLine();
-        switch (opcion){
-            case "1": //Sacar Carta de la mesa
-                sacarCartaDeLaMesa(pozo);
-                break;
-            case "2": //Sacar Carta del mazo
-                sacarCartaDeLaMesa(pozo);
-                break;
-            case "3": //Intercambiar dos cartas dentro de la misma mano
-                intercambiarCartas(pozo,mazo);
-                break;
-            case "4":
-                menu_Bajarse();
-                break;
-            case "5":
-                return;
-            default:
-                System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
-                menu(pozo,mazo);
+        boolean yaSacoCarta = false;
+        do {
+            //Se desplegara en pantalla cada una de las opciones para una persona que aun no se ha bajado
+            for (int i = 0; i < opciones.length; i++) {
+                System.out.println("(" + (i + 1) + ") " + opciones[i]);
+            }
+            System.out.print("Eliga una opcion: ");
+            String opcion = in.nextLine();
+            switch (opcion) {
+                case "1": //Sacar Carta de la mesa
+                case "2": //Sacar Carta del mazo
+                    if(!yaSacoCarta) {
+                        if(opcion.equals("1")) {
+                            sacarCartaDeLaMesa(pozo);
+                        }else if (opcion.equals("2")){
+                            sacarCartaDelMazo(pozo,mazo);
+                        }
 
-        }
+                        yaSacoCarta = true;
+                    }else{
+                        System.out.println("Usted ya saco una carta, eliga otra opcion");
+                    }
+                    break;
+                case "3": //Intercambiar dos cartas dentro de la misma mano
+                    intercambiarCartas(pozo, mazo);
+                    break;
+                case "4":
+                    menu_Bajarse();
+                    break;
+                case "5":
+                    return;
+                default:
+                    System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
+                    menu(pozo, mazo);
+
+            }
+        }while (true);
+
 
     }
     private void menu_SiSeBajo(ArrayList<Carta> pozo, Mazo mazo){
