@@ -57,13 +57,9 @@ public class Ronda {
         }while(true);
     }
     public void menu_TurnoActual(int turnoActual){
-        Carta cartaEnLaMesa = pozo.get(0); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
+        //Carta cartaEnLaMesa = pozo.get(0); //La carta que esta mas arriba en el pozo, este objeto es solo para proposito de imprimir en pantalla
         Jugador jugadorActual = jugadores.get(turnoActual);
-        System.out.println("Turno Actual: " + turnoActual + " Nombre: " + jugadorActual.getNombre());
-        System.out.println();
-        System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC());
-        System.out.println();
-        jugadorActual.imprimirCartas();
+        System.out.println("Turno Actual: " + turnoActual);
         jugadorActual.menu(pozo, mazo);
         if(jugadorActual.getNroCartas()==0){
             //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida

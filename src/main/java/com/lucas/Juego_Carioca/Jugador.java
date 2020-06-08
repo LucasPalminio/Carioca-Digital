@@ -57,6 +57,7 @@ public class Jugador {
 
     public void menu(ArrayList<Carta> pozo, Mazo mazo){
 
+
         if (seBajo){ //Si el jugador se bajo, se desplegara el menu correspondiente con sus respectivas opciones
             menu_SiSeBajo(pozo, mazo);
         }else{
@@ -67,6 +68,8 @@ public class Jugador {
         String[] opciones = {"Sacar Carta de la mesa","Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea Bajarse?","Finalizar Turno"};
         boolean yaSacoCarta = false;
         do {
+            Carta cartaEnLaMesa = pozo.get(0);
+            imprimirInformacionJugador(cartaEnLaMesa);
             //Se desplegara en pantalla cada una de las opciones para una persona que aun no se ha bajado
             for (int i = 0; i < opciones.length; i++) {
                 System.out.println("(" + (i + 1) + ") " + opciones[i]);
@@ -95,7 +98,12 @@ public class Jugador {
                     menu_Bajarse();
                     break;
                 case "5":
-                    return;
+                    if (yaSacoCarta){
+                        return;
+                    }else{
+                        System.out.println("Usted no ha botado una carta, aun no puede terminar el turno");
+                    }
+                    break;
                 default:
                     System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
                     menu(pozo, mazo);
@@ -106,12 +114,15 @@ public class Jugador {
 
     }
     private void menu_SiSeBajo(ArrayList<Carta> pozo, Mazo mazo){
+
         String[] opciones = {"Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea agregar cartas a los trios o escalas en la mesa?","Finalizar Turno"};
         for (int i = 0; i < opciones.length; i++) {
             System.out.println("("+(i+1)+") "+opciones[i]);
         }
         System.out.print("Eliga una opcion: ");
         String opcion = in.nextLine();
+        Carta cartaEnLaMesa = pozo.get(0);
+        imprimirInformacionJugador(cartaEnLaMesa);
         switch (opcion){
             case"1":
                 sacarCartaDelMazo(pozo, mazo);
@@ -202,7 +213,11 @@ public class Jugador {
         System.out.println(contenido);
 
     }
-
+    private void imprimirInformacionJugador(Carta cartaEnLaMesa){
+        System.out.println("Turno: " + nombre+"\n");
+        System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC()+"\n");
+        imprimirCartas();
+    }
     private void intercambiarCartas(ArrayList<Carta> pozo,Mazo mazo ){
 
             int primera_carta = 0;
