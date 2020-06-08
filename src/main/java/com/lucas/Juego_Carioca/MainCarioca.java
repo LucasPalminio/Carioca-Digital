@@ -67,9 +67,9 @@ public class MainCarioca {
     //Funcion que retorna el numero de jugadores que ingreso el usuario
     private static int ingresarNumeroDeJugadores() {
 
-        int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 2): ");
+        int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 2 y maximo 4): ");
         in.nextLine();
-        if (nroJugadores >= 2) {
+        if (nroJugadores >= 2 && nroJugadores<=4) {
             return nroJugadores;
         }
         System.out.println("Error: el numero de Jugadores no es valido");
