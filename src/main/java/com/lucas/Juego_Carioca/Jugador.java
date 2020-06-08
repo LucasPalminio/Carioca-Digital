@@ -65,11 +65,16 @@ public class Jugador {
         }
     }
     private void menu_NoSeBajo(ArrayList<Carta> pozo, Mazo mazo){
-        String[] opciones = {"Sacar Carta de la mesa","Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea Bajarse?","Finalizar Turno"};
+        String[] opciones = {"Sacar Carta de la mesa","Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea Bajarse?","Botar Carta y Finalizar Turno"};
         boolean yaSacoCarta = false;
+        OUTER1:
         do {
-            Carta cartaEnLaMesa = pozo.get(0);
-            imprimirInformacionJugador(cartaEnLaMesa);
+            if(yaSacoCarta){
+                //Cuando la persona ya saco una carta, la opciones de Sacar Carta de la mesa y Sacar carta del mazo se bloquean
+                opciones[0] += "(Opcion bloqueada)";
+                opciones[1] += "(Opcion bloqueada)";
+            }
+            imprimirInformacionJugador(pozo);
             //Se desplegara en pantalla cada una de las opciones para una persona que aun no se ha bajado
             for (int i = 0; i < opciones.length; i++) {
                 System.out.println("(" + (i + 1) + ") " + opciones[i]);
@@ -99,11 +104,13 @@ public class Jugador {
                     break;
                 case "5":
                     if (yaSacoCarta){
-                        return;
+                        pozo.add(0,menu_BotarCarta());
+                        break OUTER1;
                     }else{
-                        System.out.println("Usted no ha botado una carta, aun no puede terminar el turno");
+                        System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
+                        break;
                     }
-                    break;
+
                 default:
                     System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
                     menu(pozo, mazo);
@@ -121,8 +128,7 @@ public class Jugador {
         }
         System.out.print("Eliga una opcion: ");
         String opcion = in.nextLine();
-        Carta cartaEnLaMesa = pozo.get(0);
-        imprimirInformacionJugador(cartaEnLaMesa);
+        imprimirInformacionJugador(pozo);
         switch (opcion){
             case"1":
                 sacarCartaDelMazo(pozo, mazo);
@@ -145,14 +151,11 @@ public class Jugador {
         Carta cartaEnLaMesa = pozo.get(0);
         cartas.add(cartaEnLaMesa);
         pozo.remove(0);
-        cartaEnLaMesa = menu_BotarCarta();
-        pozo.add(0,cartaEnLaMesa);
     }
     private void sacarCartaDelMazo(ArrayList<Carta>pozo ,Mazo mazo){
         Carta cartaDelMazo = mazo.sacarCarta();
         System.out.println("obtuviste esta carta del mazo: "+cartaDelMazo.toStringEC());
         cartas.add(cartaDelMazo);
-        pozo.add(0,menu_BotarCarta());
     }
 
 
@@ -174,6 +177,7 @@ public class Jugador {
                 "\nEscriba si para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         if (!in.nextLine().equalsIgnoreCase("si")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
+            System.out.println("Usted se arrepintio de bajarse");
             return;
         }
         if(NROTRIOS > 0){
@@ -192,6 +196,7 @@ public class Jugador {
 
             }
         }
+        seBajo = true;
 
     }
 
@@ -213,10 +218,16 @@ public class Jugador {
         System.out.println(contenido);
 
     }
-    private void imprimirInformacionJugador(Carta cartaEnLaMesa){
+    private void imprimirInformacionJugador(ArrayList<Carta> pozo){
         System.out.println("Turno: " + nombre+"\n");
-        System.out.println("Carta en la mesa: " + cartaEnLaMesa.toStringEC()+"\n");
+        if (pozo.size() > 0) {
+            System.out.println("Carta en la mesa: " + pozo.get(0).toStringEC() + "\n");
+        }else{
+            System.out.println("Carta en la mesa: |   |");
+        }
         imprimirCartas();
+
+
     }
     private void intercambiarCartas(ArrayList<Carta> pozo,Mazo mazo ){
 

@@ -18,7 +18,27 @@ public class MainCarioca {
         }
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }
+    /////Test/////
+/*    public static void main(String[] args) {
+        Jugador jugador1 = new Jugador("Tester trios o escalas");
+        Jugador jugador2 = new Jugador("Tester trio o escalas 2");
+        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
+        for (int i = 0; i <3; i++) {
+            cartasJugador1.add(new Carta("♠","3"));
+            cartasJugador1.add(new Carta("♦","2"));
+        }
 
+        cartasJugador1.add(new Carta("JKR",""));
+        ArrayList<Carta> cartasJugador2 = new ArrayList<>();
+        cartasJugador2 = (ArrayList<Carta>) cartasJugador1.clone();
+        jugador1.setCartas(cartasJugador1);
+        jugador2.setCartas(cartasJugador2);
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Ronda ronda1 = new Ronda(jugadores,0);
+        ronda1.comenzarRonda();
+}*/
     //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
     //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
     // y retorna un ArrayList de los objetos de la clase Jugador
