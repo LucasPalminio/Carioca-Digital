@@ -219,15 +219,19 @@ public class Jugador {
     }
 
 
-    public ArrayList<Carta> crearUnTrio(){
+    public ArrayList<Carta> crearUnTrio(){ //Este metodo es para crear un solo trio
         int[] indices=ingresarIndicesTrio();
-        ArrayList<Carta> trio = new ArrayList<Carta>();
+        //Primero ingresamos los indices de las cartas que conforman el trio,
+        // verificando que estos indices no se repitan, y correspondan realmente a un trio
+        ArrayList<Carta> trio = new ArrayList<Carta>(); //Arraylist donde se almacenara temporalmente el trio
         for (int i = 0; i < 3; i++) {
+            //Por cada indice de la carta se almacena en trio
             int ind = indices[i];
             trio.add(cartas.get(ind));
 
         }
         for (int i = 0; i < 3; i++) {
+            //Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
             cartas.remove(indices[i]);
         }
         imprimirCartas(trio);
@@ -250,6 +254,7 @@ public class Jugador {
     }
 
     public  int[] ingresarIndicesTrio(){
+        System.out.println("Ingrese los indices de un trio");
         int[] indicesTrio = ingresarIndices(3);
         String valorEsperado = cartas.get(indicesTrio[0]).getValor();
         for (int i = 0; i < 3; i++) {
@@ -264,10 +269,11 @@ public class Jugador {
         return indicesTrio;
     }
     public int[] ingresarIndicesEscala(){
+        System.out.println("Ingrese los indices de una escala");
         int[] indicesEscala = ingresarIndices(4);
         String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
         String valorEsperado = cartas.get(indicesEscala[0]).getValor(); //K
-        int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12
+        int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12, En que posicion del arreglo de VALORES esta el valor: K
         for (int i = 0; i < 4; i++) {
             int ind = indicesEscala[i];
             Carta carta = cartas.get(ind);
@@ -275,7 +281,7 @@ public class Jugador {
             String valor = carta.getValor();
             if (!(palo.equalsIgnoreCase(paloEsperado) && valor.equalsIgnoreCase(valorEsperado))){
                 //si los indices ingresado no corresponden a una escala, pregunte de nuevo
-                return indicesEscala;
+                return ingresarIndicesEscala();
             }else{
                 indiceValor++;
                 if (indiceValor == Carta.VALORES.length){
@@ -283,30 +289,24 @@ public class Jugador {
                 }
                 valorEsperado = Carta.VALORES[indiceValor];
             }
-
         }
         return indicesEscala;
     }
-    public int[] ingresarIndices(int nroIndices) { // nroIndices puede ser 3 o 4
+    public int[] ingresarIndices(int nroIndices) { // Este metodo es para ingresar los indices de las cartas del jugador, nroIndices puede ser 3 o 4
         int[] indices = new int[nroIndices];
-        String EscalaOTrio = "";
-        if (nroIndices == 3) {
-            EscalaOTrio = "trio";
-        } else if (nroIndices == 4) {
-            EscalaOTrio = "escala";
-        }
 
-        System.out.println("Ingrese los indices de las cartas que formaran al " + EscalaOTrio + "(separado por espacios): ");
-        String[] indicesString = in.nextLine().split(" ");
+        System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
+        String[] indicesString = in.nextLine().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
         if (indicesString.length == nroIndices) {
+            //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
             try {
                 for (int i = 0; i < indicesString.length; i++) {
-                    int numero = Integer.parseInt(indicesString[i]);
+                    int numero = Integer.parseInt(indicesString[i]);//Convertimos los indices de string a int
 
-                    if (numero >= 0 && numero < cartas.size()) {
-                        indices[i] = numero;
-                        if (i == 2) {
-                            if(MainCarioca.sonNumerosDiferentes(indices)) {
+                    if (numero >= 0 && numero < cartas.size()) { //si el numero esta dentro del rango de los indices
+                        indices[i] = numero; //Se guarda el numero dentro del arreglo de los indices
+                        if (i == nroIndices-1) { //Una vez ingresado el ultimo indice
+                            if(MainCarioca.sonNumerosDiferentes(indices)) { //Se verifica que los indices sean numeros diferentes
                                 return indices;
                             }else{
                                 System.out.println("Los numeros deben ser diferentes, intentelo nuevamnete");
@@ -324,7 +324,7 @@ public class Jugador {
         } else {
             System.out.println("Usted ingresado mas numero de lo permitido, intentelo nuevamnete");
         }
-        return ingresarIndices(nroIndices);
+        return ingresarIndices(nroIndices); //Si a ocurrido un error, volvera a preguntar al usuario por los indices
     }
 
 
