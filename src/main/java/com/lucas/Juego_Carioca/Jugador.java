@@ -9,7 +9,7 @@ public class Jugador {
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
-    private boolean seBajo;
+    private boolean bajoSusCarta;
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
 
@@ -17,10 +17,11 @@ public class Jugador {
     private static int NROESCALAS;
 
     public static Scanner in = new Scanner(System.in);
+
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
-        this.seBajo = false;
+        this.bajoSusCarta = false;
     }
     public static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
         NROTRIOS = nroTriosRonda;
@@ -46,7 +47,17 @@ public class Jugador {
     public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
+    public void agregarCarta(Carta carta){
+        cartas.add(carta);
+    }
     public int getNroCartas(){ return cartas.size(); }
+
+    public boolean isBajoSusCarta() {
+        return bajoSusCarta;
+    }
+    public void setBajoSusCarta(boolean bajoSusCarta) {
+        this.bajoSusCarta = bajoSusCarta;
+    }
 
     public void limpiarMatriz(){
         //Este metodo funciona solamente cuando finaliza la ronda,
@@ -55,111 +66,7 @@ public class Jugador {
         matrizEscalas.clear();
     }
 
-    public void menu(ArrayList<Carta> pozo, Mazo mazo){
-
-
-        if (seBajo){ //Si el jugador se bajo, se desplegara el menu correspondiente con sus respectivas opciones
-            menu_SiSeBajo(pozo, mazo);
-        }else{
-            menu_NoSeBajo(pozo,mazo);
-        }
-    }
-    private void menu_NoSeBajo(ArrayList<Carta> pozo, Mazo mazo){
-        String[] opciones = {"Sacar Carta de la mesa","Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea Bajarse?","Botar Carta y Finalizar Turno"};
-        boolean yaSacoCarta = false;
-        OUTER1:
-        do {
-            if(yaSacoCarta){
-                //Cuando la persona ya saco una carta, la opciones de Sacar Carta de la mesa y Sacar carta del mazo se bloquean
-                opciones[0] += "(Opcion bloqueada)";
-                opciones[1] += "(Opcion bloqueada)";
-            }
-            imprimirInformacionJugador(pozo);
-            //Se desplegara en pantalla cada una de las opciones para una persona que aun no se ha bajado
-            for (int i = 0; i < opciones.length; i++) {
-                System.out.println("(" + (i + 1) + ") " + opciones[i]);
-            }
-            System.out.print("Eliga una opcion: ");
-            String opcion = in.nextLine();
-            switch (opcion) {
-                case "1": //Sacar Carta de la mesa
-                case "2": //Sacar Carta del mazo
-                    if(!yaSacoCarta) {
-                        if(opcion.equals("1")) {
-                            sacarCartaDeLaMesa(pozo);
-                        }else if (opcion.equals("2")){
-                            sacarCartaDelMazo(pozo,mazo);
-                        }
-
-                        yaSacoCarta = true;
-                    }else{
-                        System.out.println("Usted ya saco una carta, eliga otra opcion");
-                    }
-                    break;
-                case "3": //Intercambiar dos cartas dentro de la misma mano
-                    intercambiarCartas(pozo, mazo);
-                    break;
-                case "4":
-                    menu_Bajarse();
-                    break;
-                case "5":
-                    if (yaSacoCarta){
-                        pozo.add(0,menu_BotarCarta());
-                        break OUTER1;
-                    }else{
-                        System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
-                        break;
-                    }
-
-                default:
-                    System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
-                    menu(pozo, mazo);
-
-            }
-        }while (true);
-
-
-    }
-    private void menu_SiSeBajo(ArrayList<Carta> pozo, Mazo mazo){
-
-        String[] opciones = {"Sacar Carta del mazo","Intercambiar el lugar de dos cartas","¿Desea agregar cartas a los trios o escalas en la mesa?","Finalizar Turno"};
-        for (int i = 0; i < opciones.length; i++) {
-            System.out.println("("+(i+1)+") "+opciones[i]);
-        }
-        System.out.print("Eliga una opcion: ");
-        String opcion = in.nextLine();
-        imprimirInformacionJugador(pozo);
-        switch (opcion){
-            case"1":
-                sacarCartaDelMazo(pozo, mazo);
-                break;
-            case "2":
-                intercambiarCartas(pozo,mazo);
-                break;
-            case "3":
-                //Pendiente
-                System.out.println("Aun no disponible");
-                break;
-            case "4":
-                return;
-            default:
-                System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
-                menu(pozo,mazo);
-        }
-    }
-    private void sacarCartaDeLaMesa(ArrayList<Carta> pozo){
-        Carta cartaEnLaMesa = pozo.get(0);
-        cartas.add(cartaEnLaMesa);
-        pozo.remove(0);
-    }
-    private void sacarCartaDelMazo(ArrayList<Carta>pozo ,Mazo mazo){
-        Carta cartaDelMazo = mazo.sacarCarta();
-        System.out.println("obtuviste esta carta del mazo: "+cartaDelMazo.toStringEC());
-        cartas.add(cartaDelMazo);
-    }
-
-
-    private Carta menu_BotarCarta(){
+    public Carta menu_BotarCarta(){
         imprimirCartas();
         int indiceCarta = MainCarioca.ingresarUnNumero("¿Que cartas quieres botar?: ");
         if (indiceCarta >= 0 && indiceCarta < cartas.size()){
@@ -196,7 +103,7 @@ public class Jugador {
 
             }
         }
-        seBajo = true;
+        bajoSusCarta = true;
 
     }
 
@@ -218,18 +125,13 @@ public class Jugador {
         System.out.println(contenido);
 
     }
-    private void imprimirInformacionJugador(ArrayList<Carta> pozo){
+    public void imprimirInformacionJugador(ArrayList<Carta> pozo){
         System.out.println("Turno: " + nombre+"\n");
-        if (pozo.size() > 0) {
-            System.out.println("Carta en la mesa: " + pozo.get(0).toStringEC() + "\n");
-        }else{
-            System.out.println("Carta en la mesa: |   |");
-        }
         imprimirCartas();
 
 
     }
-    private void intercambiarCartas(ArrayList<Carta> pozo,Mazo mazo ){
+    public void intercambiarCartas(){
 
             int primera_carta = 0;
             int segunda_carta = 0;
@@ -240,10 +142,9 @@ public class Jugador {
             Collections.swap(cartas, primera_carta, segunda_carta);
 
             imprimirCartas();
-            menu(pozo, mazo);
+
 
     }
-
 
     public ArrayList<Carta> crearUnTrio(){ //Este metodo es para crear un solo trio
         int[] indices=ingresarIndicesTrio();

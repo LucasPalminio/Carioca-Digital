@@ -100,7 +100,7 @@ public class MainCarioca {
             min = max;
             max = aux;
         }
-        int numeroIngresado = ingresarUnNumero(mensaje+"\nIngrese un numero entre "+min+" y "+max);
+        int numeroIngresado = ingresarUnNumero(mensaje+"\nIngrese un numero entre "+min+" y "+max+": ");
         if (numeroIngresado<=max && numeroIngresado>=min){
             return numeroIngresado;
         }else{
@@ -132,7 +132,12 @@ public class MainCarioca {
         }
         return true;
     }
-
+    public static String  imprimirMenuOpciones(String[] opciones){
+        for (int i = 0; i < opciones.length; i++) {
+            System.out.println("("+(i+1)+") "+opciones[i]);
+        }
+       return String.valueOf(ingresarUnNumero("",1, opciones.length));
+    }
 }
 
 
