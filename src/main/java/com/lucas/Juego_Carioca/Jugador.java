@@ -230,10 +230,7 @@ public class Jugador {
             trio.add(cartas.get(ind));
 
         }
-        for (int i = 0; i < 3; i++) {
-            //Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
-            cartas.remove(indices[i]);
-        }
+        cartas.removeAll(trio);//Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
         imprimirCartas(trio);
         return trio;
 
@@ -246,9 +243,7 @@ public class Jugador {
             escala.add(cartas.get(ind));
 
         }
-        for (int i = 0; i < 4; i++) {
-            cartas.remove(indices[i]);
-        }
+        cartas.removeAll(escala);//Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
         imprimirCartas(escala);
         return escala;
     }
