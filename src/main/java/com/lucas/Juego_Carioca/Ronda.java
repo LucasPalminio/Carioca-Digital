@@ -67,7 +67,7 @@ public class Ronda {
 
         if (jugadorActual.getNroCartas() == 0) {
             //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida
-            finRonda(jugadorActual);
+            finRonda();
             return;
         }
         turnoActual++;
@@ -203,12 +203,12 @@ public class Ronda {
             System.out.println("Carta en la mesa: |   |");
         }
     }
-    public void finRonda(Jugador jugadorGanador){
+    public void finRonda(){
         for(int i = 0;i<jugadores.size();i++) {
-            System.out.print("////////////////");
+            System.out.print(MainCarioca.repetirString("/",20));
         }
         System.out.println("\nResultados de esta ronda");
-        for(int i= 0;i<jugadores.size()-1;i++){
+        for(int i= 0;i<jugadores.size();i++){
             jugadores.get(i).calcularPuntajeRonda();
             if(jugadores.get(i).getPuntajeRonda() > 0) {
                 System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
@@ -218,12 +218,13 @@ public class Ronda {
             jugadores.get(i).setPuntajeRonda(0);
         }
         System.out.println("\nResultados de la partida en esta ronda");
-        for(int i= 0;i<jugadores.size()-1;i++){
+        for(int i= 0;i<jugadores.size();i++){
             jugadores.get(i).calcularPuntaje();
             System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
         }
+        System.out.println();
         for(int i = 0;i<jugadores.size();i++) {
-            System.out.print("////////////////");
+            System.out.print(MainCarioca.repetirString("/",20));
         }
         System.out.println("\n");
     }
