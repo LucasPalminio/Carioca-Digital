@@ -90,7 +90,7 @@ public class Ronda {
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = MainCarioca.imprimirMenuOpciones(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
+        String opcion = MainCarioca.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
 
         switch (opcion) {
             case "1": //Sacar Carta de la mesa
@@ -144,7 +144,7 @@ public class Ronda {
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = MainCarioca.imprimirMenuOpciones(opciones);
+        String opcion = MainCarioca.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
 
         switch (opcion) {
             case "1":
