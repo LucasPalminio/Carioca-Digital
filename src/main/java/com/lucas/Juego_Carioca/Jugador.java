@@ -9,6 +9,7 @@ public class Jugador {
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
+    private int puntajeRonda;
     private boolean bajoSusCarta;
     private boolean yaSacoCarta;
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
@@ -36,6 +37,11 @@ public class Jugador {
     public int getPuntaje() {
         return puntaje;
     }
+
+    public int getPuntajeRonda() {
+        return puntajeRonda;
+    }
+
     public void calcularPuntaje(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
@@ -43,10 +49,22 @@ public class Jugador {
             }
         }
     }
+    public void calcularPuntajeRonda(){
+        if(cartas.size()>0) {
+            for (Carta carta : cartas) {
+                this.puntajeRonda += carta.getPrecio();
+            }
+        }
+    }
 
     public ArrayList<Carta> getCartas() {
         return cartas;
     }
+
+    public void setPuntajeRonda(int puntajeRonda) {
+        this.puntajeRonda = puntajeRonda;
+    }
+
     public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }

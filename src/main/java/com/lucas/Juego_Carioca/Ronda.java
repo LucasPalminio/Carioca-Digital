@@ -204,7 +204,27 @@ public class Ronda {
         }
     }
     public void finRonda(Jugador jugadorGanador){
-
+        for(int i = 0;i<jugadores.size();i++) {
+            System.out.print("////////////////");
+        }
+        System.out.println("\nResultados de esta ronda");
+        for(int i= 0;i<jugadores.size()-1;i++){
+            jugadores.get(i).calcularPuntajeRonda();
+            if(jugadores.get(i).getPuntajeRonda() > 0) {
+                System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+            }else{
+                System.out.print("(Ganador)"+jugadores.get(i).getNombre()+": "+jugadores.get(i).getPuntajeRonda()+" ");
+            }
+            jugadores.get(i).setPuntajeRonda(0);
+        }
+        System.out.println("\nResultados de la partida en esta ronda");
+        for(int i= 0;i<jugadores.size()-1;i++){
+            jugadores.get(i).calcularPuntaje();
+            System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
+        }
+        for(int i = 0;i<jugadores.size();i++) {
+            System.out.print("////////////////");
+        }
+        System.out.println("\n");
     }
-
 }
