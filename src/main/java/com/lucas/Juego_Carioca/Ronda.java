@@ -206,7 +206,6 @@ public class Ronda {
     }
 
     public void finRonda() {
-        int jugador_con_delantera = 0;
         for (int i = 0; i < jugadores.size(); i++) {
             System.out.print(MainCarioca.repetirString("/", 20));
         }
@@ -220,27 +219,10 @@ public class Ronda {
             }
             jugadores.get(i).setPuntajeRonda(0);
         }
-        for(int i=0;i<jugadores.size();i++){
-            jugadores.get(i).calcularPuntaje();
-        }
-        for (int i = 0; i < jugadores.size(); i++) {
-            if (i == 0) {
-                jugador_con_delantera = 0;
-            } else {
-                if (jugador_con_delantera < jugadores.get(i).getPuntaje()) {
-                    jugador_con_delantera = i+1;
-                }
-            }
-        }
-        System.out.println(jugador_con_delantera);
         System.out.println("\nResultados de la partida en esta ronda");
         for (int i = 0; i < jugadores.size(); i++) {
-
-            if (jugador_con_delantera == i) {
-                System.out.print(Carta.ANSI_YELLOW + "(Delantera)" + Carta.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
-            } else {
-                System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
-            }
+            jugadores.get(i).calcularPuntaje();
+            System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
         }
         System.out.println();
         for (int i = 0; i < jugadores.size(); i++) {
