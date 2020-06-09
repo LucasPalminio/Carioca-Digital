@@ -10,6 +10,7 @@ public class Jugador {
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
     private boolean bajoSusCarta;
+    private boolean yaSacoCarta;
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
 
@@ -22,7 +23,9 @@ public class Jugador {
         this.nombre = nombre;
         this.puntaje = 0;
         this.bajoSusCarta = false;
+        this.yaSacoCarta = false;
     }
+
     public static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
         NROTRIOS = nroTriosRonda;
         NROESCALAS = nroEscalasRonda;
@@ -57,6 +60,14 @@ public class Jugador {
     }
     public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
+    }
+
+    public boolean isYaSacoCarta() {
+        return yaSacoCarta;
+    }
+
+    public void setYaSacoCarta(boolean yaSacoCarta) {
+        this.yaSacoCarta = yaSacoCarta;
     }
 
     public void limpiarMatriz(){
@@ -126,7 +137,7 @@ public class Jugador {
 
     }
     public void imprimirInformacionJugador(ArrayList<Carta> pozo){
-        System.out.println("Turno: " + nombre+"\n");
+        System.out.println("Turno: " + nombre);
         imprimirCartas();
 
 

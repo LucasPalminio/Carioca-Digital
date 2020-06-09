@@ -19,7 +19,7 @@ public class MainCarioca {
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }
     /////Test/////
-/*    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Jugador jugador1 = new Jugador("Tester trios o escalas");
         Jugador jugador2 = new Jugador("Tester trio o escalas 2");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
@@ -136,7 +136,9 @@ public class MainCarioca {
         for (int i = 0; i < opciones.length; i++) {
             System.out.println("("+(i+1)+") "+opciones[i]);
         }
-       return String.valueOf(ingresarUnNumero("",1, opciones.length));
+        String opcion = String.valueOf(ingresarUnNumero("",1, opciones.length));
+        System.out.println();
+       return opcion;
     }
 }
 
