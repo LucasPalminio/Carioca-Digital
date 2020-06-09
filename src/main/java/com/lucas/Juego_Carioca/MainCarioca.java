@@ -66,7 +66,7 @@ public class MainCarioca {
         //Creo las opciones del menu
         String[] opciones = new String[Ronda.RONDAS.length];
         for (int i = 0; i < Ronda.RONDAS.length; i++) {
-            opciones[i] = Ronda.RONDAS[i][0] + " trios, " + Ronda.RONDAS[i][1] + " escalas";
+            opciones[i] = Ronda.RONDAS[i][0] + " escalas, " + Ronda.RONDAS[i][1] +" trios" ;
         }
         imprimirSoloMenuOpciones(opciones);
         System.out.println();
