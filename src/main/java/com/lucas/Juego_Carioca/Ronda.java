@@ -30,7 +30,7 @@ public class Ronda {
         NROESCALAS = RONDAS[nivel][0];
         NROTRIOS = RONDAS[nivel][1];
         Jugador.setNROTRIOSyNROESCALAS(NROESCALAS, NROTRIOS);
-        turnoActual=0;
+        turnoActual = 0;
     }
 
     public void comenzarRonda() {
@@ -55,7 +55,8 @@ public class Ronda {
         //Este Bucle funciona hasta que alguien se quede sin cartas (temporal, lo ideal remplezarlo por un metodo)
         desarrolloRonda();
     }
-    public void desarrolloRonda(){
+
+    public void desarrolloRonda() {
         Jugador jugadorActual = jugadores.get(turnoActual);
 
         //mostrar menu del jugador
@@ -117,7 +118,7 @@ public class Ronda {
                 if (yaSacoCarta) {
                     pozo.add(0, jugadorActual.menu_BotarCarta());
                     jugadorActual.setYaSacoCarta(false);
-                    System.out.println("Fin turno de "+jugadorActual.getNombre());
+                    System.out.println("Fin turno de " + jugadorActual.getNombre());
                     System.out.println("////////////////////////////////////////");
                     return;
 
@@ -147,10 +148,10 @@ public class Ronda {
 
         switch (opcion) {
             case "1":
-                if(!yaSacoCarta) {
+                if (!yaSacoCarta) {
                     sacarCartaDelMazo(jugadorActual);
                     jugadorActual.setYaSacoCarta(true);
-                }else{
+                } else {
                     System.out.println("Usted ya saco una carta, eliga otra opcion");
                 }
                 break;
@@ -165,7 +166,7 @@ public class Ronda {
                 if (yaSacoCarta) {
                     pozo.add(0, jugadorActual.menu_BotarCarta());
                     jugadorActual.setYaSacoCarta(false);
-                    System.out.println("Fin turno de "+jugadorActual.getNombre());
+                    System.out.println("Fin turno de " + jugadorActual.getNombre());
                     System.out.println("////////////////////////////////////////");
                     return;
 
@@ -203,28 +204,47 @@ public class Ronda {
             System.out.println("Carta en la mesa: |   |");
         }
     }
-    public void finRonda(){
-        for(int i = 0;i<jugadores.size();i++) {
-            System.out.print(MainCarioca.repetirString("/",20));
+
+    public void finRonda() {
+        int jugador_con_delantera = 0;
+        for (int i = 0; i < jugadores.size(); i++) {
+            System.out.print(MainCarioca.repetirString("/", 20));
         }
         System.out.println("\nResultados de esta ronda");
-        for(int i= 0;i<jugadores.size();i++){
+        for (int i = 0; i < jugadores.size(); i++) {
             jugadores.get(i).calcularPuntajeRonda();
-            if(jugadores.get(i).getPuntajeRonda() > 0) {
+            if (jugadores.get(i).getPuntajeRonda() > 0) {
                 System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
-            }else{
-                System.out.print("(Ganador)"+jugadores.get(i).getNombre()+": "+jugadores.get(i).getPuntajeRonda()+" ");
+            } else {
+                System.out.print(Carta.ANSI_YELLOW + "(Ganador)" + Carta.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
             }
             jugadores.get(i).setPuntajeRonda(0);
         }
-        System.out.println("\nResultados de la partida en esta ronda");
-        for(int i= 0;i<jugadores.size();i++){
+        for(int i=0;i<jugadores.size();i++){
             jugadores.get(i).calcularPuntaje();
-            System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
+        }
+        for (int i = 0; i < jugadores.size(); i++) {
+            if (i == 0) {
+                jugador_con_delantera = 0;
+            } else {
+                if (jugador_con_delantera < jugadores.get(i).getPuntaje()) {
+                    jugador_con_delantera = i+1;
+                }
+            }
+        }
+        System.out.println(jugador_con_delantera);
+        System.out.println("\nResultados de la partida en esta ronda");
+        for (int i = 0; i < jugadores.size(); i++) {
+
+            if (jugador_con_delantera == i) {
+                System.out.print(Carta.ANSI_YELLOW + "(Delantera)" + Carta.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
+            } else {
+                System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
+            }
         }
         System.out.println();
-        for(int i = 0;i<jugadores.size();i++) {
-            System.out.print(MainCarioca.repetirString("/",20));
+        for (int i = 0; i < jugadores.size(); i++) {
+            System.out.print(MainCarioca.repetirString("/", 20));
         }
         System.out.println("\n");
     }
