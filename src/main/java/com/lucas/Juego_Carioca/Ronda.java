@@ -37,9 +37,9 @@ public class Ronda {
         //Se crea un juego
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
-/*        for (int index = 0; index < jugadores.size(); index++) {
+        for (int index = 0; index < jugadores.size(); index++) {
             jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
-        }*/
+        }
         //ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
 
         //pozo.add(mazo.sacarCarta()); //Se extrae una carta del mazo para dejarla en la mesa, al principio de la ronda (esta carta nunca sera un JKR)
