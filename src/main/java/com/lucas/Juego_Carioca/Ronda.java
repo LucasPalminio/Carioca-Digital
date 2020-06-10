@@ -131,21 +131,16 @@ public class Ronda {
                 break;
 
         }
-        if(jugadorActual.isBajoSusCarta()) {
-            menu_jugador_siBajoSusCartas(jugadorActual);
-        }else{
-            menu_jugador_noBajoSusCartas(jugadorActual);
-        }
+        menu_jugador_noBajoSusCartas(jugadorActual);
 
     }
 
     private void menu_jugador_siBajoSusCartas(Jugador jugadorActual) {
 
-        String[] opciones = {"Sacar Carta del mazo", "Sacar Carta de la mesa","Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
+        String[] opciones = {"Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
         if (yaSacoCarta) {
             opciones[0] = "Sacar Carta del mazo (Opcion bloqueada)";
-            opciones[1] = "Sacar Carta de la mesa (Opcion bloqueada)";
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
@@ -161,21 +156,13 @@ public class Ronda {
                 }
                 break;
             case "2":
-                if (!yaSacoCarta) {
-                    sacarCartaDeLaMesa(jugadorActual);
-                    jugadorActual.setYaSacoCarta(true);
-                } else {
-                    System.out.println("Usted ya saco una carta, eliga otra opcion");
-                }
-                break;
-            case "3":
                 jugadorActual.intercambiarCartas();
                 break;
-            case "4":
+            case "3":
                 //Pendiente
                 System.out.println("Aun no disponible");
                 break;
-            case "5":
+            case "4":
                 if (yaSacoCarta) {
                     pozo.add(0, jugadorActual.menu_BotarCarta());
                     jugadorActual.setYaSacoCarta(false);
@@ -188,7 +175,7 @@ public class Ronda {
                     break;
                 }
             default:
-                System.out.println("Error, la opcion ingresada es incorrecta, intentelo nuevamente");
+                System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
 
 
         }

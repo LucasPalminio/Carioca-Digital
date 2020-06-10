@@ -37,9 +37,11 @@ public class Jugador {
     public int getPuntaje() {
         return puntaje;
     }
+
     public int getPuntajeRonda() {
         return puntajeRonda;
     }
+
     public void calcularPuntaje(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
@@ -54,12 +56,15 @@ public class Jugador {
             }
         }
     }
+
     public ArrayList<Carta> getCartas() {
         return cartas;
     }
+
     public void setPuntajeRonda(int puntajeRonda) {
         this.puntajeRonda = puntajeRonda;
     }
+
     public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
@@ -67,15 +72,18 @@ public class Jugador {
         cartas.add(carta);
     }
     public int getNroCartas(){ return cartas.size(); }
+
     public boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
     public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
+
     public boolean isYaSacoCarta() {
         return yaSacoCarta;
     }
+
     public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
@@ -102,7 +110,7 @@ public class Jugador {
     }
     public void menu_Bajarse(){
         System.out.println("¿Seguro que quiere bajarse? " +
-                "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+ "para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+                "\nEscriba si para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         if (!in.nextLine().equalsIgnoreCase("si")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
             System.out.println("Usted se arrepintio de bajarse");
