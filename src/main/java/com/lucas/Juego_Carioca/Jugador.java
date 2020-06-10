@@ -211,7 +211,8 @@ public class Jugador {
         for (int i = 0; i < 3; i++) {
             int ind = indicesTrio[i];
             String valor = cartas.get(ind).getValor();
-            if (!(valor.equalsIgnoreCase(valorEsperado))){//Si los valores son diferentes
+            String palo = cartas.get(ind).getPalo();
+            if (!(valor.equalsIgnoreCase(valorEsperado)) && !palo.equalsIgnoreCase("JKR")){//Si los valores son diferentes
                 //Vuelve a preguntar
                 System.out.println("Error los indices que ingresaste no corresponde a un trio");
                 return ingresarIndicesTrio();
@@ -230,7 +231,7 @@ public class Jugador {
             Carta carta = cartas.get(ind);
             String palo = carta.getPalo();
             String valor = carta.getValor();
-            if (!(palo.equalsIgnoreCase(paloEsperado) && valor.equalsIgnoreCase(valorEsperado))){
+            if (!(palo.equalsIgnoreCase(paloEsperado) && valor.equalsIgnoreCase(valorEsperado)) && !palo.equalsIgnoreCase("JKR")){
                 //si los indices ingresado no corresponden a una escala, pregunte de nuevo
                 return ingresarIndicesEscala();
             }else{
