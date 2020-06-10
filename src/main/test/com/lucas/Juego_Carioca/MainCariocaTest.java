@@ -20,6 +20,7 @@ public class MainCariocaTest {
     }
     @Test
     public void ingresarJugadoresTest(){
+        //Este test ingresa una letra cuando el metodo pedia en realidad, el metodo maneja bien la excepcion (nose cayo) y posterior puede ingresar los datos de cada jugador
         String stringInput = "e\n2\n"+"Lucas\nLorenzo";
         MainCarioca.entradaAProbar(stringInput);
 

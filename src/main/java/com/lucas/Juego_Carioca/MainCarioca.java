@@ -26,7 +26,8 @@ public class MainCarioca {
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }
-    public static void entradaAProbar(String stringInput){
+
+    public static void entradaAProbar(String stringInput) {
         input = new ByteArrayInputStream(stringInput.getBytes());
         in = new Scanner(input).useDelimiter("\n");
 
@@ -37,13 +38,7 @@ public class MainCarioca {
         //System.setIn(input);
 
     }
-    public static String tecladoNext(){
-        String entrada = in.next();
-        entrada.replaceAll("\n","");
-        entrada = entrada.toString();
-        if(entrada.equalsIgnoreCase("") || entrada.equalsIgnoreCase(" ")){ tecladoNext();}
-        return entrada;
-    }
+
 
     /////Test/////
     /*public static void main(String[] args) {
@@ -69,6 +64,8 @@ public class MainCarioca {
     //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
     //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
     // y retorna un ArrayList de los objetos de la clase Jugador
+
+    //Al comienzo del juego, se llama este metodo para ingresar el nro de jugadores y sus respectivos nombres
     public static ArrayList<Jugador> ingresarJugadores() {
         imprimirTitulo("Bienvenido al juego del carioca");
         //System.out.print("Ingrese el numero de jugadores a jugar");
@@ -83,12 +80,13 @@ public class MainCarioca {
 
     }
 
+    //Posterior a eso, se llama a este metodo que pregunta al usuario desde que nivel hasta que nivel desea jugar
     private static void ingresarNivelAJugar() {
         imprimirTitulo("Niveles");
         //Creo las opciones del menu
         String[] opciones = new String[Ronda.RONDAS.length];
         for (int i = 0; i < Ronda.RONDAS.length; i++) {
-            opciones[i] = Ronda.RONDAS[i][0] + " escalas, " + Ronda.RONDAS[i][1] +" trios" ;
+            opciones[i] = Ronda.RONDAS[i][0] + " escalas, " + Ronda.RONDAS[i][1] + " trios";
         }
         imprimirSoloMenuOpciones(opciones);
         System.out.println();
@@ -101,7 +99,7 @@ public class MainCarioca {
             ultimoNivel = ingresarUnNumero("Ingrese hasta que nivel desea Jugar", nivelActual + 1, Ronda.RONDAS.length) - 1;
             mensajeDeConfirmacion = "Usted desea Jugar desde el nivel " + (nivelActual + 1) + " hasta el nivel " + (ultimoNivel + 1);
         }
-        if (!confirmarOpcion(mensajeDeConfirmacion)){ //Si el jugador se equivoco, este el momento para arrepentirse
+        if (!confirmarOpcion(mensajeDeConfirmacion)) { //Si el jugador se equivoco, este el momento para arrepentirse
             ingresarNivelAJugar();
         }
     }
@@ -129,6 +127,16 @@ public class MainCarioca {
     }
 
 
+    //Este método sirve para ingresar algo por teclado, esta entrada se formatea y se devuelve como cadena String
+    public static String tecladoNext() {
+        String entrada = in.next();
+        entrada.replaceAll("\n", "");
+        entrada = entrada.toString();
+        if (entrada.equalsIgnoreCase("") || entrada.equalsIgnoreCase(" ")) {
+            tecladoNext();
+        }
+        return entrada;
+    }
 
     //Este metodo sirve para Cuando se quiere ingresar un numero por terminal,
     // se desplega un mensaje diciendo que numero debe ingresar
@@ -147,6 +155,7 @@ public class MainCarioca {
 
     }
 
+    //Parecido al metodo anterior pero debe ingresar un numero dentro de un rango
     public static int ingresarUnNumero(String mensaje, int min, int max) {
         if (min > max) {
             int aux = min;
@@ -174,6 +183,7 @@ public class MainCarioca {
 
     }
 
+    //Este metodo se ingresa un arreglo de numeros y verifica si todo estos numeros son diferentes
     public static boolean sonNumerosDiferentes(int[] array) {
         int[] array2 = array.clone();
 
@@ -187,6 +197,8 @@ public class MainCarioca {
         return true;
     }
 
+    //Este metodo imprime un menu de opciones (esas opciones se ingresa como arreglo de string)
+    // y devuelve la opcion elegida (que es un numero entre 1 hasta n opciones) en una cadena String
     public static String imprimirMenuOpciones_e_ingresarUnaOpcion(String[] opciones) {
         imprimirSoloMenuOpciones(opciones);
         String opcion = String.valueOf(ingresarUnNumero("", 1, opciones.length));
@@ -194,19 +206,23 @@ public class MainCarioca {
         return opcion;
     }
 
+    //Solo imprime solo el menu de opciones
     public static void imprimirSoloMenuOpciones(String[] opciones) {
         //Imprime el menu de opciones pero las opciones comienzan desde el 1
         for (int i = 0; i < opciones.length; i++) {
             System.out.println("(" + (i + 1) + ") " + opciones[i]);
         }
     }
-    public static boolean confirmarOpcion(String mensaje){
+
+    //Este metodo es para preguntarle al usuario por una decision irreversible (si esta seguro de la opcion elegida)
+    // si esta seguro de su decision devuelve un true sino devuelve un falso
+    public static boolean confirmarOpcion(String mensaje) {
 
 //        if (in.hasNextLine()){//Para limpiar el buffer
 //            //in.next();
 //        }
         System.out.println(mensaje);
-        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET +" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba " + Carta.ANSI_RED + "si" + Carta.ANSI_RESET + " para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         return tecladoNext().equalsIgnoreCase("si");
     }
 

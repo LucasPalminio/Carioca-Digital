@@ -28,23 +28,21 @@ public class MazoTest {
 
     }
 
-    @Test
-    public void testmMezclarConPozo() {
+    @Test //Test cuando el mazo se queda sin cartas y agregamos las cartas al pozo
+    public void testMezclarConPozo() {
+        //En este test creamos un mazo y un pazo, luego vaciamos el mazo,
         Mazo mazo = new Mazo();
         ArrayList<Carta> pozo = new ArrayList<>();
         ArrayList<Carta> aux = new ArrayList<>();
+        //Vaciamos mazo y agregarlo intencionalmente al pozo
         for (int a = 0; a < mazo.numeroDeCartas(); a++) {
             pozo.add(mazo.getCarta(a));
             mazo.removeCarta(a);
-
-
         }
+
         for(int i=0;mazo.numeroDeCartas()!=0;i++) {
             for (int a = 0; a < mazo.numeroDeCartas(); a++) {
-
                 mazo.removeCarta(a);
-
-
             }
         }
         aux.add(pozo.get(0));
