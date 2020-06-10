@@ -59,11 +59,22 @@ public class Mazo {
         mazo.add(carta);
         Collections.shuffle(mazo);
     }
+    // Cuando el mazo se encuentre vacío se usará este método para transferir todas las cartas del pozo excepto la primera al mazo y se mezclan
     public void mezclarConPozo(ArrayList<Carta> pozo){
-        for(int i= pozo.size()-1;i>0;i--){
+        int largoOriginalDelPozo = pozo.size(); // Por si el largo del pozo varía durante el for()
+        for(int i= largoOriginalDelPozo-1;i>0;i--){
             mazo.add(pozo.get(i));
             pozo.remove(i);
         }
         Collections.shuffle(mazo);
+    }
+    public Carta getCarta(int i){
+        return mazo.get(i);
+    }
+    public void removeCarta(int i){
+        mazo.remove(i);
+    }
+    public void addCarta(Carta i){
+        mazo.add(i);
     }
 }
