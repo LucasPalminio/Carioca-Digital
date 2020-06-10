@@ -1,15 +1,20 @@
 package com.lucas.Juego_Carioca;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainCarioca {
-    public static Scanner in = new Scanner(System.in);
+    public static InputStream sysInBackup = System.in;
+    public static boolean modoPrueba = false;
+    public static Scanner in;
+    public static ByteArrayInputStream input;
     private static int nivelActual = 0;
     private static int ultimoNivel = 1;
 
     public static void main(String[] args) {
-
+        in = new Scanner(System.in);
         ArrayList<Jugador> jugadores = ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
@@ -22,7 +27,15 @@ public class MainCarioca {
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }
+    public static void setModoPrueba(String stringInput){
+        input = new ByteArrayInputStream(stringInput.getBytes());
+        in = new Scanner(stringInput);
+//        System.out.println(in.nextInt());
+//        System.out.println(in.next());
+//        System.out.println(in.next());
+        //System.setIn(input);
 
+    }
     /////Test/////
     /*public static void main(String[] args) {
         Jugador jugador1 = new Jugador("Tester trios o escalas");
@@ -47,14 +60,14 @@ public class MainCarioca {
     //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
     //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
     // y retorna un ArrayList de los objetos de la clase Jugador
-    private static ArrayList<Jugador> ingresarJugadores() {
+    public static ArrayList<Jugador> ingresarJugadores() {
         imprimirTitulo("Bienvenido al juego del carioca");
         //System.out.print("Ingrese el numero de jugadores a jugar");
         int numeroJugadores = ingresarNumeroDeJugadores();
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         for (int i = 1; i <= numeroJugadores; i++) {
             System.out.print("Ingrese el nombre del Jugador " + i + ": ");
-            String nombre = in.nextLine();
+            String nombre = in.next();
             jugadores.add(new Jugador(nombre));
         }
         return jugadores;
@@ -96,7 +109,7 @@ public class MainCarioca {
     private static int ingresarNumeroDeJugadores() {
 
         int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 2 y maximo 4): ");
-        in.nextLine();
+        //in.nextLine();
         if (nroJugadores >= 2 && nroJugadores <= 4) {
             return nroJugadores;
         }
@@ -114,9 +127,9 @@ public class MainCarioca {
                 System.out.print(mensaje);
                 return in.nextInt();
             } catch (Exception e) {
-                System.out.println("Error: usted a introducido un caracter no valiudo: " + e.getMessage());
+                System.out.println("Error: usted a introducido un caracter no valido: " + e);
                 System.out.println("Intentelo nuevamente");
-                in.nextLine();
+                in.next();
             }
 
         }
@@ -177,12 +190,13 @@ public class MainCarioca {
         }
     }
     public static boolean confirmarOpcion(String mensaje){
+        /*
         if (in.hasNextLine()){//Para limpiar el buffer
             in.nextLine();
-        }
+        }*/
         System.out.println(mensaje);
         System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET +" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
-        return in.nextLine().equalsIgnoreCase("si");
+        return in.next().equalsIgnoreCase("si");
     }
 }
 
