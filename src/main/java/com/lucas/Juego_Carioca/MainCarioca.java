@@ -8,7 +8,7 @@ public class MainCarioca {
     private static int nivelActual = 0;
     private static int ultimoNivel = 1;
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 
         ArrayList<Jugador> jugadores = ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
@@ -21,10 +21,10 @@ public class MainCarioca {
         }
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
-    }
+    }*/
 
     /////Test/////
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         Jugador jugador1 = new Jugador("Tester trios o escalas");
         Jugador jugador2 = new Jugador("Tester trio o escalas 2");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
@@ -43,7 +43,7 @@ public class MainCarioca {
         jugadores.add(jugador2);
         Ronda ronda1 = new Ronda(jugadores,0);
         ronda1.comenzarRonda();
-}*/
+}
     //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
     //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
     // y retorna un ArrayList de los objetos de la clase Jugador

@@ -95,6 +95,22 @@ public class Jugador {
         matrizEscalas.clear();
     }
 
+    public ArrayList<ArrayList<Carta>> getMatrizTrios() {
+        return matrizTrios;
+    }
+
+    public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
+        this.matrizTrios = matrizTrios;
+    }
+
+    public ArrayList<ArrayList<Carta>> getMatrizEscalas() {
+        return matrizEscalas;
+    }
+
+    public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
+        this.matrizEscalas = matrizEscalas;
+    }
+
     public Carta menu_BotarCarta(){
         imprimirCartas();
         int indiceCarta = MainCarioca.ingresarUnNumero("¿Que cartas quieres botar?: ");
@@ -151,8 +167,27 @@ public class Jugador {
             segundaLinea += MainCarioca.repetirString(" ",numeroEspacios) +i+MainCarioca.repetirString(" ",numeroEspacios);
         }
         contenido = primeraLinea + "\n" + segundaLinea;
-        System.out.println(contenido);
+        System.out.print(contenido);
+        System.out.println();
 
+    }
+    public void imprimirEscalasyTrios(){
+        if (bajoSusCarta){
+
+            if (NROESCALAS>0){
+                for (int i = 0; i < matrizEscalas.size(); i++) {
+                    System.out.print("Escala "+i+": ");
+                    imprimirCartas(matrizEscalas.get(i));
+                }
+            }
+            if(NROTRIOS>0){
+                for (int i = 0; i < matrizTrios.size(); i++) {
+                    System.out.print("Trio "+i+": ");
+                    imprimirCartas(matrizTrios.get(i));
+                }
+            }
+            System.out.println();
+        }
     }
     public void imprimirInformacionJugador(ArrayList<Carta> pozo){
         System.out.println("Turno: " + nombre);
