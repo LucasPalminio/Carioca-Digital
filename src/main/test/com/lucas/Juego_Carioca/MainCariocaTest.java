@@ -21,7 +21,7 @@ public class MainCariocaTest {
     @Test
     public void ingresarJugadoresTest(){
         String stringInput = "e\n2\n"+"Lucas\nLorenzo";
-        MainCarioca.setModoPrueba(stringInput);
+        MainCarioca.entradaAProbar(stringInput);
 
         ArrayList<Jugador> jugadoresEsperado = new ArrayList<>();
         jugadoresEsperado.add(new Jugador("Lucas"));

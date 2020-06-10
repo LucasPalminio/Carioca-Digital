@@ -1,10 +1,10 @@
 package com.lucas.Juego_Carioca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Ronda {
-    public static Scanner in = new Scanner(System.in);
+
     public static final int[][] RONDAS = {
             //{Escala, Trio} ; 6,7,8,9,10,11
             {0, 2}, // 0*4+2*3 = 6 (2 trios)

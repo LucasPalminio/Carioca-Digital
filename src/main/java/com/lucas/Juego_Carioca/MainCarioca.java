@@ -1,20 +1,19 @@
 package com.lucas.Juego_Carioca;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainCarioca {
-    public static InputStream sysInBackup = System.in;
-    public static boolean modoPrueba = false;
     public static Scanner in;
     public static ByteArrayInputStream input;
     private static int nivelActual = 0;
     private static int ultimoNivel = 1;
 
     public static void main(String[] args) {
-        in = new Scanner(System.in);
+//        String stringInput = "2\nLucas Palminio\nLorenzo\n";
+//        entradaAProbar(stringInput);
+        in = new Scanner(System.in).useDelimiter("\n");
         ArrayList<Jugador> jugadores = ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
@@ -27,15 +26,25 @@ public class MainCarioca {
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }
-    public static void setModoPrueba(String stringInput){
+    public static void entradaAProbar(String stringInput){
         input = new ByteArrayInputStream(stringInput.getBytes());
-        in = new Scanner(stringInput);
+        in = new Scanner(input).useDelimiter("\n");
+
 //        System.out.println(in.nextInt());
-//        System.out.println(in.next());
-//        System.out.println(in.next());
+//        System.out.println(tecladoNext());
+//        System.out.println(tecladoNext());
+//        System.out.println(".");
         //System.setIn(input);
 
     }
+    public static String tecladoNext(){
+        String entrada = in.next();
+        entrada.replaceAll("\n","");
+        entrada = entrada.toString();
+        if(entrada.equalsIgnoreCase("") || entrada.equalsIgnoreCase(" ")){ tecladoNext();}
+        return entrada;
+    }
+
     /////Test/////
     /*public static void main(String[] args) {
         Jugador jugador1 = new Jugador("Tester trios o escalas");
@@ -119,17 +128,19 @@ public class MainCarioca {
 
     }
 
+
+
     //Este metodo sirve para Cuando se quiere ingresar un numero por terminal,
     // se desplega un mensaje diciendo que numero debe ingresar
     public static int ingresarUnNumero(String mensaje) {
         while (true) {
             try {
                 System.out.print(mensaje);
-                return in.nextInt();
+                return Integer.parseInt(tecladoNext());
             } catch (Exception e) {
                 System.out.println("Error: usted a introducido un caracter no valido: " + e);
                 System.out.println("Intentelo nuevamente");
-                in.next();
+                in.nextLine();
             }
 
         }
@@ -190,14 +201,16 @@ public class MainCarioca {
         }
     }
     public static boolean confirmarOpcion(String mensaje){
-        /*
-        if (in.hasNextLine()){//Para limpiar el buffer
-            in.nextLine();
-        }*/
+
+//        if (in.hasNextLine()){//Para limpiar el buffer
+//            //in.next();
+//        }
         System.out.println(mensaje);
         System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET +" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
-        return in.next().equalsIgnoreCase("si");
+        return tecladoNext().equalsIgnoreCase("si");
     }
+
+
 }
 
 

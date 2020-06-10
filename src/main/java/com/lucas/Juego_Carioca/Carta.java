@@ -30,17 +30,6 @@ public class Carta {
             this.color = ANSI_BLACK;
         }
     }
-//  funcion imprimirCarta (Formato antiguo)
-//    public void imprimirCarta(){
-//        String valorEC = this.color+this.valor+ANSI_RESET; // EC = En Color
-//        String paloEC = this.color + this.palo+ANSI_RESET;
-//
-//        String cartaImagen = "|"+valorEC+"  |\n"; // | 3 caracteres |
-//        cartaImagen += "| "+paloEC+" |\n";
-//        cartaImagen += "|  "+valorEC+"|\n";
-//        System.out.println(cartaImagen);
-//
-//    }
 
     //Funcion que devuelve la carta en formato String
     public String toString(){
@@ -55,7 +44,7 @@ public class Carta {
     //Cada carta tiene un precio,
     // Cuando el juego finaliza y el jugador tiene cartas en mano la suma de los precios de cada carta se adiciona a su puntaje
     //El objetivo de cada juego es ser el primero en quedar sin cartas, por lo tanto el ganador del Carioca es aquel que tenga el menor puntaje
-    private int calcularPrecio() {
+    public int calcularPrecio() {
         //Aqui importa el valor de la carta no el paloque pertenece
         for (int i = 2; i <= 10; i++) {
             //el precio de la cartas con numero es ese numero

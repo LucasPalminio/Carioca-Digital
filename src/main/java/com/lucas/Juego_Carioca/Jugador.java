@@ -1,9 +1,11 @@
 package com.lucas.Juego_Carioca;
 
 
+
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
+
 
 public class Jugador {
     private String nombre;
@@ -18,7 +20,6 @@ public class Jugador {
     private static int NROTRIOS;
     private static int NROESCALAS;
 
-    public static Scanner in = new Scanner(System.in);
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -109,9 +110,9 @@ public class Jugador {
 
     }
     public void menu_Bajarse(){
-        System.out.println("¿Seguro que quiere bajarse? " +
-                "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
-        if (!in.nextLine().equalsIgnoreCase("si")){
+        //System.out.println("¿Seguro que quiere bajarse? " +
+         //       "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+        if (!MainCarioca.confirmarOpcion("¿Seguro que quiere bajarse?")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
             System.out.println("Usted se arrepintio de bajarse");
             return;
@@ -248,7 +249,7 @@ public class Jugador {
         int[] indices = new int[nroIndices];
 
         System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
-        String[] indicesString = in.nextLine().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
+        String[] indicesString = MainCarioca.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
         if (indicesString.length == nroIndices) {
             //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
             try {
