@@ -59,4 +59,11 @@ public class Mazo {
         mazo.add(carta);
         Collections.shuffle(mazo);
     }
+    public void mezclarConPozo(ArrayList<Carta> pozo){
+        for(int i= pozo.size();i>0;i--){
+            mazo.add(pozo.get(i));
+            pozo.remove(i);
+        }
+        Collections.shuffle(mazo);
+    }
 }
