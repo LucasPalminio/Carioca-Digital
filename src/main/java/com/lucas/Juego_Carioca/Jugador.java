@@ -110,7 +110,7 @@ public class Jugador {
     }
     public void menu_Bajarse(){
         System.out.println("¿Seguro que quiere bajarse? " +
-                "\nEscriba si para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+                "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         if (!in.nextLine().equalsIgnoreCase("si")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
             System.out.println("Usted se arrepintio de bajarse");

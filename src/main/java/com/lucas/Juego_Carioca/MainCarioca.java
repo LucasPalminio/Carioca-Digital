@@ -181,7 +181,7 @@ public class MainCarioca {
             in.nextLine();
         }
         System.out.println(mensaje);
-        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba si para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET +" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         return in.nextLine().equalsIgnoreCase("si");
     }
 }
