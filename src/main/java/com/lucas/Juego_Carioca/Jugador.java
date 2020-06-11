@@ -1,43 +1,39 @@
 package com.lucas.Juego_Carioca;
 
 
-
-
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.Scanner;
 
 public class Jugador {
     private String nombre;
-    private ArrayList<Carta> cartas = new ArrayList<>(); //El arreglo de cartas del jugador
-    private int puntaje; //Puntaje que lleva durante el juego (puntaje final)
-    private int puntajeRonda; //Puntaje que saco en la ronda
-    private boolean bajoSusCarta; //Bandera que sirve para avisar si un jugador se ha bajado
-    private boolean yaSacoCarta; //Bandera que sirve para avisar si el jugador ya saco una carta (ya sea del mazo o de la mesa) en el turno actual
-    //Matrices cuando se baja, aca dejan las escalas o trios de cartas que se han bajado en la ronda actual
-    private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>();
+    private ArrayList<Carta> cartas = new ArrayList<>();
+    private int puntaje;
+    private int puntajeRonda;
+    private boolean bajoSusCarta;
+    private boolean yaSacoCarta;
+    private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
-    //variables que les dice al jugador cuantos trios y escalas deben formar
+
     private static int NROTRIOS;
     private static int NROESCALAS;
 
-    //constructor para inicializar todas estas variables
+    public static Scanner in = new Scanner(System.in);
+
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
         this.bajoSusCarta = false;
         this.yaSacoCarta = false;
     }
-    //metodo para setear la meta de cuantos trios o escalas deben formar en la ronda actual
+
     public static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
         NROTRIOS = nroTriosRonda;
         NROESCALAS = nroEscalasRonda;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public int getPuntaje() {
         return puntaje;
     }
@@ -53,7 +49,6 @@ public class Jugador {
             }
         }
     }
-
     public void calcularPuntajeRonda(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
@@ -73,17 +68,14 @@ public class Jugador {
     public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
-
     public void agregarCarta(Carta carta){
         cartas.add(carta);
     }
-
     public int getNroCartas(){ return cartas.size(); }
 
     public boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
-
     public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
@@ -95,7 +87,7 @@ public class Jugador {
     public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
-    //Metodo
+
     public void limpiarMatriz(){
         //Este metodo funciona solamente cuando finaliza la ronda,
         // su funcion es limpia las matrices de trios y escalas que el jugador tenga en la mesa
@@ -116,11 +108,10 @@ public class Jugador {
         }
 
     }
-
     public void menu_Bajarse(){
-        //System.out.println("¿Seguro que quiere bajarse? " +
-         //       "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
-        if (!MainCarioca.confirmarOpcion("¿Seguro que quiere bajarse?")){
+        System.out.println("¿Seguro que quiere bajarse? " +
+                "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+        if (!in.nextLine().equalsIgnoreCase("si")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
             System.out.println("Usted se arrepintio de bajarse");
             return;
@@ -149,8 +140,7 @@ public class Jugador {
         System.out.println("Cartas de "+nombre);
         imprimirCartas(cartas);
     }
-
-    private static void imprimirCartas(ArrayList<Carta> cartas){ // Se imprime un conjunto de cartas dado como parametro
+    private static void imprimirCartas(ArrayList<Carta> cartas){
         String contenido = "";
         String primeraLinea = "";
         String segundaLinea = "";
@@ -164,14 +154,12 @@ public class Jugador {
         System.out.println(contenido);
 
     }
-
     public void imprimirInformacionJugador(ArrayList<Carta> pozo){
         System.out.println("Turno: " + nombre);
         imprimirCartas();
 
 
     }
-
     public void intercambiarCartas(){
 
             int primera_carta = 0;
@@ -203,7 +191,6 @@ public class Jugador {
         return trio;
 
     }
-
     public ArrayList<Carta> crearUnaEscala(){
         int[] indices = ingresarIndicesEscala();
         ArrayList<Carta> escala = new ArrayList<Carta>();
@@ -233,7 +220,6 @@ public class Jugador {
         }
         return indicesTrio;
     }
-
     public int[] ingresarIndicesEscala(){
         System.out.println("Ingrese los indices de una escala");
         int[] indicesEscala = ingresarIndices(4);
@@ -258,12 +244,11 @@ public class Jugador {
         }
         return indicesEscala;
     }
-
     public int[] ingresarIndices(int nroIndices) { // Este metodo es para ingresar los indices de las cartas del jugador, nroIndices puede ser 3 o 4
         int[] indices = new int[nroIndices];
 
         System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
-        String[] indicesString = MainCarioca.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
+        String[] indicesString = in.nextLine().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
         if (indicesString.length == nroIndices) {
             //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
             try {
@@ -285,7 +270,7 @@ public class Jugador {
                         break;
                     }
                 }
-            } c-
+            } catch (NumberFormatException nfe) {
                 System.out.println("Error el caracter ingresado no es un numero");
             }
         } else {
