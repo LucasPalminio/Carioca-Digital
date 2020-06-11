@@ -21,6 +21,8 @@ public class MazoTest {
 
     @Test
     public void testMazo_primeraCarta() {
+        // Verifica que al generar el mazo y mezclarlo no quede un Joker en primera posición, ya que teoricamente
+        // deberia revolver el mazo otra vez si ese es el caso hasta que la primera carta no sea un Joker
         Mazo mazo = new Mazo();
         Carta cartaQueNoDebeSalir = new Carta("JKR", "");
         assertNotEquals(cartaQueNoDebeSalir.getPalo(), mazo.toArrayList().get(0).getPalo());
@@ -47,8 +49,12 @@ public class MazoTest {
         }
         aux.add(pozo.get(0));
         mazo.mezclarConPozo(pozo);
+        // Comprueba si el pozo posea una sola carta
         Assert.assertEquals(1,pozo.size());
+        //Comprueba si el mazo posee el resto de las cartas
         Assert.assertEquals(53,mazo.numeroDeCartas());
+        // Comprueba si el la carta "encima"(en la primera posicion) del pozo es igual a la que tenia
+        // anterior a mezclarse con el mazo
         Assert.assertEquals(aux.get(0),pozo.get(0));
 
     }

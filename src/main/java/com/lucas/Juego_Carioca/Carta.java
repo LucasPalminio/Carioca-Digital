@@ -2,11 +2,12 @@ package com.lucas.Juego_Carioca;
 
 
 public class Carta {
+    // Colores que se usaran para algunos textos
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_RESET = "\u001B[0m";
-
+    // Todos las posibilidades de palos y valores de las cartas
     final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 

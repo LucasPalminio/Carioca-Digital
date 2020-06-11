@@ -150,7 +150,7 @@ public class Jugador {
         imprimirCartas(cartas);
     }
 
-    private static void imprimirCartas(ArrayList<Carta> cartas){
+    private static void imprimirCartas(ArrayList<Carta> cartas){ // Se imprime un conjunto de cartas dado como parametro
         String contenido = "";
         String primeraLinea = "";
         String segundaLinea = "";

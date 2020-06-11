@@ -131,6 +131,8 @@ public class Ronda {
                 break;
 
         }
+        // Si el jugador llegase a bajarse durante la ronda este metodo evitara que tenga que esperar a la siguiente ronda
+        // para que se le considere bajado, ya que de no estar el jugador se podria bajar dos veces
         if(jugadorActual.isBajoSusCarta()) {
             menu_jugador_siBajoSusCartas(jugadorActual);
         }else{

@@ -20,7 +20,8 @@ public class MainCariocaTest {
     }
     @Test
     public void ingresarJugadoresTest(){
-        //Este test ingresa una letra cuando el metodo pedia en realidad, el metodo maneja bien la excepcion (nose cayo) y posterior puede ingresar los datos de cada jugador
+        //Este test ingresa una letra cuando el metodo pedia en realidad solo nombres, el metodo maneja bien la excepcion (no se cayo)
+        // y posterior puede ingresar los datos de cada jugador
         String stringInput = "e\n2\n"+"Lucas\nLorenzo";
         MainCarioca.entradaAProbar(stringInput);
 
@@ -36,6 +37,7 @@ public class MainCariocaTest {
     }
     @Test
     public void repetirString_test1() {
+        // Este test comprueba que un String ingresado se repita el numero esperado de veces
         String esperado = "//////";
         String real = MainCarioca.repetirString("/",6);
         assertEquals(esperado,real);
@@ -44,6 +46,7 @@ public class MainCariocaTest {
     }
     @Test
     public void repetirString_test2() {
+        // Este test comprueba si al repetir 0 veces un String el metodo termina retornando un espacio vacío
         String esperado = "";
         String real = MainCarioca.repetirString("/",0);
         assertEquals(esperado,real);
@@ -52,6 +55,8 @@ public class MainCariocaTest {
     }
     @Test
     public void repetirString_test3() {
+        // Este test pone a prueba la resistencia a errores, ya que las repeticiones solo pueden ser en números enteros no negativos
+        // por lo que debería retornar como si fuesen 0 repeticiones para evitar un error
         String esperado = "";
         String real = MainCarioca.repetirString("/",-5);
         assertEquals(esperado,real);
@@ -60,12 +65,15 @@ public class MainCariocaTest {
     }
     @Test
     public void sonNumerosDiferentes_test1() {
+        // Comprueba si retorna falso cuando el parametro es un arreglo de enteros que contiene dos numeros enteros
+        // lo que probaria que puede identificar a los que contienen elementos iguales
         int[] test = {1,2,3,3};
         boolean esperado = false;
         assertEquals(esperado,MainCarioca.sonNumerosDiferentes(test));
     }
     @Test
     public void sonNumerosDiferentes_test2() {
+        // Comprueba si retorna verdadero ante un arreglo de enteros que cumplen con el requerimiento de ser diferentes
         int[] test = {1,2,3,4};
         boolean esperado = true;
         assertEquals(esperado,MainCarioca.sonNumerosDiferentes(test));
