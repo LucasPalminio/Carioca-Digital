@@ -23,11 +23,22 @@ public class JugadorTest {
     }
 
     @Test
-    public void ingresarIndicesTrio() {
+    public void ingresarIndicesEscala_test01() { //(Actualmente el test no funicina) Crea un jugadores con una escala en la mano y comprueba si esta se ingresa correctamente
+        String stringInput = "0 1 2\n";
+        MainCarioca.entradaAProbar(stringInput);
+        Jugador jugador1 = new Jugador("Carlos");
+        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
+        for (int i = 2; i <6; i++) {
+            cartasJugador1.add(new Carta("♠", String.valueOf(i)));
+        }
+        jugador1.setCartas(cartasJugador1);
+        int[] indicesEscalaEsperado = {0,1,2,3};
+        int[] indicesEscalaReal = jugador1.ingresarIndicesEscala(); // (Error) Aqui el metodo se ejecuta indefinidamente
+        assertArrayEquals(indicesEscalaEsperado,indicesEscalaReal);
     }
 
     @Test
-    public void ingresarIndicesEscala() {
+    public void ingresarIndicesTrio_test01() {// Se comprueba si se acepta un trio formado por dos cartas iguales y un Joker
         String stringInput = "0 1 2\n";
         MainCarioca.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");

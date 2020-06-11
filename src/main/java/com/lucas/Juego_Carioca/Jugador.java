@@ -261,7 +261,7 @@ public class Jugador {
                             if(MainCarioca.sonNumerosDiferentes(indices)) { //Se verifica que los indices sean numeros diferentes
                                 return indices;
                             }else{
-                                System.out.println("Los numeros deben ser diferentes, intentelo nuevamnete");
+                                System.out.println("Los numeros deben ser diferentes, intentelo nuevamente");
                             }
                         }
                     } else {
