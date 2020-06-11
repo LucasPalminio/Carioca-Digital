@@ -15,9 +15,9 @@ public class Mazo {
     }
 
     public ArrayList<Carta> toArrayList() {
-        return mazo;
+        return mazo; //este metodo es para utilizar el mazo como arraylist
     }
-
+    //Este metodo es para generar un mazo ordenado conformado por 2 barajas de cartas inglesas y 4 comodines: 108 cartas en total
     private static ArrayList<Carta> generarMazoOrdenado() {
         ArrayList<Carta> mazo = new ArrayList<Carta>();
         for (int i = 1; i <= 2; i++) {
@@ -32,12 +32,12 @@ public class Mazo {
         }
         return mazo;
     }
-
+    //Este metodo devuelve el numero de cartas que hay en el mazo
     public int numeroDeCartas(){
         return mazo.size();
     }
 
-    //Cuando se saca una carta del mazo, la funciona retorna carta que esta en la primera posicion
+    //Cuando se saca una carta del mazo, el metodo retorna carta que esta en la primera posicion
     // y a la vez la elimina del mazo
     public Carta sacarCarta(){
         Carta carta = mazo.get(0);
@@ -55,7 +55,8 @@ public class Mazo {
         return arrayCartas;
 
     }
-    public void devolverCarta(Carta carta){ //En caso de devolver una carta al mazo, este se devuelve y se revuelve el mazo
+    //En caso de devolver una carta al mazo, este se devuelve y se revuelve el mazo
+    public void devolverCarta(Carta carta){
         mazo.add(carta);
         Collections.shuffle(mazo);
     }

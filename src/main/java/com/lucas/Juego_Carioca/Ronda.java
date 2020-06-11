@@ -2,25 +2,24 @@ package com.lucas.Juego_Carioca;
 
 import java.util.ArrayList;
 
-
 public class Ronda {
 
     public static final int[][] RONDAS = {
             //{Escala, Trio} ; 6,7,8,9,10,11
-            {0, 2}, // 0*4+2*3 = 6 (2 trios)
-            {1, 1}, //1*4+1*3 = 7 (1 escala y 1 trio)
-            {2, 0}, // 2 escalas
-            {0, 3}, // 3 trios
-            {1, 2}, // 1 escala y 2 trios
-            {2, 1} //2 escalas y 1 trio
+            {0, 2}, // 0*4+2*3 = 6 (2 trios) nivel 1
+            {1, 1}, //1*4+1*3 = 7 (1 escala y 1 trio) nivel 2
+            {2, 0}, // 2 escalas, nivel 3
+            {0, 3}, // 3 trios, nivel 4
+            {1, 2}, // 1 escala y 2 trios, nivel 5
+            {2, 1} //2 escalas y 1 trio, nivel 6
     };
-    private int nivel;
+    private int nivel; // El nivel actual de la ronda
     private ArrayList<Jugador> jugadores;
     private Mazo mazo;
     private ArrayList<Carta> pozo = new ArrayList<Carta>();
-    private final int NROESCALAS;
-    private final int NROTRIOS;
-    private int turnoActual;
+    private final int NROESCALAS; //Nro de escalas que hay que formar en esta ronda
+    private final int NROTRIOS; //Nro de trios que hay que formar en esta ronda
+    private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
 
     public Ronda(ArrayList<Jugador> jugadores, int nivel) {
         this.nivel = nivel;
@@ -30,11 +29,11 @@ public class Ronda {
         NROESCALAS = RONDAS[nivel][0];
         NROTRIOS = RONDAS[nivel][1];
         Jugador.setNROTRIOSyNROESCALAS(NROESCALAS, NROTRIOS);
-        turnoActual = 0;
-    }
 
+    }
+    //Se comienza la ronda, este metodo solo se ejecuta una vez durante la ronda
     public void comenzarRonda() {
-        //Se crea un juego
+
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
         for (int index = 0; index < jugadores.size(); index++) {
@@ -53,6 +52,7 @@ public class Ronda {
         //el juego termina cuando un jugador se queda sin cartas
 
         //Este Bucle funciona hasta que alguien se quede sin cartas (temporal, lo ideal remplezarlo por un metodo)
+        //Se llama al sgte metodo: desarrolloRonda,
         desarrolloRonda();
     }
 
@@ -78,7 +78,7 @@ public class Ronda {
         desarrolloRonda();
     }
 
-
+    //Si el jugador aun no se ha bajado sus cartas, debe mostrar este menu de opciones
     private void menu_jugador_noBajoSusCartas(Jugador jugadorActual) {
         String[] opciones = {"Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"};
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
@@ -138,7 +138,7 @@ public class Ronda {
         }
 
     }
-
+    //Si el jugador se ha bajado sus cartas, debe mostrar este menu de opciones
     private void menu_jugador_siBajoSusCartas(Jugador jugadorActual) {
 
         String[] opciones = {"Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
@@ -195,19 +195,19 @@ public class Ronda {
         menu_jugador_siBajoSusCartas(jugadorActual);
 
     }
-
+    //metodo cuando un jugador en su turno saca una carta de la mesa
     private void sacarCartaDeLaMesa(Jugador jugador) {
         Carta cartaEnLaMesa = pozo.get(0);
         jugador.agregarCarta(cartaEnLaMesa);
         pozo.remove(0);
     }
-
+    //metodo cuando un jugador en su turno saca una carta del mazo
     private void sacarCartaDelMazo(Jugador jugador) {
         Carta cartaDelMazo = mazo.sacarCarta();
         System.out.println("obtuviste esta carta del mazo: " + cartaDelMazo.toStringEC());
         jugador.agregarCarta(cartaDelMazo);
     }
-
+    //Este metodo imprime quien es el turnoActual y que carta hay en la mesa
     public void imprimirInformacionRonda() {
         System.out.println("///////////////////////////////////");
         System.out.println("Turno Actual: " + turnoActual);
@@ -218,6 +218,9 @@ public class Ronda {
         }
     }
 
+    //Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
+    // muestra la tabla de puntajes que sacaron en esta ronda los jugadores (dice quien fue el ganador de la ronda)
+    // y muestra la tabla de sus puntajes finales (dice tambien quien lleva la delantera)
     public void finRonda() {
         int jugador_con_delantera = 0;
         int puntaje_con_delantera = 0;
