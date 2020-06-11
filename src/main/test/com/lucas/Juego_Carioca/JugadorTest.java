@@ -44,7 +44,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void ingresarIndices_test1() {
+    public void ingresarIndices_test1() { //  Comprueba un ingreso valido de indices
         Jugador jugador = new Jugador("Carlos");
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
@@ -58,7 +58,8 @@ public class JugadorTest {
 
     }
     @Test
-    public void ingresarIndices_test2() {
+    public void ingresarIndices_test2() { // Comprueba que aunque se ingresen indices erroneos(Se repite un indice) de todas maneras
+        // solo tome los correctos para ejecutar el metodo
         Jugador jugador = new Jugador("Carlos");
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
@@ -72,7 +73,8 @@ public class JugadorTest {
 
     }
     @Test
-    public void ingresarIndices_test3() {
+    public void ingresarIndices_test3() { // Comprueba que aunque se ingresen indices erroneos(letras) de todas maneras
+        // solo tome los correctos para ejecutar el metodo
         Jugador jugador = new Jugador("Carlos");
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
@@ -86,7 +88,8 @@ public class JugadorTest {
 
     }
     @Test
-    public void ingresarIndices_test4() {
+    public void ingresarIndices_test4() {// Comprueba que aunque se ingresen indices erroneos(fuera del tamaño de la mano del jugador)
+        // de todas maneras solo tome los correctos para ejecutar el metodo
         Jugador jugador = new Jugador("Carlos");
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));

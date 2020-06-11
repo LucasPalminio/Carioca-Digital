@@ -46,7 +46,7 @@ public class Carta {
     // Cuando el juego finaliza y el jugador tiene cartas en mano la suma de los precios de cada carta se adiciona a su puntaje
     //El objetivo de cada juego es ser el primero en quedar sin cartas, por lo tanto el ganador del Carioca es aquel que tenga el menor puntaje
     public int calcularPrecio() {
-        //Aqui importa el valor de la carta no el paloque pertenece
+        //Aqui importa el valor de la carta no el palo al que pertenece
         for (int i = 2; i <= 10; i++) {
             //el precio de la cartas con numero es ese numero
             if (valor.equalsIgnoreCase(Integer.toString(i))) {
