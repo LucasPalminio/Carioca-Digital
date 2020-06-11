@@ -40,7 +40,7 @@ public class MainCarioca {
     }
 
 
-    /////Test/////
+    /////Test: PARA CREAR UN JUEGO ARREGLADO Y ASI PROBAR FACILMENTE/////
     /*public static void main(String[] args) {
         Jugador jugador1 = new Jugador("Tester trios o escalas");
         Jugador jugador2 = new Jugador("Tester trio o escalas 2");
@@ -73,7 +73,7 @@ public class MainCarioca {
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         for (int i = 1; i <= numeroJugadores; i++) {
             System.out.print("Ingrese el nombre del Jugador " + i + ": ");
-            String nombre = in.next();
+            String nombre = tecladoNext();
             jugadores.add(new Jugador(nombre));
         }
         return jugadores;

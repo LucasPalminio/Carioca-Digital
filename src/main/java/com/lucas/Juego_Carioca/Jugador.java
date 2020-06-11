@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class Jugador {
     private String nombre;
-    private ArrayList<Carta> cartas = new ArrayList<>();
+    private ArrayList<Carta> cartas = new ArrayList<>(); //El arreglo de cartas del jugador
     private int puntaje; //Puntaje que lleva durante el juego (puntaje final)
     private int puntajeRonda; //Puntaje que saco en la ronda
     private boolean bajoSusCarta; //Bandera que sirve para avisar si un jugador se ha bajado
@@ -95,7 +95,7 @@ public class Jugador {
     public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
-
+    //Metodo
     public void limpiarMatriz(){
         //Este metodo funciona solamente cuando finaliza la ronda,
         // su funcion es limpia las matrices de trios y escalas que el jugador tenga en la mesa
@@ -285,7 +285,7 @@ public class Jugador {
                         break;
                     }
                 }
-            } catch (NumberFormatException nfe) {
+            } c-
                 System.out.println("Error el caracter ingresado no es un numero");
             }
         } else {
