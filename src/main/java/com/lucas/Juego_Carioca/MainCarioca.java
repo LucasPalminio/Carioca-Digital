@@ -225,7 +225,14 @@ public class MainCarioca {
         System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba " + Carta.ANSI_RED + "si" + Carta.ANSI_RESET + " para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         return tecladoNext().equalsIgnoreCase("si");
     }
-
+    public static int StringArrayindexOf(String[] array,String target){
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(target)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }
 

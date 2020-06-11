@@ -23,20 +23,36 @@ public class JugadorTest {
     }
 
     @Test
-    public void ingresarIndicesEscala_test01() { //(Actualmente el test no funicina) Crea un jugadores con una escala en la mano y comprueba si esta se ingresa correctamente
-        String stringInput = "0 1 2\n";
+    public void ingresarIndicesEscala_test01() { // Crea un jugadores con una escala (solo numeros 2 3 4 5) en la mano y comprueba si esta se ingresa correctamente
+        String stringInput = "0 1 2 3\n";
         MainCarioca.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
-        for (int i = 2; i <6; i++) {
+        for (int i = 2; i <8; i++) {
             cartasJugador1.add(new Carta("♠", String.valueOf(i)));
         }
         jugador1.setCartas(cartasJugador1);
+        jugador1.imprimirCartas();
         int[] indicesEscalaEsperado = {0,1,2,3};
         int[] indicesEscalaReal = jugador1.ingresarIndicesEscala(); // (Error) Aqui el metodo se ejecuta indefinidamente
         assertArrayEquals(indicesEscalaEsperado,indicesEscalaReal);
     }
-
+    @Test
+    public void ingresarIndicesEscala_test02() { // Crea un jugadores con una escala(letras y numeros Q, K, A, 2) en la mano y comprueba si esta se ingresa correctamente
+        String stringInput = "0 1 2 3\n";
+        MainCarioca.entradaAProbar(stringInput);
+        Jugador jugador1 = new Jugador("Carlos");
+        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
+        cartasJugador1.add(new Carta("♠", "Q"));
+        cartasJugador1.add(new Carta("♠", "K"));
+        cartasJugador1.add(new Carta("♠", "A"));
+        cartasJugador1.add(new Carta("♠", "2"));
+        jugador1.setCartas(cartasJugador1);
+        jugador1.imprimirCartas();
+        int[] indicesEscalaEsperado = {0,1,2,3};
+        int[] indicesEscalaReal = jugador1.ingresarIndicesEscala(); // (Error) Aqui el metodo se ejecuta indefinidamente
+        assertArrayEquals(indicesEscalaEsperado,indicesEscalaReal);
+    }
     @Test
     public void ingresarIndicesTrio_test01() {// Se comprueba si se acepta un trio formado por dos cartas iguales y un Joker
         String stringInput = "0 1 2\n";
@@ -59,11 +75,10 @@ public class JugadorTest {
         Jugador jugador = new Jugador("Carlos");
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
-
-        String stringInput = "0 1 2\n";
+        String stringInput = "0 1 2 3\n";
         MainCarioca.entradaAProbar(stringInput);
-        int[] esperado = {0, 1, 2};
-        int[] real = jugador.ingresarIndices(3);
+        int[] esperado = {0, 1, 2, 3};
+        int[] real = jugador.ingresarIndices(4);
         assertArrayEquals(esperado,real);
 
 

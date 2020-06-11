@@ -1,6 +1,7 @@
 package com.lucas.Juego_Carioca;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -225,7 +226,8 @@ public class Jugador {
         int[] indicesEscala = ingresarIndices(4);
         String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
         String valorEsperado = cartas.get(indicesEscala[0]).getValor(); //K
-        int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12, En que posicion del arreglo de VALORES esta el valor: K
+        //int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12, En que posicion del arreglo de VALORES esta el valor: K
+        int indiceValor = MainCarioca.StringArrayindexOf(Carta.VALORES,valorEsperado);
         for (int i = 0; i < 4; i++) {
             int ind = indicesEscala[i];
             Carta carta = cartas.get(ind);
@@ -248,7 +250,7 @@ public class Jugador {
         int[] indices = new int[nroIndices];
 
         System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
-        String[] indicesString = in.nextLine().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
+        String[] indicesString = MainCarioca.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
         if (indicesString.length == nroIndices) {
             //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
             try {
