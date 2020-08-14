@@ -1,5 +1,6 @@
 package com.lucas.Juego_Carioca;
 
+import com.lucas.Utilidades_y_Launcher.Utilidades;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class JugadorTest {
     @Test
     public void ingresarIndicesEscala_test01() { // Crea un jugadores con una escala (solo numeros 2 3 4 5) en la mano y comprueba si esta se ingresa correctamente
         String stringInput = "0 1 2 3\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
         for (int i = 2; i <8; i++) {
@@ -40,7 +41,7 @@ public class JugadorTest {
     @Test
     public void ingresarIndicesEscala_test02() { // Crea un jugadores con una escala(letras y numeros Q, K, A, 2) en la mano y comprueba si esta se ingresa correctamente
         String stringInput = "0 1 2 3\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
         cartasJugador1.add(new Carta("♠", "Q"));
@@ -56,7 +57,7 @@ public class JugadorTest {
     @Test
     public void ingresarIndicesTrio_test01() {// Se comprueba si se acepta un trio formado por dos cartas iguales y un Joker
         String stringInput = "0 1 2\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
         for (int i = 0; i <3; i++) {
@@ -76,7 +77,7 @@ public class JugadorTest {
         Mazo mazo = new Mazo();
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
         String stringInput = "0 1 2 3\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         int[] esperado = {0, 1, 2, 3};
         int[] real = jugador.ingresarIndices(4);
         assertArrayEquals(esperado,real);
@@ -91,7 +92,7 @@ public class JugadorTest {
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
 
         String stringInput = "1 1 2\n0 1 2\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         int[] esperado = {0, 1, 2};
         int[] real = jugador.ingresarIndices(3);
         assertArrayEquals(esperado,real);
@@ -106,7 +107,7 @@ public class JugadorTest {
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
 
         String stringInput = "e e e\n0 1 2\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         int[] esperado = {0, 1, 2};
         int[] real = jugador.ingresarIndices(3);
         assertArrayEquals(esperado,real);
@@ -121,7 +122,7 @@ public class JugadorTest {
         jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
 
         String stringInput = "12 13 15\n0 1 2\n";
-        MainCarioca.entradaAProbar(stringInput);
+        Utilidades.entradaAProbar(stringInput);
         int[] esperado = {0, 1, 2};
         int[] real = jugador.ingresarIndices(3);
         assertArrayEquals(esperado,real);

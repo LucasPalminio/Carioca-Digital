@@ -1,5 +1,7 @@
 package com.lucas.Juego_Carioca;
 
+import com.lucas.Utilidades_y_Launcher.Utilidades;
+
 import java.util.ArrayList;
 
 public class Ronda {
@@ -46,7 +48,7 @@ public class Ronda {
         turnoActual = (int) (Math.random() * jugadores.size()); //y el primer turno se hara de forma aleatoria
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
-        MainCarioca.imprimirTitulo("Comienza el juego nivel " + (nivel + 1) + "\n"
+        Utilidades.imprimirTitulo("Comienza el juego nivel " + (nivel + 1) + "\n"
                 + "Escala: " + NROESCALAS + " Trios: " + NROTRIOS);
         //Aqui comienza el juego, deberia haber un bucle donde va jugando cada jugador,
         //el juego termina cuando un jugador se queda sin cartas
@@ -90,7 +92,7 @@ public class Ronda {
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = MainCarioca.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
+        String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
 
         switch (opcion) {
             case "1": //Sacar Carta de la mesa
@@ -151,7 +153,7 @@ public class Ronda {
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = MainCarioca.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
+        String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
 
         switch (opcion) {
             case "1":
@@ -227,7 +229,7 @@ public class Ronda {
         int jugador_con_delantera = 0;
         int puntaje_con_delantera = 0;
         for (int i = 0; i < jugadores.size(); i++) {
-            System.out.print(MainCarioca.repetirString("/", 20));
+            System.out.print(Utilidades.repetirString("/", 20));
         }
         System.out.println("\nResultados de esta ronda");
         for (int i = 0; i < jugadores.size(); i++) {
@@ -266,7 +268,7 @@ public class Ronda {
         }
         System.out.println();
         for (int i = 0; i < jugadores.size(); i++) {
-            System.out.print(MainCarioca.repetirString("/", 20));
+            System.out.print(Utilidades.repetirString("/", 20));
         }
         System.out.println("\n");
     }

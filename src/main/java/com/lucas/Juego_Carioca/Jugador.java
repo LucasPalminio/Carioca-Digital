@@ -1,7 +1,8 @@
 package com.lucas.Juego_Carioca;
 
 
-import java.lang.reflect.Array;
+import com.lucas.Utilidades_y_Launcher.Utilidades;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -98,7 +99,7 @@ public class Jugador {
 
     public Carta menu_BotarCarta(){
         imprimirCartas();
-        int indiceCarta = MainCarioca.ingresarUnNumero("¿Que cartas quieres botar?: ");
+        int indiceCarta = Utilidades.ingresarUnNumero("¿Que cartas quieres botar?: ");
         if (indiceCarta >= 0 && indiceCarta < cartas.size()){
             Carta cartaABotar = cartas.get(indiceCarta);
             cartas.remove(indiceCarta);
@@ -149,7 +150,7 @@ public class Jugador {
             Carta carta = cartas.get(i);
             primeraLinea += carta.toStringEC();
             int numeroEspacios = (carta.toString().length()+2)/2;
-            segundaLinea += MainCarioca.repetirString(" ",numeroEspacios) +i+MainCarioca.repetirString(" ",numeroEspacios);
+            segundaLinea += Utilidades.repetirString(" ",numeroEspacios) +i+ Utilidades.repetirString(" ",numeroEspacios);
         }
         contenido = primeraLinea + "\n" + segundaLinea;
         System.out.println(contenido);
@@ -166,9 +167,9 @@ public class Jugador {
             int primera_carta = 0;
             int segunda_carta = 0;
 
-            primera_carta = MainCarioca.ingresarUnNumero("Primera Carta a intercambiar",0,cartas.size()-1);
+            primera_carta = Utilidades.ingresarUnNumero("Primera Carta a intercambiar",0,cartas.size()-1);
 
-            segunda_carta = MainCarioca.ingresarUnNumero("Segunda Carta a intercambiar",0,cartas.size()-1);
+            segunda_carta = Utilidades.ingresarUnNumero("Segunda Carta a intercambiar",0,cartas.size()-1);
             Collections.swap(cartas, primera_carta, segunda_carta);
 
             imprimirCartas();
@@ -227,7 +228,7 @@ public class Jugador {
         String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
         String valorEsperado = cartas.get(indicesEscala[0]).getValor(); //K
         //int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12, En que posicion del arreglo de VALORES esta el valor: K
-        int indiceValor = MainCarioca.StringArrayindexOf(Carta.VALORES,valorEsperado);
+        int indiceValor = Utilidades.StringArrayindexOf(Carta.VALORES,valorEsperado);
         for (int i = 0; i < 4; i++) {
             int ind = indicesEscala[i];
             Carta carta = cartas.get(ind);
@@ -250,7 +251,7 @@ public class Jugador {
         int[] indices = new int[nroIndices];
 
         System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
-        String[] indicesString = MainCarioca.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
+        String[] indicesString = Utilidades.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
         if (indicesString.length == nroIndices) {
             //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
             try {
@@ -260,7 +261,7 @@ public class Jugador {
                     if (numero >= 0 && numero < cartas.size()) { //si el numero esta dentro del rango de los indices
                         indices[i] = numero; //Se guarda el numero dentro del arreglo de los indices
                         if (i == nroIndices-1) { //Una vez ingresado el ultimo indice
-                            if(MainCarioca.sonNumerosDiferentes(indices)) { //Se verifica que los indices sean numeros diferentes
+                            if(Utilidades.sonNumerosDiferentes(indices)) { //Se verifica que los indices sean numeros diferentes
                                 return indices;
                             }else{
                                 System.out.println("Los numeros deben ser diferentes, intentelo nuevamente");
