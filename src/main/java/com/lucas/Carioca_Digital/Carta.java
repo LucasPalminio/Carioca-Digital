@@ -1,12 +1,11 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
+
+import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 public class Carta {
     // Colores que se usaran para algunos textos
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_RESET = "\u001B[0m";
+
     // Todos las posibilidades de palos y valores de las cartas
     final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -24,11 +23,11 @@ public class Carta {
         //Aqui definimos el color de la carta:
         // diamante y corazon es rojo , pica y trebol es negro (pero en terminal es blanco) y el joker es Amarillo
         if (this.palo.equals(PALOS[1]) || this.palo.equals(PALOS[3])) {
-            this.color = ANSI_RED;
+            this.color = Utilidades.ANSI_RED;
         } else if (this.palo.equalsIgnoreCase("JKR")) {
-            this.color = ANSI_YELLOW;
+            this.color = Utilidades.ANSI_YELLOW;
         }else{
-            this.color = ANSI_BLACK;
+            this.color = Utilidades.ANSI_BLACK;
         }
     }
 
@@ -39,7 +38,7 @@ public class Carta {
     //Funcion que devuelve la carta en formato String y con su color ANSII respectivo,
     // ideal para una mejor visualizacion en terminal
     public String toStringEC(){
-        return "|"+this.color+toString()+ANSI_RESET+"|";
+        return "|"+this.color+toString()+Utilidades.ANSI_RESET+"|";
 
     }
     //Cada carta tiene un precio,

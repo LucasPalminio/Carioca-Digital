@@ -1,4 +1,4 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
@@ -6,7 +6,7 @@ import com.lucas.Utilidades_y_Launcher.Utilidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainCarioca {
+public class Juego {
     private int nivelActual = 0;
     private int ultimoNivel = 1;
 

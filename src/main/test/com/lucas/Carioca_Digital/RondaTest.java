@@ -1,12 +1,8 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class RondaTest {
 

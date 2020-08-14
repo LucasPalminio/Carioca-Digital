@@ -1,4 +1,4 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 import org.junit.After;

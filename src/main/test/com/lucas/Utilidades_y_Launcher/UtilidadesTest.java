@@ -1,7 +1,7 @@
 package com.lucas.Utilidades_y_Launcher;
 
 
-import com.lucas.Juego_Carioca.Jugador;
+import com.lucas.Carioca_Digital.Jugador;
 import org.junit.*;
 //import sun.tools.jar.Main;
 

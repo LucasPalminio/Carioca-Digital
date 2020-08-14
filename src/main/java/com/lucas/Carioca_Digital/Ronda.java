@@ -1,4 +1,4 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
@@ -237,7 +237,7 @@ public class Ronda {
             if (jugadores.get(i).getPuntajeRonda() > 0) {
                 System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
             } else {
-                System.out.print(Carta.ANSI_YELLOW + "(Ganador)" + Carta.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
             }
             jugadores.get(i).setPuntajeRonda(0);
         }
@@ -261,7 +261,7 @@ public class Ronda {
         System.out.println("\nResultados de la partida en esta ronda");
         for (int i = 0; i < jugadores.size(); i++) {
             if(jugador_con_delantera == i){
-                System.out.print(Carta.ANSI_YELLOW + "(Delantera)" + Carta.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+                System.out.print(Utilidades.ANSI_YELLOW + "(Delantera)" + Utilidades.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
             }else {
                 System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
             }

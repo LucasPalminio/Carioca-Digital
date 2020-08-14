@@ -1,4 +1,4 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,7 +1,6 @@
 package com.lucas.Utilidades_y_Launcher;
 
-import com.lucas.Juego_Carioca.Carta;
-import com.lucas.Juego_Carioca.Jugador;
+import com.lucas.Carioca_Digital.Jugador;
 
 
 import java.io.ByteArrayInputStream;
@@ -11,7 +10,10 @@ import java.util.Scanner;
 public class Utilidades {
     private static Scanner in;
     private static ByteArrayInputStream input;
-
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
 
 
@@ -156,7 +158,7 @@ public class Utilidades {
 
     }
 
-    //Este metodo se ingresa un arreglo de numeros y verifica si todo estos numeros son diferentes
+    //Este metodo se ingresa un arreglo de numeros y verifica si estos numeros son diferentes
     public static boolean sonNumerosDiferentes(int[] array) {
         int[] array2 = array.clone();
 
@@ -195,7 +197,7 @@ public class Utilidades {
 //            //in.next();
 //        }
         System.out.println(mensaje);
-        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba " + Carta.ANSI_RED + "si" + Carta.ANSI_RESET + " para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+        System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba " + ANSI_RED + "si" + ANSI_RESET + " para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         return tecladoNext().equalsIgnoreCase("si");
     }
     public static int StringArrayindexOf(String[] array,String target){

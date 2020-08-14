@@ -1,7 +1,8 @@
-package com.lucas.Juego_Carioca;
+package com.lucas.Carioca_Digital;
 
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,7 +113,7 @@ public class Jugador {
     }
     public void menu_Bajarse(){
         System.out.println("¿Seguro que quiere bajarse? " +
-                "\nEscriba "+Carta.ANSI_RED+"si"+Carta.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
+                "\nEscriba "+Utilidades.ANSI_RED+"si"+ Utilidades.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         if (!in.nextLine().equalsIgnoreCase("si")){
             //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
             System.out.println("Usted se arrepintio de bajarse");
