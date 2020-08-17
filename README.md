@@ -41,3 +41,4 @@ Esta dirigido al público en general, a partir de los 8 años de edad, idealment
 ### Necesidad
   - Forma alternativa de pasar el tiempo durante la cuarentena.
   - Poder jugar con gente de forma local en cualquier ordenador en caso de no tener la baraja inglesa para hacerlo.
+
