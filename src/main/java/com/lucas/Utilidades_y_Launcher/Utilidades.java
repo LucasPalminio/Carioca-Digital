@@ -47,8 +47,8 @@ public class Utilidades {
         }
 
         cartasJugador1.add(new Carta("JKR",""));
-        ArrayList<Carta> cartasJugador2 = new ArrayList<>();
-        cartasJugador2 = (ArrayList<Carta>) cartasJugador1.clone();
+        ArrayList<Carta> cartas2 = new ArrayList<>();
+        cartasJugador2 = (ArrayJugadorList<Carta>) cartasJugador1.clone();
         jugador1.setCartas(cartasJugador1);
         jugador2.setCartas(cartasJugador2);
         ArrayList<Jugador> jugadores = new ArrayList<>();

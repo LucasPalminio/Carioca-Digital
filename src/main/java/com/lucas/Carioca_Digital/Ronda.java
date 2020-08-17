@@ -58,7 +58,7 @@ public class Ronda {
         desarrolloRonda();
     }
 
-    public void desarrolloRonda() {
+    protected void desarrolloRonda() {
         Jugador jugadorActual = jugadores.get(turnoActual);
 
         //mostrar menu del jugador
@@ -212,7 +212,7 @@ public class Ronda {
         jugador.agregarCarta(cartaDelMazo);
     }
     //Este metodo imprime quien es el turnoActual y que carta hay en la mesa
-    public void imprimirInformacionRonda() {
+    protected void imprimirInformacionRonda() {
         System.out.println("///////////////////////////////////");
         System.out.println("Turno Actual: " + turnoActual);
         if (pozo.size() > 0) {
@@ -225,7 +225,7 @@ public class Ronda {
     //Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
     // muestra la tabla de puntajes que sacaron en esta ronda los jugadores (dice quien fue el ganador de la ronda)
     // y muestra la tabla de sus puntajes finales (dice tambien quien lleva la delantera)
-    public void finRonda() {
+    protected void finRonda() {
         int jugador_con_delantera = 0;
         int puntaje_con_delantera = 0;
         for (int i = 0; i < jugadores.size(); i++) {

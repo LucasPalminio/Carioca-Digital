@@ -30,29 +30,29 @@ public class Jugador {
         this.yaSacoCarta = false;
     }
 
-    public static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
+    protected static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
         NROTRIOS = nroTriosRonda;
         NROESCALAS = nroEscalasRonda;
     }
     public String getNombre() {
         return nombre;
     }
-    public int getPuntaje() {
+    protected int getPuntaje() {
         return puntaje;
     }
 
-    public int getPuntajeRonda() {
+    protected int getPuntajeRonda() {
         return puntajeRonda;
     }
 
-    public void calcularPuntaje(){
+    protected void calcularPuntaje(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
                 this.puntaje += carta.getPrecio();
             }
         }
     }
-    public void calcularPuntajeRonda(){
+    protected void calcularPuntajeRonda(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
                 this.puntajeRonda += carta.getPrecio();
@@ -60,45 +60,45 @@ public class Jugador {
         }
     }
 
-    public ArrayList<Carta> getCartas() {
+    protected ArrayList<Carta> getCartas() {
         return cartas;
     }
 
-    public void setPuntajeRonda(int puntajeRonda) {
+    protected void setPuntajeRonda(int puntajeRonda) {
         this.puntajeRonda = puntajeRonda;
     }
 
-    public void setCartas(ArrayList<Carta> cartas) {
+    protected void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
-    public void agregarCarta(Carta carta){
+    protected void agregarCarta(Carta carta){
         cartas.add(carta);
     }
-    public int getNroCartas(){ return cartas.size(); }
+    protected int getNroCartas(){ return cartas.size(); }
 
-    public boolean isBajoSusCarta() {
+    protected boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
-    public void setBajoSusCarta(boolean bajoSusCarta) {
+   protected void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
 
-    public boolean isYaSacoCarta() {
+    protected boolean isYaSacoCarta() {
         return yaSacoCarta;
     }
 
-    public void setYaSacoCarta(boolean yaSacoCarta) {
+    protected void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
 
-    public void limpiarMatriz(){
+    protected void limpiarMatriz(){
         //Este metodo funciona solamente cuando finaliza la ronda,
         // su funcion es limpia las matrices de trios y escalas que el jugador tenga en la mesa
         matrizTrios.clear();
         matrizEscalas.clear();
     }
 
-    public Carta menu_BotarCarta(){
+    protected Carta menu_BotarCarta(){
         imprimirCartas();
         int indiceCarta = Utilidades.ingresarUnNumero("¿Que cartas quieres botar?: ");
         if (indiceCarta >= 0 && indiceCarta < cartas.size()){
@@ -111,7 +111,7 @@ public class Jugador {
         }
 
     }
-    public void menu_Bajarse(){
+    protected void menu_Bajarse(){
         System.out.println("¿Seguro que quiere bajarse? " +
                 "\nEscriba "+Utilidades.ANSI_RED+"si"+ Utilidades.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         if (!in.nextLine().equalsIgnoreCase("si")){
@@ -139,7 +139,7 @@ public class Jugador {
 
     }
 
-    public void imprimirCartas(){ //Este metodo imprime las cartas del jugador
+    protected void imprimirCartas(){ //Este metodo imprime las cartas del jugador
         System.out.println("Cartas de "+nombre);
         imprimirCartas(cartas);
     }
@@ -157,13 +157,13 @@ public class Jugador {
         System.out.println(contenido);
 
     }
-    public void imprimirInformacionJugador(ArrayList<Carta> pozo){
+    protected void imprimirInformacionJugador(ArrayList<Carta> pozo){
         System.out.println("Turno: " + nombre);
         imprimirCartas();
 
 
     }
-    public void intercambiarCartas(){
+    protected void intercambiarCartas(){
 
             int primera_carta = 0;
             int segunda_carta = 0;
@@ -178,7 +178,7 @@ public class Jugador {
 
     }
 
-    public ArrayList<Carta> crearUnTrio(){ //Este metodo es para crear un solo trio
+    protected ArrayList<Carta> crearUnTrio(){ //Este metodo es para crear un solo trio
         int[] indices=ingresarIndicesTrio();
         //Primero ingresamos los indices de las cartas que conforman el trio,
         // verificando que estos indices no se repitan, y correspondan realmente a un trio
@@ -194,7 +194,7 @@ public class Jugador {
         return trio;
 
     }
-    public ArrayList<Carta> crearUnaEscala(){
+    protected ArrayList<Carta> crearUnaEscala(){
         int[] indices = ingresarIndicesEscala();
         ArrayList<Carta> escala = new ArrayList<Carta>();
         for (int i = 0; i < 4; i++) {
@@ -207,7 +207,7 @@ public class Jugador {
         return escala;
     }
 
-    public  int[] ingresarIndicesTrio(){
+    protected  int[] ingresarIndicesTrio(){
         System.out.println("Ingrese los indices de un trio");
         int[] indicesTrio = ingresarIndices(3);
         String valorEsperado = cartas.get(indicesTrio[0]).getValor();
@@ -223,7 +223,7 @@ public class Jugador {
         }
         return indicesTrio;
     }
-    public int[] ingresarIndicesEscala(){
+    protected int[] ingresarIndicesEscala(){
         System.out.println("Ingrese los indices de una escala");
         int[] indicesEscala = ingresarIndices(4);
         String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
@@ -248,7 +248,7 @@ public class Jugador {
         }
         return indicesEscala;
     }
-    public int[] ingresarIndices(int nroIndices) { // Este metodo es para ingresar los indices de las cartas del jugador, nroIndices puede ser 3 o 4
+    protected int[] ingresarIndices(int nroIndices) { // Este metodo es para ingresar los indices de las cartas del jugador, nroIndices puede ser 3 o 4
         int[] indices = new int[nroIndices];
 
         System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
