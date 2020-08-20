@@ -56,7 +56,7 @@ public class JugadorTest {
     }
     @Test
     public void ingresarIndicesTrio_test01() {// Se comprueba si se acepta un trio formado por dos cartas iguales y un Joker
-        String stringInput = "0 1 2\n";
+        String stringInput = "0 1 3\n";
         Utilidades.entradaAProbar(stringInput);
         Jugador jugador1 = new Jugador("Carlos");
         ArrayList<Carta> cartasJugador1 = new ArrayList<>();
@@ -66,7 +66,7 @@ public class JugadorTest {
 
         cartasJugador1.add(new Carta("JKR",""));
         jugador1.setCartas(cartasJugador1);
-        int[] indicesTriosEsperado = {0,1,2};
+        int[] indicesTriosEsperado = {0,1,3};
         int[] indicesTriosReal = jugador1.ingresarIndicesTrio();
         assertArrayEquals(indicesTriosEsperado,indicesTriosReal);
     }

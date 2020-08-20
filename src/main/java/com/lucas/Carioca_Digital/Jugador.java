@@ -18,8 +18,8 @@ public class Jugador {
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
 
-    private static int NROTRIOS;
-    private static int NROESCALAS;
+    private static int NROTRIOS_a_formar;
+    private static int NROESCALAS_a_formar;
 
     public static Scanner in = new Scanner(System.in);
 
@@ -31,8 +31,8 @@ public class Jugador {
     }
 
     protected static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
-        NROTRIOS = nroTriosRonda;
-        NROESCALAS = nroEscalasRonda;
+        NROTRIOS_a_formar = nroTriosRonda;
+        NROESCALAS_a_formar = nroEscalasRonda;
     }
     public String getNombre() {
         return nombre;
@@ -119,16 +119,16 @@ public class Jugador {
             System.out.println("Usted se arrepintio de bajarse");
             return;
         }
-        if(NROTRIOS > 0){
-            for (int i = 0; i < NROTRIOS ; i++) {
+        if(NROTRIOS_a_formar > 0){
+            for (int i = 0; i < NROTRIOS_a_formar; i++) {
                 imprimirCartas();
                 System.out.println("Ingrese el trio "+i);
                 matrizTrios.add(crearUnTrio());
 
             }
         }
-        if (NROESCALAS > 0){
-            for (int i = 0; i < NROESCALAS ; i++) {
+        if (NROESCALAS_a_formar > 0){
+            for (int i = 0; i < NROESCALAS_a_formar; i++) {
                 imprimirCartas();
                 System.out.println("Ingrese la escala "+i);
                 matrizEscalas.add(crearUnaEscala());
