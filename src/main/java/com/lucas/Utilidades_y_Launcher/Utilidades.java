@@ -180,6 +180,12 @@ public class Utilidades {
         System.out.println();
         return opcion;
     }
+    public static String imprimirMenuOpciones_e_ingresarUnaOpcion(ArrayList<String> opciones) {
+        imprimirSoloMenuOpciones(opciones);
+        String opcion = String.valueOf(ingresarUnNumero("", 1, opciones.size()));
+        System.out.println();
+        return opcion;
+    }
 
     //Solo imprime solo el menu de opciones
     public static void imprimirSoloMenuOpciones(String[] opciones) {
@@ -188,7 +194,12 @@ public class Utilidades {
             System.out.println("(" + (i + 1) + ") " + opciones[i]);
         }
     }
-
+    public static void imprimirSoloMenuOpciones(ArrayList<String> opciones) {
+        //Imprime el menu de opciones pero las opciones comienzan desde el 1
+        for (int i = 0; i < opciones.size(); i++) {
+            System.out.println("(" + (i + 1) + ") " + opciones.get(i));
+        }
+    }
     //Este metodo es para preguntarle al usuario por una decision irreversible (si esta seguro de la opcion elegida)
     // si esta seguro de su decision devuelve un true sino devuelve un falso
     public static boolean confirmarOpcion(String mensaje) {

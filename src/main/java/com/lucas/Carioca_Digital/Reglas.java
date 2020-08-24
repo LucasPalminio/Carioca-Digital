@@ -33,4 +33,7 @@ public class Reglas {
 
     }
 
+    public static void menuTrampas(Jugador jugadorActual) {
+
+    }
 }
