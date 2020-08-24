@@ -63,8 +63,8 @@ public class Utilidades {
 
     //Al comienzo del juego, se llama este metodo para ingresar el nro de jugadores y sus respectivos nombres
     public static ArrayList<Jugador> ingresarJugadores() {
-        imprimirTitulo("Bienvenido al juego del carioca");
-        //System.out.print("Ingrese el numero de jugadores a jugar");
+        Utilidades.imprimirTitulo("Ingrese los Jugadores");
+
         int numeroJugadores = ingresarNumeroDeJugadores();
         ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         for (int i = 1; i <= numeroJugadores; i++) {
