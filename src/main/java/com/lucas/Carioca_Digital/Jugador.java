@@ -283,5 +283,11 @@ public class Jugador {
         return ingresarIndices(nroIndices); //Si a ocurrido un error, volvera a preguntar al usuario por los indices
     }
 
+    protected ArrayList<ArrayList<Carta>> getMatrizTrios() {
+        return matrizTrios;
+    }
 
+    protected ArrayList<ArrayList<Carta>> getMatrizEscalas() {
+        return matrizEscalas;
+    }
 }

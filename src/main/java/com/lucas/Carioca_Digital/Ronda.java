@@ -84,13 +84,23 @@ public class Ronda {
     private void menu_jugador_noBajoSusCartas(Jugador jugadorActual) {
         String[] opciones = {"Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"};
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
+        boolean alguienSeHaBajado = false;
 
+        for(int i=0;i<jugadores.size();i++){
+            Jugador jugador = jugadores.get(i);
+            if(jugador.isBajoSusCarta()){
+                alguienSeHaBajado = true;
+            }
+        }
         if (yaSacoCarta) {
             //Cuando la persona ya saco una carta, la opciones de Sacar Carta de la mesa y Sacar carta del mazo se bloquean
             opciones[0] = "Sacar Carta de la mesa (Opcion bloqueada)";
             opciones[1] = "Sacar Carta del mazo (Opcion bloqueada)";
         }
         imprimirInformacionRonda();
+        if(alguienSeHaBajado){
+            imprimirTrios_y_Escalas();
+        }
         jugadorActual.imprimirInformacionJugador(pozo);
         String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
 
@@ -147,11 +157,23 @@ public class Ronda {
 
         String[] opciones = {"Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
+        boolean alguienSeHaBajado = false;
+
+        for(int i=0;i<jugadores.size();i++){
+            Jugador jugador = jugadores.get(i);
+            if(jugador.isBajoSusCarta()){
+                alguienSeHaBajado = true;
+            }
+        }
+
         if (yaSacoCarta) {
             opciones[0] = "Sacar Carta del mazo (Opcion bloqueada)";
             opciones[0] = "Sacar Carta de la mesa (Opcion bloqueada)";
         }
         imprimirInformacionRonda();
+        if(alguienSeHaBajado){
+            imprimirTrios_y_Escalas();
+        }
         jugadorActual.imprimirInformacionJugador(pozo);
         String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
 
@@ -221,7 +243,31 @@ public class Ronda {
             System.out.println("Carta en la mesa: |   |");
         }
     }
-
+    //método para imprimir todos los trios y escalas de los jugadores que se hayan bajado
+    private  void imprimirTrios_y_Escalas(){
+        System.out.println("Trios y/o escalas en la mesa:\n");
+        for(int i=0;i<jugadores.size();i++){
+            if(jugadores.get(i).isBajoSusCarta()) {
+                System.out.println(jugadores.get(i).getNombre());
+                System.out.println("Trios:\n");
+                for (int j = 0; j < jugadores.get(i).getMatrizTrios().size(); j++) {
+                    for (int k = 0; k < 2; k++) {
+                        Carta carta = jugadores.get(i).getMatrizTrios().get(j).get(k);
+                        System.out.println(" " + carta.toStringEC() + " ");
+                    }
+                    System.out.println("\n");
+                }
+                System.out.println("Escalas:\n");
+                for (int j = 0; j < jugadores.get(i).getMatrizEscalas().size(); j++) {
+                    for (int k = 0; k < 3; k++) {
+                        Carta carta = jugadores.get(i).getMatrizEscalas().get(j).get(k);
+                        System.out.println(" " + carta.toStringEC() + " ");
+                    }
+                    System.out.println("\n");
+                }
+            }
+        }
+    }
     //Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
     // muestra la tabla de puntajes que sacaron en esta ronda los jugadores (dice quien fue el ganador de la ronda)
     // y muestra la tabla de sus puntajes finales (dice tambien quien lleva la delantera)
