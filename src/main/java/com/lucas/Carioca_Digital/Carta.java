@@ -5,7 +5,7 @@ import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 public class Carta {
     // Colores que se usaran para algunos textos
-
+    //pruba push bugs
     // Todos las posibilidades de palos y valores de las cartas
     final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
