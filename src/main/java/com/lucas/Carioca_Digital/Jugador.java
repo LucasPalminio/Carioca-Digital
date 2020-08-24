@@ -290,4 +290,26 @@ public class Jugador {
     protected ArrayList<ArrayList<Carta>> getMatrizEscalas() {
         return matrizEscalas;
     }
+    protected  void imprimirTrios_y_Escalas() {
+        if (isBajoSusCarta()) {
+            System.out.println(getNombre());
+            System.out.println("Trios:\n");
+            for (int j = 0; j < getMatrizTrios().size(); j++) {
+                System.out.println("Trio "+j+": ");
+                for (int k = 0; k < 2; k++) {
+                    Carta carta = getMatrizTrios().get(j).get(k);
+                    System.out.println(" " + carta.toStringEC() + " ");
+                }
+            }
+            System.out.println("\nEscalas:\n");
+            for (int j = 0; j < getMatrizEscalas().size(); j++) {
+                System.out.println("Escala "+j+": ");
+                for (int k = 0; k < 3; k++) {
+                    Carta carta = getMatrizEscalas().get(j).get(k);
+                    System.out.println(" " + carta.toStringEC() + " ");
+                }
+                System.out.println("\n");
+            }
+        }
+    }
 }
