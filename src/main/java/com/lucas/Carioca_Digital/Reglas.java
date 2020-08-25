@@ -34,6 +34,22 @@ public class Reglas {
     }
 
     public static void menuTrampas(Jugador jugadorActual) {
-
+        jugadorActual.imprimirCartas();
+        String[] opciones = {"Agregar Carta","Eliminar Carta","Salir"};
+        String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
+        switch (opcion){
+            case "1": //Agregar Carta
+                Carta cartaCreada = Carta.crearCarta();
+                jugadorActual.agregarCarta(cartaCreada);
+                break;
+            case "2": // Eliminar Carta
+                break;
+            case "3":
+                System.out.println("");
+                return;
+            default:
+                System.out.println("Error la opcion ingresada es incorrecta, intentelo nuevamente");
+        }
     }
+
 }

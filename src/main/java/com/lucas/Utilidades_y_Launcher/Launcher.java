@@ -27,7 +27,7 @@ public class Launcher {
 
                 break;
             case "3": //Salir
-                System.out.println("Hasta la proxima!");
+                System.out.println("Hasta la próxima!");
                 return;
 
             default:
