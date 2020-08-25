@@ -146,7 +146,7 @@ public class Ronda {
                 }
             case "6": //Menu Trampa
                 if (Reglas.isModoDebug()){
-                    Reglas.menuTrampas(jugadorActual);
+                    Reglas.menuTrampas(jugadorActual,jugadores);
                     break;
                 }//Sino esta en modo debug, se despliega el mensaje de error
 
@@ -229,7 +229,7 @@ public class Ronda {
                 }
             case "6":
                 if (Reglas.isModoDebug()){
-                    Reglas.menuTrampas(jugadorActual);
+                    Reglas.menuTrampas(jugadorActual,jugadores);
                     break;
                 }
             default:
