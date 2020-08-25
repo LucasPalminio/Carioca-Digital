@@ -15,10 +15,10 @@ public class Ronda {
             {1, 2}, // 1 escala y 2 trios, nivel 5
             {2, 1} //2 escalas y 1 trio, nivel 6
     };
-    private int nivel; // El nivel actual de la ronda
-    private ArrayList<Jugador> jugadores;
-    private Mazo mazo;
-    private ArrayList<Carta> pozo = new ArrayList<Carta>();
+    private final int nivel; // El nivel actual de la ronda
+    private final ArrayList<Jugador> jugadores;
+    private final Mazo mazo;
+    private final ArrayList<Carta> pozo = new ArrayList<>();
     private final int NROESCALAS; //Nro de escalas que hay que formar en esta ronda
     private final int NROTRIOS; //Nro de trios que hay que formar en esta ronda
     private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
@@ -38,8 +38,8 @@ public class Ronda {
 
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
-        for (int index = 0; index < jugadores.size(); index++) {
-            jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
+        for (Jugador jugadore : jugadores) {
+            jugadore.setCartas(mazo.sacarUnNumeroDeCartas(12));
         }
         //ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
 
@@ -100,7 +100,7 @@ public class Ronda {
                 if (!yaSacoCarta) {
                     if (opcion.equals("1")) {
                         sacarCartaDeLaMesa(jugadorActual);
-                    } else if (opcion.equals("2")) {
+                    } else {
                         sacarCartaDelMazo(jugadorActual);
                     }
 
@@ -148,8 +148,9 @@ public class Ronda {
         String[] opciones = {"Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
         if (yaSacoCarta) {
-            opciones[0] = "Sacar Carta del mazo (Opcion bloqueada)";
             opciones[0] = "Sacar Carta de la mesa (Opcion bloqueada)";
+            opciones[1] = "Sacar Carta del mazo (Opcion bloqueada)";
+
         }
         imprimirInformacionRonda();
         jugadorActual.imprimirInformacionJugador(pozo);
@@ -232,17 +233,17 @@ public class Ronda {
             System.out.print(Utilidades.repetirString("/", 20));
         }
         System.out.println("\nResultados de esta ronda");
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).calcularPuntajeRonda();
-            if (jugadores.get(i).getPuntajeRonda() > 0) {
-                System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+        for (Jugador jugador : jugadores) {
+            jugador.calcularPuntajeRonda();
+            if (jugador.getPuntajeRonda() > 0) {
+                System.out.print(jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             } else {
-                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             }
-            jugadores.get(i).setPuntajeRonda(0);
+            jugador.setPuntajeRonda(0);
         }
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).calcularPuntaje();
+        for (Jugador jugadore : jugadores) {
+            jugadore.calcularPuntaje();
 
         }
         for(int i= 0;i<jugadores.size();i++){
@@ -253,7 +254,6 @@ public class Ronda {
                 }
             }else{
 
-                jugador_con_delantera = i;
                 puntaje_con_delantera = jugadores.get(i).getPuntaje();
             }
         }
