@@ -299,5 +299,11 @@ public class Ronda {
             System.out.print(Utilidades.repetirString("/", 20));
         }
         System.out.println("\n");
+        limpiarTrios_y_Escalas();
+    }
+    private void limpiarTrios_y_Escalas(){
+        for(int i=0;i<jugadores.size();i++){
+            jugadores.get(i).limpiarMatriz();
+        }
     }
 }
