@@ -11,9 +11,10 @@ public class Juego {
     private int ultimoNivel = 1;
 
     public void empezarJuego() {
+
 //        String stringInput = "2\nLucas Palminio\nLorenzo\n";
 //        entradaAProbar(stringInput);
-        Utilidades.setIn(new Scanner(System.in).useDelimiter("\n"));
+
         ArrayList<Jugador> jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 

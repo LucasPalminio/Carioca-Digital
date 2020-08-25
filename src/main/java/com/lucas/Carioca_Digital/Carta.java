@@ -3,6 +3,7 @@ package com.lucas.Carioca_Digital;
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
+
 public class Carta {
     // Colores que se usaran para algunos textos
 
@@ -83,5 +84,37 @@ public class Carta {
         return precio;
     }
 
+    public static Carta crearCarta(){
+        String[] pintas = new String[5];
+        for (int i = 0; i < PALOS.length; i++) {
+            pintas[i] = PALOS[i];
 
+        }
+        pintas[4] = "JKR";
+        System.out.println("Seleccione una pinta: ");
+        int indicePinta = Integer.parseInt(Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(pintas)) - 1;
+
+        if (indicePinta == 4){
+            return new Carta("JKR","");
+        }
+        String paloElegido = pintas[indicePinta];
+        System.out.println("Seleccione el valor: ");
+        for (String valor:VALORES) {
+            Carta c = new Carta(PALOS[indicePinta],valor);
+            System.out.println(c.toStringEC());
+        }
+        System.out.print("Ingrese un valor entre 2 y el 10 ó una A,J,Q,K : ");
+        String valorElegido = Utilidades.tecladoNext();
+        if (Utilidades.isNumeric(valorElegido)){
+            int valorNumerico = Integer.parseInt(valorElegido);
+            if (valorNumerico>=2 && valorNumerico<=10)
+                return new Carta(paloElegido,valorElegido);
+        }else if(valorElegido.equals("A") || valorElegido.equals("J") || valorElegido.equals("Q") || valorElegido.equals("K"))
+            return new Carta(paloElegido,valorElegido);
+        System.out.println("Error el valor ingresado es incorrecto, intentelo nuevamente");
+        return crearCarta();
+
+
+
+    }
 }
