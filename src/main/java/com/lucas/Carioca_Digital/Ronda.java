@@ -3,6 +3,7 @@ package com.lucas.Carioca_Digital;
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Ronda {
 
@@ -82,13 +83,18 @@ public class Ronda {
 
     //Si el jugador aun no se ha bajado sus cartas, debe mostrar este menu de opciones
     private void menu_jugador_noBajoSusCartas(Jugador jugadorActual) {
-        String[] opciones = {"Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"};
+        ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"));
+
+        if(Reglas.isModoDebug()){
+            opciones.add("Menu Trampas");
+        }
+
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
 
         if (yaSacoCarta) {
             //Cuando la persona ya saco una carta, la opciones de Sacar Carta de la mesa y Sacar carta del mazo se bloquean
-            opciones[0] = "Sacar Carta de la mesa (Opcion bloqueada)";
-            opciones[1] = "Sacar Carta del mazo (Opcion bloqueada)";
+            opciones.set(0,"Sacar Carta de la mesa (Opcion bloqueada)");
+            opciones.set(1,"Sacar Carta del mazo (Opcion bloqueada)");
         }
         imprimirInformacionRonda();
         imprimirTrios_y_EscalasEnLaMesa(jugadores);
@@ -129,6 +135,12 @@ public class Ronda {
                     System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
                     break;
                 }
+            case "6": //Menu Trampa
+                if (Reglas.isModoDebug()){
+                    Reglas.menuTrampas(jugadorActual,jugadores);
+                    break;
+                }//Sino esta en modo debug, se despliega el mensaje de error
+
             default:
                 System.out.println("Error la opcion ingresada es incorrecta, intentelo nuevamente");
                 break;
@@ -145,13 +157,15 @@ public class Ronda {
     }
     //Si el jugador se ha bajado sus cartas, debe mostrar este menu de opciones
     private void menu_jugador_siBajoSusCartas(Jugador jugadorActual) {
-
-        String[] opciones = {"Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"};
+        ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"));
+        if(Reglas.isModoDebug()){
+            opciones.add("Menu Trampas");
+        }
         boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
 
         if (yaSacoCarta) {
-            opciones[0] = "Sacar Carta del mazo (Opcion bloqueada)";
-            opciones[0] = "Sacar Carta de la mesa (Opcion bloqueada)";
+            opciones.set(0,"Sacar Carta del mazo (Opcion bloqueada)");
+            opciones.set(1,"Sacar Carta de la mesa (Opcion bloqueada)");
         }
         imprimirInformacionRonda();
         imprimirTrios_y_EscalasEnLaMesa(jugadores);
@@ -194,8 +208,13 @@ public class Ronda {
                     System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
                     break;
                 }
+            case "6":
+                if (Reglas.isModoDebug()){
+                    Reglas.menuTrampas(jugadorActual,jugadores);
+                    break;
+                }
             default:
-                System.out.println("Erro la opcion ingresada es incorrecta, intentelo nuevamente");
+                System.out.println("Error la opcion ingresada es incorrecta, intentelo nuevamente");
 
 
         }

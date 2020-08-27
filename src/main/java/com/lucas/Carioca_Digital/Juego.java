@@ -4,17 +4,18 @@ package com.lucas.Carioca_Digital;
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Juego {
     private int nivelActual = 0;
     private int ultimoNivel = 1;
-
+    private ArrayList<Jugador> jugadores;
     public void empezarJuego() {
+
 //        String stringInput = "2\nLucas Palminio\nLorenzo\n";
 //        entradaAProbar(stringInput);
-        Utilidades.setIn(new Scanner(System.in).useDelimiter("\n"));
-        ArrayList<Jugador> jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
+
+        this.jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
         ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
         while (nivelActual <= ultimoNivel) {
