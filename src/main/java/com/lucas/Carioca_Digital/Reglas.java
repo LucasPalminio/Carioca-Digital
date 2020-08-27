@@ -24,7 +24,7 @@ public class Reglas {
     public static boolean isModoDebug(){
         return valoresReglas[0];
     }
-    public static void menuReglas(){ //metodo que desplega un menu para cambiar las reglas
+    public static void menuModificarReglas(){ //metodo que desplega un menu para cambiar las reglas
         System.out.println("Ingrese el numero de la regla a cambiar: ");
         String[] opciones = {"Modo Dios: "+valoresReglas[0],"¿Si el jugador se bajo , puede sacar carta del pozo?: "+valoresReglas[1],"SALIR"};
         String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
@@ -32,7 +32,7 @@ public class Reglas {
             return; //se detiene la ejecucion del metodo
         else //De lo contrario se modifica la regla ingresada
             alternarValorRegla(Integer.parseInt(opcion)-1);
-            menuReglas();
+            menuModificarReglas();
 
     }
 
