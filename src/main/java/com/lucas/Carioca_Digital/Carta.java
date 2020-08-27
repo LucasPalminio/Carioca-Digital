@@ -84,7 +84,7 @@ public class Carta {
         return precio;
     }
 
-    public static Carta crearCarta(){
+    public static Carta menuCrearCarta(){
         String[] pintas = new String[5];
         for (int i = 0; i < PALOS.length; i++) {
             pintas[i] = PALOS[i];
@@ -112,7 +112,7 @@ public class Carta {
         }else if(valorElegido.equals("A") || valorElegido.equals("J") || valorElegido.equals("Q") || valorElegido.equals("K"))
             return new Carta(paloElegido,valorElegido);
         System.out.println("Error el valor ingresado es incorrecto, intentelo nuevamente");
-        return crearCarta();
+        return menuCrearCarta();
 
 
 

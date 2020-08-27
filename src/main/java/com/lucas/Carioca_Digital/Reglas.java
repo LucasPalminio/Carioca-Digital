@@ -42,7 +42,7 @@ public class Reglas {
         String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
         switch (opcion){
             case "1": //Agregar Carta al jugador Actual
-                Carta cartaCreada = Carta.crearCarta();
+                Carta cartaCreada = Carta.menuCrearCarta();
                 jugadorActual.agregarCarta(cartaCreada);
                 break;
             case "2": // Eliminar Carta al jugador Actual

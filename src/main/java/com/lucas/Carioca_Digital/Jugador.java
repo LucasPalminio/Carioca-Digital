@@ -143,7 +143,7 @@ public class Jugador {
         System.out.println("Cartas de "+nombre);
         imprimirCartas(cartas);
     }
-    private static void imprimirCartas(ArrayList<Carta> cartas){
+    public static void imprimirCartas(ArrayList<Carta> cartas){
         String contenido = "";
         String primeraLinea = "";
         String segundaLinea = "";
