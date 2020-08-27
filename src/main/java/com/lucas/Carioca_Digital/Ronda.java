@@ -39,8 +39,8 @@ public class Ronda {
 
 
         //Antes de comenzar a jugar, Entregamos a cada jugador doce cartas
-        for (int index = 0; index < jugadores.size(); index++) {
-            jugadores.get(index).setCartas(mazo.sacarUnNumeroDeCartas(12));
+        for (Jugador jugador : jugadores) {
+            jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
         }
         //ArrayList<Carta> pozo = new ArrayList<Carta>(); //Este es el pozo donde los jugadores botan sus cartas
 
@@ -269,17 +269,17 @@ public class Ronda {
             System.out.print(Utilidades.repetirString("/", 20));
         }
         System.out.println("\nResultados de esta ronda");
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).calcularPuntajeRonda();
-            if (jugadores.get(i).getPuntajeRonda() > 0) {
-                System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+        for (Jugador jugador : jugadores) {
+            jugador.calcularPuntajeRonda();
+            if (jugador.getPuntajeRonda() > 0) {
+                System.out.print(jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             } else {
-                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             }
-            jugadores.get(i).setPuntajeRonda(0);
+            jugador.setPuntajeRonda(0);
         }
-        for (int i = 0; i < jugadores.size(); i++) {
-            jugadores.get(i).calcularPuntaje();
+        for (Jugador jugador : jugadores) {
+            jugador.calcularPuntaje();
 
         }
         for(int i= 0;i<jugadores.size();i++){
