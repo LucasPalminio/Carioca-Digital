@@ -79,7 +79,7 @@ public class Jugador {
     protected boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
-   protected void setBajoSusCarta(boolean bajoSusCarta) {
+    protected void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
 
@@ -165,15 +165,15 @@ public class Jugador {
     }
     protected void intercambiarCartas(){
 
-            int primera_carta = 0;
-            int segunda_carta = 0;
+        int primera_carta = 0;
+        int segunda_carta = 0;
 
-            primera_carta = Utilidades.ingresarUnNumero("Primera Carta a intercambiar",0,cartas.size()-1);
+        primera_carta = Utilidades.ingresarUnNumero("Primera Carta a intercambiar",0,cartas.size()-1);
 
-            segunda_carta = Utilidades.ingresarUnNumero("Segunda Carta a intercambiar",0,cartas.size()-1);
-            Collections.swap(cartas, primera_carta, segunda_carta);
+        segunda_carta = Utilidades.ingresarUnNumero("Segunda Carta a intercambiar",0,cartas.size()-1);
+        Collections.swap(cartas, primera_carta, segunda_carta);
 
-            imprimirCartas();
+        imprimirCartas();
 
 
     }
@@ -293,22 +293,20 @@ public class Jugador {
     protected  void imprimirTrios_y_Escalas() {
         if (isBajoSusCarta()) {
             System.out.println(getNombre());
-            System.out.println("Trios:\n");
-            for (int j = 0; j < getMatrizTrios().size(); j++) {
-                System.out.println("Trio "+j+": ");
-                for (int k = 0; k < 2; k++) {
-                    Carta carta = getMatrizTrios().get(j).get(k);
-                    System.out.println(" " + carta.toStringEC() + " ");
+            if (matrizTrios.size() > 0) {
+                System.out.println("Trios:\n");
+                for (int j = 0; j < getMatrizTrios().size(); j++) {
+                    System.out.println("Trio " + j + ": ");
+                    imprimirCartas(getMatrizTrios().get(j));
                 }
             }
-            System.out.println("\nEscalas:\n");
-            for (int j = 0; j < getMatrizEscalas().size(); j++) {
-                System.out.println("Escala "+j+": ");
-                for (int k = 0; k < 3; k++) {
-                    Carta carta = getMatrizEscalas().get(j).get(k);
-                    System.out.println(" " + carta.toStringEC() + " ");
+            if (matrizEscalas.size()>0) {
+                System.out.println("\nEscalas:\n");
+                for (int j = 0; j < getMatrizEscalas().size(); j++) {
+                    System.out.println("Escala " + j + ": ");
+                    imprimirCartas(getMatrizEscalas().get(j));
+
                 }
-                System.out.println("\n");
             }
         }
     }

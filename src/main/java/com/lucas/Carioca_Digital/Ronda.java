@@ -121,7 +121,11 @@ public class Ronda {
                 //menu_jugador(jugadorActual);
                 break;
             case "4": //¿Desea Bajarse?
-                jugadorActual.menu_Bajarse();
+                if (yaSacoCarta){
+                    jugadorActual.menu_Bajarse();
+                }else{
+                    System.out.println("Usted aun no ha sacado una carta, por lo tanto aun no puede bajarse");
+                }
                 break;
             case "5": //Botar Carta y Finalizar Turno
                 if (yaSacoCarta) {
@@ -194,7 +198,12 @@ public class Ronda {
                 break;
             case "4":
                 //Pendiente
-                System.out.println("Aun no disponible");
+                if(yaSacoCarta){
+                    System.out.println("Aun no disponible");
+                }else{
+                    System.out.println("Usted aun no ha sacado carta, asique aun no puede agregar cartas a trios y/o escalas que hay en la mesa");
+                }
+
                 break;
             case "5":
                 if (yaSacoCarta) {
