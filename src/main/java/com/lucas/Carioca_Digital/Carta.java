@@ -3,16 +3,29 @@ package com.lucas.Carioca_Digital;
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
-public class Carta {
+
+public class Carta extends Canvas{
     // Colores que se usaran para algunos textos
 
     // Todos las posibilidades de palos y valores de las cartas
-    final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
+    //final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
+    final static public String[] PALOS = {"S", "D", "C", "H"};
+    //C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     private final String palo;
     private final String color;
+    private final Image imagenCarta;
+    private static final Image imagenCartaVuelta = new ImageIcon("src//images//cartas//blue_back.png").getImage();
+    private int x;
+    private int y;
+    private static final int WIDTH = 74; //Ancho de la carta
+    private static final int HEIGHT = 98; //Alto de la carta
     private final String valor;
     private final int precio;
 
@@ -21,6 +34,9 @@ public class Carta {
         this.palo = palo;
         this.valor = valor;
         this.precio = calcularPrecio();
+        String rutaImagen = "src//images//cartas//" + valor+palo+".png";
+        this.imagenCarta = new ImageIcon(rutaImagen).getImage();
+
         //Aqui definimos el color de la carta:
         // diamante y corazon es rojo , pica y trebol es negro (pero en terminal es blanco) y el joker es Amarillo
         if (this.palo.equals(PALOS[1]) || this.palo.equals(PALOS[3])) {
@@ -30,6 +46,32 @@ public class Carta {
         }else{
             this.color = Utilidades.ANSI_BLACK;
         }
+    }
+    public Carta(String palo, String valor, int x, int y) {
+        this.palo = palo;
+        this.valor = valor;
+        this.x = x;
+        this.y = y;
+
+        this.precio = calcularPrecio();
+        String rutaImagen = "src//images//cartas//" + valor+palo+".png";
+        this.imagenCarta = new ImageIcon(rutaImagen).getImage();
+
+        //Aqui definimos el color de la carta:
+        // diamante y corazon es rojo , pica y trebol es negro (pero en terminal es blanco) y el joker es Amarillo
+        if (this.palo.equals(PALOS[1]) || this.palo.equals(PALOS[3])) {
+            this.color = Utilidades.ANSI_RED;
+        } else if (this.palo.equalsIgnoreCase("JKR")) {
+            this.color = Utilidades.ANSI_YELLOW;
+        }else{
+            this.color = Utilidades.ANSI_BLACK;
+        }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(imagenCarta,x,y,WIDTH,HEIGHT,this);
     }
 
     //Funcion que devuelve la carta en formato String
@@ -82,6 +124,24 @@ public class Carta {
 
     protected int getPrecio() {
         return precio;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public static Carta menuCrearCarta(){
