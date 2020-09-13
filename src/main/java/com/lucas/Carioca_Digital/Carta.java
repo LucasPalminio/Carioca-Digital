@@ -87,7 +87,7 @@ public class Carta extends Canvas{
     //Cada carta tiene un precio,
     // Cuando el juego finaliza y el jugador tiene cartas en mano la suma de los precios de cada carta se adiciona a su puntaje
     //El objetivo de cada juego es ser el primero en quedar sin cartas, por lo tanto el ganador del Carioca es aquel que tenga el menor puntaje
-    protected int calcularPrecio() {
+    public int calcularPrecio() {
         //Aqui importa el valor de la carta no el palo al que pertenece
         for (int i = 2; i <= 10; i++) {
             //el precio de la cartas con numero es ese numero
@@ -143,7 +143,6 @@ public class Carta extends Canvas{
     public void setY(int y) {
         this.y = y;
     }
-
     public static Carta menuCrearCarta(){
         String[] pintas = new String[5];
         for (int i = 0; i < PALOS.length; i++) {
@@ -178,3 +177,4 @@ public class Carta extends Canvas{
 
     }
 }
+
