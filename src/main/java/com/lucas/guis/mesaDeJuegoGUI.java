@@ -1,48 +1,66 @@
 package com.lucas.guis;
 
-import com.lucas.Carioca_Digital.Carta;
+import com.lucas.Carioca_Digital.Jugador;
+import com.lucas.Carioca_Digital.Ronda;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotionListener {
     private JPanel panel;
-    private JTable table1;
-    private JTable table2;
-    private JTable table3;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JList list1;
-    private JButton button5;
-    private JButton button6;
-    private Carta cartaMoviendose;
+
+    private JTable jugadoresTabla;
+    private DefaultTableModel jugadoresDefaultTableModel;
+
+    private JTable escalasEnLaMesaTabla;
+    private DefaultTableModel escalasEnLaMesaDefaultTableModel;
+
+    private JTable triosEnLaMesaTabla;
+    private DefaultTableModel triosEnLaMesaDefaultTableModel;
+
+    private JButton botarCartaBoton;
+    private JButton bajarseBoton;
+    private JButton agregarTrioBoton;
+    private JButton agregarEscalaBoton;
+    private JList cartasJugadorActualLista;
+    private JButton mazoBoton;
+    private JButton pozoBoton;
+    private JLabel nroRondaLabel;
+    private JLabel nroTriosLabel;
+    private JLabel nroEscalasLabel;
+
+    private Ronda ronda;
+
+
+
 
     private boolean moviendoCarta = false;
-    public mesaDeJuegoGUI()  {
-        this.setBounds(0,0,1360,768);
-        this.setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //setUndecorated(true);
-        setResizable(false);
-        setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        addMouseListener(this);
-        addMouseMotionListener(this);
-        cartaMoviendose = new Carta("H","4",30,30);
-        cartaMoviendose.addMouseListener(this);
-        cartaMoviendose.setTransferHandler(new TransferHandler("Carta"));
-        add(cartaMoviendose);
+    public mesaDeJuegoGUI(Ronda ronda)  {
+        this.ronda = ronda;
+        createUIComponents();
+
+
+    }
+
+    public mesaDeJuegoGUI(ArrayList<Jugador> jugadores, int nivel) {
+        this.ronda = new Ronda(jugadores,nivel);
+        createUIComponents();
 
     }
 
     public static void main(String[] args) throws IOException {
-
-        new mesaDeJuegoGUI().setVisible(true);
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(new Jugador("Lucas"));
+        jugadores.add(new Jugador("Lorenzo"));
+        jugadores.add(new Jugador("Fernando"));
+        new mesaDeJuegoGUI(jugadores,1).setVisible(true);
     }
 
 //    @Override
@@ -73,7 +91,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getComponent().getClass().getName().equals("com.lucas.Carioca_Digital.Carta")) { //si lo que seleccione es una carta
-            cartaMoviendose = (Carta) e.getComponent();
+            //cartaMoviendose = (Carta) e.getComponent();
             moviendoCarta = true;
 
         }
@@ -92,7 +110,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     public void mouseReleased(MouseEvent e) {
         if(moviendoCarta){
             //animate(carta,carta.getLocation(),30,5);
-            cartaMoviendose.setLocation(MouseInfo.getPointerInfo().getLocation());
+            //cartaMoviendose.setLocation(MouseInfo.getPointerInfo().getLocation());
             moviendoCarta=false;
 
         }
@@ -150,6 +168,48 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        //this.setBounds(0,0,1360,768);
+        //this.setLocationRelativeTo(null);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setUndecorated(true);
+        setResizable(false);
+        //setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //addMouseListener(this);
+        //addMouseMotionListener(this);
+
+        nroTriosLabel = new JLabel(String.valueOf(ronda.getNROTRIOS_A_FORMAR()));
+        nroEscalasLabel = new JLabel(String.valueOf(ronda.getNROESCALAS_A_FORMAR()));
+        nroRondaLabel = new JLabel(String.valueOf(ronda.getNivel()));
+
+        mazoBoton = new JButton();
+        String rutaImagenMazo = "src//images//cartas//blue_back.png";
+        try {
+            mazoBoton.setIcon(new ImageIcon(ImageIO.read(new File(rutaImagenMazo)).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH)));
+        }catch (IOException ioe){
+            System.err.println(ioe.getMessage());
+        }
+
+        pozoBoton = new JButton();
+        pozoBoton.setVisible(false);
+
+        String[] columnasJugadoresTabla = {"Nombre", "Cartas","Puntaje"};
+        jugadoresDefaultTableModel = new DefaultTableModel(ronda.getArrayObjectJugadores(),columnasJugadoresTabla);
+        jugadoresTabla = new JTable(jugadoresDefaultTableModel);
+
+
+        triosEnLaMesaDefaultTableModel = new DefaultTableModel();
+        triosEnLaMesaTabla = new JTable(triosEnLaMesaDefaultTableModel);
+        escalasEnLaMesaDefaultTableModel = new DefaultTableModel();
+        escalasEnLaMesaTabla = new JTable(escalasEnLaMesaDefaultTableModel);
+
+
+
+
+
+
+
+
     }
 
 //    private void animate(JComponent component, Point newPoint, int frames, int interval) {

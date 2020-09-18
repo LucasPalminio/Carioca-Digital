@@ -20,7 +20,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="2f647" class="javax.swing.JTable" binding="table1" default-binding="true">
+          <component id="2f647" class="javax.swing.JTable" binding="jugadoresTabla" custom-create="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
@@ -30,36 +30,36 @@
               <background color="-14123225"/>
             </properties>
           </component>
-          <component id="ce326" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="ce326" class="javax.swing.JButton" binding="botarCartaBoton">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Botar Carta"/>
             </properties>
           </component>
-          <component id="9879d" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="9879d" class="javax.swing.JButton" binding="bajarseBoton">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Bajarse"/>
             </properties>
           </component>
-          <component id="7c764" class="javax.swing.JButton" binding="button3" default-binding="true">
+          <component id="7c764" class="javax.swing.JButton" binding="agregarTrioBoton">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Agregar a trio"/>
             </properties>
           </component>
-          <component id="73592" class="javax.swing.JButton" binding="button4" default-binding="true">
+          <component id="73592" class="javax.swing.JButton" binding="agregarEscalaBoton">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Agregar a escala"/>
             </properties>
           </component>
         </children>
@@ -72,7 +72,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="a60ed" class="javax.swing.JTable" binding="table2" default-binding="true">
+          <component id="a60ed" class="javax.swing.JTable" binding="escalasEnLaMesaTabla" custom-create="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
@@ -82,7 +82,7 @@
               <background color="-14123225"/>
             </properties>
           </component>
-          <component id="a061f" class="javax.swing.JTable" binding="table3" default-binding="true">
+          <component id="a061f" class="javax.swing.JTable" binding="triosEnLaMesaTabla" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
@@ -102,7 +102,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="d341c" class="javax.swing.JList" binding="list1" default-binding="true">
+          <component id="d341c" class="javax.swing.JList" binding="cartasJugadorActualLista">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="2" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="200"/>
@@ -118,20 +118,20 @@
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <component id="e48ed" class="javax.swing.JButton" binding="button5" default-binding="true">
+          <component id="e48ed" class="javax.swing.JButton" binding="mazoBoton" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="7dfb9" class="javax.swing.JButton" binding="button6" default-binding="true">
+          <component id="7dfb9" class="javax.swing.JButton" binding="pozoBoton" custom-create="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value=""/>
             </properties>
           </component>
         </children>
@@ -150,7 +150,7 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
+              <text value="Ronda:"/>
             </properties>
           </component>
           <component id="6a736" class="javax.swing.JLabel">
@@ -159,10 +159,10 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
+              <text value="Número de trios a formar:"/>
             </properties>
           </component>
-          <component id="b86b3" class="javax.swing.JLabel">
+          <component id="b86b3" class="javax.swing.JLabel" binding="nroTriosLabel" custom-create="true">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -177,10 +177,10 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
+              <text value="Número de escalas a formar:"/>
             </properties>
           </component>
-          <component id="fa777" class="javax.swing.JLabel">
+          <component id="fa777" class="javax.swing.JLabel" binding="nroEscalasLabel" custom-create="true">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -189,7 +189,7 @@
               <text value="Label"/>
             </properties>
           </component>
-          <component id="b7c04" class="javax.swing.JLabel">
+          <component id="b7c04" class="javax.swing.JLabel" binding="nroRondaLabel" custom-create="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

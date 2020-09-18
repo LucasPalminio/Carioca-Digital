@@ -24,13 +24,13 @@ public class Carta extends JLabel{
 
     private final String palo;
     private final String color;
-    private static final Image imagenCartaAtras = new ImageIcon("src//images//cartas//blue_back.png").getImage();
+    //public static final ImageIcon imagenCartaAtras = new ImageIcon("src//images//cartas//blue_back.png");
     private Point posicion;
     private static final int WIDTH = 74; //Ancho de la carta
     private static final int HEIGHT = 98; //Alto de la carta
     private final String valor;
     private final int precio;
-
+    private ImageIcon imagenCarta;
 
 
     protected Carta(String palo, String valor) {
@@ -61,7 +61,8 @@ public class Carta extends JLabel{
         this.precio = calcularPrecio();
         String rutaImagen = "src//images//cartas//" + valor+palo+".png";
         try {
-            setIcon(new ImageIcon(ImageIO.read(new File(rutaImagen)).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH)));
+            imagenCarta = new ImageIcon(ImageIO.read(new File(rutaImagen)).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH));
+            setIcon(imagenCarta);
         }catch (IOException e){
             System.err.println("Error "+e.getMessage());
         }
@@ -75,6 +76,10 @@ public class Carta extends JLabel{
         }else{
             this.color = Utilidades.ANSI_BLACK;
         }
+    }
+
+    public ImageIcon getImagenCarta() {
+        return imagenCarta;
     }
 
 

@@ -310,4 +310,9 @@ public class Jugador {
             }
         }
     }
+
+    public Object[] getArrayObject(){
+        Object[] array = {nombre, this.getNroCartas(), this.getPuntaje()};
+        return array;
+    }
 }

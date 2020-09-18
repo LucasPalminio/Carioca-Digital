@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Ronda {
 
-    public static final int[][] RONDAS = {
+    public static final int[][] RONDAS = { //Hacer ENUM
             //{Escala, Trio} ; 6,7,8,9,10,11
             {0, 2}, // 0*4+2*3 = 6 (2 trios) nivel 1
             {1, 1}, //1*4+1*3 = 7 (1 escala y 1 trio) nivel 2
@@ -20,8 +20,8 @@ public class Ronda {
     private ArrayList<Jugador> jugadores;
     private Mazo mazo;
     private ArrayList<Carta> pozo = new ArrayList<Carta>();
-    private final int NROESCALAS; //Nro de escalas que hay que formar en esta ronda
-    private final int NROTRIOS; //Nro de trios que hay que formar en esta ronda
+    private final int NROESCALAS_A_FORMAR; //Nro de escalas que hay que formar en esta ronda
+    private final int NROTRIOS_A_FORMAR; //Nro de trios que hay que formar en esta ronda
     private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
 
     public Ronda(ArrayList<Jugador> jugadores, int nivel) {
@@ -29,11 +29,60 @@ public class Ronda {
         this.jugadores = jugadores;
         mazo = new Mazo();
         pozo.add(mazo.sacarCarta());
-        NROESCALAS = RONDAS[nivel][0];
-        NROTRIOS = RONDAS[nivel][1];
-        Jugador.setNROTRIOSyNROESCALAS(NROESCALAS, NROTRIOS);
+        NROESCALAS_A_FORMAR = RONDAS[nivel][0];
+        NROTRIOS_A_FORMAR = RONDAS[nivel][1];
+        Jugador.setNROTRIOSyNROESCALAS(NROESCALAS_A_FORMAR, NROTRIOS_A_FORMAR);
 
     }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public void setMazo(Mazo mazo) {
+        this.mazo = mazo;
+    }
+
+    public ArrayList<Carta> getPozo() {
+        return pozo;
+    }
+
+    public void setPozo(ArrayList<Carta> pozo) {
+        this.pozo = pozo;
+    }
+
+    public int getNROESCALAS_A_FORMAR() {
+        return NROESCALAS_A_FORMAR;
+    }
+
+    public int getNROTRIOS_A_FORMAR() {
+        return NROTRIOS_A_FORMAR;
+    }
+
+    public int getTurnoActual() {
+        return turnoActual;
+    }
+
+    public void setTurnoActual(int turnoActual) {
+        this.turnoActual = turnoActual;
+    }
+
     //Se comienza la ronda, este metodo solo se ejecuta una vez durante la ronda
     public void comenzarRonda() {
 
@@ -50,7 +99,7 @@ public class Ronda {
 
         //Imprimimos un mensaje que da comienzo el juego y cuantas escalas o/y trios hay que formar
         Utilidades.imprimirTitulo("Comienza el juego nivel " + (nivel + 1) + "\n"
-                + "Escala: " + NROESCALAS + " Trios: " + NROTRIOS);
+                + "Escala: " + NROESCALAS_A_FORMAR + " Trios: " + NROTRIOS_A_FORMAR);
         //Aqui comienza el juego, deberia haber un bucle donde va jugando cada jugador,
         //el juego termina cuando un jugador se queda sin cartas
 
@@ -309,4 +358,14 @@ public class Ronda {
         }
         System.out.println("\n");
     }
+
+    public Object[][] getArrayObjectJugadores(){
+        Object[][] data = new Object[jugadores.size()][3];
+        for (int i = 0; i < jugadores.size() ; i++) {
+            data[i] = jugadores.get(i).getArrayObject();
+
+        }
+        return data;
+    }
+
 }
