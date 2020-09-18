@@ -20,6 +20,9 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     private JTable table2;
     private JButton button1;
     private JButton button2;
+    private JLabel Ronda;
+    private JLabel Trios;
+    private JLabel Escalas;
     private Carta cartaMoviendose;
 
     private boolean moviendoCarta = false;
@@ -146,6 +149,10 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 
 //    private void animate(JComponent component, Point newPoint, int frames, int interval) {
