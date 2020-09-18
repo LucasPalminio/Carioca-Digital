@@ -11,7 +11,15 @@ import java.util.ArrayList;
 public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotionListener {
     private JPanel panel;
     private JTable tablaPuntajes;
-    private JPanel mesaPanel;
+    private JButton button3;
+    private JButton button4;
+    private JButton button5;
+    private JButton button6;
+    private JList list1;
+    private JTable table1;
+    private JTable table2;
+    private JButton button1;
+    private JButton button2;
     private Carta cartaMoviendose;
 
     private boolean moviendoCarta = false;
