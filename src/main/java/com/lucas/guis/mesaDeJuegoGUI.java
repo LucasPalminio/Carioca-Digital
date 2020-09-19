@@ -1,10 +1,15 @@
 package com.lucas.guis;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
+import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
@@ -13,7 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotionListener {
+
+public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotionListener {
     private JPanel panel;
 
     private JTable jugadoresTabla;
@@ -36,22 +42,25 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     private JLabel nroTriosLabel;
     private JLabel nroEscalasLabel;
 
-    private Ronda ronda;
+    private Ronda ronda; // Composición
 
 
 
-
-    private boolean moviendoCarta = false;
-    public mesaDeJuegoGUI(Ronda ronda)  {
+    public mesaDeJuegoGUI(Ronda ronda) {
         this.ronda = ronda;
-        createUIComponents();
+        ronda.comenzarRonda();
+        $$$setupUI$$$();
+        this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAMES
 
 
     }
 
     public mesaDeJuegoGUI(ArrayList<Jugador> jugadores, int nivel) {
-        this.ronda = new Ronda(jugadores,nivel);
-        createUIComponents();
+        this.ronda = new Ronda(jugadores, nivel);
+        ronda.comenzarRonda();
+        $$$setupUI$$$();
+        this.add(panel); //IMPORTANTE AGREGAR EL PANEL AL FRAME
+
 
     }
 
@@ -60,7 +69,8 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
         jugadores.add(new Jugador("Lucas"));
         jugadores.add(new Jugador("Lorenzo"));
         jugadores.add(new Jugador("Fernando"));
-        new mesaDeJuegoGUI(jugadores,1).setVisible(true);
+
+        new mesaDeJuegoGUI(jugadores, 0).setVisible(true);
     }
 
 //    @Override
@@ -92,7 +102,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
     public void mousePressed(MouseEvent e) {
         if (e.getComponent().getClass().getName().equals("com.lucas.Carioca_Digital.Carta")) { //si lo que seleccione es una carta
             //cartaMoviendose = (Carta) e.getComponent();
-            moviendoCarta = true;
+
 
         }
 
@@ -108,12 +118,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(moviendoCarta){
-            //animate(carta,carta.getLocation(),30,5);
-            //cartaMoviendose.setLocation(MouseInfo.getPointerInfo().getLocation());
-            moviendoCarta=false;
 
-        }
     }
 
     /**
@@ -168,7 +173,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        //this.setBounds(0,0,1360,768);
+        this.setBounds(0, 0, 1360, 768);
         //this.setLocationRelativeTo(null);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setUndecorated(true);
@@ -182,19 +187,25 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
         nroEscalasLabel = new JLabel(String.valueOf(ronda.getNROESCALAS_A_FORMAR()));
         nroRondaLabel = new JLabel(String.valueOf(ronda.getNivel()));
 
+        nroTriosLabel.setVisible(true);
+        nroEscalasLabel.setVisible(true);
+        nroRondaLabel.setVisible(true);
+
         mazoBoton = new JButton();
+        mazoBoton.setSize(Carta.WIDTH, Carta.HEIGHT);
         String rutaImagenMazo = "src//images//cartas//blue_back.png";
         try {
-            mazoBoton.setIcon(new ImageIcon(ImageIO.read(new File(rutaImagenMazo)).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH)));
-        }catch (IOException ioe){
+            mazoBoton.setIcon(new ImageIcon(ImageIO.read(new File(rutaImagenMazo)).getScaledInstance(Carta.WIDTH, Carta.HEIGHT, Image.SCALE_SMOOTH)));
+        } catch (IOException ioe) {
             System.err.println(ioe.getMessage());
         }
 
         pozoBoton = new JButton();
-        pozoBoton.setVisible(false);
+        pozoBoton.setSize(Carta.WIDTH, Carta.HEIGHT);
+        pozoBoton.setVisible(true);
 
-        String[] columnasJugadoresTabla = {"Nombre", "Cartas","Puntaje"};
-        jugadoresDefaultTableModel = new DefaultTableModel(ronda.getArrayObjectJugadores(),columnasJugadoresTabla);
+        String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje"};
+        jugadoresDefaultTableModel = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
         jugadoresTabla = new JTable(jugadoresDefaultTableModel);
 
 
@@ -204,34 +215,98 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener , MouseMotio
         escalasEnLaMesaTabla = new JTable(escalasEnLaMesaDefaultTableModel);
 
 
-
-
-
-
-
-
     }
 
-//    private void animate(JComponent component, Point newPoint, int frames, int interval) {
-//        Rectangle compBounds = component.getBounds();
-//
-//        Point oldPoint = new Point(compBounds.x, compBounds.y),
-//                animFrame = new Point((newPoint.x - oldPoint.x) / frames,
-//                        (newPoint.y - oldPoint.y) / frames);
-//
-//        new Timer(interval, new ActionListener() {
-//            int currentFrame = 0;
-//            public void actionPerformed(ActionEvent e) {
-//                component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
-//                        oldPoint.y + (animFrame.y * currentFrame),
-//                        compBounds.width,
-//                        compBounds.height);
-//
-//                if (currentFrame != frames)
-//                    currentFrame++;
-//                else
-//                    ((Timer)e.getSource()).stop();
-//            }
-//        }).start();
-//    }
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        createUIComponents();
+        panel = new JPanel();
+        panel.setLayout(new BorderLayout(0, 0));
+        panel.setBackground(new Color(-14786275));
+        panel.setEnabled(true);
+        panel.setOpaque(true);
+        panel.setPreferredSize(new Dimension(1360, 680));
+        panel.setBorder(BorderFactory.createTitledBorder(null, "mesa de juego", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new GridLayoutManager(5, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel1.setBackground(new Color(-14786275));
+        panel.add(panel1, BorderLayout.WEST);
+        botarCartaBoton = new JButton();
+        botarCartaBoton.setText("Botar Carta");
+        panel1.add(botarCartaBoton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        bajarseBoton = new JButton();
+        bajarseBoton.setText("Bajarse");
+        panel1.add(bajarseBoton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        agregarTrioBoton = new JButton();
+        agregarTrioBoton.setText("Agregar a trio");
+        panel1.add(agregarTrioBoton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        agregarEscalaBoton = new JButton();
+        agregarEscalaBoton.setText("Agregar a escala");
+        panel1.add(agregarEscalaBoton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panel1.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 40), null, 0, false));
+        jugadoresTabla.setBackground(new Color(-14123225));
+        scrollPane1.setViewportView(jugadoresTabla);
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel2.setBackground(new Color(-14786275));
+        panel.add(panel2, BorderLayout.EAST);
+        final JScrollPane scrollPane2 = new JScrollPane();
+        panel2.add(scrollPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        escalasEnLaMesaTabla.setBackground(new Color(-14123225));
+        scrollPane2.setViewportView(escalasEnLaMesaTabla);
+        final JScrollPane scrollPane3 = new JScrollPane();
+        panel2.add(scrollPane3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        triosEnLaMesaTabla.setBackground(new Color(-14123225));
+        scrollPane3.setViewportView(triosEnLaMesaTabla);
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new GridLayoutManager(3, 2, new Insets(10, 10, 10, 10), -1, -1));
+        panel3.setBackground(new Color(-14786275));
+        panel.add(panel3, BorderLayout.CENTER);
+        cartasJugadorActualLista = new JList();
+        cartasJugadorActualLista.setBackground(new Color(-14123225));
+        panel3.add(cartasJugadorActualLista, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 200), new Dimension(-1, 300), 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel3.add(spacer1, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        mazoBoton.setText("");
+        panel3.add(mazoBoton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pozoBoton.setText("");
+        panel3.add(pozoBoton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new GridLayoutManager(1, 6, new Insets(10, 10, 10, 10), -1, -1));
+        panel4.setBackground(new Color(-14786275));
+        panel.add(panel4, BorderLayout.NORTH);
+        final JLabel label1 = new JLabel();
+        label1.setForeground(new Color(-1));
+        label1.setText("Ronda:");
+        panel4.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label2 = new JLabel();
+        label2.setForeground(new Color(-1));
+        label2.setText("Número de trios a formar:");
+        panel4.add(label2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nroTriosLabel.setForeground(new Color(-1));
+        panel4.add(nroTriosLabel, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label3 = new JLabel();
+        label3.setForeground(new Color(-1));
+        label3.setText("Número de escalas a formar:");
+        panel4.add(label3, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nroEscalasLabel.setForeground(new Color(-1));
+        panel4.add(nroEscalasLabel, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nroRondaLabel.setForeground(new Color(-1));
+        panel4.add(nroRondaLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return panel;
+    }
+
 }

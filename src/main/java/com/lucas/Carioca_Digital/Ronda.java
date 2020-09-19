@@ -105,7 +105,7 @@ public class Ronda {
 
         //Este Bucle funciona hasta que alguien se quede sin cartas (temporal, lo ideal remplezarlo por un metodo)
         //Se llama al sgte metodo: desarrolloRonda,
-        desarrolloRonda();
+        //desarrolloRonda();
     }
 
     protected void desarrolloRonda() {

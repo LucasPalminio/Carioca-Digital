@@ -6,7 +6,9 @@
     </constraints>
     <properties>
       <background color="-14786275"/>
-      <enabled value="false"/>
+      <enabled value="true"/>
+      <opaque value="true"/>
+      <preferredSize width="1360" height="680"/>
     </properties>
     <border type="none" title="mesa de juego">
       <title-color color="-4473925"/>
@@ -20,16 +22,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="2f647" class="javax.swing.JTable" binding="jugadoresTabla" custom-create="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-14123225"/>
-            </properties>
-          </component>
           <component id="ce326" class="javax.swing.JButton" binding="botarCartaBoton">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -62,6 +54,23 @@
               <text value="Agregar a escala"/>
             </properties>
           </component>
+          <scrollpane id="c1610">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="40"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="2f647" class="javax.swing.JTable" binding="jugadoresTabla" custom-create="true">
+                <constraints/>
+                <properties>
+                  <background color="-14123225"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
       <grid id="95358" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -72,26 +81,40 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="a60ed" class="javax.swing.JTable" binding="escalasEnLaMesaTabla" custom-create="true">
+          <scrollpane id="433">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="4" fill="2" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties>
-              <background color="-14123225"/>
-            </properties>
-          </component>
-          <component id="a061f" class="javax.swing.JTable" binding="triosEnLaMesaTabla" custom-create="true">
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="a60ed" class="javax.swing.JTable" binding="escalasEnLaMesaTabla" custom-create="true">
+                <constraints/>
+                <properties>
+                  <background color="-14123225"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+          <scrollpane id="4b423">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="4" fill="2" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties>
-              <background color="-14123225"/>
-            </properties>
-          </component>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="a061f" class="javax.swing.JTable" binding="triosEnLaMesaTabla" custom-create="true">
+                <constraints/>
+                <properties>
+                  <background color="-14123225"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
       <grid id="dfdb" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -168,7 +191,6 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
             </properties>
           </component>
           <component id="49c7" class="javax.swing.JLabel">
@@ -186,7 +208,6 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
             </properties>
           </component>
           <component id="b7c04" class="javax.swing.JLabel" binding="nroRondaLabel" custom-create="true">
@@ -195,7 +216,6 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Label"/>
             </properties>
           </component>
         </children>

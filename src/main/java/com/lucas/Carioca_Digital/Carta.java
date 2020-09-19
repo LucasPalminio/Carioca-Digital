@@ -26,8 +26,8 @@ public class Carta extends JLabel{
     private final String color;
     //public static final ImageIcon imagenCartaAtras = new ImageIcon("src//images//cartas//blue_back.png");
     private Point posicion;
-    private static final int WIDTH = 74; //Ancho de la carta
-    private static final int HEIGHT = 98; //Alto de la carta
+    public static final int WIDTH = 74; //Ancho de la carta
+    public static final int HEIGHT = 98; //Alto de la carta
     private final String valor;
     private final int precio;
     private ImageIcon imagenCarta;
