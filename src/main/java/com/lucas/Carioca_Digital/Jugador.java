@@ -60,7 +60,7 @@ public class Jugador {
         }
     }
 
-    protected ArrayList<Carta> getCartas() {
+    public ArrayList<Carta> getCartas() {
         return cartas;
     }
 

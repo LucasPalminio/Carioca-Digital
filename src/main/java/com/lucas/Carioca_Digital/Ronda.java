@@ -34,7 +34,9 @@ public class Ronda {
         Jugador.setNROTRIOSyNROESCALAS(NROESCALAS_A_FORMAR, NROTRIOS_A_FORMAR);
 
     }
-
+    public Jugador getJugadorActual(){
+        return jugadores.get(turnoActual);
+    }
     public int getNivel() {
         return nivel;
     }

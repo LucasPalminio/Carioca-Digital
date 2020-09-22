@@ -9,17 +9,18 @@ import com.lucas.Carioca_Digital.Ronda;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotionListener {
+public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
     private JPanel panel;
 
     private JTable jugadoresTabla;
@@ -35,15 +36,17 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
     private JButton bajarseBoton;
     private JButton agregarTrioBoton;
     private JButton agregarEscalaBoton;
-    private JList cartasJugadorActualLista;
+
+    private JList<Carta> cartasJugadorLista;
+    private DefaultListModel cartasJugadorListaModelo;
     private JButton mazoBoton;
     private JButton pozoBoton;
     private JLabel nroRondaLabel;
     private JLabel nroTriosLabel;
     private JLabel nroEscalasLabel;
 
-    private Ronda ronda; // Composición
 
+    private Ronda ronda; // Composición
 
 
     public mesaDeJuegoGUI(Ronda ronda) {
@@ -60,6 +63,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
         ronda.comenzarRonda();
         $$$setupUI$$$();
         this.add(panel); //IMPORTANTE AGREGAR EL PANEL AL FRAME
+        actualizar_CartasJugadorActualLista(ronda.getJugadorActual());
 
 
     }
@@ -73,103 +77,6 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
         new mesaDeJuegoGUI(jugadores, 0).setVisible(true);
     }
 
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//
-//        //carta.paint(g);
-//
-//    }
-
-
-    /**
-     * Invoked when the mouse button has been clicked (pressed
-     * and released) on a component.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        //System.out.println("x:"+e.getX()+"y:"+e.getY());
-    }
-
-    /**
-     * Invoked when a mouse button has been pressed on a component.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getComponent().getClass().getName().equals("com.lucas.Carioca_Digital.Carta")) { //si lo que seleccione es una carta
-            //cartaMoviendose = (Carta) e.getComponent();
-
-
-        }
-
-        //TransferHandler th = carta.getTransferHandler();
-        //th.exportAsDrag(carta,e,TransferHandler.COPY);
-
-    }
-
-    /**
-     * Invoked when a mouse button has been released on a component.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    /**
-     * Invoked when the mouse enters a component.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    /**
-     * Invoked when the mouse exits a component.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-
-    /**
-     * Invoked when a mouse button is pressed on a component and then
-     * dragged.  {@code MOUSE_DRAGGED} events will continue to be
-     * delivered to the component where the drag originated until the
-     * mouse button is released (regardless of whether the mouse position
-     * is within the bounds of the component).
-     * <p>
-     * Due to platform-dependent Drag&amp;Drop implementations,
-     * {@code MOUSE_DRAGGED} events may not be delivered during a native
-     * Drag&amp;Drop operation.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    /**
-     * Invoked when the mouse cursor has been moved onto a component
-     * but no buttons have been pushed.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -197,7 +104,7 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
         try {
             mazoBoton.setIcon(new ImageIcon(ImageIO.read(new File(rutaImagenMazo)).getScaledInstance(Carta.WIDTH, Carta.HEIGHT, Image.SCALE_SMOOTH)));
         } catch (IOException ioe) {
-            System.err.println(ioe.getMessage());
+            System.err.println("Error Mazo: " + ioe.getMessage());
         }
 
         pozoBoton = new JButton();
@@ -208,13 +115,65 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
         jugadoresDefaultTableModel = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
         jugadoresTabla = new JTable(jugadoresDefaultTableModel);
 
-
-        triosEnLaMesaDefaultTableModel = new DefaultTableModel();
+        String[] columnasTriosEnLaMesa = {"Valor", "NroCartas"};
+        Object[][] testTriosTabla = {{"4", 12}};
+        triosEnLaMesaDefaultTableModel = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa);
         triosEnLaMesaTabla = new JTable(triosEnLaMesaDefaultTableModel);
-        escalasEnLaMesaDefaultTableModel = new DefaultTableModel();
+
+        String[] columnasEscalasEnLaMesa = {"PrimeraCarta", "Palo", "UltimaCarta", "NroCartas"};
+        Object[][] testEscalaTabla = {{"4", "C", "7", 4}};
+        escalasEnLaMesaDefaultTableModel = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa);
         escalasEnLaMesaTabla = new JTable(escalasEnLaMesaDefaultTableModel);
 
+        cartasJugadorListaModelo = new DefaultListModel();
+        cartasJugadorLista = new JList<>(cartasJugadorListaModelo);
+        cartasJugadorLista.setCellRenderer(this::getListCellRendererComponent);
 
+
+    }
+
+    private void actualizar_CartasJugadorActualLista(Jugador jugadorActual) {
+        cartasJugadorListaModelo.clear();
+
+        for (Carta carta : jugadorActual.getCartas()) {
+            cartasJugadorListaModelo.addElement(carta);
+        }
+
+        cartasJugadorLista.setModel(cartasJugadorListaModelo);
+
+    }
+
+    /**
+     * Return a component that has been configured to display the specified
+     * value. That component's <code>paint</code> method is then called to
+     * "render" the cell.  If it is necessary to compute the dimensions
+     * of a list because the list cells do not have a fixed size, this method
+     * is called to generate a component on which <code>getPreferredSize</code>
+     * can be invoked.
+     *
+     * @param list         The JList we're painting.
+     * @param value        The value returned by list.getModel().getElementAt(index).
+     * @param index        The cells index.
+     * @param isSelected   True if the specified cell was selected.
+     * @param cellHasFocus True if the specified cell has the focus.
+     * @return A component whose paint() method will render the specified value.
+     * @see JList
+     * @see ListSelectionModel
+     * @see ListModel
+     */
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        Carta carta = (Carta) value;
+
+        if (isSelected) {
+            carta.setBackground(list.getSelectionBackground());
+            carta.setForeground(list.getSelectionForeground());
+        } else {
+            carta.setBackground(list.getBackground());
+            carta.setForeground(list.getForeground());
+        }
+
+        return carta;
     }
 
     /**
@@ -266,18 +225,28 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
         triosEnLaMesaTabla.setBackground(new Color(-14123225));
         scrollPane3.setViewportView(triosEnLaMesaTabla);
         final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(3, 2, new Insets(10, 10, 10, 10), -1, -1));
+        panel3.setLayout(new GridLayoutManager(4, 3, new Insets(10, 10, 10, 10), -1, -1));
         panel3.setBackground(new Color(-14786275));
         panel.add(panel3, BorderLayout.CENTER);
-        cartasJugadorActualLista = new JList();
-        cartasJugadorActualLista.setBackground(new Color(-14123225));
-        panel3.add(cartasJugadorActualLista, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_SOUTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 200), new Dimension(-1, 300), 0, false));
         final Spacer spacer1 = new Spacer();
-        panel3.add(spacer1, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel3.add(spacer1, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         mazoBoton.setText("");
         panel3.add(mazoBoton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pozoBoton.setText("");
-        panel3.add(pozoBoton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(pozoBoton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane4 = new JScrollPane();
+        scrollPane4.setAutoscrolls(true);
+        panel3.add(scrollPane4, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        cartasJugadorLista.setBackground(new Color(-14123225));
+        cartasJugadorLista.setLayoutOrientation(2);
+        cartasJugadorLista.setOpaque(false);
+        cartasJugadorLista.setPreferredSize(new Dimension(1270, 20));
+        cartasJugadorLista.setRequestFocusEnabled(false);
+        cartasJugadorLista.setSelectionMode(2);
+        cartasJugadorLista.setVisibleRowCount(1);
+        scrollPane4.setViewportView(cartasJugadorLista);
+        final Spacer spacer2 = new Spacer();
+        panel3.add(spacer2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridLayoutManager(1, 6, new Insets(10, 10, 10, 10), -1, -1));
         panel4.setBackground(new Color(-14786275));
@@ -308,5 +277,6 @@ public class mesaDeJuegoGUI extends JFrame implements MouseListener, MouseMotion
     public JComponent $$$getRootComponent$$$() {
         return panel;
     }
+
 
 }

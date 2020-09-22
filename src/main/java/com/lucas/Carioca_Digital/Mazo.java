@@ -27,8 +27,8 @@ public class Mazo {
                     mazo.add(carta);
                 }
             }
-            mazo.add(new Carta("JKR", " "));
-            mazo.add(new Carta("JKR"," "));
+            mazo.add(new Carta("JKR", ""));
+            mazo.add(new Carta("JKR",""));
         }
         return mazo;
     }

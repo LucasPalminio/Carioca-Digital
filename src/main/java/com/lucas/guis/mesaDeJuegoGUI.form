@@ -117,7 +117,7 @@
           </scrollpane>
         </children>
       </grid>
-      <grid id="dfdb" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="dfdb" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints border-constraint="Center"/>
         <properties>
@@ -125,20 +125,9 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="d341c" class="javax.swing.JList" binding="cartasJugadorActualLista">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="2" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="200"/>
-                <maximum-size width="-1" height="300"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-14123225"/>
-            </properties>
-          </component>
           <vspacer id="a9395">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <component id="e48ed" class="javax.swing.JButton" binding="mazoBoton" custom-create="true">
@@ -151,12 +140,40 @@
           </component>
           <component id="7dfb9" class="javax.swing.JButton" binding="pozoBoton" custom-create="true">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value=""/>
             </properties>
           </component>
+          <scrollpane id="f3ae7">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <autoscrolls value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="d341c" class="javax.swing.JList" binding="cartasJugadorLista" custom-create="true">
+                <constraints/>
+                <properties>
+                  <background color="-14123225"/>
+                  <layoutOrientation value="2"/>
+                  <opaque value="false"/>
+                  <preferredSize width="1270" height="20"/>
+                  <requestFocusEnabled value="false"/>
+                  <selectionMode value="2"/>
+                  <visibleRowCount value="1"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+          <vspacer id="c37e1">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
         </children>
       </grid>
       <grid id="2734e" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

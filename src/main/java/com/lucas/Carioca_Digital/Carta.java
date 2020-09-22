@@ -5,6 +5,9 @@ import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
@@ -25,7 +28,7 @@ public class Carta extends JLabel{
     private final String palo;
     private final String color;
     //public static final ImageIcon imagenCartaAtras = new ImageIcon("src//images//cartas//blue_back.png");
-    private Point posicion;
+
     public static final int WIDTH = 74; //Ancho de la carta
     public static final int HEIGHT = 98; //Alto de la carta
     private final String valor;
@@ -33,38 +36,27 @@ public class Carta extends JLabel{
     private ImageIcon imagenCarta;
 
 
-    protected Carta(String palo, String valor) {
+
+    public Carta(String palo, String valor) {
         this.palo = palo;
         this.valor = valor;
-        this.precio = calcularPrecio();
 
-
-        //Aqui definimos el color de la carta:
-        // diamante y corazon es rojo , pica y trebol es negro (pero en terminal es blanco) y el joker es Amarillo
-        if (this.palo.equals(PALOS[1]) || this.palo.equals(PALOS[3])) {
-            this.color = Utilidades.ANSI_RED;
-        } else if (this.palo.equalsIgnoreCase("JKR")) {
-            this.color = Utilidades.ANSI_YELLOW;
-        }else{
-            this.color = Utilidades.ANSI_BLACK;
-        }
-    }
-    public Carta(String palo, String valor, int x, int y) {
-        this.palo = palo;
-        this.valor = valor;
-        this.posicion = new Point(x, y);
-        setLocation(posicion);
-        setSize(WIDTH,HEIGHT);
+        setSize(WIDTH+20,HEIGHT+20);
         setVisible(true);
         setText("");
+
+        Border border = this.getBorder();
+        Border margin = new EmptyBorder(10, 10, 10, 10);
+        this.setBorder(new CompoundBorder(border, margin));
 
         this.precio = calcularPrecio();
         String rutaImagen = "src//images//cartas//" + valor+palo+".png";
         try {
             imagenCarta = new ImageIcon(ImageIO.read(new File(rutaImagen)).getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH));
             setIcon(imagenCarta);
+            setOpaque(true);
         }catch (IOException e){
-            System.err.println("Error "+e.getMessage());
+            System.err.println("Error "+toString()+": "+e.getMessage());
         }
 
         //Aqui definimos el color de la carta:
