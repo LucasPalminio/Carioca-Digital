@@ -15,12 +15,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
-public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
+public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer, ActionListener {
     private JPanel panel;
 
     private JTable jugadoresTabla;
@@ -44,6 +47,8 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
     private JLabel nroRondaLabel;
     private JLabel nroTriosLabel;
     private JLabel nroEscalasLabel;
+    private JButton modoDebugButton;
+    private JLabel nombreJugadorLabel;
 
 
     private Ronda ronda; // Composición
@@ -51,32 +56,87 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
 
     public mesaDeJuegoGUI(Ronda ronda) {
         this.ronda = ronda;
-        ronda.comenzarRonda();
+
+
         $$$setupUI$$$();
+        ronda.comenzarRonda();
+        actualizar_CartasJugadorActualLista();
+        mazoBoton.addActionListener(this);
+        pozoBoton.addActionListener(this);
+        botarCartaBoton.addActionListener(this);
+        bajarseBoton.addActionListener(this);
+        agregarTrioBoton.addActionListener(this);
+        agregarEscalaBoton.addActionListener(this);
+
+
         this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAMES
 
-
     }
 
-    public mesaDeJuegoGUI(ArrayList<Jugador> jugadores, int nivel) {
-        this.ronda = new Ronda(jugadores, nivel);
-        ronda.comenzarRonda();
-        $$$setupUI$$$();
-        this.add(panel); //IMPORTANTE AGREGAR EL PANEL AL FRAME
-        actualizar_CartasJugadorActualLista(ronda.getJugadorActual());
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == mazoBoton) {
+            if (ronda.getJugadorActual().isYaSacoCarta()) { //Si el jugador actual saco carta, no puede volver a sacar carta
+                JOptionPane.showMessageDialog(this, "Usted ya saco carta, elija otra opción", "Error Jugador Actual ya saco carta", JOptionPane.ERROR_MESSAGE);
+            } else {
+                ronda.jugadorActualSacaCartaDelMazo(); //saca carta del mazo y se hace un set que el jugadorActual ya saco carta
+                actualizar_CartasJugadorActualLista();
+            }
+            //Refrescar JList
+        }
+        if (e.getSource() == pozoBoton) {
+            if (ronda.getJugadorActual().isYaSacoCarta()) { //Si el jugador actual saco carta, no puede volver a sacar carta
+                JOptionPane.showMessageDialog(this, "Usted ya saco carta, elija otra opción", "Error Jugador Actual ya saco carta", JOptionPane.ERROR_MESSAGE);
+            } else {
+                ronda.jugadorActualSacaCartaDeLaMesa(); //saca carta de la mesa y se hace un set que el jugadorActual ya saco carta
+                actualizar_CartasJugadorActualLista();
+                if (ronda.getPozo().size() != 0) {
+                    pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon());
+                } else {
+                    pozoBoton.setIcon(new ImageIcon()); //AQUI CAMBIAR Y PONER UN ICONO CUANDO EL POZO NO TENGA CARTAS
+                }
+            }
+        }
+        if (e.getSource() == botarCartaBoton) { //Si el jugador desea botar una carta
+            if (ronda.getJugadorActual().isYaSacoCarta()) { //Se verifica si saco una carta previamente
+                if (cartasJugadorLista.getSelectedIndices().length == 1) { //Se verifica si selecciono solamente una carta
+                    int indice = cartasJugadorLista.getSelectedIndex(); //Se obtiene el indice de la carta seleccionada
+                    ronda.jugadorActualBotaCartaAlPozo(indice); // Se bota la carta
+                    actualizar_CartasJugadorActualLista(); //Se actualiza la lista
+                    pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon()); //El boton del pozo se actualiza la imagen
 
+                    //Se despliega un mensaje de confirmación para avisar el jugador actual ha finalizado su turno
+                    String nombreJugadorAnterior = ronda.getJugadorActual().getNombre();
+                    ronda.siguienteTurnoJugador();
+                    String nombreJugadorSiguiente = ronda.getJugadorActual().getNombre();
+                    String mensajeDeConfirmacion = "El turno de " + nombreJugadorAnterior + " a finalizado su turno.\nA continuación juega " + nombreJugadorSiguiente;
+
+                    JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
+                    actualizar_CartasJugadorActualLista();
+                }
+            } else {
+
+            }
+        }
     }
 
-    public static void main(String[] args) throws IOException {
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(new Jugador("Lucas"));
-        jugadores.add(new Jugador("Lorenzo"));
-        jugadores.add(new Jugador("Fernando"));
+    private void actualizar_CartasJugadorActualLista() {
+        nombreJugadorLabel.setText(ronda.getJugadorActual().getNombre());
+        cartasJugadorListaModelo.clear();
 
-        new mesaDeJuegoGUI(jugadores, 0).setVisible(true);
+        for (Carta carta : ronda.getJugadorActual().getCartas()) {
+            cartasJugadorListaModelo.addElement(carta);
+        }
+
+        cartasJugadorLista.setModel(cartasJugadorListaModelo);
+
     }
-
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -109,6 +169,7 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
 
         pozoBoton = new JButton();
         pozoBoton.setSize(Carta.WIDTH, Carta.HEIGHT);
+        pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon());
         pozoBoton.setVisible(true);
 
         String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje"};
@@ -132,15 +193,13 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
 
     }
 
-    private void actualizar_CartasJugadorActualLista(Jugador jugadorActual) {
-        cartasJugadorListaModelo.clear();
+    public static void main(String[] args) throws IOException {
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(new Jugador("Lucas"));
+        jugadores.add(new Jugador("Lorenzo"));
+        jugadores.add(new Jugador("Fernando"));
 
-        for (Carta carta : jugadorActual.getCartas()) {
-            cartasJugadorListaModelo.addElement(carta);
-        }
-
-        cartasJugadorLista.setModel(cartasJugadorListaModelo);
-
+        new mesaDeJuegoGUI(new Ronda(jugadores, 0)).setVisible(true);
     }
 
     /**
@@ -193,25 +252,28 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
         panel.setPreferredSize(new Dimension(1360, 680));
         panel.setBorder(BorderFactory.createTitledBorder(null, "mesa de juego", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(5, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel1.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel1.setBackground(new Color(-14786275));
         panel.add(panel1, BorderLayout.WEST);
         botarCartaBoton = new JButton();
-        botarCartaBoton.setText("Botar Carta");
-        panel1.add(botarCartaBoton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        botarCartaBoton.setText("Botar Carta y Finalizar Turno");
+        panel1.add(botarCartaBoton, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bajarseBoton = new JButton();
         bajarseBoton.setText("Bajarse");
-        panel1.add(bajarseBoton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(bajarseBoton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         agregarTrioBoton = new JButton();
         agregarTrioBoton.setText("Agregar a trio");
-        panel1.add(agregarTrioBoton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(agregarTrioBoton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         agregarEscalaBoton = new JButton();
         agregarEscalaBoton.setText("Agregar a escala");
-        panel1.add(agregarEscalaBoton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(agregarEscalaBoton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         panel1.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 40), null, 0, false));
         jugadoresTabla.setBackground(new Color(-14123225));
         scrollPane1.setViewportView(jugadoresTabla);
+        modoDebugButton = new JButton();
+        modoDebugButton.setText("Modo Debug");
+        panel1.add(modoDebugButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel2.setBackground(new Color(-14786275));
@@ -225,18 +287,16 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
         triosEnLaMesaTabla.setBackground(new Color(-14123225));
         scrollPane3.setViewportView(triosEnLaMesaTabla);
         final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(4, 3, new Insets(10, 10, 10, 10), -1, -1));
+        panel3.setLayout(new GridLayoutManager(4, 5, new Insets(10, 10, 10, 10), -1, -1));
         panel3.setBackground(new Color(-14786275));
         panel.add(panel3, BorderLayout.CENTER);
         final Spacer spacer1 = new Spacer();
-        panel3.add(spacer1, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        mazoBoton.setText("");
-        panel3.add(mazoBoton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(spacer1, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         pozoBoton.setText("");
-        panel3.add(pozoBoton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(pozoBoton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane4 = new JScrollPane();
         scrollPane4.setAutoscrolls(true);
-        panel3.add(scrollPane4, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel3.add(scrollPane4, new GridConstraints(3, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         cartasJugadorLista.setBackground(new Color(-14123225));
         cartasJugadorLista.setLayoutOrientation(2);
         cartasJugadorLista.setOpaque(false);
@@ -245,26 +305,36 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer {
         cartasJugadorLista.setSelectionMode(2);
         cartasJugadorLista.setVisibleRowCount(1);
         scrollPane4.setViewportView(cartasJugadorLista);
+        final JLabel label1 = new JLabel();
+        label1.setForeground(new Color(-1));
+        label1.setText("Jugador Actual:");
+        panel3.add(label1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_SOUTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nombreJugadorLabel = new JLabel();
+        nombreJugadorLabel.setForeground(new Color(-1));
+        nombreJugadorLabel.setText("");
+        panel3.add(nombreJugadorLabel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_SOUTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
-        panel3.add(spacer2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel3.add(spacer2, new GridConstraints(2, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        mazoBoton.setText("");
+        panel3.add(mazoBoton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridLayoutManager(1, 6, new Insets(10, 10, 10, 10), -1, -1));
         panel4.setBackground(new Color(-14786275));
         panel.add(panel4, BorderLayout.NORTH);
-        final JLabel label1 = new JLabel();
-        label1.setForeground(new Color(-1));
-        label1.setText("Ronda:");
-        panel4.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(-1));
-        label2.setText("Número de trios a formar:");
-        panel4.add(label2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        nroTriosLabel.setForeground(new Color(-1));
-        panel4.add(nroTriosLabel, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label2.setText("Ronda:");
+        panel4.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(-1));
-        label3.setText("Número de escalas a formar:");
-        panel4.add(label3, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3.setText("Número de trios a formar:");
+        panel4.add(label3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nroTriosLabel.setForeground(new Color(-1));
+        panel4.add(nroTriosLabel, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label4 = new JLabel();
+        label4.setForeground(new Color(-1));
+        label4.setText("Número de escalas a formar:");
+        panel4.add(label4, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         nroEscalasLabel.setForeground(new Color(-1));
         panel4.add(nroEscalasLabel, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         nroRondaLabel.setForeground(new Color(-1));

@@ -131,7 +131,10 @@ public class Ronda {
         }
         desarrolloRonda();
     }
+    public Carta getPrimeraCartaDelPozo(){
+        return pozo.get(0);
 
+    }
     //Si el jugador aun no se ha bajado sus cartas, debe mostrar este menu de opciones
     private void menu_jugador_noBajoSusCartas(Jugador jugadorActual) {
         ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"));
@@ -282,17 +285,43 @@ public class Ronda {
 
     }
     //metodo cuando un jugador en su turno saca una carta de la mesa
-    private void sacarCartaDeLaMesa(Jugador jugador) {
+    public void sacarCartaDeLaMesa(Jugador jugador) {
         Carta cartaEnLaMesa = pozo.get(0);
         jugador.agregarCarta(cartaEnLaMesa);
         pozo.remove(0);
     }
     //metodo cuando un jugador en su turno saca una carta del mazo
-    private void sacarCartaDelMazo(Jugador jugador) {
+    public void sacarCartaDelMazo(Jugador jugador) {
         Carta cartaDelMazo = mazo.sacarCarta();
         System.out.println("obtuviste esta carta del mazo: " + cartaDelMazo.toStringEC());
         jugador.agregarCarta(cartaDelMazo);
     }
+    public void jugadorActualSacaCartaDeLaMesa(){
+        Carta cartaEnLaMesa = pozo.get(0);
+        jugadores.get(turnoActual).agregarCarta(cartaEnLaMesa);
+        pozo.remove(0);
+        jugadores.get(turnoActual).setYaSacoCarta(true);
+    }
+    public void jugadorActualSacaCartaDelMazo(){
+        Carta cartaDelMazo = mazo.sacarCarta();
+        System.out.println("obtuviste esta carta del mazo: " + cartaDelMazo.toStringEC());
+        jugadores.get(turnoActual).agregarCarta(cartaDelMazo);
+        jugadores.get(turnoActual).setYaSacoCarta(true);
+    }
+
+    public void jugadorActualBotaCartaAlPozo(int indice){
+        pozo.add(0, jugadores.get(turnoActual).botarCarta(indice));
+        jugadores.get(turnoActual).setYaSacoCarta(false);
+    }
+
+    public void siguienteTurnoJugador(){
+        turnoActual++;
+        if(turnoActual >= jugadores.size()){
+            turnoActual = 0;
+        }
+
+    }
+
     //Este metodo imprime quien es el turnoActual y que carta hay en la mesa
     protected void imprimirInformacionRonda() {
         System.out.println("///////////////////////////////////");

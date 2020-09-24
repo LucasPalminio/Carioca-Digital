@@ -83,11 +83,11 @@ public class Jugador {
         this.bajoSusCarta = bajoSusCarta;
     }
 
-    protected boolean isYaSacoCarta() {
+    public boolean isYaSacoCarta() {
         return yaSacoCarta;
     }
 
-    protected void setYaSacoCarta(boolean yaSacoCarta) {
+    public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
 
@@ -97,7 +97,11 @@ public class Jugador {
         matrizTrios.clear();
         matrizEscalas.clear();
     }
-
+    public Carta botarCarta(int indice){
+        Carta cartaABotar = cartas.get(indice);
+        cartas.remove(indice);
+        return  cartaABotar;
+    }
     protected Carta menu_BotarCarta(){
         imprimirCartas();
         int indiceCarta = Utilidades.ingresarUnNumero("¿Que cartas quieres botar?: ");
