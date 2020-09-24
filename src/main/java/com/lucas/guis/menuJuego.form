@@ -45,7 +45,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="42285" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="42285" class="javax.swing.JComboBox" binding="rondaInicialComboBox">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -67,13 +67,13 @@
               <text value="Ronda final"/>
             </properties>
           </component>
-          <component id="e7a19" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="e7a19" class="javax.swing.JComboBox" binding="rondaFinalComboBox">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="4a5ec" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+          <component id="4a5ec" class="javax.swing.JComboBox" binding="nroDeJugadoresComboBox">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -87,7 +87,7 @@
               <text value="Número de jugadores"/>
             </properties>
           </component>
-          <component id="32c82" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="32c82" class="javax.swing.JTextField" binding="jugador1TextField">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -95,7 +95,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="f87fe" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="f87fe" class="javax.swing.JTextField" binding="jugador2TextField">
             <constraints>
               <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -103,7 +103,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="62a6e" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="62a6e" class="javax.swing.JTextField" binding="jugador3TextField">
             <constraints>
               <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -111,7 +111,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="d7ecd" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+          <component id="d7ecd" class="javax.swing.JTextField" binding="jugador4TextField">
             <constraints>
               <grid row="11" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
