@@ -17,7 +17,7 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
     private JButton salirButton;
     private JPanel panelMain;
     private JLabel logo;
-    ImageIcon imagenLogo = new ImageIcon("src//images//varios//Logo_carioca.png");
+    ImageIcon imagenLogo = new ImageIcon("src//images//varios//logoPrincipal.png");
 
 
     public MenuPrincipalGUI() {
