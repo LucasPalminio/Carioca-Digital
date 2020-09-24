@@ -7,6 +7,7 @@ import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -106,22 +107,33 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer, ActionLi
         if (e.getSource() == botarCartaBoton) { //Si el jugador desea botar una carta
             if (ronda.getJugadorActual().isYaSacoCarta()) { //Se verifica si saco una carta previamente
                 if (cartasJugadorLista.getSelectedIndices().length == 1) { //Se verifica si selecciono solamente una carta
+
+
                     int indice = cartasJugadorLista.getSelectedIndex(); //Se obtiene el indice de la carta seleccionada
-                    ronda.jugadorActualBotaCartaAlPozo(indice); // Se bota la carta
-                    actualizar_CartasJugadorActualLista(); //Se actualiza la lista
-                    pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon()); //El boton del pozo se actualiza la imagen
+                    String mensaje = "¿Usted desea botar la carta: " + ronda.getJugadorActual().getCartas().get(indice).toString();
+                    int opcion = JOptionPane.showConfirmDialog(this, mensaje, "Confirmar botar carta", JOptionPane.YES_NO_OPTION);
+                    if (opcion == 0) {//si el jugador ha seleccionado que si
+                        ronda.jugadorActualBotaCartaAlPozo(indice); // Se bota la carta
+                        actualizar_CartasJugadorActualLista(); //Se actualiza la lista
+                        pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon()); //El boton del pozo se actualiza la imagen
 
-                    //Se despliega un mensaje de confirmación para avisar el jugador actual ha finalizado su turno
-                    String nombreJugadorAnterior = ronda.getJugadorActual().getNombre();
-                    ronda.siguienteTurnoJugador();
-                    String nombreJugadorSiguiente = ronda.getJugadorActual().getNombre();
-                    String mensajeDeConfirmacion = "El turno de " + nombreJugadorAnterior + " a finalizado su turno.\nA continuación juega " + nombreJugadorSiguiente;
+                        //Se despliega un mensaje de confirmación para avisar el jugador actual ha finalizado su turno
+                        String nombreJugadorAnterior = ronda.getJugadorActual().getNombre();
+                        ronda.siguienteTurnoJugador();
+                        String nombreJugadorSiguiente = ronda.getJugadorActual().getNombre();
+                        String mensajeDeConfirmacion = "El turno de " + nombreJugadorAnterior + " a finalizado su turno.\nA continuación juega " + nombreJugadorSiguiente;
 
-                    JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
-                    actualizar_CartasJugadorActualLista();
+                        JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
+                        actualizar_CartasJugadorActualLista();
+                    }
+                } else {
+                    if (cartasJugadorLista.getSelectedIndices().length > 1)
+                        JOptionPane.showMessageDialog(this, "Usted ha seleccionado mas de una carta\nNo puede botar mas de una carta", "Error al finalizar turno", JOptionPane.ERROR_MESSAGE);
+                    else if (cartasJugadorLista.getSelectedIndices().length == 0)
+                        JOptionPane.showMessageDialog(this, "Usted no ha seleccionado una carta", "Error al finalizar turno", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-
+            } else {//El jugado no ha sacado carta debe mostrar un mensaje de error
+                JOptionPane.showMessageDialog(this, "Usted no ha sacado una carta\nAun no puede finalizar su turno", "Error al finalizar turno", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -144,7 +156,7 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer, ActionLi
         //this.setLocationRelativeTo(null);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setUndecorated(true);
-        setResizable(false);
+        setResizable(true);
         //setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //addMouseListener(this);
