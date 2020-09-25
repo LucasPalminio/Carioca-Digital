@@ -1,33 +1,32 @@
 package com.lucas.guis;
 
-import com.lucas.Carioca_Digital.Carta;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 public class MenuPrincipalGUI extends JFrame implements ActionListener {
     private JButton jugarUnaPartidaButton;
     private JButton mejoresPuntajesButton;
-    private JButton modoDebugButton;
+    private JButton configuracionButton;
     private JButton salirButton;
     private JPanel panelMain;
     private JLabel logo;
+    private JLabel tituloLabel;
+    protected menuJuego jugar = new menuJuego();
+    protected menuDebug debug = new menuDebug();
+    protected tableroDePuntuaciones puntaje = new tableroDePuntuaciones();
     ImageIcon imagenLogo = new ImageIcon("src//images//varios//logoPrincipal.png");
 
 
     public MenuPrincipalGUI() {
+
         add(panelMain);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         logo.setIcon(imagenLogo);
         jugarUnaPartidaButton.addActionListener(this);
         mejoresPuntajesButton.addActionListener(this);
-        modoDebugButton.addActionListener(this);
+        configuracionButton.addActionListener(this);
         salirButton.addActionListener(this);
     }
 
@@ -37,15 +36,15 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == modoDebugButton) {
+        if (e.getSource() == configuracionButton) {
             this.setVisible(false);
 
         }
-        if (e.getSource() == modoDebugButton) {
+        if (e.getSource() == configuracionButton) {
             this.setVisible(false);
 
         }
-        if (e.getSource() == modoDebugButton) {
+        if (e.getSource() == configuracionButton) {
             this.setVisible(false);
 
         }
@@ -61,5 +60,17 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
     private void createUIComponents(){
         // TODO: place custom component creation code here
 
+    }
+
+    public menuJuego getJugar() {
+        return jugar;
+    }
+
+    public menuDebug getDebug() {
+        return debug;
+    }
+
+    public tableroDePuntuaciones getPuntaje() {
+        return puntaje;
     }
 }

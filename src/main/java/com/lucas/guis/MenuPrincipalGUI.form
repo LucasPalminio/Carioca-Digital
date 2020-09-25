@@ -11,11 +11,15 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="f64bb" class="javax.swing.JLabel">
+      <component id="f64bb" class="javax.swing.JLabel" binding="tituloLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="100"/>
+            <maximum-size width="-1" height="100"/>
+          </grid>
         </constraints>
         <properties>
+          <foreground color="-1"/>
           <text value="Carioca Digital"/>
         </properties>
       </component>
@@ -35,12 +39,12 @@
           <text value="Mejores puntajes"/>
         </properties>
       </component>
-      <component id="b9882" class="javax.swing.JButton" binding="modoDebugButton">
+      <component id="b9882" class="javax.swing.JButton" binding="configuracionButton">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Modo Debug"/>
+          <text value="Configuración"/>
         </properties>
       </component>
       <component id="b7c84" class="javax.swing.JButton" binding="salirButton">
