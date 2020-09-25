@@ -12,9 +12,6 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
     private JPanel panelMain;
     private JLabel logo;
     private JLabel tituloLabel;
-    protected menuJuego jugar = new menuJuego();
-    protected menuDebug debug = new menuDebug();
-    protected tableroDePuntuaciones puntaje = new tableroDePuntuaciones();
     ImageIcon imagenLogo = new ImageIcon("src//images//varios//logoPrincipal.png");
 
 
@@ -36,16 +33,22 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == configuracionButton) {
+        if (e.getSource() == jugarUnaPartidaButton) {
+
             this.setVisible(false);
+            new menuJuego().setVisible(true);
+
+
+
+        }
+        if (e.getSource() == mejoresPuntajesButton) {
+            this.setVisible(false);
+            new tableroDePuntuaciones().setVisible(true);
 
         }
         if (e.getSource() == configuracionButton) {
             this.setVisible(false);
-
-        }
-        if (e.getSource() == configuracionButton) {
-            this.setVisible(false);
+            new menuDebug().setVisible(true);
 
         }
         if (e.getSource() == salirButton) {
@@ -62,15 +65,4 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
     }
 
-    public menuJuego getJugar() {
-        return jugar;
-    }
-
-    public menuDebug getDebug() {
-        return debug;
-    }
-
-    public tableroDePuntuaciones getPuntaje() {
-        return puntaje;
-    }
 }

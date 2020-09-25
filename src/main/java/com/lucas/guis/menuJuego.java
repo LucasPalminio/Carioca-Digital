@@ -135,7 +135,8 @@ public class menuJuego extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int nroJugadores = Integer.parseInt(nroJugadoresComboBox.getSelectedItem().toString());
         if (e.getSource() == volverAlMenúPrincipalButton) {
-
+            this.setVisible(false);
+            new MenuPrincipalGUI().setVisible(true);
         }
         if (e.getSource() == comenzarLaPartidaButton) {
 
