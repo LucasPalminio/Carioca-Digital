@@ -33,7 +33,7 @@ public class MenuPrincipal {
         Reglas.menuModificarReglas();
     }
     public static void comenzarNuevaPartida(){
-        Juego juego = new Juego();
-        juego.empezarJuego();
+      //  Juego juego = new Juego();
+    //    juego.empezarJuego();
     }
 }

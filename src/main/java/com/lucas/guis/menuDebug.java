@@ -2,6 +2,7 @@ package com.lucas.guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.lucas.Carioca_Digital.Reglas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,12 @@ public class menuDebug extends JFrame implements ActionListener {
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
-
+        if(Reglas.getValorRegla(0)) {
+            modoDiosCheckBox.setSelected(true);
+        }
+        if(Reglas.getValorRegla(1)) {
+            siUnJugadorSeCheckBox.setSelected(true);
+        }
         volverAlMenuPrincipalButton.addActionListener(this);
         modoDiosCheckBox.addActionListener(this);
         siUnJugadorSeCheckBox.addActionListener(this);
@@ -83,6 +89,13 @@ public class menuDebug extends JFrame implements ActionListener {
         if(e.getSource()==volverAlMenuPrincipalButton){
             this.setVisible(false);
             new MenuPrincipalGUI().setVisible(true);
+            this.dispose();
+        }
+        if(e.getSource() == modoDiosCheckBox){
+            Reglas.setRegla(0,!Reglas.getValorRegla(0));
+        }
+        if(e.getSource() == siUnJugadorSeCheckBox){
+            Reglas.setRegla(1,!Reglas.getValorRegla(1));
         }
 
     }

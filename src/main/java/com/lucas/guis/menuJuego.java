@@ -2,6 +2,7 @@ package com.lucas.guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.lucas.Carioca_Digital.Juego;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class menuJuego extends JFrame implements ActionListener {
     private JPanel panel1;
@@ -21,6 +23,12 @@ public class menuJuego extends JFrame implements ActionListener {
     private JTextField jugador2textField;
     private JTextField jugador3textField;
     private JTextField jugador4textField;
+    private final Color blanco = new Color(255,255,255);
+    private final Color rojo = new Color(255,0,0);
+    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    int nivelInicial;
+    int nivelFinal;
+
 
     public static void main(String[] args) {
         new menuJuego().setVisible(true);
@@ -133,10 +141,14 @@ public class menuJuego extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        nivelInicial = Integer.parseInt(rondaInicialComboBox.getSelectedItem().toString())-1;
+        nivelFinal = Integer.parseInt(rondaFinalComboBox.getSelectedItem().toString())-1;
         int nroJugadores = Integer.parseInt(nroJugadoresComboBox.getSelectedItem().toString());
         if (e.getSource() == volverAlMenúPrincipalButton) {
             this.setVisible(false);
             new MenuPrincipalGUI().setVisible(true);
+            this.dispose();
         }
         if (e.getSource() == comenzarLaPartidaButton) {
 
@@ -144,21 +156,36 @@ public class menuJuego extends JFrame implements ActionListener {
                 switch (nroJugadores) {
                     case 2:
                         if (!jugador1textField.getText().trim().equals("") && !jugador2textField.getText().trim().equals("")) {
+                            jugadores.add(new Jugador(jugador1textField.getText()));
+                            jugadores.add(new Jugador(jugador2textField.getText()));
 
+                            new Juego(jugadores,nivelInicial,nivelFinal).empezarJuego();
+                            this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
                         }
                         break;
                     case 3:
                         if (!jugador1textField.getText().trim().equals("") && !jugador2textField.getText().trim().equals("") && !jugador3textField.getText().trim().equals("")) {
+                            jugadores.add(new Jugador(jugador1textField.getText()));
+                            jugadores.add(new Jugador(jugador2textField.getText()));
+                            jugadores.add(new Jugador(jugador3textField.getText()));
 
+                            new Juego(jugadores,nivelInicial,nivelFinal).empezarJuego();
+                            this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
                         }
                         break;
                     case 4:
                         if (!jugador1textField.getText().trim().equals("") && !jugador2textField.getText().trim().equals("") && !jugador3textField.getText().trim().equals("") && !jugador4textField.getText().trim().equals("")) {
+                            jugadores.add(new Jugador(jugador1textField.getText()));
+                            jugadores.add(new Jugador(jugador2textField.getText()));
+                            jugadores.add(new Jugador(jugador3textField.getText()));
+                            jugadores.add(new Jugador(jugador4textField.getText()));
 
+                            new Juego(jugadores,nivelInicial,nivelFinal).empezarJuego();
+                            this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
                         }
@@ -170,10 +197,6 @@ public class menuJuego extends JFrame implements ActionListener {
         }
         bloquearJTextFields();
 
-        if (e.getSource() == nroJugadoresComboBox) {
-            nroJugadores = Integer.parseInt(nroJugadoresComboBox.getSelectedItem().toString());
-
-        }
 
     }
 
@@ -182,14 +205,18 @@ public class menuJuego extends JFrame implements ActionListener {
         if (Integer.parseInt(nroJugadoresComboBox.getSelectedItem().toString()) < 3) {
             jugador3textField.setText("");
             jugador3textField.setEditable(false);
+            jugador3textField.setBackground(rojo);
         } else {
             jugador3textField.setEditable(true);
+            jugador3textField.setBackground(blanco);
         }
         if (Integer.parseInt(nroJugadoresComboBox.getSelectedItem().toString()) < 4) {
             jugador4textField.setText("");
             jugador4textField.setEditable(false);
+            jugador4textField.setBackground(rojo);
         } else {
             jugador4textField.setEditable(true);
+            jugador4textField.setBackground(blanco);
         }
     }
 }

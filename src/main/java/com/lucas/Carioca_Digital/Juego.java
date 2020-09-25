@@ -2,7 +2,7 @@ package com.lucas.Carioca_Digital;
 
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
-
+import com.lucas.guis.mesaDeJuegoGUI;
 import java.util.ArrayList;
 
 
@@ -10,19 +10,28 @@ public class Juego {
     private int nivelActual = 0;
     private int ultimoNivel = 1;
     private ArrayList<Jugador> jugadores;
+
+    public Juego(ArrayList<Jugador> jugadores, int nivelActual, int ultimoNivel){
+        this.jugadores = jugadores;
+        this.nivelActual = nivelActual;
+        this.ultimoNivel = ultimoNivel;
+    }
     public void empezarJuego() {
 
 //        String stringInput = "2\nLucas Palminio\nLorenzo\n";
 //        entradaAProbar(stringInput);
 
-        this.jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
-        ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
+      //  this.jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
+      //  ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
-        while (nivelActual <= ultimoNivel) {
+        for(int i=nivelActual;nivelActual<=ultimoNivel;nivelActual++) {
             Ronda rondaActual = new Ronda(jugadores, nivelActual);
-            rondaActual.comenzarRonda();
+            mesaDeJuegoGUI mesaActual = new mesaDeJuegoGUI(rondaActual);
+            mesaActual.setVisible(true);
+
+       //     rondaActual.comenzarRonda();
+
             //Agregar: Por cada juego completo, se muestra en pantalla los puntajes de cada jugador y quien lleva la delantera (gana el que tiene menor puntaje)
-            nivelActual++;
         }
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes

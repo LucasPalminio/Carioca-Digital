@@ -37,6 +37,7 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
             this.setVisible(false);
             new menuJuego().setVisible(true);
+            this.dispose();
 
 
 
@@ -44,11 +45,13 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
         if (e.getSource() == mejoresPuntajesButton) {
             this.setVisible(false);
             new tableroDePuntuaciones().setVisible(true);
+            this.dispose();
 
         }
         if (e.getSource() == configuracionButton) {
             this.setVisible(false);
             new menuDebug().setVisible(true);
+            this.dispose();
 
         }
         if (e.getSource() == salirButton) {
