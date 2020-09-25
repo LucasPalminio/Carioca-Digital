@@ -20,7 +20,7 @@ public class Carta extends JLabel{
     // Colores que se usaran para algunos textos
 
     // Todos las posibilidades de palos y valores de las cartas
-    //final static public String[] PALOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
+    final static public String[] PALOS_SIMBOLOS = {"♠", "♦", "♣", "♥"}; // {pica, diamante, trebol, corazon}
     final static public String[] PALOS = {"S", "D", "C", "H"};
     //C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -78,7 +78,18 @@ public class Carta extends JLabel{
 
     //Funcion que devuelve la carta en formato String
     public String toString(){
-        return this.valor + " " + this.palo+" "+this.valor;
+        String simbolo = "?";
+        if (this.palo.equals("JKR")){
+            simbolo = "JKR";
+        }else {
+            for (int i = 0; i < PALOS.length; i++) {
+                if (PALOS[i].equals(this.palo)) {
+                    simbolo = PALOS_SIMBOLOS[i];
+                    break;
+                }
+            }
+        }
+        return this.valor + " " + simbolo+" "+this.valor;
     }
     //Funcion que devuelve la carta en formato String y con su color ANSII respectivo,
     // ideal para una mejor visualizacion en terminal
