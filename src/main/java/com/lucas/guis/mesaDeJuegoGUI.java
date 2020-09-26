@@ -133,7 +133,21 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer, ActionLi
                         JOptionPane.showMessageDialog(this, "Usted no ha seleccionado una carta", "Error al finalizar turno", JOptionPane.ERROR_MESSAGE);
                 }
             } else {//El jugado no ha sacado carta debe mostrar un mensaje de error
+                //JOptionPane errorDialogo = new JOptionPane("Usted no ha sacado una carta\nAun no puede finalizar su turno", JOptionPane.ERROR_MESSAGE);
+
                 JOptionPane.showMessageDialog(this, "Usted no ha sacado una carta\nAun no puede finalizar su turno", "Error al finalizar turno", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        if (e.getSource() == bajarseBoton) {
+            if (ronda.getJugadorActual().isBajoSusCarta()) {
+                JOptionPane.showMessageDialog(this, "¡Usted ya bajo sus Cartas!");
+            } else {
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Usted esta seguro de bajarse?", "El jugador desea bajarse", JOptionPane.YES_NO_OPTION);
+                if (opcion == 0) {
+                    new BajarseGUI(ronda.getJugadorActual(), ronda.getNROESCALAS_A_FORMAR(), ronda.getNROTRIOS_A_FORMAR()).setVisible(true);
+
+
+                }
             }
         }
     }
@@ -189,13 +203,14 @@ public class mesaDeJuegoGUI extends JFrame implements ListCellRenderer, ActionLi
         jugadoresTabla = new JTable(jugadoresDefaultTableModel);
 
         String[] columnasTriosEnLaMesa = {"Valor", "NroCartas"};
-        Object[][] testTriosTabla = {{"4", 12}};
+        Object[][] testTriosTabla = {{}};
         triosEnLaMesaDefaultTableModel = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa);
         triosEnLaMesaTabla = new JTable(triosEnLaMesaDefaultTableModel);
 
         String[] columnasEscalasEnLaMesa = {"PrimeraCarta", "Palo", "UltimaCarta", "NroCartas"};
-        Object[][] testEscalaTabla = {{"4", "C", "7", 4}};
+        Object[][] testEscalaTabla = {{}};
         escalasEnLaMesaDefaultTableModel = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa);
+
         escalasEnLaMesaTabla = new JTable(escalasEnLaMesaDefaultTableModel);
 
         cartasJugadorListaModelo = new DefaultListModel();

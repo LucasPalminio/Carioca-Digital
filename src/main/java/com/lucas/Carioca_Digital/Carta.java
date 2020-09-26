@@ -127,11 +127,11 @@ public class Carta extends JLabel{
 
     }
 
-    protected String getPalo() {
+    public String getPalo() {
         return palo;
     }
 
-    protected String getValor() {
+    public String getValor() {
         return valor;
     }
 
