@@ -68,7 +68,7 @@ public class Jugador {
         this.puntajeRonda = puntajeRonda;
     }
 
-    protected void setCartas(ArrayList<Carta> cartas) {
+    public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
     protected void agregarCarta(Carta carta){
@@ -76,10 +76,10 @@ public class Jugador {
     }
     protected int getNroCartas(){ return cartas.size(); }
 
-    protected boolean isBajoSusCarta() {
+    public boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
-    protected void setBajoSusCarta(boolean bajoSusCarta) {
+    public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
 
@@ -313,6 +313,14 @@ public class Jugador {
                 }
             }
         }
+    }
+
+    public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
+        this.matrizTrios = matrizTrios;
+    }
+
+    public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
+        this.matrizEscalas = matrizEscalas;
     }
 
     public Object[] getArrayObject(){

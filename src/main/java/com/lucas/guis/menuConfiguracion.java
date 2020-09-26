@@ -9,21 +9,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class menuDebug extends JFrame implements ActionListener {
+public class menuConfiguracion extends JFrame implements ActionListener {
     private JPanel panel1;
     private JButton volverAlMenuPrincipalButton;
     private JCheckBox modoDiosCheckBox;
     private JCheckBox siUnJugadorSeCheckBox;
 
-    public menuDebug() {
+    public menuConfiguracion() {
         add(panel1);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
-        if(Reglas.getValorRegla(0)) {
+        if (Reglas.getValorRegla(0)) {
             modoDiosCheckBox.setSelected(true);
         }
-        if(Reglas.getValorRegla(1)) {
+        if (Reglas.getValorRegla(1)) {
             siUnJugadorSeCheckBox.setSelected(true);
         }
         volverAlMenuPrincipalButton.addActionListener(this);
@@ -31,8 +31,8 @@ public class menuDebug extends JFrame implements ActionListener {
         siUnJugadorSeCheckBox.addActionListener(this);
     }
 
-    public static void main(String[] args){
-        new menuDebug().setVisible(true);
+    public static void main(String[] args) {
+        new menuConfiguracion().setVisible(true);
     }
 
     {
@@ -52,24 +52,28 @@ public class menuDebug extends JFrame implements ActionListener {
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout(0, 0));
+        panel1.setPreferredSize(new Dimension(1360, 680));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setBackground(new Color(-13989079));
         panel1.add(panel2, BorderLayout.NORTH);
         volverAlMenuPrincipalButton = new JButton();
         volverAlMenuPrincipalButton.setText("Volver al menú principal");
         panel2.add(volverAlMenuPrincipalButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
-        label1.setText("Menu Debug");
+        label1.setForeground(new Color(-1));
+        label1.setText("Configuración");
         panel2.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel3.setBackground(new Color(-14786275));
         panel1.add(panel3, BorderLayout.CENTER);
         modoDiosCheckBox = new JCheckBox();
         modoDiosCheckBox.setText("Modo Dios");
-        panel3.add(modoDiosCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(modoDiosCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         siUnJugadorSeCheckBox = new JCheckBox();
         siUnJugadorSeCheckBox.setText("Si un jugador se bajó, ¿Puede sacar carta del pozo?");
-        panel3.add(siUnJugadorSeCheckBox, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(siUnJugadorSeCheckBox, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -86,16 +90,16 @@ public class menuDebug extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==volverAlMenuPrincipalButton){
+        if (e.getSource() == volverAlMenuPrincipalButton) {
             this.setVisible(false);
             new MenuPrincipalGUI().setVisible(true);
             this.dispose();
         }
-        if(e.getSource() == modoDiosCheckBox){
-            Reglas.setRegla(0,!Reglas.getValorRegla(0));
+        if (e.getSource() == modoDiosCheckBox) {
+            Reglas.setRegla(0, !Reglas.getValorRegla(0));
         }
-        if(e.getSource() == siUnJugadorSeCheckBox){
-            Reglas.setRegla(1,!Reglas.getValorRegla(1));
+        if (e.getSource() == siUnJugadorSeCheckBox) {
+            Reglas.setRegla(1, !Reglas.getValorRegla(1));
         }
 
     }

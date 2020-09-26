@@ -2,7 +2,7 @@ package com.lucas.Carioca_Digital;
 
 
 import com.lucas.Utilidades_y_Launcher.Utilidades;
-import com.lucas.guis.mesaDeJuegoGUI;
+import com.lucas.guis.RondaGUI.MesaGUI;
 import java.util.ArrayList;
 
 
@@ -26,7 +26,7 @@ public class Juego {
 
         for(int i=nivelActual;nivelActual<=ultimoNivel;nivelActual++) {
             Ronda rondaActual = new Ronda(jugadores, nivelActual);
-            mesaDeJuegoGUI mesaActual = new mesaDeJuegoGUI(rondaActual);
+            MesaGUI mesaActual = new MesaGUI(rondaActual);
             mesaActual.setVisible(true);
 
        //     rondaActual.comenzarRonda();
