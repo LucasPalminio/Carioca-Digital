@@ -53,7 +53,7 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
         }
         if (e.getSource() == configuracionButton) {
             this.setVisible(false);
-            new menuDebug().setVisible(true);
+            new menuConfiguracion().setVisible(true);
             this.dispose();
 
         }

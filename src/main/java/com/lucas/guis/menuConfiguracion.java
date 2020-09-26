@@ -9,13 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class menuDebug extends JFrame implements ActionListener {
+public class menuConfiguracion extends JFrame implements ActionListener {
     private JPanel panel1;
     private JButton volverAlMenuPrincipalButton;
     private JCheckBox modoDiosCheckBox;
     private JCheckBox siUnJugadorSeCheckBox;
 
-    public menuDebug() {
+    public menuConfiguracion() {
         add(panel1);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -32,7 +32,7 @@ public class menuDebug extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new menuDebug().setVisible(true);
+        new menuConfiguracion().setVisible(true);
     }
 
     {

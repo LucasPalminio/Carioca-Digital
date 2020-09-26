@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class Carta extends JLabel{
+public class Carta extends JLabel {
     // Colores que se usaran para algunos textos
 
     // Todos las posibilidades de palos y valores de las cartas
@@ -172,5 +172,7 @@ public class Carta extends JLabel{
 
 
     }
+
+
 }
 
