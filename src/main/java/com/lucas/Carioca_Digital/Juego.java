@@ -24,7 +24,7 @@ public class Juego {
       //  this.jugadores = Utilidades.ingresarJugadores(); //Se da la bienvenida, ingresa el numero de Jugadores y el nombre de cada Jugador
       //  ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
-        for(int i=nivelActual;nivelActual<=ultimoNivel;nivelActual++) {
+     //   for(int i=nivelActual;nivelActual<=ultimoNivel;nivelActual++) {
             Ronda rondaActual = new Ronda(jugadores, nivelActual);
             MesaGUI mesaActual = new MesaGUI(rondaActual);
             mesaActual.setVisible(true);
@@ -32,7 +32,7 @@ public class Juego {
        //     rondaActual.comenzarRonda();
 
             //Agregar: Por cada juego completo, se muestra en pantalla los puntajes de cada jugador y quien lleva la delantera (gana el que tiene menor puntaje)
-        }
+    //    }
 
         //Cuando termine todos los juegos gana el jugador con el menor Puntaje y muestra en pantalla la tabla de Puntajes
     }

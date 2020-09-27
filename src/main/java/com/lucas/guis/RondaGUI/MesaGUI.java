@@ -62,9 +62,9 @@ public class MesaGUI extends JFrame implements ActionListener {
     private Ronda ronda; // Composición
 
 
-    public MesaGUI(Ronda ronda) {
+    public MesaGUI(Ronda ronda, int nivelFinal) {
         this.ronda = ronda;
-
+        this.nivelFinal = nivelFinal;
 
         $$$setupUI$$$();
         ronda.comenzarRonda();
@@ -139,7 +139,7 @@ public class MesaGUI extends JFrame implements ActionListener {
                 ronda.getJugadores().get(i).calcularPuntaje();
                 ronda.getJugadores().get(i).setPuntajeRonda(0);
             }
-            new MesaGUI(new Ronda(ronda.getJugadores(),ronda.getNivel()+1));
+            new MesaGUI(new Ronda(ronda.getJugadores(),ronda.getNivel()+1),nivelFinal);
 
         }
         this.dispose();
@@ -341,7 +341,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         jugadores.add(new Jugador("Lorenzo"));
         jugadores.add(new Jugador("Fernando"));
 
-        new MesaGUI(new Ronda(jugadores, 0)).setVisible(true);
+        new MesaGUI(new Ronda(jugadores, 0),0).setVisible(true);
     }
 
 

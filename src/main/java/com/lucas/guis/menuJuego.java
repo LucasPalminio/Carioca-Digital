@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.Carioca_Digital.Juego;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
+import com.lucas.guis.RondaGUI.MesaGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -165,7 +166,9 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador1textField.getText()));
                             jugadores.add(new Jugador(jugador2textField.getText()));
 
-                            new Juego(jugadores, nivelInicial, nivelFinal).empezarJuego();
+                            Ronda rondaActual = new Ronda(jugadores, nivelInicial);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            mesaActual.setVisible(true);
                             this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
@@ -177,7 +180,9 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador2textField.getText()));
                             jugadores.add(new Jugador(jugador3textField.getText()));
 
-                            new Juego(jugadores, nivelInicial, nivelFinal).empezarJuego();
+                            Ronda rondaActual = new Ronda(jugadores, nivelInicial);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            mesaActual.setVisible(true);
                             this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
@@ -190,7 +195,9 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador3textField.getText()));
                             jugadores.add(new Jugador(jugador4textField.getText()));
 
-                            new Juego(jugadores, nivelInicial, nivelFinal).empezarJuego();
+                            Ronda rondaActual = new Ronda(jugadores, nivelInicial);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            mesaActual.setVisible(true);
                             this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Faltan nombres de jugadores");
