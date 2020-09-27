@@ -8,7 +8,7 @@ import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
 import com.lucas.guis.menuConfiguracion;
-
+import com.lucas.guis.resultadosGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -56,6 +56,7 @@ public class MesaGUI extends JFrame implements ActionListener {
     private JButton derechaBoton;
     private JButton configuracionesButton;
     private JLabel nroDeCartasJugadorLabel;
+    int nivelFinal;
 
 
     private Ronda ronda; // Composición
@@ -107,6 +108,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         if (e.getSource() == izquierdaBoton) izquierdaBotonEvento();
         if (e.getSource() == derechaBoton) derechaBotonEvento();
         if (e.getSource() == modoDebugButton) modoDebugButtonEvento();
+        if(ronda.getJugadorActual().getNroCartas()==0){
+            finRonda();
+        }
 
         if (e.getSource() == configuracionesButton) configuracionesButtonEvento();
 
@@ -119,6 +123,26 @@ public class MesaGUI extends JFrame implements ActionListener {
     private void configuracionesButtonEvento() {
         new menuConfiguracion().setVisible(true);
 
+    }
+    private void finRonda(){
+        if(ronda.getNivel()== nivelFinal){
+            ArrayList<Integer> puntajesFinales= new ArrayList<>();
+            for(int i=0;i<ronda.getJugadores().size();i++){
+                ronda.getJugadores().get(i).calcularPuntajeRonda();
+                ronda.getJugadores().get(i).calcularPuntaje();
+                puntajesFinales.add(ronda.getJugadores().get(i).getPuntaje());
+            }
+            new resultadosGUI(ronda.getJugadores(),puntajesFinales).setVisible(true);
+        }else{
+            for(int i=0;i<ronda.getJugadores().size();i++){
+                ronda.getJugadores().get(i).calcularPuntajeRonda();
+                ronda.getJugadores().get(i).calcularPuntaje();
+                ronda.getJugadores().get(i).setPuntajeRonda(0);
+            }
+            new MesaGUI(new Ronda(ronda.getJugadores(),ronda.getNivel()+1));
+
+        }
+        this.dispose();
     }
 
     private void modoDebugButtonEvento() {

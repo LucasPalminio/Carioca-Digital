@@ -37,22 +37,22 @@ public class Jugador {
     public String getNombre() {
         return nombre;
     }
-    protected int getPuntaje() {
+    public int getPuntaje() {
         return puntaje;
     }
 
-    protected int getPuntajeRonda() {
+    public int getPuntajeRonda() {
         return puntajeRonda;
     }
 
-    protected void calcularPuntaje(){
+    public void calcularPuntaje(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
                 this.puntaje += carta.getPrecio();
             }
         }
     }
-    protected void calcularPuntajeRonda(){
+    public void calcularPuntajeRonda(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
                 this.puntajeRonda += carta.getPrecio();
@@ -64,7 +64,7 @@ public class Jugador {
         return cartas;
     }
 
-    protected void setPuntajeRonda(int puntajeRonda) {
+    public void setPuntajeRonda(int puntajeRonda) {
         this.puntajeRonda = puntajeRonda;
     }
 
@@ -74,7 +74,7 @@ public class Jugador {
     protected void agregarCarta(Carta carta){
         cartas.add(carta);
     }
-    protected int getNroCartas(){ return cartas.size(); }
+    public int getNroCartas(){ return cartas.size(); }
 
     public boolean isBajoSusCarta() {
         return bajoSusCarta;
