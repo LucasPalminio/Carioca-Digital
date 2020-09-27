@@ -5,7 +5,9 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
+import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
+import com.lucas.guis.menuConfiguracion;
 
 
 import javax.imageio.ImageIO;
@@ -52,6 +54,7 @@ public class MesaGUI extends JFrame implements ActionListener {
     private JLabel yaSacoCartaLabel;
     private JButton izquierdaBoton;
     private JButton derechaBoton;
+    private JButton configuracionesButton;
     private JLabel nroDeCartasJugadorLabel;
 
 
@@ -74,6 +77,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         izquierdaBoton.addActionListener(this);
         derechaBoton.addActionListener(this);
         modoDebugButton.addActionListener(this);
+        configuracionesButton.addActionListener(this);
 
 
         this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAMES
@@ -103,6 +107,17 @@ public class MesaGUI extends JFrame implements ActionListener {
         if (e.getSource() == izquierdaBoton) izquierdaBotonEvento();
         if (e.getSource() == derechaBoton) derechaBotonEvento();
         if (e.getSource() == modoDebugButton) modoDebugButtonEvento();
+
+        if (e.getSource() == configuracionesButton) configuracionesButtonEvento();
+
+        modoDebugButton.setVisible(Reglas.isModoDebug());
+        modoDebugButton.setEnabled(Reglas.isModoDebug());
+
+
+    }
+
+    private void configuracionesButtonEvento() {
+        new menuConfiguracion().setVisible(true);
 
     }
 
@@ -323,7 +338,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         panel.setPreferredSize(new Dimension(1360, 680));
         panel.setBorder(BorderFactory.createTitledBorder(null, "Mesa", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel1.setLayout(new GridLayoutManager(7, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel1.setBackground(new Color(-14786275));
         panel.add(panel1, BorderLayout.WEST);
         botarCartaBoton = new JButton();
@@ -345,6 +360,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         modoDebugButton = new JButton();
         modoDebugButton.setText("Modo Debug");
         panel1.add(modoDebugButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        configuracionesButton = new JButton();
+        configuracionesButton.setText("Configuraciones");
+        panel1.add(configuracionesButton, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel2.setBackground(new Color(-14786275));
