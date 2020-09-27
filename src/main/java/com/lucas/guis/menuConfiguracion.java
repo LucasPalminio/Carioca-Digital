@@ -96,6 +96,7 @@ public class menuConfiguracion extends JFrame implements ActionListener {
             this.dispose();
         }
         if (e.getSource() == modoDiosCheckBox) {
+
             Reglas.setRegla(0, !Reglas.getValorRegla(0));
         }
         if (e.getSource() == siUnJugadorSeCheckBox) {

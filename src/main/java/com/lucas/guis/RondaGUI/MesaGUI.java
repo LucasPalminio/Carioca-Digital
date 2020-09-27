@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class MesaGUI extends JFrame implements  ActionListener {
+public class MesaGUI extends JFrame implements ActionListener {
     private JPanel panel;
 
     private JTable jugadoresTabla;
@@ -73,6 +73,7 @@ public class MesaGUI extends JFrame implements  ActionListener {
         agregarEscalaBoton.addActionListener(this);
         izquierdaBoton.addActionListener(this);
         derechaBoton.addActionListener(this);
+        modoDebugButton.addActionListener(this);
 
 
         this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAMES
@@ -106,7 +107,7 @@ public class MesaGUI extends JFrame implements  ActionListener {
     }
 
     private void modoDebugButtonEvento() {
-
+        new MenuDebugGUI(ronda).setVisible(true);
     }
 
     private void mazoBotonEvento() {
@@ -320,7 +321,7 @@ public class MesaGUI extends JFrame implements  ActionListener {
         panel.setEnabled(true);
         panel.setOpaque(true);
         panel.setPreferredSize(new Dimension(1360, 680));
-        panel.setBorder(BorderFactory.createTitledBorder(null, "mesa de juego", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
+        panel.setBorder(BorderFactory.createTitledBorder(null, "Mesa", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel1.setBackground(new Color(-14786275));

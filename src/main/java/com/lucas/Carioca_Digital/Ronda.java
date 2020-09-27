@@ -399,4 +399,20 @@ public class Ronda {
         return data;
     }
 
+    public Object[][] getArrayObjectCartasJugadores(){
+        Object[][] data = new Object[jugadores.size()][2];
+        for (int i = 0; i < jugadores.size(); i++) {
+            Jugador jugador = jugadores.get(i);
+            String nombre = jugador.getNombre();
+            String cartasToString = "";
+            for (int j = 0; j < jugador.getNroCartas(); j++) {
+                Carta carta = jugador.getCartas().get(j);
+                cartasToString += "|"+carta.toString()+"| ";
+            }
+            data[i][0] = nombre;
+            data[i][1] = cartasToString;
+        }
+        return data;
+    }
+
 }
