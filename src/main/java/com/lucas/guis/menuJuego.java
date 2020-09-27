@@ -167,7 +167,7 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador2textField.getText()));
 
                             Ronda rondaActual = new Ronda(jugadores, nivelInicial);
-                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual, nivelFinal);
                             mesaActual.setVisible(true);
                             this.dispose();
                         } else {
@@ -181,7 +181,7 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador3textField.getText()));
 
                             Ronda rondaActual = new Ronda(jugadores, nivelInicial);
-                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual, nivelFinal);
                             mesaActual.setVisible(true);
                             this.dispose();
                         } else {
@@ -196,7 +196,7 @@ public class menuJuego extends JFrame implements ActionListener {
                             jugadores.add(new Jugador(jugador4textField.getText()));
 
                             Ronda rondaActual = new Ronda(jugadores, nivelInicial);
-                            MesaGUI mesaActual = new MesaGUI(rondaActual,nivelFinal);
+                            MesaGUI mesaActual = new MesaGUI(rondaActual, nivelFinal);
                             mesaActual.setVisible(true);
                             this.dispose();
                         } else {

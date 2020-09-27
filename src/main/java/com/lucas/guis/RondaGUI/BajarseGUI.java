@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
+import com.lucas.Carioca_Digital.Ronda;
 import com.lucas.Utilidades_y_Launcher.Utilidades;
 
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BajarseGUI extends JFrame implements ActionListener {
+    private Ronda ronda;
     private JPanel panel1;
     private JList<Carta> list1;
     private ArrayList<Carta> cartasArrayList;
@@ -33,7 +35,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
     private JButton bajarButton;
 
     private DefaultListModel modeloLista;
-    private Jugador jugadorActual;
+
     private int escalasAFormar;
     private int triosAFormar;
 
@@ -41,13 +43,14 @@ public class BajarseGUI extends JFrame implements ActionListener {
     private ArrayList<ArrayList<Carta>> matrizEscalas;
 
 
-    public BajarseGUI(Jugador jugadorActual, int escalasAFormar, int triosAFormar) {
-        this.jugadorActual = jugadorActual;
+    public BajarseGUI(Ronda ronda) {
+        this.ronda = ronda;
 
-        this.cartasArrayList = new ArrayList<>(jugadorActual.getCartas());
 
-        this.escalasAFormar = escalasAFormar;
-        this.triosAFormar = triosAFormar;
+        this.cartasArrayList = new ArrayList<>(ronda.getJugadorActual().getCartas());
+
+        this.escalasAFormar = ronda.getNROESCALAS_A_FORMAR();
+        this.triosAFormar = ronda.getNROTRIOS_A_FORMAR();
         matrizTrios = new ArrayList<>();
         matrizEscalas = new ArrayList<>();
 
@@ -188,9 +191,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
         if (escalasAFormar == 0 && triosAFormar == 0) {
             JOptionPane.showConfirmDialog(this, "Usted se ha bajado correctamente", "Usted se ha bajado", JOptionPane.OK_OPTION);
-            jugadorActual.setMatrizEscalas(matrizEscalas);
-            jugadorActual.setMatrizTrios(matrizTrios);
-            jugadorActual.setCartas(cartasArrayList);
+            ronda.getJugadorActual().setMatrizEscalas(matrizEscalas);
+            ronda.getJugadorActual().setMatrizTrios(matrizTrios);
+            ronda.getJugadorActual().setCartas(cartasArrayList);
             dispose();
         }
     }
@@ -296,7 +299,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
 
         setBounds(0, 0, 800, 600);
         setLocationRelativeTo(null);
-        setTitle("Bajarse: " + jugadorActual.getNombre());
+        setTitle("Bajarse: " + ronda.getJugadorActual().getNombre());
     }
 
     /**

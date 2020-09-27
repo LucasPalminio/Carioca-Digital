@@ -25,9 +25,9 @@ public class Juego {
       //  ingresarNivelAJugar();// Se ingresa desde que nivel hasta que nivel desea Jugar
 
      //   for(int i=nivelActual;nivelActual<=ultimoNivel;nivelActual++) {
-            Ronda rondaActual = new Ronda(jugadores, nivelActual);
-            MesaGUI mesaActual = new MesaGUI(rondaActual);
-            mesaActual.setVisible(true);
+//            Ronda rondaActual = new Ronda(jugadores, nivelActual);
+//            //MesaGUI mesaActual = new MesaGUI(rondaActual);
+//            mesaActual.setVisible(true);
 
        //     rondaActual.comenzarRonda();
 

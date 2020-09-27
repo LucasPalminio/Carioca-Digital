@@ -108,7 +108,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         if (e.getSource() == izquierdaBoton) izquierdaBotonEvento();
         if (e.getSource() == derechaBoton) derechaBotonEvento();
         if (e.getSource() == modoDebugButton) modoDebugButtonEvento();
-        if(ronda.getJugadorActual().getNroCartas()==0){
+        if (ronda.getJugadorActual().getNroCartas() == 0) {
             finRonda();
         }
 
@@ -124,22 +124,23 @@ public class MesaGUI extends JFrame implements ActionListener {
         new menuConfiguracion().setVisible(true);
 
     }
-    private void finRonda(){
-        if(ronda.getNivel()== nivelFinal){
-            ArrayList<Integer> puntajesFinales= new ArrayList<>();
-            for(int i=0;i<ronda.getJugadores().size();i++){
+
+    private void finRonda() {
+        if (ronda.getNivel() == nivelFinal) {
+            ArrayList<Integer> puntajesFinales = new ArrayList<>();
+            for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();
                 ronda.getJugadores().get(i).calcularPuntaje();
                 puntajesFinales.add(ronda.getJugadores().get(i).getPuntaje());
             }
-            new resultadosGUI(ronda.getJugadores(),puntajesFinales).setVisible(true);
-        }else{
-            for(int i=0;i<ronda.getJugadores().size();i++){
+            new resultadosGUI(ronda.getJugadores(), puntajesFinales).setVisible(true);
+        } else {
+            for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();
                 ronda.getJugadores().get(i).calcularPuntaje();
                 ronda.getJugadores().get(i).setPuntajeRonda(0);
             }
-            new MesaGUI(new Ronda(ronda.getJugadores(),ronda.getNivel()+1),nivelFinal);
+            new MesaGUI(new Ronda(ronda.getJugadores(), ronda.getNivel() + 1), nivelFinal);
 
         }
         this.dispose();
@@ -221,7 +222,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         } else {
             int opcion = JOptionPane.showConfirmDialog(this, "¿Usted esta seguro de bajarse?", "El jugador desea bajarse", JOptionPane.YES_NO_OPTION);
             if (opcion == 0) {
-                new BajarseGUI(ronda.getJugadorActual(), ronda.getNROESCALAS_A_FORMAR(), ronda.getNROTRIOS_A_FORMAR()).setVisible(true);
+                new BajarseGUI(ronda).setVisible(true);
 
 
             }
@@ -341,7 +342,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         jugadores.add(new Jugador("Lorenzo"));
         jugadores.add(new Jugador("Fernando"));
 
-        new MesaGUI(new Ronda(jugadores, 0),0).setVisible(true);
+        new MesaGUI(new Ronda(jugadores, 0), 0).setVisible(true);
     }
 
 
