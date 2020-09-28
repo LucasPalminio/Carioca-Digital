@@ -7,7 +7,6 @@ import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
-import com.lucas.guis.menuConfiguracion;
 import com.lucas.guis.resultadosGUI;
 
 import javax.imageio.ImageIO;
@@ -27,13 +26,13 @@ public class MesaGUI extends JFrame implements ActionListener {
     private JPanel panel;
 
     private JTable jugadoresTabla;
-    private DefaultTableModel jugadoresDefaultTableModel;
+    private DefaultTableModel jugadoresTablaModelo;
 
     private JTable escalasEnLaMesaTabla;
-    private DefaultTableModel escalasEnLaMesaDefaultTableModel;
+    private DefaultTableModel escalasEnLaMesaModelo;
 
     private JTable triosEnLaMesaTabla;
-    private DefaultTableModel triosEnLaMesaDefaultTableModel;
+    private DefaultTableModel triosEnLaMesaModelo;
 
     private JButton botarCartaBoton;
     private JButton bajarseBoton;
@@ -54,21 +53,18 @@ public class MesaGUI extends JFrame implements ActionListener {
     private JLabel yaSacoCartaLabel;
     private JButton izquierdaBoton;
     private JButton derechaBoton;
-    private JButton configuracionesButton;
-    private JLabel nroDeCartasJugadorLabel;
-    int nivelFinal;
+
+    private int nivelFinal;
 
 
     private Ronda ronda; // Composición
 
-
     public MesaGUI(Ronda ronda, int nivelFinal) {
         this.ronda = ronda;
         this.nivelFinal = nivelFinal;
+        ronda.comenzarRonda();
 
         $$$setupUI$$$();
-        ronda.comenzarRonda();
-        actualizar_CartasJugadorActualLista();
         mazoBoton.addActionListener(this);
         pozoBoton.addActionListener(this);
         botarCartaBoton.addActionListener(this);
@@ -78,10 +74,81 @@ public class MesaGUI extends JFrame implements ActionListener {
         izquierdaBoton.addActionListener(this);
         derechaBoton.addActionListener(this);
         modoDebugButton.addActionListener(this);
-        configuracionesButton.addActionListener(this);
+        this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAME
 
 
-        this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAMES
+        actualizar_CartasJugadorActualLista();
+        modoDebugButton.setVisible(Reglas.isModoDebug());
+        modoDebugButton.setEnabled(Reglas.isModoDebug());
+
+
+    }
+
+
+    public int getNivelFinal() {
+        return nivelFinal;
+    }
+
+    public Ronda getRonda() {
+        return ronda;
+    }
+
+    public void setRonda(Ronda ronda) {
+        this.ronda = ronda;
+    }
+
+    public void actualizarTablaEscala() {
+        for (int i = 0; i < escalasEnLaMesaModelo.getRowCount(); i++) {
+            escalasEnLaMesaModelo.removeRow(i); //BORRAMOS TODAS LAS FILAS
+        }
+        for (Jugador jugador : ronda.getJugadores()) {
+            if (jugador.isBajoSusCarta()) {
+                for (int i = 0; i < jugador.getArrayObjectEscalas().length; i++) {
+                    escalasEnLaMesaModelo.addRow(jugador.getArrayObjectEscalas()[i]);
+                }
+            }
+        }
+        escalasEnLaMesaTabla.setModel(escalasEnLaMesaModelo);
+    }
+
+    public void actualizarTablaTrios() {
+        for (int i = 0; i < triosEnLaMesaModelo.getRowCount(); i++) {
+            triosEnLaMesaModelo.removeRow(i);
+        }
+        for (Jugador jugador : ronda.getJugadores()) {
+            if (jugador.isBajoSusCarta()) {
+                for (int i = 0; i < jugador.getArrayObjectTrios().length; i++) {
+                    triosEnLaMesaModelo.addRow(jugador.getArrayObjectTrios()[i]);
+                }
+            }
+
+        }
+        triosEnLaMesaTabla.setModel(triosEnLaMesaModelo);
+
+    }
+
+    public void actualizarTablaJugadores() {
+        for (int i = 0; i < jugadoresTablaModelo.getRowCount(); i++) {
+            jugadoresTablaModelo.removeRow(i); //Borramos todas las filas
+        }
+        for (Jugador jugador : ronda.getJugadores()) {
+            jugadoresTablaModelo.addRow(jugador.getArrayObject());
+        }
+        jugadoresTabla.setModel(jugadoresTablaModelo);
+    }
+
+    public void actualizar_CartasJugadorActualLista() {
+        nombreJugadorLabel.setText(ronda.getJugadorActual().getNombre());
+        nroCartasLabel.setText(String.valueOf(ronda.getJugadorActual().getCartas().size()));
+        seHaBajadoLabel.setText(String.valueOf(ronda.getJugadorActual().isBajoSusCarta()));
+        yaSacoCartaLabel.setText(String.valueOf(ronda.getJugadorActual().isYaSacoCarta()));
+        cartasJugadorListaModelo.clear();
+
+        for (Carta carta : ronda.getJugadorActual().getCartas()) {
+            cartasJugadorListaModelo.addElement(carta);
+        }
+
+        cartasJugadorLista.setModel(cartasJugadorListaModelo);
 
     }
 
@@ -93,35 +160,24 @@ public class MesaGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == mazoBoton) {
-            mazoBotonEvento();
-        }
-        if (e.getSource() == pozoBoton) {
-            pozoBotonEvento();
-        }
-        if (e.getSource() == botarCartaBoton) {
-            botarCartaBotonEvento();
-        }
-        if (e.getSource() == bajarseBoton) {
-            bajarseBotonEvento();
-        }
+        if (e.getSource() == mazoBoton) mazoBotonEvento();
+
+        if (e.getSource() == pozoBoton) pozoBotonEvento();
+
+        if (ronda.getJugadorActual().getNroCartas() == 0) finRonda();
+
+        if (e.getSource() == botarCartaBoton) botarCartaBotonEvento();
+
+        if (e.getSource() == bajarseBoton) bajarseBotonEvento();
+
         if (e.getSource() == izquierdaBoton) izquierdaBotonEvento();
         if (e.getSource() == derechaBoton) derechaBotonEvento();
         if (e.getSource() == modoDebugButton) modoDebugButtonEvento();
-        if (ronda.getJugadorActual().getNroCartas() == 0) {
-            finRonda();
-        }
 
-        if (e.getSource() == configuracionesButton) configuracionesButtonEvento();
 
         modoDebugButton.setVisible(Reglas.isModoDebug());
         modoDebugButton.setEnabled(Reglas.isModoDebug());
 
-
-    }
-
-    private void configuracionesButtonEvento() {
-        new menuConfiguracion().setVisible(true);
 
     }
 
@@ -171,6 +227,14 @@ public class MesaGUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Usted ya saco carta, elija otra opción", "Error Jugador Actual ya saco carta", JOptionPane.ERROR_MESSAGE);
         } else {
             ronda.jugadorActualSacaCartaDeLaMesa(); //saca carta de la mesa y se hace un set que el jugadorActual ya saco carta
+
+            Panel panel = new Panel();
+            //Despliega un mensaje diciendo al jugador que carta obtuvo del mazo
+            String mensaje = "Obtuvo un ";
+            panel.add(new JLabel(mensaje));
+            panel.add(ronda.getJugadorActual().getCartas().get(ronda.getJugadorActual().getCartas().size() - 1));
+            JOptionPane.showMessageDialog(this, panel, "Saco carta del pozo", JOptionPane.DEFAULT_OPTION);
+
             actualizar_CartasJugadorActualLista();
             if (ronda.getPozo().size() != 0) {
                 pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon());
@@ -185,23 +249,29 @@ public class MesaGUI extends JFrame implements ActionListener {
         if (ronda.getJugadorActual().isYaSacoCarta()) { //Se verifica si saco una carta previamente
             if (cartasJugadorLista.getSelectedIndices().length == 1) { //Se verifica si selecciono solamente una carta
 
-
                 int indice = cartasJugadorLista.getSelectedIndex(); //Se obtiene el indice de la carta seleccionada
-                String mensaje = "¿Usted desea botar la carta: " + ronda.getJugadorActual().getCartas().get(indice).toString();
-                int opcion = JOptionPane.showConfirmDialog(this, mensaje, "Confirmar botar carta", JOptionPane.YES_NO_OPTION);
+                Panel panel = new Panel();
+                String mensaje = "Usted desea botar la carta: ";
+                panel.add(new JLabel(mensaje));
+                panel.add(ronda.getJugadorActual().getCartas().get(indice));
+                int opcion = JOptionPane.showConfirmDialog(this, panel, "Confirmar botar carta", JOptionPane.YES_NO_OPTION);
                 if (opcion == 0) {//si el jugador ha seleccionado que si
                     ronda.jugadorActualBotaCartaAlPozo(indice); // Se bota la carta
                     actualizar_CartasJugadorActualLista(); //Se actualiza la lista
                     pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon()); //El boton del pozo se actualiza la imagen
 
-                    //Se despliega un mensaje de confirmación para avisar el jugador actual ha finalizado su turno
-                    String nombreJugadorAnterior = ronda.getJugadorActual().getNombre();
-                    ronda.siguienteTurnoJugador();
-                    String nombreJugadorSiguiente = ronda.getJugadorActual().getNombre();
-                    String mensajeDeConfirmacion = "El turno de " + nombreJugadorAnterior + " a finalizado su turno.\nA continuación juega " + nombreJugadorSiguiente;
+                    if (ronda.getJugadorActual().getNroCartas() == 0) {//Si el jugador Actual se ha quedado sin cartas, entonces la ronda finaliza
+                        finRonda();
+                    } else { //De lo contrario, continua el juego y se finaliza la ronda
+                        //Se despliega un mensaje de confirmación para avisar el jugador actual ha finalizado su turno
+                        String nombreJugadorAnterior = ronda.getJugadorActual().getNombre();
+                        ronda.siguienteTurnoJugador();
+                        String nombreJugadorSiguiente = ronda.getJugadorActual().getNombre();
+                        String mensajeDeConfirmacion = "El turno de " + nombreJugadorAnterior + " a finalizado su turno.\nA continuación juega " + nombreJugadorSiguiente;
 
-                    JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
-                    actualizar_CartasJugadorActualLista();
+                        JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
+                        actualizar_CartasJugadorActualLista();
+                    }
                 }
             } else {
                 if (cartasJugadorLista.getSelectedIndices().length > 1)
@@ -222,7 +292,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         } else {
             int opcion = JOptionPane.showConfirmDialog(this, "¿Usted esta seguro de bajarse?", "El jugador desea bajarse", JOptionPane.YES_NO_OPTION);
             if (opcion == 0) {
-                new BajarseGUI(ronda).setVisible(true);
+                new BajarseGUI(this).setVisible(true);
 
 
             }
@@ -265,20 +335,6 @@ public class MesaGUI extends JFrame implements ActionListener {
         }
     }
 
-    private void actualizar_CartasJugadorActualLista() {
-        nombreJugadorLabel.setText(ronda.getJugadorActual().getNombre());
-        nroCartasLabel.setText(String.valueOf(ronda.getJugadorActual().getCartas().size()));
-        seHaBajadoLabel.setText(String.valueOf(ronda.getJugadorActual().isBajoSusCarta()));
-        yaSacoCartaLabel.setText(String.valueOf(ronda.getJugadorActual().isYaSacoCarta()));
-        cartasJugadorListaModelo.clear();
-
-        for (Carta carta : ronda.getJugadorActual().getCartas()) {
-            cartasJugadorListaModelo.addElement(carta);
-        }
-
-        cartasJugadorLista.setModel(cartasJugadorListaModelo);
-
-    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -315,34 +371,46 @@ public class MesaGUI extends JFrame implements ActionListener {
         pozoBoton.setVisible(true);
 
         String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje"};
-        jugadoresDefaultTableModel = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
-        jugadoresTabla = new JTable(jugadoresDefaultTableModel);
+        jugadoresTablaModelo = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
+        jugadoresTabla = new JTable(jugadoresTablaModelo);
+
 
         String[] columnasTriosEnLaMesa = {"Valor", "NroCartas"};
         Object[][] testTriosTabla = {{}};
-        triosEnLaMesaDefaultTableModel = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa);
-        triosEnLaMesaTabla = new JTable(triosEnLaMesaDefaultTableModel);
+        triosEnLaMesaModelo = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa);
+        triosEnLaMesaTabla = new JTable(triosEnLaMesaModelo);
 
         String[] columnasEscalasEnLaMesa = {"PrimeraCarta", "Palo", "UltimaCarta", "NroCartas"};
         Object[][] testEscalaTabla = {{}};
-        escalasEnLaMesaDefaultTableModel = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa);
-
-        escalasEnLaMesaTabla = new JTable(escalasEnLaMesaDefaultTableModel);
+        escalasEnLaMesaModelo = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa);
+        escalasEnLaMesaTabla = new JTable(escalasEnLaMesaModelo);
 
         cartasJugadorListaModelo = new DefaultListModel();
         cartasJugadorLista = new JList<>(cartasJugadorListaModelo);
         cartasJugadorLista.setCellRenderer(new CartaListCellRendererComponent());
+        cartasJugadorLista.setDragEnabled(true);
 
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(new Jugador("Lucas"));
         jugadores.add(new Jugador("Lorenzo"));
-        jugadores.add(new Jugador("Fernando"));
+        Ronda ronda = new Ronda(jugadores, 0);
+        ArrayList<Carta> cartas = new ArrayList<>();
+        cartas.add(new Carta("S", "3"));
+        cartas.add(new Carta("D", "3"));
+        cartas.add(new Carta("C", "3"));
+        cartas.add(new Carta("JKR", ""));
+        cartas.add(new Carta("H", "Q"));
+        cartas.add(new Carta("D", "Q"));
 
-        new MesaGUI(new Ronda(jugadores, 0), 0).setVisible(true);
+
+        MesaGUI a = new MesaGUI(ronda, 0);
+        a.setVisible(true);
+        a.getRonda().getJugadorActual().setCartas(cartas);
+
     }
 
 
@@ -363,7 +431,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         panel.setPreferredSize(new Dimension(1360, 680));
         panel.setBorder(BorderFactory.createTitledBorder(null, "Mesa", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, new Color(-4473925)));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(7, 1, new Insets(10, 10, 10, 10), -1, -1));
+        panel1.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel1.setBackground(new Color(-14786275));
         panel.add(panel1, BorderLayout.WEST);
         botarCartaBoton = new JButton();
@@ -385,20 +453,15 @@ public class MesaGUI extends JFrame implements ActionListener {
         modoDebugButton = new JButton();
         modoDebugButton.setText("Modo Debug");
         panel1.add(modoDebugButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        configuracionesButton = new JButton();
-        configuracionesButton.setText("Configuraciones");
-        panel1.add(configuracionesButton, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
         panel2.setBackground(new Color(-14786275));
         panel.add(panel2, BorderLayout.EAST);
         final JScrollPane scrollPane2 = new JScrollPane();
         panel2.add(scrollPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        escalasEnLaMesaTabla.setBackground(new Color(-14123225));
         scrollPane2.setViewportView(escalasEnLaMesaTabla);
         final JScrollPane scrollPane3 = new JScrollPane();
         panel2.add(scrollPane3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        triosEnLaMesaTabla.setBackground(new Color(-14123225));
         scrollPane3.setViewportView(triosEnLaMesaTabla);
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayoutManager(5, 7, new Insets(10, 10, 10, 10), -1, -1));
@@ -443,7 +506,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-1));
         label1.setText("Jugador Actual:");
-        panel7.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_SOUTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel7.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         nombreJugadorLabel = new JLabel();
         nombreJugadorLabel.setForeground(new Color(-1));
         nombreJugadorLabel.setText("");

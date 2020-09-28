@@ -287,11 +287,11 @@ public class Jugador {
         return ingresarIndices(nroIndices); //Si a ocurrido un error, volvera a preguntar al usuario por los indices
     }
 
-    protected ArrayList<ArrayList<Carta>> getMatrizTrios() {
+    public ArrayList<ArrayList<Carta>> getMatrizTrios() {
         return matrizTrios;
     }
 
-    protected ArrayList<ArrayList<Carta>> getMatrizEscalas() {
+    public ArrayList<ArrayList<Carta>> getMatrizEscalas() {
         return matrizEscalas;
     }
     protected  void imprimirTrios_y_Escalas() {
@@ -326,5 +326,34 @@ public class Jugador {
     public Object[] getArrayObject(){
         Object[] array = {nombre, this.getNroCartas(), this.getPuntaje()};
         return array;
+    }
+
+    public Object[][] getArrayObjectEscalas(){
+        Object[][] data = new Object[matrizEscalas.size()][4]; // Primera Carta, Palo, Ultima Carta, nroCartas
+        for (int i = 0; i < matrizEscalas.size(); i++) {
+            ArrayList<Carta> escala = matrizEscalas.get(i);
+            data[i][0] = escala.get(0).getValor();
+            data[i][1] = escala.get(0).getPalo();
+            data[i][2]  = escala.get(escala.size()-1).getValor();
+            data[i][3] = escala.size();
+        }
+        return data;
+    }
+    public Object[][] getArrayObjectTrios(){
+        //Valor y Nro Carta
+        Object[][] data = new Object[matrizTrios.size()][2];
+        for (int i = 0; i < matrizTrios.size(); i++) {
+            ArrayList<Carta> trio = matrizTrios.get(i);
+            String valor = "";
+            for (int j = 0; j < trio.size(); j++) {
+                valor = trio.get(j).getValor();
+                if (!valor.equals("JKR")) break;
+
+            }
+            data[i][0] = valor;
+            data[i][1] = trio.size();
+        }
+        return data;
+
     }
 }

@@ -14,7 +14,7 @@
       <title-color color="-4473925"/>
     </border>
     <children>
-      <grid id="fd6e4" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="fd6e4" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints border-constraint="West"/>
         <properties>
@@ -79,14 +79,6 @@
               <text value="Modo Debug"/>
             </properties>
           </component>
-          <component id="364ae" class="javax.swing.JButton" binding="configuracionesButton" default-binding="true">
-            <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Configuraciones"/>
-            </properties>
-          </component>
         </children>
       </grid>
       <grid id="95358" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -108,9 +100,7 @@
             <children>
               <component id="a60ed" class="javax.swing.JTable" binding="escalasEnLaMesaTabla" custom-create="true">
                 <constraints/>
-                <properties>
-                  <background color="-14123225"/>
-                </properties>
+                <properties/>
               </component>
             </children>
           </scrollpane>
@@ -125,9 +115,7 @@
             <children>
               <component id="a061f" class="javax.swing.JTable" binding="triosEnLaMesaTabla" custom-create="true">
                 <constraints/>
-                <properties>
-                  <background color="-14123225"/>
-                </properties>
+                <properties/>
               </component>
             </children>
           </scrollpane>
@@ -239,7 +227,7 @@
               </scrollpane>
               <component id="756ab" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <foreground color="-1"/>

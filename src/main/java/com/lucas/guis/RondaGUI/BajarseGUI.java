@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BajarseGUI extends JFrame implements ActionListener {
+
+    private MesaGUI mesaDeJuego;
     private Ronda ronda;
     private JPanel panel1;
     private JList<Carta> list1;
@@ -43,8 +45,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
     private ArrayList<ArrayList<Carta>> matrizEscalas;
 
 
-    public BajarseGUI(Ronda ronda) {
-        this.ronda = ronda;
+    public BajarseGUI(MesaGUI mesaDeJuego) {
+        this.mesaDeJuego = mesaDeJuego;
+        this.ronda = mesaDeJuego.getRonda();
 
 
         this.cartasArrayList = new ArrayList<>(ronda.getJugadorActual().getCartas());
@@ -108,12 +111,12 @@ public class BajarseGUI extends JFrame implements ActionListener {
     public ArrayList<Carta> bajarTrio() {
         String mensajeDeError = "";
         ArrayList<Carta> trio = (ArrayList<Carta>) list1.getSelectedValuesList();
-        int[] indicesCartasSeleccionadas = list1.getSelectedIndices();
+        
         if (triosAFormar > 0) {
             if (trio.size() == 3) {
                 if (esUnTrio(trio)) { //Si las cartas seleccionadas corresponden a un trio
-                    for (int indice : indicesCartasSeleccionadas) {
-                        cartasArrayList.remove(indice);
+                    for (Carta cartaAeliminar : trio) {
+                        cartasArrayList.remove(cartaAeliminar);
                     }
                     actualizarLista();
                     return trio;
@@ -134,19 +137,17 @@ public class BajarseGUI extends JFrame implements ActionListener {
     public ArrayList<Carta> bajarEscala() {
         String mensajeDeError = "";
         ArrayList<Carta> escala = (ArrayList<Carta>) list1.getSelectedValuesList();
-        int[] indicesCartasSeleccionadas = list1.getSelectedIndices();
+
         if (escalasAFormar > 0) {
             if (escala.size() == 4) {
                 if (esUnaEscala(escala)) { //Si las cartas seleccionadas corresponden a una escala
-                    for (int indice : indicesCartasSeleccionadas) {
-                        cartasArrayList.remove(indice);
+                    for (Carta cartaAeliminar : escala) {
+                        cartasArrayList.remove(cartaAeliminar);
                     }
-
                     actualizarLista();
                     return escala;
                 } else {
                     mensajeDeError = "No ha seleccionado una escala de cartas \nIntentelo Nuevamente";
-
                 }
             } else {
                 mensajeDeError = "No ha seleccionado 4 cartas \nIntentelo Nuevamente";
@@ -165,37 +166,6 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
         list1.setModel(modeloLista);
 
-    }
-
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == formarTrioButton) {
-            formarTrioButtonEvento();
-        }
-        if (e.getSource() == formarEscalaButton) {
-            formarEscalaButtonEvento();
-        }
-        if (e.getSource() == abortarBajarseButton) {
-            abortarBajarseButtonEvento();
-        }
-        if (e.getSource() == subirButton) {
-            subirButtonEvento();
-        }
-        if (e.getSource() == bajarButton) {
-            bajarButtonEvento();
-        }
-        if (escalasAFormar == 0 && triosAFormar == 0) {
-            JOptionPane.showConfirmDialog(this, "Usted se ha bajado correctamente", "Usted se ha bajado", JOptionPane.OK_OPTION);
-            ronda.getJugadorActual().setMatrizEscalas(matrizEscalas);
-            ronda.getJugadorActual().setMatrizTrios(matrizTrios);
-            ronda.getJugadorActual().setCartas(cartasArrayList);
-            dispose();
-        }
     }
 
     private void formarTrioButtonEvento() {
@@ -269,6 +239,46 @@ public class BajarseGUI extends JFrame implements ActionListener {
 
         } else {
             JOptionPane.showMessageDialog(this, "Error: Para mover cartas debe hacerlo de a uno", "Error: Mover Carta", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void bajarseCompletado() {
+        JOptionPane.showConfirmDialog(this, "Usted se ha bajado correctamente", "Usted se ha bajado", JOptionPane.OK_OPTION);
+        ronda.getJugadorActual().setBajoSusCarta(true);
+        ronda.getJugadorActual().setMatrizEscalas(matrizEscalas);
+        ronda.getJugadorActual().setMatrizTrios(matrizTrios);
+        ronda.getJugadorActual().setCartas(cartasArrayList);
+        mesaDeJuego.setRonda(ronda);
+        mesaDeJuego.actualizarTablaEscala();
+        mesaDeJuego.actualizarTablaTrios();
+        mesaDeJuego.actualizar_CartasJugadorActualLista();
+        dispose();
+    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == formarTrioButton) {
+            formarTrioButtonEvento();
+        }
+        if (e.getSource() == formarEscalaButton) {
+            formarEscalaButtonEvento();
+        }
+        if (e.getSource() == abortarBajarseButton) {
+            abortarBajarseButtonEvento();
+        }
+        if (e.getSource() == subirButton) {
+            subirButtonEvento();
+        }
+        if (e.getSource() == bajarButton) {
+            bajarButtonEvento();
+        }
+        if (escalasAFormar == 0 && triosAFormar == 0) {
+            bajarseCompletado();
         }
     }
 
