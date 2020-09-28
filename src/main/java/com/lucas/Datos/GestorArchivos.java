@@ -21,15 +21,13 @@ public class GestorArchivos {
             System.out.println(e.getMessage());
         }
     }
-    public void crearArchivo(String contenido, String nombre){
+    public void crearArchivo(String nombre){
         try {
 
             File archivo = new File("Carioca_Digital_Datos//" + nombre+".txt");
             FileWriter escriba = new FileWriter(archivo.getPath());
 
             if(archivo.createNewFile()){
-                escriba.write(contenido);
-                escriba.close();
                 System.out.println("Se ha creado el archivo: "+nombre+".txt");
             }else{
                 System.out.println("El archivo" +nombre+".txt ya existe");
@@ -40,12 +38,27 @@ public class GestorArchivos {
             e.printStackTrace();
         }
     }
+    public void escribir(String mensaje, String nombre){
+        try {
+            File archivo = new File("Carioca_Digital_Datos//" + nombre + ".txt");
+            FileWriter escriba = new FileWriter(archivo.getPath());
+            if(archivo.exists()){
+                escriba.write(mensaje);
+                escriba.close();
+            }else{
+                System.out.println("El archivo no existe");
+            }
+        }catch(IOException e){
+            System.out.println("No se ha podido escribir en el archivo");
+            e.printStackTrace();
+        }
+
+    }
     public String leer(String ruta){
         String contenido = "";
         try {
             File archivo = new File(ruta);
             Scanner lector = new Scanner(archivo);
-
             while (lector.hasNextLine()) {
                 String data = lector.nextLine();
                 System.out.println(data);

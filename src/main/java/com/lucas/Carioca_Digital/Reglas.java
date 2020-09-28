@@ -5,6 +5,8 @@ import com.lucas.Utilidades_y_Launcher.Utilidades;
 import java.util.ArrayList;
 
 public class Reglas {
+    private static String NombreMejorPuntaje;
+    private static int MejorPuntaje;
     private static boolean[] valoresReglas = {false,false,false};
     //La clase Reglas es una clase con atributos y métodos estáticos
     //donde el jugador puede eligir que reglas que desea utilizar en el juego, hasta el momento se tiene pensado implementar 3 reglas:
@@ -68,4 +70,19 @@ public class Reglas {
         menuTrampas(jugadorActual,jugadores);
     }
 
+    public static String getNombreMejorPuntaje() {
+        return NombreMejorPuntaje;
+    }
+
+    public static int getMejorPuntaje() {
+        return MejorPuntaje;
+    }
+
+    public static void setNombreMejorPuntaje(String nombreMejorPuntaje) {
+        NombreMejorPuntaje = nombreMejorPuntaje;
+    }
+
+    public static void setMejorPuntaje(int mejorPuntaje) {
+        MejorPuntaje = mejorPuntaje;
+    }
 }
