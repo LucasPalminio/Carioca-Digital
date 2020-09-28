@@ -248,6 +248,8 @@ public class BajarseGUI extends JFrame implements ActionListener {
         ronda.getJugadorActual().setMatrizEscalas(matrizEscalas);
         ronda.getJugadorActual().setMatrizTrios(matrizTrios);
         ronda.getJugadorActual().setCartas(cartasArrayList);
+
+
         mesaDeJuego.setRonda(ronda);
         mesaDeJuego.actualizarTablaEscala();
         mesaDeJuego.actualizarTablaTrios();

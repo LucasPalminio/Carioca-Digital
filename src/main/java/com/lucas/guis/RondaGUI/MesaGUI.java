@@ -7,6 +7,7 @@ import com.lucas.Carioca_Digital.Carta;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
+import com.lucas.Utilidades_y_Launcher.Utilidades;
 import com.lucas.guis.resultadosGUI;
 
 import javax.imageio.ImageIO;
@@ -78,8 +79,7 @@ public class MesaGUI extends JFrame implements ActionListener {
 
 
         actualizar_CartasJugadorActualLista();
-        modoDebugButton.setVisible(Reglas.isModoDebug());
-        modoDebugButton.setEnabled(Reglas.isModoDebug());
+
 
 
     }
@@ -142,6 +142,14 @@ public class MesaGUI extends JFrame implements ActionListener {
         nroCartasLabel.setText(String.valueOf(ronda.getJugadorActual().getCartas().size()));
         seHaBajadoLabel.setText(String.valueOf(ronda.getJugadorActual().isBajoSusCarta()));
         yaSacoCartaLabel.setText(String.valueOf(ronda.getJugadorActual().isYaSacoCarta()));
+
+        agregarEscalaBoton.setVisible((ronda.getNROESCALAS_A_FORMAR() > 0) && (ronda.getJugadorActual().isBajoSusCarta()));
+        agregarTrioBoton.setVisible((ronda.getNROTRIOS_A_FORMAR() > 0) && ronda.getJugadorActual().isBajoSusCarta());
+        //Se muestra el boton de bajar escala o trio si el jugador se ha bajado y si la ronda lo permite
+        bajarseBoton.setVisible(!ronda.getJugadorActual().isBajoSusCarta());
+        //Si el jugador se ha bajado, se oculta el boton bajarse
+        modoDebugButton.setVisible(Reglas.isModoDebug());
+
         cartasJugadorListaModelo.clear();
 
         for (Carta carta : ronda.getJugadorActual().getCartas()) {
@@ -173,12 +181,81 @@ public class MesaGUI extends JFrame implements ActionListener {
         if (e.getSource() == izquierdaBoton) izquierdaBotonEvento();
         if (e.getSource() == derechaBoton) derechaBotonEvento();
         if (e.getSource() == modoDebugButton) modoDebugButtonEvento();
-
+        if (e.getSource() == agregarEscalaBoton) agregarEscalaBotonEvento();
+        if (e.getSource() == agregarTrioBoton) agregarTrioBotonEvento();
 
         modoDebugButton.setVisible(Reglas.isModoDebug());
         modoDebugButton.setEnabled(Reglas.isModoDebug());
+        agregarTrioBoton.setVisible(ronda.getJugadorActual().isBajoSusCarta());
+        agregarEscalaBoton.setVisible(ronda.getJugadorActual().isBajoSusCarta());
 
+    }
 
+    private void agregarEscalaBotonEvento() {
+        String mensajeDeError = "";
+
+        if (cartasJugadorLista.getSelectedIndices().length == 1 && escalasEnLaMesaTabla.getSelectedRow() != -1 && escalasEnLaMesaTabla.getSelectedRows().length == 1) {
+            int fila = escalasEnLaMesaTabla.getSelectedRow();
+            Carta cartaSeleccionada = cartasJugadorLista.getSelectedValue();
+            int nroCartasEscala = (int) escalasEnLaMesaModelo.getValueAt(fila, 3);
+            String paloEscala = (String) escalasEnLaMesaModelo.getValueAt(fila, 1);
+            String[] opciones = {"Primera posición", "Ultima Posicición"};
+            if (paloEscala.equals(cartaSeleccionada.getPalo()) || cartaSeleccionada.getPalo().equals("JKR")) {
+                int opcion = JOptionPane.showOptionDialog(this, "¿En que posición desea agregar la carta?", "Agregar carta a una escala", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+                String valorEsperado = "";
+                int indiceValorEsperado = 0;
+                int columna = 0;
+                if (opcion == 0) { //Si el jugador desea agregar la carta a la primera posición
+                    columna = 0;
+                    indiceValorEsperado = Utilidades.StringArrayindexOf(Carta.VALORES, (String) escalasEnLaMesaModelo.getValueAt(fila, columna));
+                    indiceValorEsperado = (indiceValorEsperado - 1) % Carta.VALORES.length;
+
+                } else if (opcion == 1) {// Si el jugador desea agregar la carta a la ultima posición
+                    columna = 2;
+                    indiceValorEsperado = Utilidades.StringArrayindexOf(Carta.VALORES, (String) escalasEnLaMesaModelo.getValueAt(fila, columna));
+                    indiceValorEsperado = (indiceValorEsperado + 1) % Carta.VALORES.length;
+
+                }
+                valorEsperado = Carta.VALORES[indiceValorEsperado];
+                if (valorEsperado.equals(cartaSeleccionada.getValor()) || cartaSeleccionada.getPalo().equals("JKR")) {
+                    escalasEnLaMesaModelo.setValueAt(valorEsperado, fila, columna);
+                    nroCartasEscala++;
+                    escalasEnLaMesaModelo.setValueAt(nroCartasEscala, fila, 3);
+                    escalasEnLaMesaTabla.setModel(escalasEnLaMesaModelo);
+                    ronda.getJugadorActual().getCartas().remove(cartaSeleccionada);
+                    actualizar_CartasJugadorActualLista();
+                    return;
+                }
+                mensajeDeError = "La carta seleccionada no aplica para la escala, se necesita un " + valorEsperado + " ó un JKR";
+            } else {
+                mensajeDeError = "La carta seleccionada no aplica para la escala";
+            }
+
+        }
+        JOptionPane.showMessageDialog(this, mensajeDeError, "Error al agregar carta hacia una escala", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void agregarTrioBotonEvento() {
+        String mensajeDeError = "";
+        if (cartasJugadorLista.getSelectedIndices().length == 1 && triosEnLaMesaTabla.getSelectedRow() != -1 && triosEnLaMesaTabla.getSelectedRows().length == 1) {
+            int fila = triosEnLaMesaTabla.getSelectedRow();
+            Carta cartaSeleccionada = cartasJugadorLista.getSelectedValue();
+            String valorTrio = (String) triosEnLaMesaModelo.getValueAt(fila, 0);
+            int nroCartasTrio = (int) triosEnLaMesaModelo.getValueAt(fila, 1);
+            if (cartaSeleccionada.getValor().equals(valorTrio) || cartaSeleccionada.getPalo().equals("JKR")) {
+                nroCartasTrio++;
+                ronda.getJugadorActual().getCartas().remove(cartaSeleccionada);
+                actualizar_CartasJugadorActualLista();
+                triosEnLaMesaModelo.setValueAt(nroCartasTrio, fila, 1);
+                triosEnLaMesaTabla.setModel(triosEnLaMesaModelo);
+                return;
+            } else {
+                mensajeDeError = "La carta seleccionada no aplica para el Trio";
+            }
+        } else {
+            mensajeDeError = "Usted debe seleccionar una carta de su lista y una fila de la tabla de Trios";
+        }
+        JOptionPane.showMessageDialog(this, mensajeDeError, "Error al agregar carta a un trio", JOptionPane.ERROR_MESSAGE);
     }
 
     private void finRonda() {
@@ -271,6 +348,7 @@ public class MesaGUI extends JFrame implements ActionListener {
 
                         JOptionPane.showConfirmDialog(this, mensajeDeConfirmacion, "Turno finalizado", JOptionPane.DEFAULT_OPTION);
                         actualizar_CartasJugadorActualLista();
+                        actualizarTablaJugadores(); //se actualiza la tabla de jugadores
                     }
                 }
             } else {
@@ -287,15 +365,17 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     private void bajarseBotonEvento() {
-        if (ronda.getJugadorActual().isBajoSusCarta()) {
-            JOptionPane.showMessageDialog(this, "¡Usted ya bajo sus Cartas!");
-        } else {
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Usted esta seguro de bajarse?", "El jugador desea bajarse", JOptionPane.YES_NO_OPTION);
-            if (opcion == 0) {
-                new BajarseGUI(this).setVisible(true);
-
-
+        if (ronda.getJugadorActual().isYaSacoCarta()) {
+            if (ronda.getJugadorActual().isBajoSusCarta()) {
+                JOptionPane.showMessageDialog(this, "¡Usted ya bajo sus Cartas!", "Error: Jugador intenta bajarse pero ya se habia bajado", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Usted esta seguro de bajarse?", "El jugador desea bajarse", JOptionPane.YES_NO_OPTION);
+                if (opcion == 0) {
+                    new BajarseGUI(this).setVisible(true);
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "¡Usted no puede bajarse porque no ha sacado carta!", "Error: Jugador aún no ha sacado carta", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -370,7 +450,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         pozoBoton.setIcon(ronda.getPrimeraCartaDelPozo().getIcon());
         pozoBoton.setVisible(true);
 
-        String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje"};
+        String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje", "¿Se ha bajado?"};
         jugadoresTablaModelo = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
         jugadoresTabla = new JTable(jugadoresTablaModelo);
 
@@ -397,14 +477,17 @@ public class MesaGUI extends JFrame implements ActionListener {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(new Jugador("Lucas"));
         jugadores.add(new Jugador("Lorenzo"));
-        Ronda ronda = new Ronda(jugadores, 0);
+        Ronda ronda = new Ronda(jugadores, 1);
         ArrayList<Carta> cartas = new ArrayList<>();
         cartas.add(new Carta("S", "3"));
         cartas.add(new Carta("D", "3"));
         cartas.add(new Carta("C", "3"));
         cartas.add(new Carta("JKR", ""));
+        cartas.add(new Carta("H", "J"));
         cartas.add(new Carta("H", "Q"));
-        cartas.add(new Carta("D", "Q"));
+        cartas.add(new Carta("H", "K"));
+        cartas.add(new Carta("H", "A"));
+        cartas.add(new Carta("H", "2"));
 
 
         MesaGUI a = new MesaGUI(ronda, 0);

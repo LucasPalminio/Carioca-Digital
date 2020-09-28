@@ -324,7 +324,7 @@ public class Jugador {
     }
 
     public Object[] getArrayObject(){
-        Object[] array = {nombre, this.getNroCartas(), this.getPuntaje()};
+        Object[] array = {nombre, this.getNroCartas(), this.getPuntaje(),this.isBajoSusCarta()};
         return array;
     }
 
@@ -339,6 +339,7 @@ public class Jugador {
         }
         return data;
     }
+
     public Object[][] getArrayObjectTrios(){
         //Valor y Nro Carta
         Object[][] data = new Object[matrizTrios.size()][2];
