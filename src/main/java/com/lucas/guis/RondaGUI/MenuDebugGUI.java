@@ -25,22 +25,26 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
     private JPanel panelPadre;
     private JLabel cartaLabel;
     private Ronda ronda;
-    private Carta cartaACrear;
+    private MesaGUI mesaGUI;
     private ArrayList<Carta> cartasJugadorArrayList;
+    private Carta cartaACrear;
 
-
-    public MenuDebugGUI(Ronda ronda) {
-        this.ronda = ronda;
+    public MenuDebugGUI(MesaGUI mesaGUI) {
+        this.mesaGUI = mesaGUI;
+        this.ronda = mesaGUI.getRonda();
         this.cartasJugadorArrayList = new ArrayList<>(ronda.getJugadorActual().getCartas());
 
         $$$setupUI$$$();
 
         valorComboBox2.addActionListener(this);
         paloComboBox1.addActionListener(this);
-
+        crearCartaButton.addActionListener(this);
+        eliminarCartaButton.addActionListener(this);
+        confirmarCambiosButton.addActionListener(this);
 
         this.add(panelPadre);
 
+        valorComboBoxEvento();
 
     }
 
@@ -140,6 +144,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == paloComboBox1) paloComboBoxEvento();
         if (e.getSource() == valorComboBox2) valorComboBoxEvento();
+        if (e.getSource() == crearCartaButton) crearCartaButtonEvento();
+        if (e.getSource() == eliminarCartaButton) eliminarCartaButtonEvento();
+        if (e.getSource() == confirmarCambiosButton) confirmarCambiosButtonEvento();
     }
 
     private void paloComboBoxEvento() {
@@ -161,6 +168,46 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         String valor = (String) valorComboBox2.getSelectedItem();
         cartaACrear = new Carta(palo, valor);
         cartaLabel.setIcon(cartaACrear.getIcon());
+    }
+
+    private void crearCartaButtonEvento() {
+        if (cartaACrear != null) {
+            cartasJugadorArrayList.add(0, cartaACrear);
+            actualizarListaCartas();
+        }
+    }
+
+    private void eliminarCartaButtonEvento() {
+        if (cartasList1.getSelectedIndices().length >= 1) {
+            for (Carta cartaAEliminar : (ArrayList<Carta>) cartasList1.getSelectedValuesList()) {
+                cartasJugadorArrayList.remove(cartaAEliminar);
+
+            }
+            actualizarListaCartas();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error, no ha seleccionado una carta a borrar", "Error borrar carta", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void confirmarCambiosButtonEvento() {
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea confirmar los cambios y salir?", "Confirmar Cambios", JOptionPane.YES_NO_OPTION);
+        if (opcion == 0) {
+            ronda.getJugadorActual().setCartas(cartasJugadorArrayList);
+            mesaGUI.setRonda(ronda);
+            mesaGUI.actualizar_CartasJugadorActualLista();
+            this.dispose();
+        }
+
+    }
+
+    private void actualizarListaCartas() {
+
+        DefaultListModel cartasList1Model = new DefaultListModel();
+
+        for (Carta carta : cartasJugadorArrayList) {
+            cartasList1Model.addElement(carta);
+        }
+        cartasList1.setModel(cartasList1Model);
     }
 }
 

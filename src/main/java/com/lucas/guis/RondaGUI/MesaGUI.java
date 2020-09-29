@@ -8,6 +8,7 @@ import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
 import com.lucas.Utilidades_y_Launcher.Utilidades;
+import com.lucas.guis.MenuPrincipalGUI;
 import com.lucas.guis.resultadosGUI;
 
 import javax.imageio.ImageIO;
@@ -15,8 +16,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,23 +63,27 @@ public class MesaGUI extends JFrame implements ActionListener {
     public MesaGUI(Ronda ronda, int nivelFinal) {
         this.ronda = ronda;
         this.nivelFinal = nivelFinal;
-        ronda.comenzarRonda();
+        if (ronda.getNivel() <= nivelFinal) {
+            ronda.comenzarRonda();
 
-        $$$setupUI$$$();
-        mazoBoton.addActionListener(this);
-        pozoBoton.addActionListener(this);
-        botarCartaBoton.addActionListener(this);
-        bajarseBoton.addActionListener(this);
-        agregarTrioBoton.addActionListener(this);
-        agregarEscalaBoton.addActionListener(this);
-        izquierdaBoton.addActionListener(this);
-        derechaBoton.addActionListener(this);
-        modoDebugButton.addActionListener(this);
-        this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAME
+            $$$setupUI$$$();
+            mazoBoton.addActionListener(this);
+            pozoBoton.addActionListener(this);
+            botarCartaBoton.addActionListener(this);
+            bajarseBoton.addActionListener(this);
+            agregarTrioBoton.addActionListener(this);
+            agregarEscalaBoton.addActionListener(this);
+            izquierdaBoton.addActionListener(this);
+            derechaBoton.addActionListener(this);
+            modoDebugButton.addActionListener(this);
+            this.add(panel);//IMPORTANTE AGREGAR EL PANEL AL FRAME
 
 
-        actualizar_CartasJugadorActualLista();
-
+            actualizar_CartasJugadorActualLista();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error: nivelActual > nivelFinal!", "Error al crear Ronda", JOptionPane.ERROR_MESSAGE);
+            dispose();
+        }
 
 
     }
@@ -280,7 +284,7 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     private void modoDebugButtonEvento() {
-        new MenuDebugGUI(ronda).setVisible(true);
+        new MenuDebugGUI(this).setVisible(true);
     }
 
     private void mazoBotonEvento() {
@@ -424,7 +428,26 @@ public class MesaGUI extends JFrame implements ActionListener {
         //setUndecorated(true);
         setResizable(true);
         //setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                String[] opciones = {"Volver al menu principal", "Salir al escritorio", "Cancelar"};
+                int opcion = JOptionPane.showOptionDialog(e.getComponent(), "", "Menu Salir", JOptionPane.DEFAULT_OPTION, JOptionPane.CLOSED_OPTION, null, opciones, null);
+                switch (opcion) {
+                    case 0:
+                        new MenuPrincipalGUI().setVisible(true);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                }
+            }
+        });
+
+
         //addMouseListener(this);
         //addMouseMotionListener(this);
 
@@ -490,7 +513,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         cartas.add(new Carta("H", "2"));
 
 
-        MesaGUI a = new MesaGUI(ronda, 0);
+        MesaGUI a = new MesaGUI(ronda, 1);
         a.setVisible(true);
         a.getRonda().getJugadorActual().setCartas(cartas);
 
