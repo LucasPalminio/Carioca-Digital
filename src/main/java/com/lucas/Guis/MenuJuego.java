@@ -1,10 +1,10 @@
-package com.lucas.guis;
+package com.lucas.Guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
-import com.lucas.guis.RondaGUI.MesaGUI;
+import com.lucas.Guis.RondaGUI.MesaGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class menuJuego extends JFrame implements ActionListener {
+public class MenuJuego extends JFrame implements ActionListener {
     private JPanel panel1;
     private JButton volverAlMenúPrincipalButton;
     private JButton comenzarLaPartidaButton;
@@ -31,10 +31,10 @@ public class menuJuego extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new menuJuego().setVisible(true);
+        new MenuJuego().setVisible(true);
     }
 
-    public menuJuego() {
+    public MenuJuego() {
 
         $$$setupUI$$$();
         add(panel1);

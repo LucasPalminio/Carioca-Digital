@@ -1,4 +1,4 @@
-package com.lucas.guis;
+package com.lucas.Guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -47,20 +47,20 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
         if (e.getSource() == jugarUnaPartidaButton) {
 
             this.setVisible(false);
-            new menuJuego().setVisible(true);
+            new MenuJuego().setVisible(true);
             this.dispose();
 
 
         }
         if (e.getSource() == mejoresPuntajesButton) {
             this.setVisible(false);
-            new tableroDePuntuaciones().setVisible(true);
+            new TableroDePuntuaciones().setVisible(true);
             this.dispose();
 
         }
         if (e.getSource() == configuracionButton) {
             this.setVisible(false);
-            new menuConfiguracion().setVisible(true);
+            new MenuConfiguracion().setVisible(true);
             this.dispose();
 
         }

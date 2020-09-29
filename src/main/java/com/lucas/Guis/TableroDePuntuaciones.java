@@ -1,25 +1,23 @@
-package com.lucas.guis;
+package com.lucas.Guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import com.lucas.Datos.GestorArchivos;
-import com.lucas.Carioca_Digital.Reglas;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class tableroDePuntuaciones extends JFrame implements ActionListener {
+public class TableroDePuntuaciones extends JFrame implements ActionListener {
 
     private JPanel panel1;
     private JButton volverPuntajesButton;
     private JLabel jugadorLabel;
     private JLabel puntajeLabel;
 
-    public tableroDePuntuaciones() {
+    public TableroDePuntuaciones() {
         $$$setupUI$$$();
         add(panel1);
         //    jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
@@ -47,7 +45,7 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
 
         gestor.escribir("Lucas", "jugadorMayor");
         gestor.escribir("25", "puntajeMayor");
-        tableroDePuntuaciones aux = new tableroDePuntuaciones();
+        TableroDePuntuaciones aux = new TableroDePuntuaciones();
         aux.setVisible(true);
     }
 

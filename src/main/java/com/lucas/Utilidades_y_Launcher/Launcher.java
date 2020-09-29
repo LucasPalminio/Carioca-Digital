@@ -1,6 +1,6 @@
 package com.lucas.Utilidades_y_Launcher;
 
-import com.lucas.guis.MenuPrincipalGUI;
+import com.lucas.Guis.MenuPrincipalGUI;
 
 public class Launcher {
 

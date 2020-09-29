@@ -1,4 +1,4 @@
-package com.lucas.guis;
+package com.lucas.Guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class resultadosGUI extends JFrame implements ActionListener {
+public class ResultadosGUI extends JFrame implements ActionListener {
 
 
     private JPanel panel1;
@@ -32,7 +32,7 @@ public class resultadosGUI extends JFrame implements ActionListener {
     ArrayList<Jugador> jugadores;
 
 
-    public resultadosGUI(ArrayList<Jugador> jugadores, ArrayList<Integer> puntajes) {
+    public ResultadosGUI(ArrayList<Jugador> jugadores, ArrayList<Integer> puntajes) {
         add(panel1);
         iconoLabel.setIcon(icono);
         this.puntajes = puntajes;
@@ -88,7 +88,7 @@ public class resultadosGUI extends JFrame implements ActionListener {
         jugadores.add(new Jugador("Pedro"));
         jugadores.add(new Jugador("Jose"));
         jugadores.add(new Jugador("Juan"));
-        new resultadosGUI(jugadores, ejemplo).setVisible(true);
+        new ResultadosGUI(jugadores, ejemplo).setVisible(true);
     }
 
     @Override

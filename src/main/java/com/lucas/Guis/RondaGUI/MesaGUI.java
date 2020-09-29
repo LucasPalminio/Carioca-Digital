@@ -1,4 +1,4 @@
-package com.lucas.guis.RondaGUI;
+package com.lucas.Guis.RondaGUI;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -8,8 +8,8 @@ import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Reglas;
 import com.lucas.Carioca_Digital.Ronda;
 import com.lucas.Utilidades_y_Launcher.Utilidades;
-import com.lucas.guis.MenuPrincipalGUI;
-import com.lucas.guis.resultadosGUI;
+import com.lucas.Guis.MenuPrincipalGUI;
+import com.lucas.Guis.ResultadosGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -268,7 +268,7 @@ public class MesaGUI extends JFrame implements ActionListener {
                 ronda.getJugadores().get(i).calcularPuntaje();
                 puntajesFinales.add(ronda.getJugadores().get(i).getPuntaje());
             }
-            new resultadosGUI(ronda.getJugadores(), puntajesFinales).setVisible(true);
+            new ResultadosGUI(ronda.getJugadores(), puntajesFinales).setVisible(true);
         } else {
             for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();

@@ -1,4 +1,4 @@
-package com.lucas.guis;
+package com.lucas.Guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -9,13 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class menuConfiguracion extends JFrame implements ActionListener {
+public class MenuConfiguracion extends JFrame implements ActionListener {
     private JPanel panel1;
     private JButton volverAlMenuPrincipalButton;
     private JCheckBox modoDiosCheckBox;
     private JCheckBox siUnJugadorSeCheckBox;
 
-    public menuConfiguracion() {
+    public MenuConfiguracion() {
         add(panel1);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -32,7 +32,7 @@ public class menuConfiguracion extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new menuConfiguracion().setVisible(true);
+        new MenuConfiguracion().setVisible(true);
     }
 
     {

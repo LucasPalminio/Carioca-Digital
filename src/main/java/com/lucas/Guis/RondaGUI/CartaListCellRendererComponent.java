@@ -1,4 +1,4 @@
-package com.lucas.guis.RondaGUI;
+package com.lucas.Guis.RondaGUI;
 
 import com.lucas.Carioca_Digital.Carta;
 
