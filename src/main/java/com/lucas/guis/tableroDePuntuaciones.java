@@ -28,10 +28,11 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
         GestorArchivos gestor = new GestorArchivos();
         try {
             if (gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt").equals("")) {
+                puntajeLabel.setVisible(false);
+
+            } else {
                 puntajeLabel.setText(gestor.leer("Carioca_Digital_Datos//puntajeMayor.txt"));
                 jugadorLabel.setText(gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt"));
-            } else {
-                puntajeLabel.setVisible(false);
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -41,7 +42,12 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new tableroDePuntuaciones().setVisible(true);
+        GestorArchivos gestor = new GestorArchivos();
+
+        gestor.escribir("Lucas","jugadorMayor");
+        gestor.escribir("25","puntajeMayor");
+        tableroDePuntuaciones aux = new tableroDePuntuaciones();
+        aux.setVisible(true);
     }
 
     /**

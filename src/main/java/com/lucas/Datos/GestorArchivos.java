@@ -9,12 +9,17 @@ import java.util.Scanner;
 public class GestorArchivos {
 
     public GestorArchivos(){
+
+    }
+    public void crearCarpeta(){
         try {
             File carpeta = new File("Carioca_Digital_Datos");
-            if (carpeta.mkdir()) {
-                System.out.println("Se ha creado la carpeta de datos");
-            } else {
-                System.out.println("Ya existe la carpeta de datos");
+            if(!carpeta.exists()) {
+                if (carpeta.mkdir()) {
+                    System.out.println("Se ha creado la carpeta de datos");
+                }
+            }else{
+                System.out.println("La carpeta ya existe");
             }
         }catch (Exception e){
             System.out.println("Ha ocurrido un error al crear la carpeta");
@@ -26,13 +31,14 @@ public class GestorArchivos {
 
             File archivo = new File("Carioca_Digital_Datos//" + nombre+".txt");
             FileWriter escriba = new FileWriter(archivo.getPath());
-
-            if(archivo.createNewFile()){
-                escriba.write("");
-                escriba.close();
-                System.out.println("Se ha creado el archivo: "+nombre+".txt");
+            if(!archivo.exists()) {
+                if (archivo.createNewFile()) {
+                    escriba.write("");
+                    escriba.close();
+                    System.out.println("Se ha creado el archivo: " + nombre + ".txt");
+                }
             }else{
-                System.out.println("El archivo" +nombre+".txt ya existe");
+                System.out.println("Ya existe el archivo");
             }
 
         }catch(IOException e){
@@ -72,6 +78,10 @@ public class GestorArchivos {
             e.printStackTrace();
         }
         return  contenido;
+    }
+    public boolean verificarSiExiste(String nombre){
+        File archivo = new File(nombre);
+        return archivo.exists();
     }
 
 }

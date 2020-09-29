@@ -61,7 +61,7 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Actualmente no hay ningún puntaje registrado en este qeuipo"/>
+              <text value="Actualmente no hay ningún puntaje registrado en este equipo"/>
             </properties>
           </component>
         </children>
