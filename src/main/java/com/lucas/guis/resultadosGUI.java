@@ -60,16 +60,16 @@ public class resultadosGUI extends JFrame implements ActionListener {
         jugadores.sort(new Comparator<Jugador>() {
             @Override
             public int compare(Jugador o1, Jugador o2) {
-                if(o1.getPuntaje()<o2.getPuntaje()){
+                if (o1.getPuntaje() < o2.getPuntaje()) {
                     return -1;
                 }
-                if(o1.getPuntaje()>o2.getPuntaje()){
+                if (o1.getPuntaje() > o2.getPuntaje()) {
                     return 1;
                 }
                 return 0;
             }
         });
-        if(jugadores.get(0).getPuntaje()>Reglas.getMejorPuntaje()) {
+        if (jugadores.get(0).getPuntaje() > Reglas.getMejorPuntaje()) {
             Reglas.setMejorPuntaje(puntajes.get(jugadores.get(0).getPuntaje()));
             Reglas.setNombreMejorPuntaje(jugadores.get(0).getNombre());
             GestorArchivos gestor = new GestorArchivos();
@@ -176,4 +176,5 @@ public class resultadosGUI extends JFrame implements ActionListener {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }

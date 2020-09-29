@@ -1,9 +1,6 @@
 package com.lucas.Utilidades_y_Launcher;
 
-import com.lucas.Carioca_Digital.MenuPrincipal;
 import com.lucas.guis.MenuPrincipalGUI;
-
-import java.util.Scanner;
 
 public class Launcher {
 

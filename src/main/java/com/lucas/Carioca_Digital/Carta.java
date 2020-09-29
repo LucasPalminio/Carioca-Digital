@@ -26,8 +26,6 @@ public class Carta extends JLabel {
     final static public String[] VALORES = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     private final String palo;
-    private final String color;
-    //public static final ImageIcon imagenCartaAtras = new ImageIcon("src//images//cartas//blue_back.png");
 
     public static final int WIDTH = 74; //Ancho de la carta
     public static final int HEIGHT = 98; //Alto de la carta
@@ -59,22 +57,7 @@ public class Carta extends JLabel {
             System.err.println("Error "+toString()+": "+e.getMessage());
         }
 
-        //Aqui definimos el color de la carta:
-        // diamante y corazon es rojo , pica y trebol es negro (pero en terminal es blanco) y el joker es Amarillo
-        if (this.palo.equals(PALOS[1]) || this.palo.equals(PALOS[3])) {
-            this.color = Utilidades.ANSI_RED;
-        } else if (this.palo.equalsIgnoreCase("JKR")) {
-            this.color = Utilidades.ANSI_YELLOW;
-        }else{
-            this.color = Utilidades.ANSI_BLACK;
-        }
     }
-
-    public ImageIcon getImagenCarta() {
-        return imagenCarta;
-    }
-
-
 
     //Funcion que devuelve la carta en formato String
     public String toString(){
@@ -93,10 +76,10 @@ public class Carta extends JLabel {
     }
     //Funcion que devuelve la carta en formato String y con su color ANSII respectivo,
     // ideal para una mejor visualizacion en terminal
-    protected String toStringEC(){
-        return "|"+this.color+toString()+Utilidades.ANSI_RESET+"|";
-
-    }
+//    protected String toStringEC(){
+//        return "|"+this.color+toString()+Utilidades.ANSI_RESET+"|";
+//
+//    }
     //Cada carta tiene un precio,
     // Cuando el juego finaliza y el jugador tiene cartas en mano la suma de los precios de cada carta se adiciona a su puntaje
     //El objetivo de cada juego es ser el primero en quedar sin cartas, por lo tanto el ganador del Carioca es aquel que tenga el menor puntaje
@@ -138,41 +121,6 @@ public class Carta extends JLabel {
     protected int getPrecio() {
         return precio;
     }
-
-    public static Carta menuCrearCarta(){
-        String[] pintas = new String[5];
-        for (int i = 0; i < PALOS.length; i++) {
-            pintas[i] = PALOS[i];
-
-        }
-        pintas[4] = "JKR";
-        System.out.println("Seleccione una pinta: ");
-        int indicePinta = Integer.parseInt(Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(pintas)) - 1;
-
-        if (indicePinta == 4){
-            return new Carta("JKR","");
-        }
-        String paloElegido = pintas[indicePinta];
-        System.out.println("Seleccione el valor: ");
-        for (String valor:VALORES) {
-            Carta c = new Carta(PALOS[indicePinta],valor);
-            System.out.println(c.toStringEC());
-        }
-        System.out.print("Ingrese un valor entre 2 y el 10 ó una A,J,Q,K : ");
-        String valorElegido = Utilidades.tecladoNext();
-        if (Utilidades.isNumeric(valorElegido)){
-            int valorNumerico = Integer.parseInt(valorElegido);
-            if (valorNumerico>=2 && valorNumerico<=10)
-                return new Carta(paloElegido,valorElegido);
-        }else if(valorElegido.equals("A") || valorElegido.equals("J") || valorElegido.equals("Q") || valorElegido.equals("K"))
-            return new Carta(paloElegido,valorElegido);
-        System.out.println("Error el valor ingresado es incorrecto, intentelo nuevamente");
-        return menuCrearCarta();
-
-
-
-    }
-
 
 }
 

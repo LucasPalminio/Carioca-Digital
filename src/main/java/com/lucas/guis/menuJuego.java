@@ -2,7 +2,6 @@ package com.lucas.guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.lucas.Carioca_Digital.Juego;
 import com.lucas.Carioca_Digital.Jugador;
 import com.lucas.Carioca_Digital.Ronda;
 import com.lucas.guis.RondaGUI.MesaGUI;

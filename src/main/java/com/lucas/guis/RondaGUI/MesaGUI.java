@@ -102,9 +102,8 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     public void actualizarTablaEscala() {
-        for (int i = 0; i < escalasEnLaMesaModelo.getRowCount(); i++) {
-            escalasEnLaMesaModelo.removeRow(i); //BORRAMOS TODAS LAS FILAS
-        }
+        while (jugadoresTablaModelo.getRowCount() > 0) jugadoresTablaModelo.removeRow(0);
+
         for (Jugador jugador : ronda.getJugadores()) {
             if (jugador.isBajoSusCarta()) {
                 for (int i = 0; i < jugador.getArrayObjectEscalas().length; i++) {
@@ -116,9 +115,8 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     public void actualizarTablaTrios() {
-        for (int i = 0; i < triosEnLaMesaModelo.getRowCount(); i++) {
-            triosEnLaMesaModelo.removeRow(i);
-        }
+        while (triosEnLaMesaModelo.getRowCount() > 0) triosEnLaMesaModelo.removeRow(0);
+
         for (Jugador jugador : ronda.getJugadores()) {
             if (jugador.isBajoSusCarta()) {
                 for (int i = 0; i < jugador.getArrayObjectTrios().length; i++) {
@@ -132,9 +130,9 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     public void actualizarTablaJugadores() {
-        for (int i = 0; i < jugadoresTablaModelo.getRowCount(); i++) {
-            jugadoresTablaModelo.removeRow(i); //Borramos todas las filas
-        }
+
+        while (jugadoresTablaModelo.getRowCount() > 0) jugadoresTablaModelo.removeRow(0);
+
         for (Jugador jugador : ronda.getJugadores()) {
             jugadoresTablaModelo.addRow(jugador.getArrayObject());
         }
@@ -439,6 +437,7 @@ public class MesaGUI extends JFrame implements ActionListener {
                 switch (opcion) {
                     case 0:
                         new MenuPrincipalGUI().setVisible(true);
+                        e.getWindow().dispose();
                         break;
                     case 1:
                         System.exit(0);
@@ -474,18 +473,33 @@ public class MesaGUI extends JFrame implements ActionListener {
         pozoBoton.setVisible(true);
 
         String[] columnasJugadoresTabla = {"Nombre", "Cartas", "Puntaje", "¿Se ha bajado?"};
-        jugadoresTablaModelo = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla);
+        jugadoresTablaModelo = new DefaultTableModel(ronda.getArrayObjectJugadores(), columnasJugadoresTabla) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         jugadoresTabla = new JTable(jugadoresTablaModelo);
 
 
         String[] columnasTriosEnLaMesa = {"Valor", "NroCartas"};
         Object[][] testTriosTabla = {{}};
-        triosEnLaMesaModelo = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa);
+        triosEnLaMesaModelo = new DefaultTableModel(testTriosTabla, columnasTriosEnLaMesa) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         triosEnLaMesaTabla = new JTable(triosEnLaMesaModelo);
 
         String[] columnasEscalasEnLaMesa = {"PrimeraCarta", "Palo", "UltimaCarta", "NroCartas"};
         Object[][] testEscalaTabla = {{}};
-        escalasEnLaMesaModelo = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa);
+        escalasEnLaMesaModelo = new DefaultTableModel(testEscalaTabla, columnasEscalasEnLaMesa) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         escalasEnLaMesaTabla = new JTable(escalasEnLaMesaModelo);
 
         cartasJugadorListaModelo = new DefaultListModel();

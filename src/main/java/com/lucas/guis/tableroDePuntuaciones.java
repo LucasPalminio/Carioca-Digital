@@ -2,6 +2,7 @@ package com.lucas.guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import com.lucas.Datos.GestorArchivos;
 import com.lucas.Carioca_Digital.Reglas;
 
@@ -21,8 +22,8 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
     public tableroDePuntuaciones() {
         $$$setupUI$$$();
         add(panel1);
-    //    jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
-    //    puntajeLabel.setText(String.valueOf(Reglas.getMejorPuntaje()));
+        //    jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
+        //    puntajeLabel.setText(String.valueOf(Reglas.getMejorPuntaje()));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         GestorArchivos gestor = new GestorArchivos();
@@ -34,7 +35,7 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
                 puntajeLabel.setText(gestor.leer("Carioca_Digital_Datos//puntajeMayor.txt"));
                 jugadorLabel.setText(gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         volverPuntajesButton.addActionListener(this);
@@ -44,8 +45,8 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
     public static void main(String[] args) {
         GestorArchivos gestor = new GestorArchivos();
 
-        gestor.escribir("Lucas","jugadorMayor");
-        gestor.escribir("25","puntajeMayor");
+        gestor.escribir("Lucas", "jugadorMayor");
+        gestor.escribir("25", "puntajeMayor");
         tableroDePuntuaciones aux = new tableroDePuntuaciones();
         aux.setVisible(true);
     }
@@ -69,15 +70,27 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
         panel1.add(panel2, BorderLayout.NORTH);
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-1));
-        label1.setText("Mejores puntajes");
+        label1.setText("Mejor puntaje");
         panel2.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         volverPuntajesButton = new JButton();
         volverPuntajesButton.setText("Regresar al menú principal");
         panel2.add(volverPuntajesButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(1, 1, new Insets(20, 20, 20, 20), -1, -1));
+        panel3.setLayout(new GridLayoutManager(1, 4, new Insets(20, 20, 20, 20), -1, -1));
         panel3.setBackground(new Color(-14786275));
         panel1.add(panel3, BorderLayout.CENTER);
+        puntajeLabel = new JLabel();
+        puntajeLabel.setForeground(new Color(-1));
+        puntajeLabel.setText("Label");
+        panel3.add(puntajeLabel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        jugadorLabel = new JLabel();
+        jugadorLabel.setForeground(new Color(-1));
+        jugadorLabel.setText("Actualmente no hay ningún puntaje registrado en este equipo");
+        panel3.add(jugadorLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel3.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        panel3.add(spacer2, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
     }
 
     /**

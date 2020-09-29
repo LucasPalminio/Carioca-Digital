@@ -31,7 +31,7 @@ public class Ronda {
         pozo.add(mazo.sacarCarta());
         NROESCALAS_A_FORMAR = RONDAS[nivel][0];
         NROTRIOS_A_FORMAR = RONDAS[nivel][1];
-        Jugador.setNROTRIOSyNROESCALAS(NROESCALAS_A_FORMAR, NROTRIOS_A_FORMAR);
+
 
     }
     public Jugador getJugadorActual(){
@@ -39,10 +39,6 @@ public class Ronda {
     }
     public int getNivel() {
         return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public ArrayList<Jugador> getJugadores() {
@@ -53,20 +49,8 @@ public class Ronda {
         this.jugadores = jugadores;
     }
 
-    public Mazo getMazo() {
-        return mazo;
-    }
-
-    public void setMazo(Mazo mazo) {
-        this.mazo = mazo;
-    }
-
     public ArrayList<Carta> getPozo() {
         return pozo;
-    }
-
-    public void setPozo(ArrayList<Carta> pozo) {
-        this.pozo = pozo;
     }
 
     public int getNROESCALAS_A_FORMAR() {
@@ -75,14 +59,6 @@ public class Ronda {
 
     public int getNROTRIOS_A_FORMAR() {
         return NROTRIOS_A_FORMAR;
-    }
-
-    public int getTurnoActual() {
-        return turnoActual;
-    }
-
-    public void setTurnoActual(int turnoActual) {
-        this.turnoActual = turnoActual;
     }
 
     //Se comienza la ronda, este metodo solo se ejecuta una vez durante la ronda
@@ -110,201 +86,21 @@ public class Ronda {
         //desarrolloRonda();
     }
 
-    protected void desarrolloRonda() {
-        Jugador jugadorActual = jugadores.get(turnoActual);
 
-        //mostrar menu del jugador
-        if (jugadorActual.isBajoSusCarta()) { //Si el jugador se bajo, se desplegara el menu correspondiente con sus respectivas opciones
-            menu_jugador_siBajoSusCartas(jugadorActual);
-        } else {
-            menu_jugador_noBajoSusCartas(jugadorActual);
-        }
-
-        if (jugadorActual.getNroCartas() == 0) {
-            //Si el jugador Actual se quedo sin cartas, quiere decir que gano la partida
-            finRonda();
-            return;
-        }
-        turnoActual++;
-        if (turnoActual == jugadores.size()) {
-            turnoActual = 0;
-        }
-        desarrolloRonda();
-    }
     public Carta getPrimeraCartaDelPozo(){
         return pozo.get(0);
 
     }
-    //Si el jugador aun no se ha bajado sus cartas, debe mostrar este menu de opciones
-    private void menu_jugador_noBajoSusCartas(Jugador jugadorActual) {
-        ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Sacar Carta de la mesa", "Sacar Carta del mazo", "Intercambiar el lugar de dos cartas", "¿Desea Bajarse?", "Botar Carta y Finalizar Turno"));
 
-        if(Reglas.isModoDebug()){
-            opciones.add("Menu Trampas");
-        }
-
-        boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
-
-        if (yaSacoCarta) {
-            //Cuando la persona ya saco una carta, la opciones de Sacar Carta de la mesa y Sacar carta del mazo se bloquean
-            opciones.set(0,"Sacar Carta de la mesa (Opcion bloqueada)");
-            opciones.set(1,"Sacar Carta del mazo (Opcion bloqueada)");
-        }
-        imprimirInformacionRonda();
-        imprimirTrios_y_EscalasEnLaMesa(jugadores);
-        jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones); //Imprimo el menu de opciones y almaceno la opcion elegida
-
-        switch (opcion) {
-            case "1": //Sacar Carta de la mesa
-            case "2": //Sacar Carta del mazo
-                if (!yaSacoCarta) {
-                    if (opcion.equals("1")) {
-                        sacarCartaDeLaMesa(jugadorActual);
-                    } else if (opcion.equals("2")) {
-                        sacarCartaDelMazo(jugadorActual);
-                    }
-
-                    jugadorActual.setYaSacoCarta(true);
-                } else {
-                    System.out.println("Usted ya saco una carta, eliga otra opcion");
-                }
-                break;
-            case "3": //Intercambiar dos cartas dentro de la misma mano
-                jugadorActual.intercambiarCartas();
-                //menu_jugador(jugadorActual);
-                break;
-            case "4": //¿Desea Bajarse?
-                if (yaSacoCarta){
-                    jugadorActual.menu_Bajarse();
-                }else{
-                    System.out.println("Usted aun no ha sacado una carta, por lo tanto aun no puede bajarse");
-                }
-                break;
-            case "5": //Botar Carta y Finalizar Turno
-                if (yaSacoCarta) {
-                    pozo.add(0, jugadorActual.menu_BotarCarta());
-                    jugadorActual.setYaSacoCarta(false);
-                    System.out.println("Fin turno de " + jugadorActual.getNombre());
-                    System.out.println("////////////////////////////////////////");
-                    return;
-
-                } else {
-                    System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
-                    break;
-                }
-            case "6": //Menu Trampa
-                if (Reglas.isModoDebug()){
-                    Reglas.menuTrampas(jugadorActual,jugadores);
-                    break;
-                }//Sino esta en modo debug, se despliega el mensaje de error
-
-            default:
-                System.out.println("Error la opcion ingresada es incorrecta, intentelo nuevamente");
-                break;
-
-        }
-        // Si el jugador llegase a bajarse durante la ronda este metodo evitara que tenga que esperar a la siguiente ronda
-        // para que se le considere bajado, ya que de no estar el jugador se podria bajar dos veces
-        if(jugadorActual.isBajoSusCarta()) {
-            menu_jugador_siBajoSusCartas(jugadorActual);
-        }else{
-            menu_jugador_noBajoSusCartas(jugadorActual);
-        }
-
-    }
-    //Si el jugador se ha bajado sus cartas, debe mostrar este menu de opciones
-    private void menu_jugador_siBajoSusCartas(Jugador jugadorActual) {
-        ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Sacar Carta del mazo","Sacar Carta de la mesa", "Intercambiar el lugar de dos cartas", "¿Desea agregar cartas a los trios o escalas en la mesa?", "Finalizar Turno"));
-        if(Reglas.isModoDebug()){
-            opciones.add("Menu Trampas");
-        }
-        boolean yaSacoCarta = jugadorActual.isYaSacoCarta();
-
-        if (yaSacoCarta) {
-            opciones.set(0,"Sacar Carta del mazo (Opcion bloqueada)");
-            opciones.set(1,"Sacar Carta de la mesa (Opcion bloqueada)");
-        }
-        imprimirInformacionRonda();
-        imprimirTrios_y_EscalasEnLaMesa(jugadores);
-        jugadorActual.imprimirInformacionJugador(pozo);
-        String opcion = Utilidades.imprimirMenuOpciones_e_ingresarUnaOpcion(opciones);
-
-        switch (opcion) {
-            case "1":
-                if (!yaSacoCarta) {
-                    sacarCartaDelMazo(jugadorActual);
-                    jugadorActual.setYaSacoCarta(true);
-                } else {
-                    System.out.println("Usted ya saco una carta, eliga otra opcion");
-                }
-                break;
-            case "2":
-                if (!yaSacoCarta) {
-                    sacarCartaDeLaMesa(jugadorActual);
-                    jugadorActual.setYaSacoCarta(true);
-                } else {
-                    System.out.println("Usted ya saco una carta, eliga otra opcion");
-                }
-                break;
-            case "3":
-                jugadorActual.intercambiarCartas();
-                break;
-            case "4":
-                //Pendiente
-                if(yaSacoCarta){
-                    System.out.println("Aun no disponible");
-                }else{
-                    System.out.println("Usted aun no ha sacado carta, asique aun no puede agregar cartas a trios y/o escalas que hay en la mesa");
-                }
-
-                break;
-            case "5":
-                if (yaSacoCarta) {
-                    pozo.add(0, jugadorActual.menu_BotarCarta());
-                    jugadorActual.setYaSacoCarta(false);
-                    System.out.println("Fin turno de " + jugadorActual.getNombre());
-                    System.out.println("////////////////////////////////////////");
-                    return;
-
-                } else {
-                    System.out.println("Usted no ha sacado una carta, por lo tanto no puede botar carta aun");
-                    break;
-                }
-            case "6":
-                if (Reglas.isModoDebug()){
-                    Reglas.menuTrampas(jugadorActual,jugadores);
-                    break;
-                }
-            default:
-                System.out.println("Error la opcion ingresada es incorrecta, intentelo nuevamente");
-
-
-        }
-        menu_jugador_siBajoSusCartas(jugadorActual);
-
-    }
-    //metodo cuando un jugador en su turno saca una carta de la mesa
-    public void sacarCartaDeLaMesa(Jugador jugador) {
-        Carta cartaEnLaMesa = pozo.get(0);
-        jugador.agregarCarta(cartaEnLaMesa);
-        pozo.remove(0);
-    }
-    //metodo cuando un jugador en su turno saca una carta del mazo
-    public void sacarCartaDelMazo(Jugador jugador) {
-        Carta cartaDelMazo = mazo.sacarCarta();
-        System.out.println("obtuviste esta carta del mazo: " + cartaDelMazo.toStringEC());
-        jugador.agregarCarta(cartaDelMazo);
-    }
     public void jugadorActualSacaCartaDeLaMesa(){
         Carta cartaEnLaMesa = pozo.get(0);
         jugadores.get(turnoActual).agregarCarta(cartaEnLaMesa);
         pozo.remove(0);
         jugadores.get(turnoActual).setYaSacoCarta(true);
     }
+
     public void jugadorActualSacaCartaDelMazo(){
         Carta cartaDelMazo = mazo.sacarCarta();
-        System.out.println("obtuviste esta carta del mazo: " + cartaDelMazo.toStringEC());
         jugadores.get(turnoActual).agregarCarta(cartaDelMazo);
         jugadores.get(turnoActual).setYaSacoCarta(true);
     }
@@ -322,23 +118,6 @@ public class Ronda {
 
     }
 
-    //Este metodo imprime quien es el turnoActual y que carta hay en la mesa
-    protected void imprimirInformacionRonda() {
-        System.out.println("///////////////////////////////////");
-        System.out.println("Turno Actual: " + turnoActual);
-        if (pozo.size() > 0) {
-            System.out.println("Carta en la mesa: " + pozo.get(0).toStringEC() + "\n");
-        } else {
-            System.out.println("Carta en la mesa: |   |");
-        }
-    }
-    //método para imprimir todos los trios y escalas de los jugadores que se hayan bajado
-    private  void imprimirTrios_y_EscalasEnLaMesa(ArrayList<Jugador> jugadores){
-        System.out.println("Trios y/o escalas en la mesa:\n");
-        for(int i=0;i<jugadores.size();i++){
-            jugadores.get(i).imprimirTrios_y_Escalas();
-        }
-    }
     //Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
     // muestra la tabla de puntajes que sacaron en esta ronda los jugadores (dice quien fue el ganador de la ronda)
     // y muestra la tabla de sus puntajes finales (dice tambien quien lleva la delantera)
