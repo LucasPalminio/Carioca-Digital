@@ -21,13 +21,13 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
     public tableroDePuntuaciones() {
         $$$setupUI$$$();
         add(panel1);
-        jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
-        puntajeLabel.setText(String.valueOf(Reglas.getMejorPuntaje()));
+    //    jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
+    //    puntajeLabel.setText(String.valueOf(Reglas.getMejorPuntaje()));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         GestorArchivos gestor = new GestorArchivos();
         try {
-            if (gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt").equals("")) {
+            if (gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt").trim().equals("") || gestor.leer("Carioca_Digital_Datos//puntajeMayor.txt").trim().equals("")) {
                 puntajeLabel.setVisible(false);
 
             } else {
