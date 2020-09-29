@@ -2,6 +2,7 @@ package com.lucas.guis;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.lucas.Datos.GestorArchivos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,9 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
         mejoresPuntajesButton.addActionListener(this);
         configuracionButton.addActionListener(this);
         salirButton.addActionListener(this);
+        GestorArchivos gestor = new GestorArchivos();
+        gestor.crearArchivo("jugadorMayor");
+        gestor.crearArchivo("puntajeMayor");
     }
 
     public static void main(String[] args) {

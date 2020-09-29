@@ -3,6 +3,7 @@ package com.lucas.guis;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.Datos.GestorArchivos;
+import com.lucas.Carioca_Digital.Reglas;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,18 +15,29 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
 
     private JPanel panel1;
     private JButton volverPuntajesButton;
-    private JTable puntuacionesTable;
-    private DefaultTableModel puntuacionesTableModel;
-    private GestorArchivos gestor = new GestorArchivos();
+    private JLabel jugadorLabel;
+    private JLabel puntajeLabel;
 
     public tableroDePuntuaciones() {
         $$$setupUI$$$();
         add(panel1);
-
+        jugadorLabel.setText(Reglas.getNombreMejorPuntaje());
+        puntajeLabel.setText(String.valueOf(Reglas.getMejorPuntaje()));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
-
+        GestorArchivos gestor = new GestorArchivos();
+        try {
+            if (gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt").equals("")) {
+                puntajeLabel.setText(gestor.leer("Carioca_Digital_Datos//puntajeMayor.txt"));
+                jugadorLabel.setText(gestor.leer("Carioca_Digital_Datos//jugadorMayor.txt"));
+            } else {
+                puntajeLabel.setVisible(false);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         volverPuntajesButton.addActionListener(this);
+
     }
 
     public static void main(String[] args) {
@@ -60,10 +72,6 @@ public class tableroDePuntuaciones extends JFrame implements ActionListener {
         panel3.setLayout(new GridLayoutManager(1, 1, new Insets(20, 20, 20, 20), -1, -1));
         panel3.setBackground(new Color(-14786275));
         panel1.add(panel3, BorderLayout.CENTER);
-        puntuacionesTable = new JTable();
-        puntuacionesTable.setBackground(new Color(-14123225));
-        puntuacionesTable.setForeground(new Color(-1));
-        panel3.add(puntuacionesTable, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**

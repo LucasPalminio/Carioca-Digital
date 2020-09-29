@@ -3,12 +3,15 @@ package com.lucas.guis;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.Carioca_Digital.Jugador;
+import com.lucas.Carioca_Digital.Reglas;
+import com.lucas.Datos.GestorArchivos;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class resultadosGUI extends JFrame implements ActionListener {
 
@@ -27,6 +30,7 @@ public class resultadosGUI extends JFrame implements ActionListener {
     ImageIcon icono = new ImageIcon("src//images//varios//cartasMoviendose.gif");
     ArrayList<Integer> puntajes;
     ArrayList<Jugador> jugadores;
+
 
     public resultadosGUI(ArrayList<Jugador> jugadores, ArrayList<Integer> puntajes) {
         add(panel1);
@@ -53,8 +57,26 @@ public class resultadosGUI extends JFrame implements ActionListener {
         this.pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         volverResultadosButton.addActionListener(this);
+        jugadores.sort(new Comparator<Jugador>() {
+            @Override
+            public int compare(Jugador o1, Jugador o2) {
+                if(o1.getPuntaje()<o2.getPuntaje()){
+                    return -1;
+                }
+                if(o1.getPuntaje()>o2.getPuntaje()){
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        if(jugadores.get(0).getPuntaje()>Reglas.getMejorPuntaje()) {
+            Reglas.setMejorPuntaje(puntajes.get(jugadores.get(0).getPuntaje()));
+            Reglas.setNombreMejorPuntaje(jugadores.get(0).getNombre());
+            GestorArchivos gestor = new GestorArchivos();
 
-
+            gestor.escribir(Reglas.getNombreMejorPuntaje(), "jugadorMayor");
+            gestor.escribir(String.valueOf(Reglas.getMejorPuntaje()), "puntajeMayor");
+        }
     }
 
     public static void main(String[] args) {

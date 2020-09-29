@@ -28,6 +28,8 @@ public class GestorArchivos {
             FileWriter escriba = new FileWriter(archivo.getPath());
 
             if(archivo.createNewFile()){
+                escriba.write("");
+                escriba.close();
                 System.out.println("Se ha creado el archivo: "+nombre+".txt");
             }else{
                 System.out.println("El archivo" +nombre+".txt ya existe");
