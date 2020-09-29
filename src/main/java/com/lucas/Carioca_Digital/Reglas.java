@@ -5,15 +5,25 @@ import com.lucas.Utilidades_y_Launcher.Utilidades;
 import java.util.ArrayList;
 
 public class Reglas {
+    /**
+     *En la clase Reglas es donde el jugador puede eligir que reglas que desea utilizar en el juego. Estas son:
+     * Modo DIOS : Al activar esta regla se activa en el menu del jugador un sub-menu para hacer trampas, esto con la finalidad de hacer un debug mas rapido y detectar facilmente fallas (Se esta implementando)
+     * ¿Si el jugador se bajo , puede sacar carta del pozo?
+     * ¿Existe la posibilidad de bajarse en el primer turno del juego?
+     * @param valoresReglas establece que al iniciar el juego, las reglas no esten activadas
+     * @param NombreMejorPuntaje es el jugador que obtuvo la menor puntuacion
+     * @param MejorPuntaje es el puntaje mas bajo
+     */
     private static String NombreMejorPuntaje;
     private static int MejorPuntaje;
     private static boolean[] valoresReglas = {false,false,false};
 
-    //La clase Reglas es una clase con atributos y métodos estáticos
-    //donde el jugador puede eligir que reglas que desea utilizar en el juego, hasta el momento se tiene pensado implementar 3 reglas:
-    //Regla[0] = Modo DIOS : Al activar esta regla se activa en el menu del jugador un sub-menu para hacer trampas, esto con la finalidad de hacer un debug mas rapido y detectar facilmente fallas (Se esta implementando)
-    //Regla[1] = ¿Si el jugador se bajo , puede sacar carta del pozo? (Aun NO implementado)
-    //Regla[2] = ¿Existe la posibilidad de bajarse en el primer turno del juego? (Aun NO implementado)
+
+    /**
+     * genera un arreglo de la cantidad de reglas implementadas
+     * @param i
+     * @return ??
+     */
     public static boolean getValorRegla(int i) {
         return valoresReglas[i];
     }

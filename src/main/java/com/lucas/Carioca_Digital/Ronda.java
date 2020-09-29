@@ -6,7 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Ronda {
-
+    /**
+     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opcines
+     * que podra hacer el jugador
+     * @param nivel El nivel actual de la ronda
+     * @param mazo baraja de cartas ordenas aleatoriamente
+     * @param Jugador arreglo de los jugadores que jugaran
+     * @param Carta arreglo de las cartas de cada jugador
+     * @param NROESCALAS numero de escalas que hay que formar en esta ronda
+     * @param NROTRIOS Numero de trios que hay que formar en esta ronda
+     * @param turnoActual turno actual que se usa como indice para el arreglo de jugadores
+     *
+     */
     public static final int[][] RONDAS = { //Hacer ENUM
             //{Escala, Trio} ; 6,7,8,9,10,11
             {0, 2}, // 0*4+2*3 = 6 (2 trios) nivel 1
@@ -24,6 +35,11 @@ public class Ronda {
     private final int NROTRIOS_A_FORMAR; //Nro de trios que hay que formar en esta ronda
     private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
 
+    /**
+     * En este metodo se instancian las variables en la clase actual
+     * @param jugadores es la cantidad de jugadores que jugaran
+     * @param nivel especifica la cantidad de trios y escalas
+     */
     public Ronda(ArrayList<Jugador> jugadores, int nivel) {
         this.nivel = nivel;
         this.jugadores = jugadores;
@@ -31,12 +47,12 @@ public class Ronda {
         pozo.add(mazo.sacarCarta());
         NROESCALAS_A_FORMAR = RONDAS[nivel][0];
         NROTRIOS_A_FORMAR = RONDAS[nivel][1];
-
-
     }
+
     public Jugador getJugadorActual(){
         return jugadores.get(turnoActual);
     }
+
     public int getNivel() {
         return nivel;
     }
@@ -61,7 +77,13 @@ public class Ronda {
         return NROTRIOS_A_FORMAR;
     }
 
-    //Se comienza la ronda, este metodo solo se ejecuta una vez durante la ronda
+
+    /**
+     * EN este metodo se comienza la ronda, y  solo se ejecuta una vez durante esta
+     * Se entrga a cada jugador sus doce cartas
+     * Se genera de forma aleatoria el orden para jugar
+     * Se muestra por pantalla la cantida de trios y escalas que hay hacer en esta ronda
+     */
     public void comenzarRonda() {
 
 
@@ -118,9 +140,14 @@ public class Ronda {
 
     }
 
-    //Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
-    // muestra la tabla de puntajes que sacaron en esta ronda los jugadores (dice quien fue el ganador de la ronda)
-    // y muestra la tabla de sus puntajes finales (dice tambien quien lleva la delantera)
+
+
+    /**
+     * Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
+     * muestra la tabla de puntajes que sacaron en esta ronda los jugadores
+     * (dice quien fue el ganador de la ronda) y muestra la tabla de sus
+     * puntajes finales (dice tambien quien lleva la delantera)
+     */
     protected void finRonda() {
         int jugador_con_delantera = 0;
         int puntaje_con_delantera = 0;

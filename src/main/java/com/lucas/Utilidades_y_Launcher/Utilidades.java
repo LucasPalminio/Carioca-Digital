@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidades {
+    /**
+     * @param in se encarga de leer lo escrito por el usario
+     * @param input
+     * @param ANSI_BLACK es el color negro en en ANSI
+     * @param ANSI_RED es el color rojo en ANSI
+     * @param ANSI_YELLOW es el color amarillo en ANSI
+     * @param ANSI_RESET  este color es gris en ANSI, se encarga de resetear el color
+     */
     private static Scanner in;
     private static ByteArrayInputStream input;
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -16,7 +24,10 @@ public class Utilidades {
     public static final String ANSI_RESET = "\u001B[0m";
 
 
-
+    /**
+     *
+     * @param stringInput
+     */
     public static void entradaAProbar(String stringInput) {
         input = new ByteArrayInputStream(stringInput.getBytes());
         in = new Scanner(input).useDelimiter("\n");
@@ -28,7 +39,10 @@ public class Utilidades {
         //System.setIn(input);
 
     }
-
+    /**
+     *
+     * @return muestra lo escrito por el usuario
+     */
     public static Scanner getIn() {
         return in;
     }
@@ -57,11 +71,15 @@ public class Utilidades {
         Ronda ronda1 = new Ronda(jugadores,0);
         ronda1.comenzarRonda();
 }*/
-    //Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca
-    //Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
-    // y retorna un ArrayList de los objetos de la clase Jugador
 
-    //Al comienzo del juego, se llama este metodo para ingresar el nro de jugadores y sus respectivos nombres
+
+
+    /**
+     * Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca.
+     * Al comienzo del juego, se llama este metodo para ingresar el nro de jugadores y sus respectivos nombres
+     * Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
+     * @return  ArrayList de los objetos de la clase Jugador
+     */
     public static ArrayList<Jugador> ingresarJugadores() {
         Utilidades.imprimirTitulo("Ingrese los Jugadores");
 
@@ -79,7 +97,10 @@ public class Utilidades {
     //Posterior a eso, se llama a este metodo que pregunta al usuario desde que nivel hasta que nivel desea jugar
 
 
-    //Para imprimir mensajes importantes, Titulos
+    /**
+     * Para imprimir mensajes importantes, como por ejemplo titulos
+     * @param mensaje es el mensaje que se quiere mostrar
+     */
     public static void imprimirTitulo(String mensaje) {
 
         System.out.println("\n" + repetirString("/", mensaje.length()));
@@ -87,7 +108,11 @@ public class Utilidades {
         System.out.println(repetirString("/", mensaje.length()) + "\n");
     }
 
-    //Funcion que retorna el numero de jugadores que ingreso el usuario
+
+    /**
+     *
+     * @return retorna el numero de jugadores que ingreso el usuario
+     */
     private static int ingresarNumeroDeJugadores() {
 
         int nroJugadores = ingresarUnNumero("Ingrese el numero de Jugadores (debe ser minimo 2 y maximo 4): ");
@@ -102,7 +127,11 @@ public class Utilidades {
     }
 
 
-    //Este método sirve para ingresar algo por teclado, esta entrada se formatea y se devuelve como cadena String
+
+    /**
+     *  Sirve para ingresar algo por teclado
+     * @return  devuelve lo ingresado por teclado como cadena String
+     */
     public static String tecladoNext() {
         String entrada = in.next();
         entrada.replaceAll("\n", "");
@@ -113,8 +142,15 @@ public class Utilidades {
         return entrada;
     }
 
-    //Este metodo sirve para Cuando se quiere ingresar un numero por terminal,
-    // se desplega un mensaje diciendo que numero debe ingresar
+
+    /**
+     * Sirve para Cuando se quiere ingresar un numero por terminal, se desplega un mensaje diciendo que
+     * numero debe ingresar
+     * @param mensaje asereje
+     //* @param min valor minimo que se puede ingresar
+     //* @param max valor maximo que se puede ingresar
+     * @return ??
+     */
     public static int ingresarUnNumero(String mensaje) {
         while (true) {
             try {
@@ -130,7 +166,15 @@ public class Utilidades {
 
     }
 
-    //Parecido al metodo anterior pero debe ingresar un numero dentro de un rango
+
+    /**
+     * Este metodo sirve para Cuando se quiere ingresar un numero por terminal, ingresando
+     * un numero dentro de un rango
+     * @param mensaje ??
+     * @param min nuemro maximo aceptado
+     * @param max nuemro maximo aceptado
+     * @return
+     */
     public static int ingresarUnNumero(String mensaje, int min, int max) {
         if (min > max) {
             int aux = min;
@@ -146,7 +190,13 @@ public class Utilidades {
         }
     }
 
-    //Este metodo repite un string una cantidad de veces (es un remplazo al metodo repeat de la clase String)
+
+    /**
+     *Este metodo repite un string una cantidad de veces (es un remplazo al metodo repeat de la clase String)
+     * @param stringARepetir
+     * @param nro
+     * @return
+     */
     public static String repetirString(String stringARepetir, int nro) {
         String stringADevolver = "";
         if (nro > 0) {
@@ -158,7 +208,13 @@ public class Utilidades {
 
     }
 
-    //Este metodo se ingresa un arreglo de numeros y verifica si estos numeros son diferentes
+
+
+    /**
+     * Este metodo se ingresa un arreglo de numeros
+     * @param array
+     * @return verificacion si los numeros son diferentes
+     */
     public static boolean sonNumerosDiferentes(int[] array) {
         int[] array2 = array.clone();
 
@@ -172,8 +228,12 @@ public class Utilidades {
         return true;
     }
 
-    //Este metodo imprime un menu de opciones (esas opciones se ingresa como arreglo de string)
-    // y devuelve la opcion elegida (que es un numero entre 1 hasta n opciones) en una cadena String
+
+    /**
+     * imprime un menu de opciones (esas opciones se ingresa como arreglo de string)
+     * @param opciones son las opciones que se pueden elegir
+     * @return Devuelve la opcion elegida (que es un numero entre 1 hasta n opciones) en una cadena String
+     */
     public static String imprimirMenuOpciones_e_ingresarUnaOpcion(String[] opciones) {
         imprimirSoloMenuOpciones(opciones);
         String opcion = String.valueOf(ingresarUnNumero("", 1, opciones.length));
@@ -187,7 +247,12 @@ public class Utilidades {
         return opcion;
     }
 
-    //Solo imprime solo el menu de opciones
+
+
+    /**
+     * Solo imprime solo el menu de opciones
+     * @param opciones
+     */
     public static void imprimirSoloMenuOpciones(String[] opciones) {
         //Imprime el menu de opciones pero las opciones comienzan desde el 1
         for (int i = 0; i < opciones.length; i++) {
@@ -200,8 +265,13 @@ public class Utilidades {
             System.out.println("(" + (i + 1) + ") " + opciones.get(i));
         }
     }
-    //Este metodo es para preguntarle al usuario por una decision irreversible (si esta seguro de la opcion elegida)
-    // si esta seguro de su decision devuelve un true sino devuelve un falso
+
+    /**
+     * Se encarga de preguntar al usuario por una decision irreversible
+     * (si esta seguro de la opcion elegida)
+     * @param mensaje ??
+     * @return si esta seguro de su decision devuelve un true sino devuelve un falso
+     */
     public static boolean confirmarOpcion(String mensaje) {
 
 //        if (in.hasNextLine()){//Para limpiar el buffer
@@ -211,6 +281,13 @@ public class Utilidades {
         System.out.println("¿Usted esta seguro de su eleccion?, \nEscriba " + ANSI_RED + "si" + ANSI_RESET + " para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
         return tecladoNext().equalsIgnoreCase("si");
     }
+
+    /**
+     *
+     * @param array
+     * @param target
+     * @return
+     */
     public static int StringArrayindexOf(String[] array,String target){
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(target)){
@@ -220,6 +297,13 @@ public class Utilidades {
         return -1;
     }
 
+    /**
+     *
+     * @param strNum
+     * @return
+     * @throws NumberFormatException nfe  ocurre cuando intenta hacer algo como convertir un String
+     * en un valor numérico, como un int, float, double, long, etc.
+     */
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
