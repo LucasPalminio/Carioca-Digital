@@ -11,6 +11,23 @@ public class GestorArchivos {
     public GestorArchivos(){
 
     }
+    public void crearCarpeta(String nombreCarpeta){
+        try {
+            File carpeta = new File("Carioca_Digital_Datos//"+nombreCarpeta);
+            if(!carpeta.exists()) {
+                if (carpeta.mkdir()) {
+                    System.out.println("Se ha creado la carpeta de datos");
+                }
+            }else{
+                System.out.println("La carpeta ya existe");
+            }
+        }catch (Exception e){
+            System.out.println("Ha ocurrido un error al crear la carpeta");
+            System.out.println(e.getMessage());
+        }
+
+
+    }
     public void crearCarpeta(){
         try {
             File carpeta = new File("Carioca_Digital_Datos");
@@ -49,7 +66,11 @@ public class GestorArchivos {
     public void escribir(String mensaje, String nombre){
         try {
             File archivo = new File("Carioca_Digital_Datos//" + nombre + ".txt");
+            if (!archivo.exists()) {
+                crearArchivo(nombre);
+            }
             FileWriter escriba = new FileWriter(archivo.getPath());
+
             if(archivo.exists()){
                 escriba.write(mensaje);
                 escriba.close();

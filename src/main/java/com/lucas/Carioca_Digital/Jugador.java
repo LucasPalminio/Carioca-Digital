@@ -16,8 +16,8 @@ public class Jugador {
      * @param cartas
      * @param puntaje
      * @param puntajeRonda
-     * @param bajoSuCarta
-     * @param yaSacoCarta
+     * @param bajoSuCarta Si el jugador bajo sus cartas en la ronda actual
+     * @param yaSacoCarta Si el jugador ya saco carta en el turno actual
      * @param matrizTrios
      * @param matrizEscalas
      * @param NROTRIOS_a_formar
@@ -62,7 +62,7 @@ public class Jugador {
         return puntaje;
     }
     /**
-     * @return devuelve el puntaje de la ronda
+     * @return devuelve el puntaje de la ronda actual
      */
 
     public int getPuntajeRonda() {
@@ -70,18 +70,14 @@ public class Jugador {
     }
 
     /**
-     * este metodo calcula el puntaje de la mano del jugador total
+     * este metodo calcula el puntaje total del jugaador
      */
     public void calcularPuntaje(){
-        if(cartas.size()>0) {
-            for (Carta carta : cartas) {
-                this.puntaje += carta.getPrecio();
-            }
-        }
+        this.puntaje += puntajeRonda;
     }
 
     /**
-     * este metodo calcula el puntaje de la mano del jugador en cada ronda
+     * este metodo calcula el puntaje de la mano del jugador en la ronda actual
      */
     public void calcularPuntajeRonda(){
         if(cartas.size()>0) {
@@ -138,7 +134,7 @@ public class Jugador {
     }
 
     /**
-     * se instancia ?? en la clase actual
+     * cambia el valor del atributo "bajoSusCartas"
      *
      * @param bajoSusCarta
      */
