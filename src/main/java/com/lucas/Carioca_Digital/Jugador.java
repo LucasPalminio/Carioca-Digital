@@ -9,6 +9,22 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Jugador {
+    /**
+     * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
+     * cada ronda, como verificar si los trios y escalas son coerentes
+     *  @param nombre
+     * @param cartas
+     * @param puntaje
+     * @param puntajeRonda
+     * @param bajoSuCarta Si el jugador bajo sus cartas en la ronda actual
+     * @param yaSacoCarta Si el jugador ya saco carta en el turno actual
+     * @param matrizTrios
+     * @param matrizEscalas
+     * @param NROTRIOS_a_formar
+     * @param NROESCALAS_a_formar
+     * @param in
+     *
+     */
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
     private int puntaje;
@@ -18,41 +34,52 @@ public class Jugador {
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
 
-    private static int NROTRIOS_a_formar;
-    private static int NROESCALAS_a_formar;
-
     public static Scanner in = new Scanner(System.in);
 
+    /**
+     * Constructor del jugador, indicando nombre puntaje y el estado de sus cartas
+     *
+     * @param nombre nombre del jugador
+     */
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
         this.bajoSusCarta = false;
         this.yaSacoCarta = false;
     }
+    /**
+     * @return devuelve el nombre del jugador
+     */
 
-    protected static void setNROTRIOSyNROESCALAS(int nroEscalasRonda,int nroTriosRonda) {
-        NROTRIOS_a_formar = nroTriosRonda;
-        NROESCALAS_a_formar = nroEscalasRonda;
-    }
     public String getNombre() {
         return nombre;
     }
-    protected int getPuntaje() {
+    /**
+     * @return devuelve el puntaje del jugador
+     */
+
+    public int getPuntaje() {
         return puntaje;
     }
+    /**
+     * @return devuelve el puntaje de la ronda actual
+     */
 
-    protected int getPuntajeRonda() {
+    public int getPuntajeRonda() {
         return puntajeRonda;
     }
 
-    protected void calcularPuntaje(){
-        if(cartas.size()>0) {
-            for (Carta carta : cartas) {
-                this.puntaje += carta.getPrecio();
-            }
-        }
+    /**
+     * este metodo calcula el puntaje total del jugaador
+     */
+    public void calcularPuntaje(){
+        this.puntaje += puntajeRonda;
     }
-    protected void calcularPuntajeRonda(){
+
+    /**
+     * este metodo calcula el puntaje de la mano del jugador en la ronda actual
+     */
+    public void calcularPuntajeRonda(){
         if(cartas.size()>0) {
             for (Carta carta : cartas) {
                 this.puntajeRonda += carta.getPrecio();
@@ -60,254 +87,172 @@ public class Jugador {
         }
     }
 
-    protected ArrayList<Carta> getCartas() {
+    /**
+     * @return retorna las cartas que obtiene el jugador
+     */
+    public ArrayList<Carta> getCartas() {
         return cartas;
     }
 
-    protected void setPuntajeRonda(int puntajeRonda) {
+    /**
+     * se instancia la variable PuntajeRonda en la clase actual
+     *
+     * @param puntajeRonda puntaje obtenido en la ronda actual
+     */
+    public void setPuntajeRonda(int puntajeRonda) {
         this.puntajeRonda = puntajeRonda;
     }
 
-    protected void setCartas(ArrayList<Carta> cartas) {
+    /**
+     * se instancia el arreglo de cartas en la clase actual
+     *
+     * @param cartas son las cartas de cada jugador
+     */
+    public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
+
+    /**
+     * es la carta que agregara el jugador a su mano
+     *
+     * @param carta es la carta que se encuentra en la mesa
+     */
     protected void agregarCarta(Carta carta){
         cartas.add(carta);
     }
-    protected int getNroCartas(){ return cartas.size(); }
 
-    protected boolean isBajoSusCarta() {
+    /**
+     * @return devuelne el valor de la carta
+     */
+    public int getNroCartas(){ return cartas.size(); }
+
+    /**
+     * @return????
+     */
+    public boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
-    protected void setBajoSusCarta(boolean bajoSusCarta) {
+
+    /**
+     * cambia el valor del atributo "bajoSusCartas"
+     *
+     * @param bajoSusCarta
+     */
+    public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
     }
 
-    protected boolean isYaSacoCarta() {
+    /**
+     * @return luego de sacar una carta se le habilita la opcion de botar carta en el pozo
+     */
+    public boolean isYaSacoCarta() {
         return yaSacoCarta;
     }
 
-    protected void setYaSacoCarta(boolean yaSacoCarta) {
+    /**
+     * se instancia yaSacoCarta en la clase actual
+     *
+     * @param yaSacoCarta
+     */
+    public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;
     }
 
+    /**
+     * Este metodo funciona solamente cuando finaliza la ronda,su funcion es limpia las matrices
+     * de trios y escalas que el jugador tenga en la mesa
+     */
     protected void limpiarMatriz(){
-        //Este metodo funciona solamente cuando finaliza la ronda,
-        // su funcion es limpia las matrices de trios y escalas que el jugador tenga en la mesa
         matrizTrios.clear();
         matrizEscalas.clear();
     }
 
-    protected Carta menu_BotarCarta(){
-        imprimirCartas();
-        int indiceCarta = Utilidades.ingresarUnNumero("¿Que cartas quieres botar?: ");
-        if (indiceCarta >= 0 && indiceCarta < cartas.size()){
-            Carta cartaABotar = cartas.get(indiceCarta);
-            cartas.remove(indiceCarta);
-            return cartaABotar;
-        }else{
-            System.out.println("Error el numero ingresado esta fuera del rango, intentelo nuevamente");
-            return menu_BotarCarta();
-        }
-
-    }
-    protected void menu_Bajarse(){
-        System.out.println("¿Seguro que quiere bajarse? " +
-                "\nEscriba "+Utilidades.ANSI_RED+"si"+ Utilidades.ANSI_RESET+" para confirmar, de lo contrario escriba otra palabra para cancelar la operacion");
-        if (!in.nextLine().equalsIgnoreCase("si")){
-            //En caso de que el usuario no ingreso si, se detiene la ejecucion del metodo
-            System.out.println("Usted se arrepintio de bajarse");
-            return;
-        }
-        if(NROTRIOS_a_formar > 0){
-            for (int i = 0; i < NROTRIOS_a_formar; i++) {
-                imprimirCartas();
-                System.out.println("Ingrese el trio "+i);
-                matrizTrios.add(crearUnTrio());
-
-            }
-        }
-        if (NROESCALAS_a_formar > 0){
-            for (int i = 0; i < NROESCALAS_a_formar; i++) {
-                imprimirCartas();
-                System.out.println("Ingrese la escala "+i);
-                matrizEscalas.add(crearUnaEscala());
-
-            }
-        }
-        bajoSusCarta = true;
-
+    /**
+     * @param indice posicion de la carta en la mano del jugador
+     * @return Este metodo se encarga de guardar la carta que selecciono el jugador para botarla en el pozo
+     */
+    public Carta botarCarta(int indice){
+        Carta cartaABotar = cartas.get(indice);
+        cartas.remove(indice);
+        return  cartaABotar;
     }
 
-    protected void imprimirCartas(){ //Este metodo imprime las cartas del jugador
-        System.out.println("Cartas de "+nombre);
-        imprimirCartas(cartas);
-    }
-    public static void imprimirCartas(ArrayList<Carta> cartas){
-        String contenido = "";
-        String primeraLinea = "";
-        String segundaLinea = "";
-        for (int i = 0; i < cartas.size(); i++) {
-            Carta carta = cartas.get(i);
-            primeraLinea += carta.toStringEC();
-            int numeroEspacios = (carta.toString().length()+2)/2;
-            segundaLinea += Utilidades.repetirString(" ",numeroEspacios) +i+ Utilidades.repetirString(" ",numeroEspacios);
-        }
-        contenido = primeraLinea + "\n" + segundaLinea;
-        System.out.println(contenido);
-
-    }
-    protected void imprimirInformacionJugador(ArrayList<Carta> pozo){
-        System.out.println("Turno: " + nombre);
-        imprimirCartas();
-
-
-    }
-    protected void intercambiarCartas(){
-
-        int primera_carta = 0;
-        int segunda_carta = 0;
-
-        primera_carta = Utilidades.ingresarUnNumero("Primera Carta a intercambiar",0,cartas.size()-1);
-
-        segunda_carta = Utilidades.ingresarUnNumero("Segunda Carta a intercambiar",0,cartas.size()-1);
-        Collections.swap(cartas, primera_carta, segunda_carta);
-
-        imprimirCartas();
-
-
-    }
-
-    protected ArrayList<Carta> crearUnTrio(){ //Este metodo es para crear un solo trio
-        int[] indices=ingresarIndicesTrio();
-        //Primero ingresamos los indices de las cartas que conforman el trio,
-        // verificando que estos indices no se repitan, y correspondan realmente a un trio
-        ArrayList<Carta> trio = new ArrayList<Carta>(); //Arraylist donde se almacenara temporalmente el trio
-        for (int i = 0; i < 3; i++) {
-            //Por cada indice de la carta se almacena en trio
-            int ind = indices[i];
-            trio.add(cartas.get(ind));
-
-        }
-        cartas.removeAll(trio);//Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
-        imprimirCartas(trio);
-        return trio;
-
-    }
-    protected ArrayList<Carta> crearUnaEscala(){
-        int[] indices = ingresarIndicesEscala();
-        ArrayList<Carta> escala = new ArrayList<Carta>();
-        for (int i = 0; i < 4; i++) {
-            int ind = indices[i];
-            escala.add(cartas.get(ind));
-
-        }
-        cartas.removeAll(escala);//Una vez hecho el trio, para evitar la duplicacion de cartas, estas se debe borrar de las cartas del jugador
-        imprimirCartas(escala);
-        return escala;
-    }
-
-    protected  int[] ingresarIndicesTrio(){
-        System.out.println("Ingrese los indices de un trio");
-        int[] indicesTrio = ingresarIndices(3);
-        String valorEsperado = cartas.get(indicesTrio[0]).getValor();
-        for (int i = 0; i < 3; i++) {
-            int ind = indicesTrio[i];
-            String valor = cartas.get(ind).getValor();
-            String palo = cartas.get(ind).getPalo();
-            if (!(valor.equalsIgnoreCase(valorEsperado)) && !palo.equalsIgnoreCase("JKR")){//Si los valores son diferentes
-                //Vuelve a preguntar
-                System.out.println("Error los indices que ingresaste no corresponde a un trio");
-                return ingresarIndicesTrio();
-            }
-        }
-        return indicesTrio;
-    }
-    protected int[] ingresarIndicesEscala(){
-        System.out.println("Ingrese los indices de una escala");
-        int[] indicesEscala = ingresarIndices(4);
-        String paloEsperado = cartas.get(indicesEscala[0]).getPalo(); //Corazon
-        String valorEsperado = cartas.get(indicesEscala[0]).getValor(); //K
-        //int indiceValor = Carta.VALORES.toString().indexOf(valorEsperado); //12, En que posicion del arreglo de VALORES esta el valor: K
-        int indiceValor = Utilidades.StringArrayindexOf(Carta.VALORES,valorEsperado);
-        for (int i = 0; i < 4; i++) {
-            int ind = indicesEscala[i];
-            Carta carta = cartas.get(ind);
-            String palo = carta.getPalo();
-            String valor = carta.getValor();
-            if (!(palo.equalsIgnoreCase(paloEsperado) && valor.equalsIgnoreCase(valorEsperado)) && !palo.equalsIgnoreCase("JKR")){
-                //si los indices ingresado no corresponden a una escala, pregunte de nuevo
-                return ingresarIndicesEscala();
-            }else{
-                indiceValor++;
-                if (indiceValor == Carta.VALORES.length){
-                    indiceValor = 0;
-                }
-                valorEsperado = Carta.VALORES[indiceValor];
-            }
-        }
-        return indicesEscala;
-    }
-    protected int[] ingresarIndices(int nroIndices) { // Este metodo es para ingresar los indices de las cartas del jugador, nroIndices puede ser 3 o 4
-        int[] indices = new int[nroIndices];
-
-        System.out.println("Ingrese los indices de las cartas (separado por espacios): ");
-        String[] indicesString = Utilidades.tecladoNext().split(" ");//Se ingresa los indices separados por espacios, posteriormente esos indices se almacenan en un arreglo
-        if (indicesString.length == nroIndices) {
-            //Primero verificamos si el nroIndices ingresados corresponde al nro de indices solicitados
-            try {
-                for (int i = 0; i < indicesString.length; i++) {
-                    int numero = Integer.parseInt(indicesString[i]);//Convertimos los indices de string a int
-
-                    if (numero >= 0 && numero < cartas.size()) { //si el numero esta dentro del rango de los indices
-                        indices[i] = numero; //Se guarda el numero dentro del arreglo de los indices
-                        if (i == nroIndices-1) { //Una vez ingresado el ultimo indice
-                            if(Utilidades.sonNumerosDiferentes(indices)) { //Se verifica que los indices sean numeros diferentes
-                                return indices;
-                            }else{
-                                System.out.println("Los numeros deben ser diferentes, intentelo nuevamente");
-                            }
-                        }
-                    } else {
-                        System.out.println("El numero: " + numero + " no esta dentro del rango");
-                        System.out.println("Intentelo nuevamente");
-                        break;
-                    }
-                }
-            } catch (NumberFormatException nfe) {
-                System.out.println("Error el caracter ingresado no es un numero");
-            }
-        } else {
-            System.out.println("Usted ingresado mas numero de lo permitido, intentelo nuevamnete");
-        }
-        return ingresarIndices(nroIndices); //Si a ocurrido un error, volvera a preguntar al usuario por los indices
-    }
-
-    protected ArrayList<ArrayList<Carta>> getMatrizTrios() {
+    /**
+     *
+     * @return devuelve los trios del jugador
+     */
+    public ArrayList<ArrayList<Carta>> getMatrizTrios() {
         return matrizTrios;
     }
 
-    protected ArrayList<ArrayList<Carta>> getMatrizEscalas() {
+    /**
+     *
+     * @return  devuelve las escalas del jugador
+     */
+    public ArrayList<ArrayList<Carta>> getMatrizEscalas() {
         return matrizEscalas;
     }
-    protected  void imprimirTrios_y_Escalas() {
-        if (isBajoSusCarta()) {
-            System.out.println(getNombre());
-            if (matrizTrios.size() > 0) {
-                System.out.println("Trios:\n");
-                for (int j = 0; j < getMatrizTrios().size(); j++) {
-                    System.out.println("Trio " + j + ": ");
-                    imprimirCartas(getMatrizTrios().get(j));
-                }
-            }
-            if (matrizEscalas.size()>0) {
-                System.out.println("\nEscalas:\n");
-                for (int j = 0; j < getMatrizEscalas().size(); j++) {
-                    System.out.println("Escala " + j + ": ");
-                    imprimirCartas(getMatrizEscalas().get(j));
 
-                }
-            }
+    /**
+     *
+     * @param matrizTrios sobreescribe los trios que tiene el jugador
+     */
+    public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
+        this.matrizTrios = matrizTrios;
+    }
+
+    /**
+     *
+     * @param matrizEscalas  sobreescribe las escalas que tiene el jugador
+     */
+    public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
+        this.matrizEscalas = matrizEscalas;
+    }
+
+    /**
+     *
+     * @return muestra en una tabla el nombre, numero de cartas , puntaje y si bajo sus cartas
+     */
+    public Object[] getArrayObject(){
+        Object[] array = {nombre, this.getNroCartas(), this.getPuntaje(),this.isBajoSusCarta()};
+        return array;
+    }
+
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de una escala
+     */
+    public Object[][] getArrayObjectEscalas(){
+        Object[][] data = new Object[matrizEscalas.size()][4]; // Primera Carta, Palo, Ultima Carta, nroCartas
+        for (int i = 0; i < matrizEscalas.size(); i++) {
+            ArrayList<Carta> escala = matrizEscalas.get(i);
+            data[i][0] = escala.get(0).getValor();
+            data[i][1] = escala.get(0).getPalo();
+            data[i][2]  = escala.get(escala.size()-1).getValor();
+            data[i][3] = escala.size();
         }
+        return data;
+    }
+
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de un trio
+     */
+    public Object[][] getArrayObjectTrios(){
+        //Valor y Nro Carta
+        Object[][] data = new Object[matrizTrios.size()][2];
+        for (int i = 0; i < matrizTrios.size(); i++) {
+            ArrayList<Carta> trio = matrizTrios.get(i);
+            String valor = "";
+            for (int j = 0; j < trio.size(); j++) {
+                valor = trio.get(j).getValor();
+                if (!valor.equals("JKR")) break;
+
+            }
+            data[i][0] = valor;
+            data[i][1] = trio.size();
+        }
+        return data;
+
     }
 }
