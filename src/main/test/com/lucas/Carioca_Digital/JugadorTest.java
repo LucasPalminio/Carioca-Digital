@@ -21,7 +21,7 @@ public class JugadorTest {
 
     /**
      * Se crea un jugador con una mano de cartas pre-establecido, luego calculamos el puntaje
-     * y verificamos que el metodo haya hecho bien el calculo de las cartas
+     * y verificamos que el método haya hecho bien el calculo de las cartas
      */
     @Test
     public void calcularPuntaje() {
@@ -35,7 +35,6 @@ public class JugadorTest {
         jugador.calcularPuntajeRonda();
 
         assertEquals(42,jugador.getPuntajeRonda());
-
 
     }
 

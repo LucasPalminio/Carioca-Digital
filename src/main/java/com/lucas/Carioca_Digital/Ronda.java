@@ -160,7 +160,7 @@ public class Ronda {
             if (jugador.getPuntajeRonda() > 0) {
                 System.out.print(jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             } else {
-                System.out.print(Utilidades.ANSI_YELLOW + "(Ganador)" + Utilidades.ANSI_RESET + jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
+                System.out.print("(Ganador)" + jugador.getNombre() + ": " + jugador.getPuntajeRonda() + " ");
             }
             jugador.setPuntajeRonda(0);
         }
@@ -184,7 +184,7 @@ public class Ronda {
         System.out.println("\nResultados de la partida en esta ronda");
         for (int i = 0; i < jugadores.size(); i++) {
             if(jugador_con_delantera == i){
-                System.out.print(Utilidades.ANSI_YELLOW + "(Delantera)" + Utilidades.ANSI_RESET + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
+                System.out.print("(Delantera)" + jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntajeRonda() + " ");
             }else {
                 System.out.print(jugadores.get(i).getNombre() + ": " + jugadores.get(i).getPuntaje() + " ");
             }
