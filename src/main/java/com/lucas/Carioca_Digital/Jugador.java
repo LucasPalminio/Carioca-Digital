@@ -12,18 +12,17 @@ public class Jugador {
     /**
      * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
      * cada ronda, como verificar si los trios y escalas son coerentes
-     *  @param nombre
-     * @param cartas
-     * @param puntaje
-     * @param puntajeRonda
-     * @param bajoSuCarta
-     * @param yaSacoCarta
-     * @param matrizTrios
-     * @param matrizEscalas
-     * @param NROTRIOS_a_formar
-     * @param NROESCALAS_a_formar
-     * @param in
-     *
+     *  @param nombre Nombre del jugador
+     * @param cartas las cartas que tiene el jugador
+     * @param puntaje puntaje obtenido durante el juego
+     * @param puntajeRonda puntaje de cada ronda
+     * @param bajoSuCarta es un aviso si el jugador se bajo con sus cartas
+     * @param yaSacoCarta es un aviso si el jugador ya saco carta de la mesa
+     * @param matrizTrios Es una matriz en donde se almacenan los trios del jugador
+     * @param matrizEscalas Es una matriz en donde se almacenan las escalas del jugador
+     * @param NROTRIOS_a_formar cantidad de trios que se tienen que formar en la ronda actual
+     * @param NROESCALAS_a_formar cantidad de escalas que se tienen que formar en la ronda actual
+     * @param in lo que ingresa por teclado el jugador
      */
     private String nombre;
     private ArrayList<Carta> cartas = new ArrayList<>();
@@ -131,16 +130,15 @@ public class Jugador {
     public int getNroCartas(){ return cartas.size(); }
 
     /**
-     * @return????
+     * @return devuelve el estado de "bajo sus cartas"
      */
     public boolean isBajoSusCarta() {
         return bajoSusCarta;
     }
 
     /**
-     * se instancia ?? en la clase actual
      *
-     * @param bajoSusCarta
+     * @param bajoSusCarta  sobreescribe el estado de "bajo sus cartas"
      */
     public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
@@ -181,29 +179,53 @@ public class Jugador {
         return  cartaABotar;
     }
 
+    /**
+     *
+     * @return devuelve los trios del jugador
+     */
     public ArrayList<ArrayList<Carta>> getMatrizTrios() {
         return matrizTrios;
     }
 
+    /**
+     *
+     * @return  devuelve las escalas del jugador
+     */
     public ArrayList<ArrayList<Carta>> getMatrizEscalas() {
         return matrizEscalas;
     }
 
+    /**
+     *
+     * @param matrizTrios sobreescribe los trios que tiene el jugador
+     */
     public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
         this.matrizTrios = matrizTrios;
     }
 
+    /**
+     *
+     * @param matrizEscalas  sobreescribe las escalas que tiene el jugador
+     */
     public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
         this.matrizEscalas = matrizEscalas;
     }
 
+    /**
+     *
+     * @return muestra en una tabla el nombre, numero de cartas , puntaje y si bajo sus cartas
+     */
     public Object[] getArrayObject(){
         Object[] array = {nombre, this.getNroCartas(), this.getPuntaje(),this.isBajoSusCarta()};
         return array;
     }
 
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de una escala
+     */
     public Object[][] getArrayObjectEscalas(){
-        Object[][] data = new Object[matrizEscalas.size()][4]; // Primera Carta, Palo, Ultima Carta, nroCartas
+        Object[][] data = new Object[matrizEscalas.size()][4]; /
         for (int i = 0; i < matrizEscalas.size(); i++) {
             ArrayList<Carta> escala = matrizEscalas.get(i);
             data[i][0] = escala.get(0).getValor();
@@ -214,6 +236,10 @@ public class Jugador {
         return data;
     }
 
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de un trio
+     */
     public Object[][] getArrayObjectTrios(){
         //Valor y Nro Carta
         Object[][] data = new Object[matrizTrios.size()][2];

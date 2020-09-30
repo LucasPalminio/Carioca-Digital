@@ -11,6 +11,10 @@ public class GestorArchivos {
     public GestorArchivos(){
 
     }
+
+    /**
+     * Este metodo se encarga de crear una carpeta, verificar su existencia y si existe algun error al crearla
+     */
     public void crearCarpeta(){
         try {
             File carpeta = new File("Carioca_Digital_Datos");
@@ -26,6 +30,11 @@ public class GestorArchivos {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     *
+     * @param nombre
+     */
     public void crearArchivo(String nombre){
         try {
 
@@ -46,6 +55,12 @@ public class GestorArchivos {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param mensaje
+     * @param nombre
+     */
     public void escribir(String mensaje, String nombre){
         try {
             File archivo = new File("Carioca_Digital_Datos//" + nombre + ".txt");
@@ -62,6 +77,12 @@ public class GestorArchivos {
         }
 
     }
+
+    /**
+     * Este metodo se encarga de leer los datos guardados del juego
+     * @param ruta Es donde se encuetra el fichero
+     * @return en caso de que el archivo sea funcional
+     */
     public String leer(String ruta){
         String contenido = "";
         try {
@@ -79,6 +100,12 @@ public class GestorArchivos {
         }
         return  contenido;
     }
+
+    /**
+     * Este metodo se encarga
+     * @param nombre nombre del archivo
+     * @return la validacion de que el archivo existe
+     */
     public boolean verificarSiExiste(String nombre){
         File archivo = new File(nombre);
         return archivo.exists();

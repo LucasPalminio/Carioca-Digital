@@ -62,9 +62,9 @@ public class Mazo {
     }
 
     /**
-     * EL metodo  devuelve un ArrayList de cartas con un numero de cartas sacadas del mazo
+     *
      * @param nroCartas
-     * @return
+     * @return devuelve un ArrayList de cartas con un numero de cartas sacadas del mazo
      */
     protected ArrayList<Carta> sacarUnNumeroDeCartas(int nroCartas){
         ArrayList<Carta> arrayCartas = new ArrayList<Carta>();
@@ -75,20 +75,13 @@ public class Mazo {
         return arrayCartas;
 
     }
-    /**
-     * En caso de devolver una carta al mazo, este se devuelve y se revuelve el mazo
-     * @param carta
-     */
-    protected void devolverCarta(Carta carta){
-        mazo.add(carta);
-        Collections.shuffle(mazo);
-    }
+
     /**
      *     Cuando el mazo se encuentre vacío se usará este método para transferir todas las cartas del pozo
      *     excepto la primera al mazo y se mezclan
-     *     @param pozo
+     *     @param pozo son las cartas desechadas por los jugadores al final de cada turno
      */
-    // Cuando el mazo se encuentre vacío se usará este método para transferir todas las cartas del pozo excepto la primera al mazo y se mezclan
+
     protected void mezclarConPozo(ArrayList<Carta> pozo) {
         int largoOriginalDelPozo = pozo.size(); // Por si el largo del pozo varía durante el for()
         for (int i = largoOriginalDelPozo - 1; i > 0; i--) {
@@ -97,12 +90,28 @@ public class Mazo {
         }
         Collections.shuffle(mazo);
     }
+
+    /**
+     *
+     * @param i indice de la carta deseada que esta en el mazo
+     * @return la carta botada
+     */
     protected Carta getCarta(int i){
         return mazo.get(i);
     }
+
+    /**
+     *
+     * @param i indice de la carta desasda que sera desechada
+     */
     protected void removeCarta(int i){
         mazo.remove(i);
     }
+
+    /**
+     *
+     * @param i indice de la carta desasda que sera añadida a la mano del jugador
+     */
     protected void addCarta(Carta i){
         mazo.add(i);
     }

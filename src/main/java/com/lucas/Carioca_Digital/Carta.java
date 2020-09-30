@@ -20,13 +20,13 @@ public class Carta extends JLabel {
     /**
      * Esta clase se encarga de de asignar los valores, el palo a las cartas
      * @param PALOS_SIMBOLOS son los simbolos de los palos de los naipes ingleses pica, diamante, trebol, corazon
-     * @param PALOS es la inicial de cada palo C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
+     * @param PALOS deff es la inicial de cada palo C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
      * @param Valores son los valores de cada carta
-     * @param palo
+     * @param palo de la carta
      * @param WIDTH Ancho de la carta
      * @param HEIGHT Alto de la carta
-     * @param valor
-     * @param precio
+     * @param valor son los numeros o letra de la carta
+     * @param precio puntaje de la carta (si es numero es ese valor. Si es J= Q= K= A= JKR=30)
      * @param imagenCarta es la imagen que le corresponde a  cada carta
      *
      *
@@ -103,10 +103,10 @@ public class Carta extends JLabel {
      * si la carta es una J,Q o K, el precio es de 10
      * si la carta es una A el precio en 20
      * si la carta en un JOKER (JKR) tambien conocido comodin el precio es 30
-     * @return
+     * @return precio de la carta no el palo ni el valor al que pertenece
      */
     public int calcularPrecio() {
-        //Aqui importa el valor de la carta no el palo al que pertenece
+
         for (int i = 2; i <= 10; i++) {
             //el precio de la cartas con numero es ese numero
             if (valor.equalsIgnoreCase(Integer.toString(i))) {
@@ -131,16 +131,17 @@ public class Carta extends JLabel {
         return 0;
 
     }
+
     /**
      *
-     * @return ??
+     * @return Que palo corresponde la carta
      */
     public String getPalo() {
         return palo;
     }
     /**
      *
-     * @return ??
+     * @return Que valor corresponde la carta
      */
     public String getValor() {
         return valor;
@@ -148,7 +149,7 @@ public class Carta extends JLabel {
 
     /**
      *
-     * @return ??
+     * @return Que precio corresponde la carta
      */
     protected int getPrecio() {
         return precio;
