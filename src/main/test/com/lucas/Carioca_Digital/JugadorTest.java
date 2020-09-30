@@ -19,118 +19,44 @@ public class JugadorTest {
     public void tearDown() throws Exception {
     }
 
+    /**
+     * Se crea un jugador con una mano de cartas pre-establecido, luego calculamos el puntaje
+     * y verificamos que el metodo haya hecho bien el calculo de las cartas
+     */
     @Test
     public void calcularPuntaje() {
-    }
+        Jugador jugador = new Jugador("jugadorTest");
+        ArrayList<Carta> cartas = new ArrayList<>();
+        cartas.add(new Carta("JKR",""));
+        cartas.add(new Carta("C","Q"));
+        cartas.add(new Carta("H","2"));
 
-    @Test
-    public void ingresarIndicesEscala_test01() { // Crea un jugadores con una escala (solo numeros 2 3 4 5) en la mano y comprueba si esta se ingresa correctamente
-        String stringInput = "0 1 2 3\n";
-        Utilidades.entradaAProbar(stringInput);
-        Jugador jugador1 = new Jugador("Carlos");
-        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
-        for (int i = 2; i <8; i++) {
-            cartasJugador1.add(new Carta("♠", String.valueOf(i)));
-        }
-        jugador1.setCartas(cartasJugador1);
-        jugador1.imprimirCartas();
-        int[] indicesEscalaEsperado = {0,1,2,3};
-        int[] indicesEscalaReal = jugador1.ingresarIndicesEscala(); // (Error) Aqui el metodo se ejecuta indefinidamente
-        assertArrayEquals(indicesEscalaEsperado,indicesEscalaReal);
-    }
-    @Test
-    public void ingresarIndicesEscala_test02() { // Crea un jugadores con una escala(letras y numeros Q, K, A, 2) en la mano y comprueba si esta se ingresa correctamente
-        String stringInput = "0 1 2 3\n";
-        Utilidades.entradaAProbar(stringInput);
-        Jugador jugador1 = new Jugador("Carlos");
-        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
-        cartasJugador1.add(new Carta("♠", "Q"));
-        cartasJugador1.add(new Carta("♠", "K"));
-        cartasJugador1.add(new Carta("♠", "A"));
-        cartasJugador1.add(new Carta("♠", "2"));
-        jugador1.setCartas(cartasJugador1);
-        jugador1.imprimirCartas();
-        int[] indicesEscalaEsperado = {0,1,2,3};
-        int[] indicesEscalaReal = jugador1.ingresarIndicesEscala(); // (Error) Aqui el metodo se ejecuta indefinidamente
-        assertArrayEquals(indicesEscalaEsperado,indicesEscalaReal);
-    }
-    @Test
-    public void ingresarIndicesTrio_test01() {// Se comprueba si se acepta un trio formado por dos cartas iguales y un Joker
-        String stringInput = "0 1 3\n";
-        Utilidades.entradaAProbar(stringInput);
-        Jugador jugador1 = new Jugador("Carlos");
-        ArrayList<Carta> cartasJugador1 = new ArrayList<>();
-        for (int i = 0; i <3; i++) {
-            cartasJugador1.add(new Carta("♠","3"));
-        }
+        jugador.setCartas(cartas);
+        jugador.calcularPuntajeRonda();
 
-        cartasJugador1.add(new Carta("JKR",""));
-        jugador1.setCartas(cartasJugador1);
-        int[] indicesTriosEsperado = {0,1,3};
-        int[] indicesTriosReal = jugador1.ingresarIndicesTrio();
-        assertArrayEquals(indicesTriosEsperado,indicesTriosReal);
-    }
-
-    @Test
-    public void ingresarIndices_test1() { //  Comprueba un ingreso valido de indices
-        Jugador jugador = new Jugador("Carlos");
-        Mazo mazo = new Mazo();
-        jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
-        String stringInput = "0 1 2 3\n";
-        Utilidades.entradaAProbar(stringInput);
-        int[] esperado = {0, 1, 2, 3};
-        int[] real = jugador.ingresarIndices(4);
-        assertArrayEquals(esperado,real);
+        assertEquals(42,jugador.getPuntajeRonda());
 
 
     }
+
     @Test
-    public void ingresarIndices_test2() { // Comprueba que aunque se ingresen indices erroneos(Se repite un indice) de todas maneras
-        // solo tome los correctos para ejecutar el metodo
-        Jugador jugador = new Jugador("Carlos");
-        Mazo mazo = new Mazo();
-        jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
+    public void getArrayObject() {
+        Jugador jugador = new Jugador("test");
+        ArrayList<Carta> cartas = new ArrayList<>();
+        cartas.add(new Carta("JKR",""));
+        cartas.add(new Carta("C","Q"));
+        cartas.add(new Carta("H","2"));
+        jugador.setCartas(cartas);
+        Object[] esperado = {"test",3,0,false};
 
-        String stringInput = "1 1 2\n0 1 2\n";
-        Utilidades.entradaAProbar(stringInput);
-        int[] esperado = {0, 1, 2};
-        int[] real = jugador.ingresarIndices(3);
-        assertArrayEquals(esperado,real);
-
-
+        assertArrayEquals(esperado,jugador.getArrayObject());
     }
+
     @Test
-    public void ingresarIndices_test3() { // Comprueba que aunque se ingresen indices erroneos(letras) de todas maneras
-        // solo tome los correctos para ejecutar el metodo
-        Jugador jugador = new Jugador("Carlos");
-        Mazo mazo = new Mazo();
-        jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
-
-        String stringInput = "e e e\n0 1 2\n";
-        Utilidades.entradaAProbar(stringInput);
-        int[] esperado = {0, 1, 2};
-        int[] real = jugador.ingresarIndices(3);
-        assertArrayEquals(esperado,real);
-
-
+    public void getArrayObjectEscalas() {
     }
+
     @Test
-    public void ingresarIndices_test4() {// Comprueba que aunque se ingresen indices erroneos(fuera del tamaño de la mano del jugador)
-        // de todas maneras solo tome los correctos para ejecutar el metodo
-        Jugador jugador = new Jugador("Carlos");
-        Mazo mazo = new Mazo();
-        jugador.setCartas(mazo.sacarUnNumeroDeCartas(12));
-
-        String stringInput = "12 13 15\n0 1 2\n";
-        Utilidades.entradaAProbar(stringInput);
-        int[] esperado = {0, 1, 2};
-        int[] real = jugador.ingresarIndices(3);
-        assertArrayEquals(esperado,real);
-
-
-    }
-    @Test
-    public void menuBajarse_test1(){
-
+    public void getArrayObjectTrios() {
     }
 }
