@@ -4,7 +4,7 @@ import com.lucas.Guis.MenuPrincipalGUI;
 
 public class Launcher {
     /**
-     * Lanzador del programa, haciendo visible la ventana de la interfaz grafica
+     *  Se encarga de iniciar el programa, haciendo visible la ventana de la interfaz gráfica
      * @param args son los argumentos que recibe el metodo
      */
 

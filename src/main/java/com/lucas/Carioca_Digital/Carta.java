@@ -19,17 +19,15 @@ import java.io.IOException;
 public class Carta extends JLabel {
     /**
      * Esta clase se encarga de de asignar los valores, el palo a las cartas
-     * @param PALOS_SIMBOLOS son los simbolos de los palos de los naipes ingleses pica, diamante, trebol, corazon
-     * @param PALOS deff es la inicial de cada palo C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
+     * @param PALOS_SIMBOLOS son los símbolos de los palos de los naipes ingleses pica, diamante, trebol, corazon
+     * @param PALOS definición Es la inicial de cada palo (en ingles) C = trébol, D = diamante, H = Corazon, S = Pica
      * @param Valores son los valores de cada carta
      * @param palo de la carta
      * @param WIDTH Ancho de la carta
      * @param HEIGHT Alto de la carta
-     * @param valor son los numeros o letra de la carta
+     * @param valor son los números o letra de la carta
      * @param precio puntaje de la carta (si es numero es ese valor. Si es J= Q= K= A= JKR=30)
      * @param imagenCarta es la imagen que le corresponde a  cada carta
-     *
-     *
      */
     // Colores que se usaran para algunos textos
 
@@ -52,7 +50,7 @@ public class Carta extends JLabel {
     /**
      * se establece el valor y palo a cada carta, ademas de sus dimensiones y color
      * @param palo otorga una clase de palo (corazon, pica, trebol, diamante) pertenese la carta
-     * @param valor otorg un valor numerico a cada carta
+     * @param valor otorga un valor numérico a cada carta
      */
     public Carta(String palo, String valor) {
         this.palo = palo;
@@ -80,7 +78,7 @@ public class Carta extends JLabel {
 
     /**
      *
-     * @return Funcion que devuelve la carta en formato String
+     * @return Esta función que devuelve la carta en formato String
      */
 
     public String toString(){
@@ -102,7 +100,7 @@ public class Carta extends JLabel {
      * Cada carta tiene un precio:
      * si la carta es una J,Q o K, el precio es de 10
      * si la carta es una A el precio en 20
-     * si la carta en un JOKER (JKR) tambien conocido comodin el precio es 30
+     * si la carta en un JOKER (JKR) también conocido comodín el precio es 30
      * @return precio de la carta no el palo ni el valor al que pertenece
      */
     public int calcularPrecio() {

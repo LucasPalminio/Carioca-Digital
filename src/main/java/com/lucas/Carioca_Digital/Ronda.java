@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Ronda {
     /**
-     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opcines
-     * que podra hacer el jugador
+     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugará como las opciones
+     * que podrá hacer el jugador
      * @param nivel El nivel actual de la ronda
      * @param mazo baraja de cartas ordenas aleatoriamente
      * @param Jugador arreglo de los jugadores que jugaran
@@ -36,7 +36,7 @@ public class Ronda {
     private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
 
     /**
-     * En este metodo se instancian las variables en la clase actual
+     * En este método se instancia las variables en la clase actual
      * @param jugadores es la cantidad de jugadores que jugaran
      * @param nivel especifica la cantidad de trios y escalas
      */
@@ -79,10 +79,10 @@ public class Ronda {
 
 
     /**
-     * EN este metodo se comienza la ronda, y  solo se ejecuta una vez durante esta
-     * Se entrga a cada jugador sus doce cartas
+     * EN este método se comienza la ronda, y  solo se ejecuta una vez durante esta
+     * Se entrega a cada jugador sus doce cartas
      * Se genera de forma aleatoria el orden para jugar
-     * Se muestra por pantalla la cantida de trios y escalas que hay hacer en esta ronda
+     * Se muestra por pantalla la cantidad de trios y escalas que hay hacer en esta ronda
      */
     public void comenzarRonda() {
 
@@ -143,10 +143,10 @@ public class Ronda {
 
 
     /**
-     * Este metodo es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
+     * Este método es cuando la ronda termina (uno de los jugadores se queda sin carta en la mano)
      * muestra la tabla de puntajes que sacaron en esta ronda los jugadores
      * (dice quien fue el ganador de la ronda) y muestra la tabla de sus
-     * puntajes finales (dice tambien quien lleva la delantera)
+     * puntajes finales (dice también quien lleva la delantera)
      */
     protected void finRonda() {
         int jugador_con_delantera = 0;

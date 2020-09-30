@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class GestorArchivos {
     /**
-     * Esta clase se encarga de guardar, leer y gestionar
+     * Esta clase se encarga de guardar, leer y gestionar los datos importantes de la partida
+     *
      */
 
     public GestorArchivos(){
@@ -34,6 +35,12 @@ public class GestorArchivos {
 
 
     }
+
+    /**
+     * Este método se encarga de crea una carpeta llamada "Carioca_Digital_Datos", ademas de verificar si
+     * ya existe una con ese nombre
+     * @throws Exception e Son condiciones que pueden generar un error, haciendo que el código los detecte.
+     */
     public void crearCarpeta(){
         try {
             File carpeta = new File("Carioca_Digital_Datos");

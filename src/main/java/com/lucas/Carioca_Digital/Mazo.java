@@ -6,6 +6,13 @@ import java.util.Collections;
 
 
 public class Mazo {
+    /**
+     * Esta clase se encarga de generar lo que es el mazo del juego
+     * Usando como referencia una baraja de naipes ingles, los métodos se encargan de crear cada carta de
+     * la baraja (de forma ordenada), hacer una copia de esta,con el fin de  tener todas las cartas
+     * necesarias para poder jugar( hay que tener 104 en total) y por ultimo  darle las ordenes de lo que
+     * el mazo debe hacer en ciertos casos
+     */
     private ArrayList<Carta> mazo;
 
     /**
@@ -24,6 +31,7 @@ public class Mazo {
     protected ArrayList<Carta> toArrayList() {
         return mazo;
     }
+
     /**
      * Este metodo es para generar un mazo ordenado
      * @return  2 barajas de cartas inglesas y 4 comodines(108 cartas en total)
@@ -42,6 +50,7 @@ public class Mazo {
         }
         return mazo;
     }
+
     /**
      * Este metodo devuelve el numero de cartas que hay en el mazo
      * @return
@@ -51,7 +60,7 @@ public class Mazo {
     }
 
     /**
-     * Cuando se saca una carta del mazo, el metodo retorna carta que se encuentra en la primera posicion
+     * Cuando se saca una carta del mazo, el método retorna carta que se encuentra en la primera posición
      * y a la vez la elimina del mazo
      * @return
      */
@@ -77,9 +86,9 @@ public class Mazo {
     }
 
     /**
-     *     Cuando el mazo se encuentre vacío se usará este método para transferir todas las cartas del pozo
-     *     excepto la primera al mazo y se mezclan
-     *     @param pozo son las cartas desechadas por los jugadores al final de cada turno
+     *Cuando el mazo se encuentre vacío se usará este método para transferir todas las cartas del pozo
+     *excepto la primera al mazo y se mezclan
+     *@param pozo son las cartas desechadas por los jugadores al final de cada turno
      */
 
     protected void mezclarConPozo(ArrayList<Carta> pozo) {

@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Utilidades {
     /**
-     * @param in se encarga de leer lo escrito por el usario
-     * @param input
+     * @param in se encarga de leer y guardar lo escrito por el usuario
+     * @param input lee los datos de la matriz???
      * @param ANSI_BLACK es el color negro en en ANSI
      * @param ANSI_RED es el color rojo en ANSI
      * @param ANSI_YELLOW es el color amarillo en ANSI
@@ -18,10 +18,14 @@ public class Utilidades {
      */
     private static Scanner in;
     private static ByteArrayInputStream input;
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
 
     /**
-     *
+     * ????
      * @param stringInput
      */
     public static void entradaAProbar(String stringInput) {
@@ -43,6 +47,10 @@ public class Utilidades {
         return in;
     }
 
+    /**
+     * modifica el valor de in
+     * @param in se encarga de leer lo escrito por el usario
+     */
     public static void setIn(Scanner in) {
         Utilidades.in = in;
     }
@@ -125,7 +133,7 @@ public class Utilidades {
 
 
     /**
-     *  Sirve para ingresar algo por teclado
+     *  Sirve para ingresar texto por teclado
      * @return  devuelve lo ingresado por teclado como cadena String
      */
     public static String tecladoNext() {
@@ -140,7 +148,7 @@ public class Utilidades {
 
 
     /**
-     * Sirve para Cuando se quiere ingresar un numero por terminal, se desplega un mensaje diciendo que
+     * Sirve para Cuando se quiere ingresar un numero por terminal, se desplegá un mensaje diciendo que
      * numero debe ingresar
      * @param mensaje asereje
      //* @param min valor minimo que se puede ingresar
@@ -188,7 +196,8 @@ public class Utilidades {
 
 
     /**
-     *Este metodo repite un string una cantidad de veces (es un remplazo al metodo repeat de la clase String)
+     *Este metodo repite un string una cantidad de veces
+     *  (es un remplazo al metodo repeat de la clase String)
      * @param stringARepetir
      * @param nro
      * @return
@@ -255,6 +264,11 @@ public class Utilidades {
             System.out.println("(" + (i + 1) + ") " + opciones[i]);
         }
     }
+
+    /**
+     *
+     * @param opciones
+     */
     public static void imprimirSoloMenuOpciones(ArrayList<String> opciones) {
         //Imprime el menu de opciones pero las opciones comienzan desde el 1
         for (int i = 0; i < opciones.size(); i++) {

@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class Jugador {
     /**
      * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
-     * cada ronda, como verificar si los trios y escalas son coerentes
-     *  @param nombre
+     * cada ronda, como verificar si los trios y escalas son coherentes
+     * @param nombre
      * @param cartas
      * @param puntaje
      * @param puntajeRonda
@@ -70,14 +70,14 @@ public class Jugador {
     }
 
     /**
-     * este metodo calcula el puntaje total del jugaador
+     * este método calcula el puntaje total del jugaador
      */
     public void calcularPuntaje(){
         this.puntaje += puntajeRonda;
     }
 
     /**
-     * este metodo calcula el puntaje de la mano del jugador en la ronda actual
+     * este método calcula el puntaje de la mano del jugador en la ronda actual
      */
     public void calcularPuntajeRonda(){
         if(cartas.size()>0) {
@@ -122,7 +122,7 @@ public class Jugador {
     }
 
     /**
-     * @return devuelne el valor de la carta
+     * @return Devuelve el valor de la carta
      */
     public int getNroCartas(){ return cartas.size(); }
 
@@ -159,7 +159,7 @@ public class Jugador {
     }
 
     /**
-     * Este metodo funciona solamente cuando finaliza la ronda,su funcion es limpia las matrices
+     * Este método funciona solamente cuando finaliza la ronda,su funcion es limpia las matrices
      * de trios y escalas que el jugador tenga en la mesa
      */
     protected void limpiarMatriz(){
@@ -168,8 +168,8 @@ public class Jugador {
     }
 
     /**
-     * @param indice posicion de la carta en la mano del jugador
-     * @return Este metodo se encarga de guardar la carta que selecciono el jugador para botarla en el pozo
+     * @param indice posición de la carta en la mano del jugador
+     * @return Este método se encarga de guardar la carta que selecciono el jugador para botarla en el pozo
      */
     public Carta botarCarta(int indice){
         Carta cartaABotar = cartas.get(indice);
@@ -195,7 +195,7 @@ public class Jugador {
 
     /**
      *
-     * @param matrizTrios sobreescribe los trios que tiene el jugador
+     * @param matrizTrios sobrescribe los trios que tiene el jugador
      */
     public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
         this.matrizTrios = matrizTrios;
@@ -203,7 +203,7 @@ public class Jugador {
 
     /**
      *
-     * @param matrizEscalas  sobreescribe las escalas que tiene el jugador
+     * @param matrizEscalas  sobrescribe las escalas que tiene el jugador
      */
     public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
         this.matrizEscalas = matrizEscalas;
