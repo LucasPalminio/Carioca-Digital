@@ -177,27 +177,51 @@ public class Jugador {
         return  cartaABotar;
     }
 
+    /**
+     *
+     * @return devuelve los trios del jugador
+     */
     public ArrayList<ArrayList<Carta>> getMatrizTrios() {
         return matrizTrios;
     }
 
+    /**
+     *
+     * @return  devuelve las escalas del jugador
+     */
     public ArrayList<ArrayList<Carta>> getMatrizEscalas() {
         return matrizEscalas;
     }
 
+    /**
+     *
+     * @param matrizTrios sobreescribe los trios que tiene el jugador
+     */
     public void setMatrizTrios(ArrayList<ArrayList<Carta>> matrizTrios) {
         this.matrizTrios = matrizTrios;
     }
 
+    /**
+     *
+     * @param matrizEscalas  sobreescribe las escalas que tiene el jugador
+     */
     public void setMatrizEscalas(ArrayList<ArrayList<Carta>> matrizEscalas) {
         this.matrizEscalas = matrizEscalas;
     }
 
+    /**
+     *
+     * @return muestra en una tabla el nombre, numero de cartas , puntaje y si bajo sus cartas
+     */
     public Object[] getArrayObject(){
         Object[] array = {nombre, this.getNroCartas(), this.getPuntaje(),this.isBajoSusCarta()};
         return array;
     }
 
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de una escala
+     */
     public Object[][] getArrayObjectEscalas(){
         Object[][] data = new Object[matrizEscalas.size()][4]; // Primera Carta, Palo, Ultima Carta, nroCartas
         for (int i = 0; i < matrizEscalas.size(); i++) {
@@ -210,6 +234,10 @@ public class Jugador {
         return data;
     }
 
+    /**
+     *
+     * @return muestra en una tabla la primera Carta, su Palo, la  Ultima Carta y el numero de cartas de un trio
+     */
     public Object[][] getArrayObjectTrios(){
         //Valor y Nro Carta
         Object[][] data = new Object[matrizTrios.size()][2];
