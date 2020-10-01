@@ -14,6 +14,7 @@ public class TableroDePuntuaciones extends JFrame implements ActionListener {
     private JPanel panel1;
     private JButton volverPuntajesButton;
     private JTable table1;
+    private JLabel noDisponibleLabel;
 
 
     public TableroDePuntuaciones() {
@@ -26,11 +27,10 @@ public class TableroDePuntuaciones extends JFrame implements ActionListener {
         TableroDePuntuacionesModelo tablaModelo = new TableroDePuntuacionesModelo();
         if (tablaModelo.getRowCount() == 0) {
             table1.setVisible(false);
-            JOptionPane.showMessageDialog(this, "No hay puntaciones registradas", "", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
-            new MenuPrincipalGUI().setVisible(true);
             this.dispose();
         } else {
+            noDisponibleLabel.setVisible(false);
             table1.setModel(tablaModelo);
         }
     }
