@@ -1,9 +1,16 @@
 package com.lucas.datos;
 
+import com.lucas.carioca_digital.Jugador;
+import com.lucas.carioca_digital.Reglas;
+import com.lucas.carioca_digital.Ronda;
+import com.lucas.gui.ResultadosGUI;
+import com.lucas.gui.ronda_gui.MesaGUI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorArchivos {
@@ -51,18 +58,22 @@ public class GestorArchivos {
     }
     /**
      *
-     * @param nombre
+     * @param ruta
      */
-    public void crearArchivo(String nombre){
+    public void crearArchivo(String ruta){
         try {
 
-            File archivo = new File("Carioca_Digital_Datos//" + nombre+".txt");
-            FileWriter escriba = new FileWriter(archivo.getPath());
+            File archivo = new File(ruta);
+            if(archivo.getParentFile() != null){
+                archivo.getParentFile().mkdirs();
+            }
             if(!archivo.exists()) {
+
                 if (archivo.createNewFile()) {
+                    FileWriter escriba = new FileWriter(archivo.getPath());
                     escriba.write("");
                     escriba.close();
-                    System.out.println("Se ha creado el archivo: " + nombre + ".txt");
+                    System.out.println("Se ha creado el archivo: " + ruta);
                 }
             }else{
                 System.out.println("Ya existe el archivo");
@@ -77,14 +88,15 @@ public class GestorArchivos {
     /**
      *
      * @param mensaje
-     * @param nombre
+     * @param ruta
      */
-    public void escribir(String mensaje, String nombre){
+    public void escribir(String mensaje, String ruta){
         try {
-            File archivo = new File("Carioca_Digital_Datos//" + nombre + ".txt");
+            File archivo = new File( ruta);
             if (!archivo.exists()) {
-                crearArchivo(nombre);
+                crearArchivo(ruta);
             }
+            String filaString;
             FileWriter escriba = new FileWriter(archivo.getPath());
 
             if(archivo.exists()){

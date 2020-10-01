@@ -3,15 +3,14 @@ package com.lucas.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.lucas.carioca_digital.Jugador;
-import com.lucas.carioca_digital.Reglas;
-import com.lucas.datos.GestorArchivos;
+import com.lucas.carioca_digital.TableroDePuntuacionesModelo;
+import com.lucas.gui.ronda_gui.MesaGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class ResultadosGUI extends JFrame implements ActionListener {
 
@@ -28,68 +27,31 @@ public class ResultadosGUI extends JFrame implements ActionListener {
     private JLabel jugador1Label;
     private JLabel jugador2Label;
     ImageIcon icono = new ImageIcon("src//images//varios//cartasMoviendose.gif");
-    ArrayList<Integer> puntajes;
-    ArrayList<Jugador> jugadores;
 
 
-    public ResultadosGUI(ArrayList<Jugador> jugadores, ArrayList<Integer> puntajes) {
+    public ResultadosGUI(MesaGUI mesaGUI) {
+        JLabel[][] etiquetas = {{jugador1Label, puntaje1Label}, {jugador2Label, puntaje2Label}, {jugador3Label, puntaje3Label}, {jugador4Label, puntaje4Label}};
+        ArrayList<Jugador> jugadores = mesaGUI.getRonda().getJugadores();
+
+        for (int i = 0; i < etiquetas.length; i++) {
+            etiquetas[i][0].setVisible(false);
+            etiquetas[i][1].setVisible(false);
+        }
+
+        for (int i = 0; i < jugadores.size(); i++) {
+            etiquetas[i][0].setText(jugadores.get(i).getNombre());
+            etiquetas[i][1].setText(String.valueOf(jugadores.get(i).getPuntaje()));
+            etiquetas[i][0].setVisible(true);
+            etiquetas[i][1].setVisible(true);
+        }
         add(panel1);
         iconoLabel.setIcon(icono);
-        this.puntajes = puntajes;
-        puntaje1Label.setText(String.valueOf(puntajes.get(0)));
-        puntaje2Label.setText(String.valueOf(puntajes.get(1)));
-        jugador1Label.setText(jugadores.get(0).getNombre());
-        jugador2Label.setText(jugadores.get(1).getNombre());
-        if (puntajes.size() < 3) {
-            puntaje3Label.setVisible(false);
-            jugador3Label.setVisible(false);
-        } else {
-            puntaje3Label.setText(String.valueOf(puntajes.get(2)));
-            jugador3Label.setText(jugadores.get(2).getNombre());
-        }
-        if (puntajes.size() < 4) {
-            puntaje4Label.setVisible(false);
-            jugador4Label.setVisible(false);
-        } else {
-            puntaje4Label.setText(String.valueOf(puntajes.get(3)));
-            jugador4Label.setText(jugadores.get(3).getNombre());
-        }
         this.pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         volverResultadosButton.addActionListener(this);
-        jugadores.sort(new Comparator<Jugador>() {
-            @Override
-            public int compare(Jugador o1, Jugador o2) {
-                if (o1.getPuntaje() < o2.getPuntaje()) {
-                    return -1;
-                }
-                if (o1.getPuntaje() > o2.getPuntaje()) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
-        if (jugadores.get(0).getPuntaje() > Reglas.getMejorPuntaje()) {
-            Reglas.setMejorPuntaje(puntajes.get(jugadores.get(0).getPuntaje()));
-            Reglas.setNombreMejorPuntaje(jugadores.get(0).getNombre());
-            GestorArchivos gestor = new GestorArchivos();
-
-            gestor.escribir(Reglas.getNombreMejorPuntaje(), "jugadorMayor");
-            gestor.escribir(String.valueOf(Reglas.getMejorPuntaje()), "puntajeMayor");
-        }
+        new TableroDePuntuacionesModelo().agregarRonda(mesaGUI.getRonda(), mesaGUI.getNivelInicial());
     }
 
-    public static void main(String[] args) {
-        ArrayList<Integer> ejemplo = new ArrayList<>();
-        ejemplo.add(2);
-        ejemplo.add(3);
-        ejemplo.add(4);
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(new Jugador("Pedro"));
-        jugadores.add(new Jugador("Jose"));
-        jugadores.add(new Jugador("Juan"));
-        new ResultadosGUI(jugadores, ejemplo).setVisible(true);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

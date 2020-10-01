@@ -24,6 +24,8 @@ import java.util.Collections;
 
 
 public class MesaGUI extends JFrame implements ActionListener {
+
+
     private JPanel panel;
 
     private JTable jugadoresTabla;
@@ -56,13 +58,15 @@ public class MesaGUI extends JFrame implements ActionListener {
     private JButton derechaBoton;
 
     private final int nivelFinal;
+    private final int nivelInicial;
 
 
-    private Ronda ronda; // Composición
+    private Ronda ronda; // Asociación
 
-    public MesaGUI(Ronda ronda, int nivelFinal) {
+    public MesaGUI(Ronda ronda, int nivelInicial, int nivelFinal) {
         this.ronda = ronda;
         this.nivelFinal = nivelFinal;
+        this.nivelInicial = nivelInicial;
         if (ronda.getNivel() <= nivelFinal) {
             ronda.comenzarRonda();
 
@@ -82,12 +86,15 @@ public class MesaGUI extends JFrame implements ActionListener {
             actualizar_CartasJugadorActualLista();
         } else {
             JOptionPane.showMessageDialog(this, "Error: nivelActual > nivelFinal!", "Error al crear Ronda", JOptionPane.ERROR_MESSAGE);
-            dispose();
+            //dispose();
         }
 
 
     }
 
+    public int getNivelInicial() {
+        return nivelInicial;
+    }
 
     public int getNivelFinal() {
         return nivelFinal;
@@ -262,20 +269,18 @@ public class MesaGUI extends JFrame implements ActionListener {
 
     private void finRonda() {
         if (ronda.getNivel() == nivelFinal) {
-            ArrayList<Integer> puntajesFinales = new ArrayList<>();
-            for (int i = 0; i < ronda.getJugadores().size(); i++) {
+           for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();
                 ronda.getJugadores().get(i).calcularPuntaje();
-                puntajesFinales.add(ronda.getJugadores().get(i).getPuntaje());
             }
-            new ResultadosGUI(ronda.getJugadores(), puntajesFinales).setVisible(true);
+            new ResultadosGUI(this).setVisible(true);
         } else {
             for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();
                 ronda.getJugadores().get(i).calcularPuntaje();
                 ronda.getJugadores().get(i).setPuntajeRonda(0);
             }
-            new MesaGUI(new Ronda(ronda.getJugadores(), ronda.getNivel() + 1), nivelFinal);
+            new MesaGUI(new Ronda(ronda.getJugadores(), ronda.getNivel() + 1), nivelInicial, nivelFinal).setVisible(true);
 
         }
         this.dispose();
@@ -527,7 +532,7 @@ public class MesaGUI extends JFrame implements ActionListener {
         cartas.add(new Carta("H", "2"));
 
 
-        MesaGUI a = new MesaGUI(ronda, 1);
+        MesaGUI a = new MesaGUI(ronda, 1, 2);
         a.setVisible(true);
         a.getRonda().getJugadorActual().setCartas(cartas);
 

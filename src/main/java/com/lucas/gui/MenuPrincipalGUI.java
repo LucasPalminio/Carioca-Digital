@@ -30,12 +30,7 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
         mejoresPuntajesButton.addActionListener(this);
         configuracionButton.addActionListener(this);
         salirButton.addActionListener(this);
-        GestorArchivos gestor = new GestorArchivos();
-        if (!gestor.verificarSiExiste("Carioca_Digital_Datos")) {
-            gestor.crearCarpeta();
-            gestor.crearArchivo("jugadorMayor");
-            gestor.crearArchivo("puntajeMayor");
-        }
+
     }
 
     public static void main(String[] args) {

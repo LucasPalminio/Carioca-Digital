@@ -27,3 +27,7 @@ hs_err_pid*
 Juego_Carioca.zip
 .out/
 .idea/
+#Cada ordenador almacenara su propia carpeta de datos, por lo tanto no debe estar en el repositorio
+src/datos/
+target/generated-sources/
+target/generated-test-sources/
