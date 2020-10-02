@@ -73,7 +73,7 @@ public class Utilidad {
     /**
      * Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca.
      * Al comienzo del juego, se llama este metodo para ingresar el nro de jugadores y sus respectivos nombres
-     * Basicamente en esta funcion se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
+     * Básicamente en esta función se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
      * @return  ArrayList de los objetos de la clase Jugador
      */
     public static ArrayList<Jugador> ingresarJugadores() {
@@ -246,7 +246,7 @@ public class Utilidad {
 
 
     /**
-     * Solo imprime solo el menu de opciones
+     * Este metodo solo imprime solo el menu de opciones
      * @param opciones
      */
     public static void imprimirSoloMenuOpciones(String[] opciones) {
@@ -279,8 +279,8 @@ public class Utilidad {
     }
 
     /**
-     *
-     * @param strNum
+     * String es numero verifica
+     * @param strNum lo que ingresa el usuario
      * @return
      * @throws NumberFormatException nfe  ocurre cuando intenta hacer algo como convertir un String
      * en un valor numérico, como un int, float, double, long, etc.

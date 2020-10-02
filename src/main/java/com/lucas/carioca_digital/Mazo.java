@@ -25,7 +25,7 @@ public class Mazo {
         return mazo;
     }
     /**
-     * Este metodo es para generar un mazo ordenado
+     * Este método es para generar un mazo ordenado
      * @return  2 barajas de cartas inglesas y 4 comodines(108 cartas en total)
      */
     private static ArrayList<Carta> generarMazoOrdenado() {
@@ -43,17 +43,16 @@ public class Mazo {
         return mazo;
     }
     /**
-     * Este metodo devuelve el numero de cartas que hay en el mazo
-     * @return
+     *
+     * @return devuelve el numero de cartas que hay en el mazo
      */
     protected int numeroDeCartas(){
         return mazo.size();
     }
 
     /**
-     * Cuando se saca una carta del mazo, el metodo retorna carta que se encuentra en la primera posicion
-     * y a la vez la elimina del mazo
-     * @return
+     * Este metodó se usa cuando se saca una carta del mazo
+     * @return el método retorna carta que se encuentra en la primera posición y a la vez la elimina del mazo
      */
     protected Carta sacarCarta(){
         Carta carta = mazo.get(0);
@@ -101,7 +100,7 @@ public class Mazo {
     }
 
     /**
-     *
+     * Remueve una carta del mazo
      * @param i indice de la carta desasda que sera desechada
      */
     protected void removeCarta(int i){
@@ -109,7 +108,7 @@ public class Mazo {
     }
 
     /**
-     *
+     * Añade una carta al mazo
      * @param i indice de la carta desasda que sera añadida a la mano del jugador
      */
     protected void addCarta(Carta i){

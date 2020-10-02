@@ -11,6 +11,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class TableroDePuntuacionesModelo extends DefaultTableModel {
+    /**
+     * En esta clase se administran los datos que se guardaran de la partida
+     * @param gestorCSV fichero de texto donde se guardaran los datos
+     * @param rutaCSV Es donde se guardara el archivo csv
+     * @param COLUMNAS Son los objetos que se guardaran en el gestorCSV
+     */
     private GestorCSV gestorCSV ;
     private String rutaCSV = "src//datos//tabla_resultado.csv";
     private final Object[] COLUMNAS = {"Ganador", "puntaje","nro Jugadores","nivel inicial", "nivel final", "fecha y hora"};
@@ -24,13 +30,20 @@ public class TableroDePuntuacionesModelo extends DefaultTableModel {
     }
 
     @Override
+    /**
+     * En este método es para deshabilitar la opción de editar  una  celda
+     */
     public boolean isCellEditable(int row, int column) {
         return false;
     }
 
-
+    /**
+     * En este método se gestiona lo que se va a guardara (Ganador, puntaje,nro Jugadores,nivel inicial, nivel final, fecha y hora)
+     * @param ronda en que nivel están jugando los usuarios
+     * @param nivelInicial en que nivel empezaron a jugar los usuarios
+     */
     public void agregarRonda(Ronda ronda, int nivelInicial){
-        //Ganador, puntaje,nro Jugadores,nivel inicial, nivel final, fecha y hora
+
         String[] datos = new String[6];
         LocalDateTime reloj = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/LLLL/yyyy HH:mm:ss");
@@ -49,6 +62,10 @@ public class TableroDePuntuacionesModelo extends DefaultTableModel {
         gestorCSV.escribirCSV(datos,rutaCSV);
         cargarRondas();
     }
+
+    /**
+     * Carga la información del archivo csv en la tabla de puntuaciones
+     */
     public void cargarRondas(){
         List<String[]> data = gestorCSV.leerCSV(rutaCSV);
         while (getRowCount()>0) removeRow(0);

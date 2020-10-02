@@ -8,7 +8,7 @@ public class Reglas {
      * ¿Existe la posibilidad de bajarse en el primer turno del juego?
      *
      * @param valoresReglas establece que al iniciar el juego, las reglas no esten activadas
-     * @param NombreMejorPuntaje es el jugador que obtuvo la menor puntuacion
+     * @param NombreMejorPuntaje es el jugador que obtuvo la menor puntuación
      * @param MejorPuntaje es el puntaje mas bajo
      */
     private static String NombreMejorPuntaje;
@@ -17,7 +17,7 @@ public class Reglas {
 
 
     /**
-     * @param i
+     * @param i posición del arreglo
      * @return genera un arreglo de la cantidad de reglas implementadas
      */
     public static boolean getValorRegla(int i) {
@@ -25,7 +25,7 @@ public class Reglas {
     }
 
     /**
-     * @param i  posicion de la regla en la tabla
+     * @param i  posición de la regla en la tabla
      * @param booleano verifica si la regla esta activada o no
      */
     public static void setRegla(int i, boolean booleano) {
@@ -40,7 +40,7 @@ public class Reglas {
     }
 
     /**
-     * @return
+     * @return Se activa el menu de trampas
      */
     public static boolean isModoDebug() {
         return valoresReglas[0];

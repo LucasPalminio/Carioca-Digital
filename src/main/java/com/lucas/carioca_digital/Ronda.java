@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Ronda {
     /**
-     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opcines
+     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opciones
      * que podra hacer el jugador
      * @param nivel El nivel actual de la ronda
      * @param mazo baraja de cartas ordenas aleatoriamente

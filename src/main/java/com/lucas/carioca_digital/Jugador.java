@@ -7,18 +7,18 @@ import java.util.Scanner;
 public class Jugador {
     /**
      * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
-     * cada ronda, como verificar si los trios y escalas son coerentes
-     *  @param nombre
-     * @param cartas
-     * @param puntaje
-     * @param puntajeRonda
+     * cada ronda, como verificar si los trios y escalas son coherentes
+     *  @param nombre en esta variable se guarda el nombre del usuario
+     * @param cartas Son las cartas que posee cada jugador
+     * @param puntaje Es el puntaje total de cada jugador
+     * @param puntajeRonda Es el el puntaje que se obtuvo en la ronda actual
      * @param bajoSuCarta Si el jugador bajo sus cartas en la ronda actual
      * @param yaSacoCarta Si el jugador ya saco carta en el turno actual
-     * @param matrizTrios
-     * @param matrizEscalas
-     * @param NROTRIOS_a_formar
-     * @param NROESCALAS_a_formar
-     * @param in
+     * @param matrizTrios Aquí es donde se almacena los trios cuan se baja
+     * @param matrizEscalas Aquí es donde se almacena las escalas cuan se baja
+     * @param NROTRIOS_a_formar Cantidad de trios a formar en cada ronda
+     * @param NROESCALAS_a_formar Cantidad de trios a formar en cada ronda
+     * @param in Aquí se almacena lo escrito por el usuario
      *
      */
     private final String nombre;
@@ -27,7 +27,7 @@ public class Jugador {
     private int puntajeRonda;
     private boolean bajoSusCarta;
     private boolean yaSacoCarta;
-    private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>(); //Matrices cuando se baja
+    private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>();
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
 
     public static Scanner in = new Scanner(System.in);

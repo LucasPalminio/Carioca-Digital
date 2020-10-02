@@ -75,7 +75,7 @@ public class Carta extends JLabel {
 
     /**
      *
-     * @return Funcion que devuelve la carta en formato String
+     * @return Función que devuelve la carta en formato String
      */
 
     public String toString(){

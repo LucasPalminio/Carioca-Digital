@@ -24,6 +24,38 @@ import java.util.Collections;
 
 
 public class MesaGUI extends JFrame implements ActionListener {
+    /**
+     * @param jugadoresTabla
+     * @param jugadoresTablaModelo
+     * @param jugadoresTabla
+     * @param escalasEnLaMesaTabla
+     * @param escalasEnLaMesaModelo
+     * @param triosEnLaMesaTabla
+     * @param triosEnLaMesaModelo
+     * @param botarCartaBoton
+     * @param bajarseBoton
+     * @param agregarTrioBoton
+     * @param agregarEscalaBoton
+     * @param cartasJugadorLista
+     * @param cartasJugadorListaModelo
+     * @param mazoBoton
+     * @param pozoBoton
+     * @param nroTriosLabel
+     * @param nroRondaLabel
+     * @param nroEscalasLabel
+     * @param modoDebugButton
+     * @param nombreJugadorLabel
+     * @param nroCartasLabel
+     * @param seHaBajadoLabel
+     * @param yaSacoCartaLabel
+     * @param yaSacoCartaLabel
+     * @param izquierdaBoton
+     * @param derechaBoton
+     * @param nivelFinal
+     * @param nivelInicial
+     * @param ronda
+     *
+     */
 
 
     private JPanel panel;
@@ -63,6 +95,12 @@ public class MesaGUI extends JFrame implements ActionListener {
 
     private Ronda ronda; // Asociación
 
+    /**
+     *
+     * @param ronda
+     * @param nivelInicial
+     * @param nivelFinal
+     */
     public MesaGUI(Ronda ronda, int nivelInicial, int nivelFinal) {
         this.ronda = ronda;
         this.nivelFinal = nivelFinal;

@@ -10,11 +10,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuConfiguracion extends JFrame implements ActionListener {
+    /**
+     * Esta clase se encarga de crear el panel de configuración
+     * @param panel1 Se ocupa para la creación de paneles
+     * @param volverAlMenuPrincipalButton Botón para volver al menu principal
+     * @param modoDiosCheckBox Se ocupa para activar el modo dios
+     * @param siUnJugadorSeCheckBox Se ocupa para activar la opción "Si un jugador se bajó, ¿Puede sacar carta del pozo?"
+     */
     private JPanel panel1;
     private JButton volverAlMenuPrincipalButton;
     private JCheckBox modoDiosCheckBox;
     private JCheckBox siUnJugadorSeCheckBox;
 
+    /**
+     * TOdas las opciones que están en el menu configuración (construye la ventana)
+     */
     public MenuConfiguracion() {
         add(panel1);
 
@@ -30,6 +40,7 @@ public class MenuConfiguracion extends JFrame implements ActionListener {
         modoDiosCheckBox.addActionListener(this);
         siUnJugadorSeCheckBox.addActionListener(this);
     }
+
 
     public static void main(String[] args) {
         new MenuConfiguracion().setVisible(true);
@@ -89,6 +100,9 @@ public class MenuConfiguracion extends JFrame implements ActionListener {
     }
 
     @Override
+    /**
+     * Revisa que ventana se va activar
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == volverAlMenuPrincipalButton) {
             this.setVisible(false);
