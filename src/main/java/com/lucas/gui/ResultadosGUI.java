@@ -14,7 +14,19 @@ import java.util.ArrayList;
 
 public class ResultadosGUI extends JFrame implements ActionListener {
 
-
+    /**
+     * @param panel1 Se usa para crear un panel
+     * @param puntaje1Label  etiqueta con el puntaje del jugador 1
+     * @param puntaje2Label  etiqueta con el puntaje del jugador 2
+     * @param puntaje3Label  etiqueta con el puntaje del jugador 3
+     * @param puntaje4Label  etiqueta con el puntaje del jugador 4
+     * @param volverResultadosButton botón para regresar a resultados
+     * @param jugador1Label etiqueta con el nombre del jugador 1
+     * @param jugador2Label etiqueta con el nombre del jugador 2
+     * @param jugador3Label etiqueta con el nombre del jugador 3
+     * @param jugador4Label etiqueta con el nombre del jugador 4
+     * @param icono Es la imagen seleccionada para mostrar
+     */
     private JPanel panel1;
     private JLabel puntaje1Label;
     private JLabel puntaje2Label;
@@ -29,6 +41,11 @@ public class ResultadosGUI extends JFrame implements ActionListener {
     ImageIcon icono = new ImageIcon("src//images//varios//cartasMoviendose.gif");
 
 
+    /**
+     * Constructor de la clase
+     * Muestra los nombres y resultados de cada jugador
+     * @param mesaGUI
+     */
     public ResultadosGUI(MesaGUI mesaGUI) {
         JLabel[][] etiquetas = {{jugador1Label, puntaje1Label}, {jugador2Label, puntaje2Label}, {jugador3Label, puntaje3Label}, {jugador4Label, puntaje4Label}};
         ArrayList<Jugador> jugadores = mesaGUI.getRonda().getJugadores();
@@ -52,7 +69,10 @@ public class ResultadosGUI extends JFrame implements ActionListener {
         new TableroDePuntuacionesModelo().agregarRonda(mesaGUI.getRonda(), mesaGUI.getNivelInicial());
     }
 
-
+    /**
+     * Este método devuelve al usuario a la pantalla de menu principal
+     * @param e  permite acceder a las propiedades de ActionEven
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

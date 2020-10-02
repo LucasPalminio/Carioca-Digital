@@ -10,6 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPrincipalGUI extends JFrame implements ActionListener {
+    /**
+     * @param jugarUnaPartidaButton botón para ir a la pantalla de jugar una
+     * @param mejoresPuntajesButton botón para ir a ver los puntajes
+     * @param salirButton botón para abandonar el programa
+     * @param panelMain panel principal
+     * @param logo etiqueta donde ira el logo del juego
+     * @param tituloLabel etiqueta del titulo
+     * @param imagenLogo logo del juego
+     */
     private JButton jugarUnaPartidaButton;
     private JButton mejoresPuntajesButton;
     private JButton configuracionButton;
@@ -20,6 +29,10 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
     ImageIcon imagenLogo = new ImageIcon("src//images//varios//logoPrincipal.png");
 
 
+    /**
+     * Este método es el constructor de la clase
+     * sirve como enlace para ir a las otras pantallas (guis)
+     */
     public MenuPrincipalGUI() {
 
         add(panelMain);
@@ -33,10 +46,18 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     *
+     * @param args se ocupa para enviarle valores al programa
+     */
     public static void main(String[] args) {
         new MenuPrincipalGUI().setVisible(true);
     }
 
+    /**
+     *
+     * @param e permite acceder a las propiedades de ActionEven
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jugarUnaPartidaButton) {

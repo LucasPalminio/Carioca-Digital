@@ -14,6 +14,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MenuJuego extends JFrame implements ActionListener {
+
+    /**
+     * @param panel1 variable para crear un panel
+     * @param volverAlMenúPrincipalButton botón para volver al menu principal
+     * @param comenzarLaPartidaButton botón para comenzar la partida
+     * @param rondaInicialComboBox despliega una lista con los niveles con el que deseamos iniciar la partida
+     * @param rondaFinalComboBox  despliega una lista con los niveles con el que deseamos finalizar la partida
+     * @param nroJugadoresComboBox despliega una lista con el numero de personas que pueden jugar
+     * @param jugador1textField aquí ira el nombre del jugador 1
+     * @param jugador2textField aquí ira el nombre del jugador 2
+     * @param jugador3textField aquí ira el nombre del jugador 3
+     * @param jugador4textField aquí ira el nombre del jugador 4
+     * @param blanco se usa para indicar que se puede escribir en el recuadro
+     * @param rojo se usa para indicar que no se puede escribir en el recuadro
+     * @param jugadores Lista con los jugadores
+     * @param nivelInicial
+     * @param nivelFinal
+     */
     private JPanel panel1;
     private JButton volverAlMenúPrincipalButton;
     private JButton comenzarLaPartidaButton;
@@ -30,11 +48,19 @@ public class MenuJuego extends JFrame implements ActionListener {
     int nivelInicial;
     int nivelFinal;
 
-
+    /**
+     *
+     * @param args se ocupa para enviarle valores al programa
+     */
     public static void main(String[] args) {
         new MenuJuego().setVisible(true);
     }
 
+    /**
+     * Constructor de la clase
+     * Este método reacciona a los clics que haga el jugador. Dependiendo sobre que botón lo haga el programa
+     * lo llevara aun distinta pantalla
+     */
     public MenuJuego() {
 
         $$$setupUI$$$();
@@ -136,6 +162,10 @@ public class MenuJuego extends JFrame implements ActionListener {
         return panel1;
     }
 
+    /**
+     * Aqui se crean las opciones que iran en las listas desplegables de numero de jugadores y
+     * ronda inicial y final
+     */
     private void createUIComponents() {
         // TODO: place custom component creation code here
         String[] opcionesRondaInicialComboBox = {"1", "2", "3", "4", "5", "6"};
@@ -146,6 +176,10 @@ public class MenuJuego extends JFrame implements ActionListener {
         nroJugadoresComboBox = new JComboBox(opcionesNroJugadoresComboBox);
     }
 
+    /**
+     *
+     * @param e permite acceder a las propiedades de ActionEven
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

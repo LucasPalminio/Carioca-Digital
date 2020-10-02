@@ -93,6 +93,11 @@ public class BajarseGUI extends JFrame implements ActionListener {
         this.add($$$getRootComponent$$$());
     }
 
+    /**
+     * Este método verifica  que las cartas que conforman a un trio sean de igual valor
+     * @param trio Son las cartas que conforman a un trio
+     * @return una escala formada
+     */
     public boolean esUnTrio(ArrayList<Carta> trio) {
         String valorEsperado = trio.get(0).getValor();
         for (int i = 0; i < 3; i++) {
@@ -108,6 +113,11 @@ public class BajarseGUI extends JFrame implements ActionListener {
         return true;
     }
 
+    /**
+     * Este método verifica  que las cartas que conforman a la escala sean del mismo palo
+     * @param escala Son las cartas que conforman a la escala
+     * @return una escala formada
+     */
     public boolean esUnaEscala(ArrayList<Carta> escala) {
 
         String paloEsperado = escala.get(0).getPalo(); //Corazon
@@ -135,6 +145,11 @@ public class BajarseGUI extends JFrame implements ActionListener {
         return true;
     }
 
+    /**
+     * Este método ocupa al método "esUnTrio" para verificar si las cartas son iguales
+     * @return en caso de que las cartas seleccionadas sean correctas se creara un trio y en caso contrario el programa
+     * avisara que hay un problema
+     */
     public ArrayList<Carta> bajarTrio() {
         String mensajeDeError = "";
         ArrayList<Carta> trio = (ArrayList<Carta>) list1.getSelectedValuesList();
@@ -161,6 +176,11 @@ public class BajarseGUI extends JFrame implements ActionListener {
         return null;
     }
 
+    /**
+     * Este método ocupa al método "esUnaEscala" para verificar si las cartas son de igual palo
+     * @return en caso de que las cartas seleccionadas sean correctas se creara una escala y en caso contrario el programa
+     * avisara que hay un problema
+     */
     public ArrayList<Carta> bajarEscala() {
         String mensajeDeError = "";
         ArrayList<Carta> escala = (ArrayList<Carta>) list1.getSelectedValuesList();
@@ -182,7 +202,8 @@ public class BajarseGUI extends JFrame implements ActionListener {
         } else {
             mensajeDeError = "No puede seguir construyendo escalas";
         }
-        JOptionPane.showMessageDialog(this, mensajeDeError, "Error: El jugador no selecciono un trio", JOptionPane.ERROR_MESSAGE);
+        //revisar
+        JOptionPane.showMessageDialog(this, mensajeDeError, "Error: El jugador no selecciono un trio (una escala???)", JOptionPane.ERROR_MESSAGE);
         return null;
     }
 
@@ -212,7 +233,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método crea
+     * Este método crea el botón para poder bajarse con una escala
      */
     private void formarEscalaButtonEvento() {
         ArrayList<Carta> escala = bajarEscala();
@@ -324,7 +345,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
     }
 
     /**
-     *
+     * Este método se encarga de crear toda la parte visual de la clase
      */
     private void createUIComponents() {
 
