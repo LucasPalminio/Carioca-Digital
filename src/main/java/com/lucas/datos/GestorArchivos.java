@@ -8,14 +8,17 @@ import java.util.Scanner;
 
 public class GestorArchivos {
     /**
-     * Esta clase se encarga de guardar, leer y gestionar
+     * Esta clase se encarga de guardar, leer y gestionar los datos a guardar
+     * Ademas de funcionar como clase padre para la clase GestorCSV
      */
 
     public GestorArchivos(){
 
     }
     /**
-     * Este metodo se encarga de crear una carpeta, verificar su existencia y si existe algun error al crearla
+     * Este método se encarga de crear una carpeta, verificar su existencia y si existe algún error al crearla
+     * @param nombreCarpeta Es el nombre de la carpeta en donde se almacenaran los datos
+     * @throws Exception e  Evento que ocurre durante la ejecución de un programa que interrumpe el flujo normal de instrucciones.
      */
     public void crearCarpeta(String nombreCarpeta){
         try {
@@ -34,6 +37,10 @@ public class GestorArchivos {
 
 
     }
+
+    /**
+     * Este método se encarga de crear una carpeta, verificar su existencia y si existe algún error al crearla
+     */
     public void crearCarpeta(){
         try {
             File carpeta = new File("Carioca_Digital_Datos");
@@ -50,8 +57,9 @@ public class GestorArchivos {
         }
     }
     /**
-     *
-     * @param ruta
+     * Este método se encarga de crear el archivo, obteniendo los datos y usando la ruta para almacenarlo
+     * @param ruta Es donde se encuentra el fichero
+     * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta.
      */
     public void crearArchivo(String ruta){
         try {
@@ -79,9 +87,10 @@ public class GestorArchivos {
     }
 
     /**
-     *
-     * @param mensaje
-     * @param ruta
+     *  Este método funciona como método padre para el almacenamiento de datos
+     * @param mensaje lo que se escribe en el archivo
+     * @param ruta Es donde se encuentra el fichero
+     * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta
      */
     public void escribir(String mensaje, String ruta){
         try {
@@ -106,8 +115,8 @@ public class GestorArchivos {
     }
 
     /**
-     * Este metodo se encarga de leer los datos guardados del juego
-     * @param ruta Es donde se encuetra el fichero
+     * Este método se encarga de leer los datos guardados del juego
+     * @param ruta Es donde se encuentra el fichero
      * @return en caso de que el archivo sea funcional
      */
     public String leer(String ruta){
@@ -129,9 +138,9 @@ public class GestorArchivos {
     }
 
     /**
-     * Este metodo se encarga
+     *
      * @param nombre nombre del archivo
-     * @return la validacion de que el archivo existe
+     * @return la validación de que el archivo existe
      */
     public boolean verificarSiExiste(String nombre){
         File archivo = new File(nombre);

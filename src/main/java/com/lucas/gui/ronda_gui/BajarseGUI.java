@@ -16,6 +16,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BajarseGUI extends JFrame implements ActionListener {
+    /**
+     * @param mesaDeJuego
+     * @param ronda
+     * @param panel1
+     * @param list1
+     * @param cartasArrayList
+     * @param formarTrioButton
+     * @param escalaTabla
+     * @param escalaTablaModelo
+     * @param triosTabla
+     * @param triosTablaModelo
+     * @param abortarBajarseButton
+     * @param formarEscalaButton
+     * @param escalasPorFormarLabel
+     * @param triosPorFormarLabel
+     * @param triosPorFormarLabel
+     * @param subirButton
+     * @param bajarButton
+     * @param modeloLista
+     * @param escalasAFormar
+     * @param triosAFormar
+     * @param matrizTrios
+     * @param matrizEscalas
+     */
 
     private final MesaGUI mesaDeJuego;
     private final Ronda ronda;
@@ -44,6 +68,10 @@ public class BajarseGUI extends JFrame implements ActionListener {
     private final ArrayList<ArrayList<Carta>> matrizEscalas;
 
 
+    /**
+     *
+     * @param mesaDeJuego
+     */
     public BajarseGUI(MesaGUI mesaDeJuego) {
         this.mesaDeJuego = mesaDeJuego;
         this.ronda = mesaDeJuego.getRonda();
@@ -183,6 +211,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Este método crea
+     */
     private void formarEscalaButtonEvento() {
         ArrayList<Carta> escala = bajarEscala();
         if (escala != null) {
@@ -197,6 +228,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Este método se usa cuando el usuario se arrepiente de bajarse
+     */
     private void abortarBajarseButtonEvento() {
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está que usted no desea bajarse?", "Abortar Bajarse", JOptionPane.YES_NO_OPTION);
         if (confirmacion == 0) { //Si realmente desea confirmar
@@ -224,6 +258,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     *
+     */
     private void bajarButtonEvento() {
         if (list1.getSelectedIndices().length == 1) { //Si selecciono solamente un indice
             int indice = list1.getSelectedIndex();
@@ -241,6 +278,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Este método muestra un panel confirmando que el usuario se bajo
+     */
     private void bajarseCompletado() {
         JOptionPane.showConfirmDialog(this, "Usted se ha bajado correctamente", "Usted se ha bajado", JOptionPane.OK_OPTION);
         ronda.getJugadorActual().setBajoSusCarta(true);
@@ -257,9 +297,9 @@ public class BajarseGUI extends JFrame implements ActionListener {
     }
 
     /**
-     * Invoked when an action occurs.
+     * Este método es invocado cuando se produce una acción.
      *
-     * @param e the event to be processed
+     * @param e Es el evento a ser procesado
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -283,8 +323,11 @@ public class BajarseGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     *
+     */
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         modeloLista = new DefaultListModel();
         for (Carta carta : cartasArrayList) {
