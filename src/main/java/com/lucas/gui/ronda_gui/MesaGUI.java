@@ -268,6 +268,7 @@ public class MesaGUI extends JFrame implements ActionListener {
     }
 
     private void finRonda() {
+        ronda.limpiarMatrizJugadores();
         if (ronda.getNivel() == nivelFinal) {
            for (int i = 0; i < ronda.getJugadores().size(); i++) {
                 ronda.getJugadores().get(i).calcularPuntajeRonda();

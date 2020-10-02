@@ -106,7 +106,12 @@ public class Ronda {
         //Se llama al sgte metodo: desarrolloRonda,
         //desarrolloRonda();
     }
+    public void limpiarMatrizJugadores(){
+        for (Jugador jugador:jugadores) {
+            jugador.limpiarMatriz();
 
+        }
+    }
 
     public Carta getPrimeraCartaDelPozo(){
         return pozo.get(0);

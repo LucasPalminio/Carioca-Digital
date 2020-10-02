@@ -1,16 +1,9 @@
 package com.lucas.datos;
 
-import com.lucas.carioca_digital.Jugador;
-import com.lucas.carioca_digital.Reglas;
-import com.lucas.carioca_digital.Ronda;
-import com.lucas.gui.ResultadosGUI;
-import com.lucas.gui.ronda_gui.MesaGUI;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorArchivos {
