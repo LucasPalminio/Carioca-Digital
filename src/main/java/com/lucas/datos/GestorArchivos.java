@@ -11,23 +11,29 @@ import java.util.Scanner;
  */
 public class GestorArchivos {
     /**
+     * Es la ruta donde el gestor archivos puede interactuar
+     */
+    protected final String CARPETA_DATOS = "src//datos//";
+    /**
      * Crea el gestor de archivos genérico
      */
-
     public GestorArchivos(){
 
     }
     /**
      * Este método se encarga de crear una carpeta, verificar su existencia y si existe algún error al crearla
-     * @param nombreCarpeta Es el nombre de la carpeta en donde se almacenaran los datos
+     * @param ruta Es la ruta de la carpeta en donde se almacenaran los datos
      * @throws Exception e  Evento que ocurre durante la ejecución de un programa que interrumpe el flujo normal de instrucciones.
      */
-    public void crearCarpeta(String nombreCarpeta){
+    public void crearCarpeta(String ruta){
         try {
-            File carpeta = new File("Carioca_Digital_Datos//"+nombreCarpeta);
+            File carpeta = new File(CARPETA_DATOS +ruta);
             if(!carpeta.exists()) {
+                if(carpeta.getParentFile() != null){
+                    carpeta.getParentFile().mkdirs();
+                }
                 if (carpeta.mkdir()) {
-                    System.out.println("Se ha creado la carpeta de datos");
+                    System.out.println("Se ha creado la carpeta "+ruta);
                 }
             }else{
                 System.out.println("La carpeta ya existe");
@@ -40,24 +46,7 @@ public class GestorArchivos {
 
     }
 
-    /**
-     * Este método se encarga de crear una carpeta, verificar su existencia y si existe algún error al crearla
-     */
-    public void crearCarpeta(){
-        try {
-            File carpeta = new File("Carioca_Digital_Datos");
-            if(!carpeta.exists()) {
-                if (carpeta.mkdir()) {
-                    System.out.println("Se ha creado la carpeta de datos");
-                }
-            }else{
-                System.out.println("La carpeta ya existe");
-            }
-        }catch (Exception e){
-            System.out.println("Ha ocurrido un error al crear la carpeta");
-            System.out.println(e.getMessage());
-        }
-    }
+
     /**
      * Este método se encarga de crear el archivo, obteniendo los datos y usando la ruta para almacenarlo
      * @param ruta Es donde se encuentra el fichero
@@ -66,7 +55,7 @@ public class GestorArchivos {
     public void crearArchivo(String ruta){
         try {
 
-            File archivo = new File(ruta);
+            File archivo = new File(CARPETA_DATOS +ruta);
             if(archivo.getParentFile() != null){
                 archivo.getParentFile().mkdirs();
             }
@@ -95,6 +84,7 @@ public class GestorArchivos {
      * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta
      */
     public void escribir(String mensaje, String ruta){
+        ruta = CARPETA_DATOS + ruta;
         try {
             File archivo = new File( ruta);
             if (!archivo.exists()) {
@@ -122,6 +112,7 @@ public class GestorArchivos {
      * @return en caso de que el archivo sea funcional
      */
     public String leer(String ruta){
+        ruta = CARPETA_DATOS + ruta;
         String contenido = "";
         try {
             File archivo = new File(ruta);
@@ -141,12 +132,27 @@ public class GestorArchivos {
 
     /**
      *
-     * @param nombre nombre del archivo
+     * @param ruta ruta del archivo, puede ser relativa o absoluta
      * @return la validación de que el archivo existe
      */
-    public boolean verificarSiExiste(String nombre){
-        File archivo = new File(nombre);
+    public boolean verificarSiExiste(String ruta){
+        ruta = CARPETA_DATOS + ruta;
+        File archivo = new File(ruta);
         return archivo.exists();
+    }
+
+    /**
+     *
+     * @param ruta ruta del archivo a borrar, puede ser relativa o absoluta
+     */
+
+    public void eliminarArchivo(String ruta){
+        ruta = CARPETA_DATOS + ruta;
+        File archivo = new File(ruta);
+        if (archivo.exists()) {
+            archivo.delete();
+        }
+
     }
 
 }

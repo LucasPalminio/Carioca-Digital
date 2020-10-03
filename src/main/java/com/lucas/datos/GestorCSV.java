@@ -28,7 +28,7 @@ public class GestorCSV extends GestorArchivos{
             if(!verificarSiExiste(ruta)) {
                 crearArchivo(ruta);
             }
-            CSVWriter writer = new CSVWriter(new FileWriter(ruta, true));
+            CSVWriter writer = new CSVWriter(new FileWriter(CARPETA_DATOS+ruta, true));
             for (String[] fila:data){
                 writer.writeNext(fila);
             }
@@ -51,7 +51,7 @@ public class GestorCSV extends GestorArchivos{
             if(!verificarSiExiste(ruta)) {
                 crearArchivo(ruta);
             }
-            CSVWriter writer = new CSVWriter(new FileWriter(ruta, true));
+            CSVWriter writer = new CSVWriter(new FileWriter(CARPETA_DATOS+ruta, true));
             writer.writeNext(fila);
             writer.close();
 
@@ -73,7 +73,7 @@ public class GestorCSV extends GestorArchivos{
                 crearArchivo(ruta);
             }
             // create a reader
-            Reader reader = Files.newBufferedReader(Paths.get(ruta));
+            Reader reader = Files.newBufferedReader(Paths.get(CARPETA_DATOS+ruta));
 
             // create csv reader
             CSVReader csvReader = new CSVReader(reader);

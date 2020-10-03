@@ -5,15 +5,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GestorArchivosTest {
+
     /**
      * Este test verifica la existencia de una carpeta, si no esta el gestor de archivo debe crearla
      */
     @Test
     public void crearCarpeta() {
         GestorArchivos gestorArchivos = new GestorArchivos();
-        String nombreCarpeta = "Test";
-        gestorArchivos.crearCarpeta(nombreCarpeta);
-        assertTrue(gestorArchivos.verificarSiExiste("Carioca_Digital_Datos//"+nombreCarpeta));
+        String ruta = "src//datos//gestor_archivo_test//";
+        gestorArchivos.crearCarpeta(ruta);
+        assertTrue(gestorArchivos.verificarSiExiste(ruta));
 
     }
 

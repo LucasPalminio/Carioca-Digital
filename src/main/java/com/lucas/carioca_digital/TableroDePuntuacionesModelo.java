@@ -22,7 +22,7 @@ public class TableroDePuntuacionesModelo extends DefaultTableModel {
     /**
      * Es donde se guardara el archivo csv
      */
-    private String rutaCSV = "src//datos//tabla_resultado.csv";
+    private String rutaCSV = "tabla_resultado.csv";
     /**
      * Son los objetos que se guardaran en el gestorCSV
      */
