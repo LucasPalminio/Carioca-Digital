@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class GestorArchivos {
     /**
-     * Es la ruta donde el gestor archivos puede interactuar
+     * Como medida de seguridad, el gestor archivos esta limitado solamente en la carpeta src//datos//
      */
     protected final String CARPETA_DATOS = "src//datos//";
     /**
@@ -78,7 +78,7 @@ public class GestorArchivos {
     }
 
     /**
-     *  Este método funciona como método padre para el almacenamiento de datos
+     *  Este método es para escribir en un archivo
      * @param mensaje lo que se escribe en el archivo
      * @param ruta Es donde se encuentra el fichero
      * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta
