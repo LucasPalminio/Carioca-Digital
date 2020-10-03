@@ -4,8 +4,13 @@ package com.lucas.carioca_digital;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Esta clase almacena el mazo de cartas y métodos relacionados a este
+ */
 public class Mazo {
+    /**
+     * Es el mazo de cartas
+     */
     private final ArrayList<Carta> mazo;
 
     /**

@@ -1,18 +1,22 @@
 package com.lucas.carioca_digital;
 
+/**
+ * En la clase Reglas es donde el jugador puede eligir que reglas que desea utilizar en el juego. Estas son:
+ * Modo DIOS : Al activar esta regla se activa en el menu del jugador un sub-menu para hacer trampas, esto con la finalidad de hacer un debug mas rapido y detectar facilmente fallas (Se esta implementando),
+ * ¿Si el jugador se bajo , puede sacar carta del pozo?
+ */
 public class Reglas {
     /**
-     * En la clase Reglas es donde el jugador puede eligir que reglas que desea utilizar en el juego. Estas son:
-     * Modo DIOS : Al activar esta regla se activa en el menu del jugador un sub-menu para hacer trampas, esto con la finalidad de hacer un debug mas rapido y detectar facilmente fallas (Se esta implementando)
-     * ¿Si el jugador se bajo , puede sacar carta del pozo?
-     * ¿Existe la posibilidad de bajarse en el primer turno del juego?
-     *
-     * @param valoresReglas establece que al iniciar el juego, las reglas no esten activadas
-     * @param NombreMejorPuntaje es el jugador que obtuvo la menor puntuación
-     * @param MejorPuntaje es el puntaje mas bajo
+     * Es el jugador que obtuvo la menor puntuación
      */
     private static String NombreMejorPuntaje;
+    /**
+     * Es el puntaje mas bajo
+     */
     private static int MejorPuntaje;
+    /**
+     * Establece que al iniciar el juego, las reglas no esten activadas
+     */
     private static final boolean[] valoresReglas = {false, false, false};
 
 

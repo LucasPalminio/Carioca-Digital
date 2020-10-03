@@ -4,18 +4,13 @@ import com.lucas.utilidad.Utilidad;
 
 import java.util.ArrayList;
 
+/**
+ * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opciones
+ * que podra hacer el jugador
+ */
 public class Ronda {
     /**
-     * Una clase que genera todo lo relacionado a la ronda, tanto el nivel que se jugara como las opciones
-     * que podra hacer el jugador
-     * @param nivel El nivel actual de la ronda
-     * @param mazo baraja de cartas ordenas aleatoriamente
-     * @param Jugador arreglo de los jugadores que jugaran
-     * @param Carta arreglo de las cartas de cada jugador
-     * @param NROESCALAS numero de escalas que hay que formar en esta ronda
-     * @param NROTRIOS Numero de trios que hay que formar en esta ronda
-     * @param turnoActual turno actual que se usa como indice para el arreglo de jugadores
-     *
+     * Se crean los requisitos para cada ronda
      */
     public static final int[][] RONDAS = { //Hacer ENUM
             //{Escala, Trio} ; 6,7,8,9,10,11
@@ -26,12 +21,33 @@ public class Ronda {
             {1, 2}, // 1 escala y 2 trios, nivel 5
             {2, 1} //2 escalas y 1 trio, nivel 6
     };
+    /**
+     * El nivel actual de la ronda
+     */
     private final int nivel; // El nivel actual de la ronda
+    /**
+     * Arreglo de los jugadores que jugaran
+     */
     private ArrayList<Jugador> jugadores;
+    /**
+     * Baraja de cartas ordenas aleatoriamente
+     */
     private final Mazo mazo;
+    /**
+     * Pozo al cual se botan las cartas
+     */
     private final ArrayList<Carta> pozo = new ArrayList<Carta>();
+    /**
+     * Numero de escalas que hay que formar en esta ronda
+     */
     private final int NROESCALAS_A_FORMAR; //Nro de escalas que hay que formar en esta ronda
+    /**
+     * Numero de trios que hay que formar en esta ronda
+     */
     private final int NROTRIOS_A_FORMAR; //Nro de trios que hay que formar en esta ronda
+    /**
+     * Turno actual que se usa como indice para el arreglo de jugadores
+     */
     private int turnoActual; //turno actual que se usa como indice para el arreglo de jugadores
 
     /**

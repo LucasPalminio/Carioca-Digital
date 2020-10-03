@@ -4,31 +4,46 @@ package com.lucas.carioca_digital;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
+ *  cada ronda, como verificar si los trios y escalas son coherentes
+ */
 public class Jugador {
     /**
-     * Esta clase se encarga de las cartas que posee el jugador, tanto como para asignar el puntaje al final de
-     * cada ronda, como verificar si los trios y escalas son coherentes
-     *  @param nombre en esta variable se guarda el nombre del usuario
-     * @param cartas Son las cartas que posee cada jugador
-     * @param puntaje Es el puntaje total de cada jugador
-     * @param puntajeRonda Es el el puntaje que se obtuvo en la ronda actual
-     * @param bajoSuCarta Si el jugador bajo sus cartas en la ronda actual
-     * @param yaSacoCarta Si el jugador ya saco carta en el turno actual
-     * @param matrizTrios Aquí es donde se almacena los trios cuan se baja
-     * @param matrizEscalas Aquí es donde se almacena las escalas cuan se baja
-     * @param NROTRIOS_a_formar Cantidad de trios a formar en cada ronda
-     * @param NROESCALAS_a_formar Cantidad de trios a formar en cada ronda
-     * @param in Aquí se almacena lo escrito por el usuario
-     *
+     * En esta variable se guarda el nombre del usuario
      */
     private final String nombre;
+    /**
+     * Son las cartas que posee cada jugador
+     */
     private ArrayList<Carta> cartas = new ArrayList<>();
+    /**
+     * Es el puntaje total de cada jugador
+     */
     private int puntaje;
+    /**
+     * Es el el puntaje que se obtuvo en la ronda actual
+     */
     private int puntajeRonda;
+    /**
+     * Si el jugador bajo sus cartas en la ronda actual
+     */
     private boolean bajoSusCarta;
+    /**
+     * Si el jugador ya saco carta en el turno actual
+     */
     private boolean yaSacoCarta;
+    /**
+     * Aquí es donde se almacena los trios cuan se baja
+     */
     private ArrayList<ArrayList<Carta>> matrizTrios = new ArrayList<ArrayList<Carta>>();
+    /**
+     * Aquí es donde se almacena las escalas cuan se baja
+     */
     private ArrayList<ArrayList<Carta>> matrizEscalas =  new ArrayList<ArrayList<Carta>>();
+    /**
+     * Aquí se almacena lo escrito por el usuario
+     */
 
     public static Scanner in = new Scanner(System.in);
 

@@ -10,15 +10,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Esta clase administra el guardado de datos permanentes en el equipo a través del uso de gestores de archivos y los muestra a través de las GUI
+ */
 public class TableroDePuntuacionesModelo extends DefaultTableModel {
+
     /**
-     * En esta clase se administran los datos que se guardaran de la partida
-     * @param gestorCSV fichero de texto donde se guardaran los datos
-     * @param rutaCSV Es donde se guardara el archivo csv
-     * @param COLUMNAS Son los objetos que se guardaran en el gestorCSV
+     * Fichero de texto donde se guardaran los datos
      */
     private GestorCSV gestorCSV ;
+    /**
+     * Es donde se guardara el archivo csv
+     */
     private String rutaCSV = "src//datos//tabla_resultado.csv";
+    /**
+     * Son los objetos que se guardaran en el gestorCSV
+     */
     private final Object[] COLUMNAS = {"Ganador", "puntaje","nro Jugadores","nivel inicial", "nivel final", "fecha y hora"};
 
     public TableroDePuntuacionesModelo() {
@@ -28,11 +35,11 @@ public class TableroDePuntuacionesModelo extends DefaultTableModel {
         cargarRondas();
 
     }
-
-    @Override
     /**
      * En este método es para deshabilitar la opción de editar  una  celda
      */
+    @Override
+
     public boolean isCellEditable(int row, int column) {
         return false;
     }
