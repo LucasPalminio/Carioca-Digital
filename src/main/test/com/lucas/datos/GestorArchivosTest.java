@@ -18,6 +18,9 @@ public class GestorArchivosTest {
 
     }
 
+    /**
+     * Este test crea un archivo de texto
+     */
     @Test
     public void crearArchivo() {
         GestorArchivos gestorArchivos = new GestorArchivos();

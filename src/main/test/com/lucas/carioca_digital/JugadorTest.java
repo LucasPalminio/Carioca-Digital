@@ -37,6 +37,9 @@ public class JugadorTest {
 
     }
 
+    /**
+     * Este test su uso para comprobar si las cartas que eligio el jugador son iguales para crear un trio
+     */
     @Test
     public void getArrayObject() {
         Jugador jugador = new Jugador("test");
