@@ -147,7 +147,7 @@ public class Jugador {
     /**
      * cambia el valor del atributo "bajoSusCartas"
      *
-     * @param bajoSusCarta
+     * @param bajoSusCarta Indicador de si el jugador ha bajado sus cartas
      */
     public void setBajoSusCarta(boolean bajoSusCarta) {
         this.bajoSusCarta = bajoSusCarta;
@@ -163,7 +163,7 @@ public class Jugador {
     /**
      * se instancia yaSacoCarta en la clase actual
      *
-     * @param yaSacoCarta
+     * @param yaSacoCarta Indicador de si el jugador actual se ha bajado
      */
     public void setYaSacoCarta(boolean yaSacoCarta) {
         this.yaSacoCarta = yaSacoCarta;

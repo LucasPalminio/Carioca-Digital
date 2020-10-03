@@ -73,7 +73,7 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
 
     /**
      * Este método crea la ventana para acceder al menu Debug
-     * @param mesaGUI
+     * @param mesaGUI Mesa en la que se está jugando actualmente
      */
     public MenuDebugGUI(MesaGUI mesaGUI) {
         this.mesaGUI = mesaGUI;
@@ -152,9 +152,7 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         panel3.add(confirmarCambiosButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
-    /**
-     * @noinspection ALL
-     */
+
     public JComponent $$$getRootComponent$$$() {
         return panelPadre;
     }

@@ -44,7 +44,6 @@ public class GestorCSV extends GestorArchivos{
      * Crea el archivo a guardar solo si no existe
      * @param fila linea que se edita
      * @param ruta donde se almacena el archivo
-     * @throw IOException ex Error producido por una operación de entrada o salida que falla o se interpreta
      */
     public void escribirCSV(String[] fila, String ruta){
         try {
@@ -64,7 +63,6 @@ public class GestorCSV extends GestorArchivos{
     /**
      *
      * @param ruta Es donde se almacenará el archivo
-     * @throws IOException ex Error producido por una operación de entrada o salida que falla o se interpreta
      * @return Toma la lista para devolver los datos de cada fila
      */
     public List<String[]> leerCSV(String ruta){

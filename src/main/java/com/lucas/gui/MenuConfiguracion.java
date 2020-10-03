@@ -94,9 +94,7 @@ public class MenuConfiguracion extends JFrame implements ActionListener {
         panel3.add(siUnJugadorSeCheckBox, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
-    /**
-     * @noinspection ALL
-     */
+
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
@@ -107,22 +105,40 @@ public class MenuConfiguracion extends JFrame implements ActionListener {
     }
 
     @Override
-    /**
-     * Revisa que ventana se va activar
-     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == volverAlMenuPrincipalButton) {
-            this.setVisible(false);
-            new MenuPrincipalGUI().setVisible(true);
-            this.dispose();
+volverAlMenuPrincipalButtonEvento();
         }
         if (e.getSource() == modoDiosCheckBox) {
 
-            Reglas.setRegla(0, !Reglas.getValorRegla(0));
+modoDiosCheckBoxEvento();
         }
         if (e.getSource() == siUnJugadorSeCheckBox) {
-            Reglas.setRegla(1, !Reglas.getValorRegla(1));
+siUnJugadorSeCheckBoxEvento();
         }
 
+    }
+
+    /**
+     * Vuelve a la ventana del menú principal
+     */
+    public void volverAlMenuPrincipalButtonEvento(){
+        this.setVisible(false);
+        new MenuPrincipalGUI().setVisible(true);
+        this.dispose();
+    }
+
+    /**
+     * Alterna la casila del modo dios
+     */
+    public void modoDiosCheckBoxEvento(){
+        Reglas.setRegla(0, !Reglas.getValorRegla(0));
+    }
+
+    /**
+     * Alterna la casilla de la regla: "Si un jugador se bajó, ¿Puede sacar carta del pozo?"
+     */
+    public void siUnJugadorSeCheckBoxEvento(){
+        Reglas.setRegla(1, !Reglas.getValorRegla(1));
     }
 }

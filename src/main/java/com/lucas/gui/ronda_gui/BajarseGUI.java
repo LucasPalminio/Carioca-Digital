@@ -106,7 +106,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
 
     /**
      *  Este método crea la ventana para bajarse
-     * @param mesaDeJuego
+     * @param mesaDeJuego Mesa en la que se está jugando actualmente y toda la información relevante
      */
     public BajarseGUI(MesaGUI mesaDeJuego) {
         this.mesaDeJuego = mesaDeJuego;
@@ -470,9 +470,7 @@ public class BajarseGUI extends JFrame implements ActionListener {
         panel4.add(formarTrioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
-    /**
-     * @noinspection ALL
-     */
+
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }

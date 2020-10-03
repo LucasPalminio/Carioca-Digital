@@ -93,16 +93,12 @@ public class TableroDePuntuaciones extends JFrame implements ActionListener {
         panel3.add(noDisponibleLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
-    /**
-     * @noinspection ALL
-     */
+
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
 
-    /**
-     *
-     */
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
 

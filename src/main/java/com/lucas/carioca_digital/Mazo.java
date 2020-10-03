@@ -67,7 +67,7 @@ public class Mazo {
 
     /**
      *
-     * @param nroCartas
+     * @param nroCartas Número de cartas a sacar del mazo
      * @return devuelve un ArrayList de cartas con un numero de cartas sacadas del mazo
      */
     protected ArrayList<Carta> sacarUnNumeroDeCartas(int nroCartas){

@@ -37,7 +37,7 @@ public class Reglas {
     }
 
     /**
-     * @param i
+     * @param i Valor de la regla a alternar
      */
     public static void alternarValorRegla(int i) {
         valoresReglas[i] = !valoresReglas[i];
@@ -77,7 +77,7 @@ public class Reglas {
 
     /**
      *  Se establece el puntaje mejor puntaje entre los jugadores
-     * @param mejorPuntaje
+     * @param mejorPuntaje Mejor puntaje obtenido en la partida
      */
     public static void setMejorPuntaje(int mejorPuntaje) {
         MejorPuntaje = mejorPuntaje;
