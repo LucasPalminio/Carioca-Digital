@@ -14,21 +14,67 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Esta clase sirve para acceder al menú Debug pensado para el desarrollo del programa
+ */
 public class MenuDebugGUI extends JFrame implements ActionListener {
+    /**
+     * ComboBox que permite seleccionar el palo de la carta que se desea crear
+     */
     private JComboBox paloComboBox1;
+    /**
+     * ComboBox que permite seleccionar el valor de la carta que se desea crear
+     */
     private JComboBox valorComboBox2;
+    /**
+     * Botón que sirve para crear la carta según las especificaciones dadas
+     */
     private JButton crearCartaButton;
+    /**
+     * Tabla que muestra las cartas de cada jugador
+     */
     private JTable table1;
+    /**
+     * Botón usado para eliminar la carta seleccionada de la mano del jugador actual
+     */
     private JButton eliminarCartaButton;
+    /**
+     * Lista que muestra las cartas de la mano del jugador actual
+     */
     private JList cartasList1;
+    /**
+     * Botón que permite confirmar los cambios y volver a la partida
+     */
     private JButton confirmarCambiosButton;
+    /**
+     * Panel principal que muestra la ventana del menú Debug
+     */
     private JPanel panelPadre;
+    /**
+     * Etiqueta que muestra una vista anticipada de la carta a crear
+     */
     private JLabel cartaLabel;
+    /**
+     * Ronda que se juega actualmente
+     */
     private final Ronda ronda;
+    /**
+     * Mesa que será afectada por los cambios en menú debug
+     */
     private final MesaGUI mesaGUI;
+    /**
+     * Arraylist que contiene las cartas del jugador actual
+     */
     private final ArrayList<Carta> cartasJugadorArrayList;
+    /**
+     * Carta que puede ser creada indicando ciertas especificaciones
+     */
     private Carta cartaACrear;
 
+    /**
+     * Este método crea la ventana para acceder al menu Debug
+     * @param mesaGUI
+     */
     public MenuDebugGUI(MesaGUI mesaGUI) {
         this.mesaGUI = mesaGUI;
         this.ronda = mesaGUI.getRonda();
@@ -149,6 +195,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         if (e.getSource() == confirmarCambiosButton) confirmarCambiosButtonEvento();
     }
 
+    /**
+     * Este método permite seleccionar el palo de la carta a crear
+     */
     private void paloComboBoxEvento() {
 
         if (paloComboBox1.getSelectedItem().equals("JKR")) {
@@ -162,6 +211,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Este método permite seleccionar el valor de la carta a crear
+     */
     private void valorComboBoxEvento() {
         int indicePalo = paloComboBox1.getSelectedIndex();
         String palo = Carta.PALOS[indicePalo];
@@ -170,6 +222,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         cartaLabel.setIcon(cartaACrear.getIcon());
     }
 
+    /**
+     * Este método permite crear la carta según la información seleccionada
+     */
     private void crearCartaButtonEvento() {
         if (cartaACrear != null) {
             cartasJugadorArrayList.add(0, cartaACrear);
@@ -177,6 +232,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Este método elimina la carta seleccionada de la mano del jugador actual
+     */
     private void eliminarCartaButtonEvento() {
         if (cartasList1.getSelectedIndices().length >= 1) {
             for (Carta cartaAEliminar : (ArrayList<Carta>) cartasList1.getSelectedValuesList()) {
@@ -189,6 +247,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Este método permite salir del menú Debug y volver a la partida con los cambios hechos
+     */
     private void confirmarCambiosButtonEvento() {
         int opcion = JOptionPane.showConfirmDialog(this, "¿Desea confirmar los cambios y salir?", "Confirmar Cambios", JOptionPane.YES_NO_OPTION);
         if (opcion == 0) {
@@ -200,6 +261,9 @@ public class MenuDebugGUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Este método actualiza la lista de cartas que contiene la mano del jugador actual
+     */
     private void actualizarListaCartas() {
 
         DefaultListModel cartasList1Model = new DefaultListModel();
