@@ -17,59 +17,95 @@ import java.util.Collections;
 
 public class BajarseGUI extends JFrame implements ActionListener {
     /**
-     * @param mesaDeJuego
-     * @param ronda
-     * @param panel1
-     * @param list1
-     * @param cartasArrayList
-     * @param formarTrioButton
-     * @param escalaTabla
-     * @param escalaTablaModelo
-     * @param triosTabla
-     * @param triosTablaModelo
-     * @param abortarBajarseButton
-     * @param formarEscalaButton
-     * @param escalasPorFormarLabel
-     * @param triosPorFormarLabel
-     * @param triosPorFormarLabel
-     * @param subirButton
-     * @param bajarButton
-     * @param modeloLista
-     * @param escalasAFormar
-     * @param triosAFormar
-     * @param matrizTrios
-     * @param matrizEscalas
+     * Mesa a la cual esta ventana está vinculada para enviar las escalas o trios bajados
      */
 
     private final MesaGUI mesaDeJuego;
+    /**
+     * Ronda que actualmente se está jugando
+     */
     private final Ronda ronda;
+    /**
+     * Panel principal que despliega esta GUI
+     */
     private JPanel panel1;
+    /**
+     * Lista donde se mostrarán las cartas de la mano del jugador actual
+     */
     private JList<Carta> list1;
+    /**
+     * Cartas del jugador actual
+     */
     private final ArrayList<Carta> cartasArrayList;
+    /**
+     * Botón usado para formar un trío con las cartas seleccionadas
+     */
     private JButton formarTrioButton;
+    /**
+     * Tabla que contiene las escalas formadas por el jugador
+     */
     private JTable escalaTabla;
+    /**
+     * Modelo usado para crear la escalaTabla
+     */
     private DefaultTableModel escalaTablaModelo;
-
+    /**
+     * Tabla que contiene los tríos formados por el jugador
+     */
     private JTable triosTabla;
+    /**
+     * Modelo usado para crear la triosTabla
+     */
     private DefaultTableModel triosTablaModelo;
+    /**
+     * Botón que permite anular la acción de bajarse y vuelve a la MesaGUI
+     */
     private JButton abortarBajarseButton;
+    /**
+     * Botón que permite formar escalas válidas a partir de las cartas seleccionadas de la mano
+     */
     private JButton formarEscalaButton;
+    /**
+     * Etiqueta que representa las escalas a formar necesarias en la ronda actual
+     */
     private JLabel escalasPorFormarLabel;
+    /**
+     * Etiqueta que representa los tríos a formar necesarios en la ronda actual
+     */
     private JLabel triosPorFormarLabel;
+    /**
+     * Botón que permite subir de posición las cartas de la mano
+     */
     private JButton subirButton;
+    /**
+     * Botón que permite bajar de posición las cartas de la mano
+     */
     private JButton bajarButton;
-
+    /**
+     * Modelo que sirve para formar la lista que contiene las cartas de la mano del jugador actual
+     */
     private DefaultListModel modeloLista;
-
+    /**
+     * Escalas a formar en la ronda actual
+     */
     private int escalasAFormar;
+    /**
+     * Trios a formar en la ronda actual
+     */
     private int triosAFormar;
+    /**
+     * Matriz que contiene los tríos que se han formado
+     */
 
     private final ArrayList<ArrayList<Carta>> matrizTrios;
+    /**
+     * Matriz que contiene las escalas que se han formado
+     */
     private final ArrayList<ArrayList<Carta>> matrizEscalas;
 
 
     /**
-     *
+     *  Este método crea la ventana para bajarse
      * @param mesaDeJuego
      */
     public BajarseGUI(MesaGUI mesaDeJuego) {
