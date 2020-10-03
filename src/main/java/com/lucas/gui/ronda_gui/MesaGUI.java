@@ -22,84 +22,130 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Esta clase es la GUI principal del programa permitiendo ejecutar correctamente una partida de carioca
+ */
 public class MesaGUI extends JFrame implements ActionListener {
+
     /**
-     * @param jugadoresTabla
-     * @param jugadoresTablaModelo
-     * @param jugadoresTabla
-     * @param escalasEnLaMesaTabla
-     * @param escalasEnLaMesaModelo
-     * @param triosEnLaMesaTabla
-     * @param triosEnLaMesaModelo
-     * @param botarCartaBoton
-     * @param bajarseBoton
-     * @param agregarTrioBoton
-     * @param agregarEscalaBoton
-     * @param cartasJugadorLista
-     * @param cartasJugadorListaModelo
-     * @param mazoBoton
-     * @param pozoBoton
-     * @param nroTriosLabel
-     * @param nroRondaLabel
-     * @param nroEscalasLabel
-     * @param modoDebugButton
-     * @param nombreJugadorLabel
-     * @param nroCartasLabel
-     * @param seHaBajadoLabel
-     * @param yaSacoCartaLabel
-     * @param yaSacoCartaLabel
-     * @param izquierdaBoton
-     * @param derechaBoton
-     * @param nivelFinal
-     * @param nivelInicial
-     * @param ronda
-     *
+     * Panel principal que muestra la ventana de la mesa de carioca
      */
-
-
     private JPanel panel;
-
+    /**
+     * Tabla que muestra los jugadores e información relevante
+     */
     private JTable jugadoresTabla;
+    /**
+     * Modelo usado para construir la tabla de jugadores
+     */
     private DefaultTableModel jugadoresTablaModelo;
-
+    /**
+     * Tabla que muestra las escalas puestas en la mesa
+     */
     private JTable escalasEnLaMesaTabla;
+    /**
+     * Modelo usado para construir la tabla de escalas en la mesa
+     */
     private DefaultTableModel escalasEnLaMesaModelo;
-
+    /**
+     * Tabla que muestra las escalas puestas en la mesa
+     */
     private JTable triosEnLaMesaTabla;
+    /**
+     * Modelo usado para construir la tabla de trios en la mesa
+     */
     private DefaultTableModel triosEnLaMesaModelo;
-
+    /**
+     * Botón que permite botar una carta
+     */
     private JButton botarCartaBoton;
+    /**
+     * Botón que permite acceder al menú para bajarse
+     */
     private JButton bajarseBoton;
+    /**
+     * Botón que permite agregar una carta a un trío seleccionado
+     */
     private JButton agregarTrioBoton;
+    /**
+     * Botón que permite agregar una carta a una escala seleccionada
+     */
     private JButton agregarEscalaBoton;
-
+    /**
+     * Lista que contiene las cartas del jugador actual
+     */
     private JList<Carta> cartasJugadorLista;
+    /**
+     * Modelo que sirve para construir la lista de las cartas del jugador actual
+     */
     private DefaultListModel cartasJugadorListaModelo;
+    /**
+     * Botón que saca una carta del mazo
+     */
     private JButton mazoBoton;
+    /**
+     * Botón que saca una carta del pozo
+     */
     private JButton pozoBoton;
+    /**
+     * Etiqueta que muestra el número de la ronda actual
+     */
     private JLabel nroRondaLabel;
+    /**
+     * Etiqueta que muestra el número de trios a formar en la ronda actual
+     */
     private JLabel nroTriosLabel;
+    /**
+     * Etiqueta que muestra el número de escalas a formar en la ronda actual
+     */
     private JLabel nroEscalasLabel;
+    /**
+     * Botón que accede al modo Debug
+     */
     private JButton modoDebugButton;
+    /**
+     * Etiqueta que muestra el nombre del jugador actual
+     */
     private JLabel nombreJugadorLabel;
+    /**
+     * Etiqueta que muestra el número de cartas del jugador actual
+     */
     private JLabel nroCartasLabel;
+    /**
+     * Etiqueta que indica si el jugador actual se há bajado
+     */
     private JLabel seHaBajadoLabel;
+    /**
+     * Etiqueta que indica si el jugador actual ha sacado una carta
+     */
     private JLabel yaSacoCartaLabel;
+    /**
+     * Botón que permite mover una carta seleccionada de la mano a la izquierda
+     */
     private JButton izquierdaBoton;
+    /**
+     * Botón que permite mover una carta seleccionada de la mano a la derecha
+     */
     private JButton derechaBoton;
-
+    /**
+     * Ronda final seleccionada para jugar
+     */
     private final int nivelFinal;
+    /**
+     * Ronda inicial seleccionada para jugar
+     */
     private final int nivelInicial;
 
-
+    /**
+     * Ronda actual que se está jugando
+     */
     private Ronda ronda; // Asociación
 
     /**
-     *
-     * @param ronda
-     * @param nivelInicial
-     * @param nivelFinal
+     * Crea la ventana para jugar carioca digital según la información dada antes de iniciar la partida
+     * @param ronda ronda actual que provee de requisitos para jugar la partida
+     * @param nivelInicial ronda inicial que se eligió a jugar
+     * @param nivelFinal ronda final que se eligió jugar
      */
     public MesaGUI(Ronda ronda, int nivelInicial, int nivelFinal) {
         this.ronda = ronda;
@@ -146,6 +192,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         this.ronda = ronda;
     }
 
+    /**
+     * Actualiza la tabla que muestra las escalas en la mesa con nueva información
+     */
     public void actualizarTablaEscala() {
         while (jugadoresTablaModelo.getRowCount() > 0) jugadoresTablaModelo.removeRow(0);
 
@@ -159,6 +208,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         escalasEnLaMesaTabla.setModel(escalasEnLaMesaModelo);
     }
 
+    /**
+     * Actualiza la tabla que muestra los tríos en la mesa con nueva información
+     */
     public void actualizarTablaTrios() {
         while (triosEnLaMesaModelo.getRowCount() > 0) triosEnLaMesaModelo.removeRow(0);
 
@@ -174,6 +226,9 @@ public class MesaGUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Actualiza la tabla que muestra los jugadores con información nueva
+     */
     public void actualizarTablaJugadores() {
 
         while (jugadoresTablaModelo.getRowCount() > 0) jugadoresTablaModelo.removeRow(0);
@@ -184,6 +239,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         jugadoresTabla.setModel(jugadoresTablaModelo);
     }
 
+    /**
+     * Actualiza la lista que contiene la mano del jugador actual con nueva información
+     */
     public void actualizar_CartasJugadorActualLista() {
         nombreJugadorLabel.setText(ronda.getJugadorActual().getNombre());
         nroCartasLabel.setText(String.valueOf(ronda.getJugadorActual().getCartas().size()));
@@ -207,11 +265,6 @@ public class MesaGUI extends JFrame implements ActionListener {
 
     }
 
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -238,6 +291,9 @@ public class MesaGUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Agrega la carta seleccionada a la escala en la mesa seleccionada
+     */
     private void agregarEscalaBotonEvento() {
         String mensajeDeError = "";
 
@@ -282,6 +338,10 @@ public class MesaGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, mensajeDeError, "Error al agregar carta hacia una escala", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Agrega la carta seleccionada a el trío en la mesa seleccionado
+     */
+
     private void agregarTrioBotonEvento() {
         String mensajeDeError = "";
         if (cartasJugadorLista.getSelectedIndices().length == 1 && triosEnLaMesaTabla.getSelectedRow() != -1 && triosEnLaMesaTabla.getSelectedRows().length == 1) {
@@ -305,6 +365,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, mensajeDeError, "Error al agregar carta a un trio", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Se reinician los trios y escalas de cada jugador, se calculan los puntajes y se puede terminar la partida si se está en la última ronda
+     */
     private void finRonda() {
         ronda.limpiarMatrizJugadores();
         if (ronda.getNivel() == nivelFinal) {
@@ -325,10 +388,17 @@ public class MesaGUI extends JFrame implements ActionListener {
         this.dispose();
     }
 
+    /**
+     * Accede al menú Debug instanciando una nueva ventana con la información de la ronda actual
+     */
+
     private void modoDebugButtonEvento() {
         new MenuDebugGUI(this).setVisible(true);
     }
 
+    /**
+     * Saca una carta del mazo y se la agrega a la mano del jugador actual si este no ha sacado una carta anteriormente
+     */
     private void mazoBotonEvento() {
         if (ronda.getJugadorActual().isYaSacoCarta()) { //Si el jugador actual saco carta, no puede volver a sacar carta
             JOptionPane.showMessageDialog(this, "Usted ya saco carta, elija otra opción", "Error Jugador Actual ya saco carta", JOptionPane.ERROR_MESSAGE);
@@ -344,6 +414,10 @@ public class MesaGUI extends JFrame implements ActionListener {
         }
         //Refrescar JList
     }
+
+    /**
+     * Saca una carta del pozo y se la agrega a la mano del jugador actual si este no ha sacado una carta anteriormente
+     */
 
     private void pozoBotonEvento() {
         if (ronda.getJugadorActual().isYaSacoCarta()) { //Si el jugador actual saco carta, no puede volver a sacar carta
@@ -367,6 +441,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Bota la carta seleccionada al pozo
+     */
     private void botarCartaBotonEvento() {
         //Si el jugador desea botar una carta
         if (ronda.getJugadorActual().isYaSacoCarta()) { //Se verifica si saco una carta previamente
@@ -410,6 +487,9 @@ public class MesaGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Accede al jugador actual al menú bajarse al abrir una ventana nueva con la información de la ronda actual
+     */
     private void bajarseBotonEvento() {
         if (ronda.getJugadorActual().isYaSacoCarta()) {
             if (ronda.getJugadorActual().isBajoSusCarta()) {
@@ -424,6 +504,10 @@ public class MesaGUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "¡Usted no puede bajarse porque no ha sacado carta!", "Error: Jugador aún no ha sacado carta", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    /**
+     * Mueve la carta seleccionada a la izquierda dentro de la lista
+     */
 
     private void izquierdaBotonEvento() {
         if (cartasJugadorLista.getSelectedIndices().length == 1) { //Si selecciono solamente un indice
@@ -444,6 +528,10 @@ public class MesaGUI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Mueve la carta seleccionada a la derecha dentro de la lista
+     */
+
     private void derechaBotonEvento() {
         if (cartasJugadorLista.getSelectedIndices().length == 1) { //Si selecciono solamente un indice
             int indice = cartasJugadorLista.getSelectedIndex();
@@ -460,6 +548,7 @@ public class MesaGUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Error: Para mover cartas debe hacerlo de a uno", "Error: Mover Carta", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 
     private void createUIComponents() {

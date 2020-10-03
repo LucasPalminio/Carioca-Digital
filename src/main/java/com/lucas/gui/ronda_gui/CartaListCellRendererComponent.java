@@ -5,21 +5,19 @@ import com.lucas.carioca_digital.Carta;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Esta clase sirve para renderizar las cartas en el resto de GUI relacionadas con jugar una ronda de carioca
+ */
 public class CartaListCellRendererComponent implements ListCellRenderer {
     /**
-     * Return a component that has been configured to display the specified
-     * value. That component's <code>paint</code> method is then called to
-     * "render" the cell.  If it is necessary to compute the dimensions
-     * of a list because the list cells do not have a fixed size, this method
-     * is called to generate a component on which <code>getPreferredSize</code>
-     * can be invoked.
+     * Este método retorna las cartas renderizadas para su uso en otras clases, como MenuGUI
      *
-     * @param list         The JList we're painting.
-     * @param value        The value returned by list.getModel().getElementAt(index).
-     * @param index        The cells index.
-     * @param isSelected   True if the specified cell was selected.
-     * @param cellHasFocus True if the specified cell has the focus.
-     * @return A component whose paint() method will render the specified value.
+     * @param list         El JList que se está manipulando
+     * @param value        El valor retornado por list.getModel().getElementAt(index).
+     * @param index        El identificador de las celdas
+     * @param isSelected   Es verdadero si la celda especificada está seleccionada
+     * @param cellHasFocus Es verdadero si la celda especificada está siendo enfocada
+     * @return El componente con el renderizado de las cartas
      * @see JList
      * @see ListSelectionModel
      * @see ListModel

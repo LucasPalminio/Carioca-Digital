@@ -177,7 +177,7 @@ public class Utilidad {
      * @param mensaje pregunta que hace la terminal
      * @param min numero maximo aceptado
      * @param max numero maximo aceptado
-     * @return
+     * @return Número ingresado por el usuario
      */
     public static int ingresarUnNumero(String mensaje, int min, int max) {
         if (min > max) {
@@ -256,8 +256,8 @@ public class Utilidad {
 
 
     /**
-     * Este método solo imprime solo el menu de opciones
-     * @param opciones
+     * Este método solo imprime el menu de opciones
+     * @param opciones Alternativas a seleccionar por el usuario
      */
     public static void imprimirSoloMenuOpciones(String[] opciones) {
         //Imprime el menu de opciones pero las opciones comienzan desde el 1
@@ -268,7 +268,7 @@ public class Utilidad {
 
     /**
      * Este método imprime el menu de opciones
-     * @param opciones
+     * @param opciones Alternativas a seleccionar por el usuario
      */
     public static void imprimirSoloMenuOpciones(ArrayList<String> opciones) {
 
