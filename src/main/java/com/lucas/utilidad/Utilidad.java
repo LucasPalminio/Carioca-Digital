@@ -7,16 +7,19 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Esta clase sirve para proveer de métodos de uso general a otras clases
+ */
 public class Utilidad {
 
     /**
-     * in se encarga de leer lo escrito por el usuario
+     * Se encarga de leer lo escrito por el usuario
      */
     private static Scanner in;
 
     /**
      *
-     * @param input que entrada de texto se va a remplazar
+     * Que entrada de texto se va a remplazar
      */
     private static ByteArrayInputStream input;
 

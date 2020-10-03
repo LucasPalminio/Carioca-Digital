@@ -5,11 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+ * Esta clase se encarga de guardar, leer y gestionar los datos a guardar
+ * Ademas de funcionar como clase padre para la clase GestorCSV
+ */
 public class GestorArchivos {
     /**
-     * Esta clase se encarga de guardar, leer y gestionar los datos a guardar
-     * Ademas de funcionar como clase padre para la clase GestorCSV
+     * Crea el gestor de archivos genérico
      */
 
     public GestorArchivos(){

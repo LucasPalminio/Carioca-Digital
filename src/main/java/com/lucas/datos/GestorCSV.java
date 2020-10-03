@@ -11,11 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-
+/**
+ * Esta clase es una derivación del GestorArchivos y sirve específicamente para manipular archivos .csv
+ */
 public class GestorCSV extends GestorArchivos{
-    /**
-     *
-     */
+
 
 
     /**

@@ -2,6 +2,9 @@ package com.lucas.launcher;
 
 import com.lucas.gui.MenuPrincipalGUI;
 
+/**
+ * Esta clase solo cumple el propósito de ejecutar el resto del programa
+ */
 public class Launcher {
     /**
      * Lanzador del programa, haciendo visible la ventana de la interfaz grafica
