@@ -84,13 +84,6 @@ public class MenuJuego extends JFrame implements ActionListener {
     int nivelInicial;
     int nivelFinal;
 
-    /**
-     *
-     * @param args se ocupa para enviarle valores al programa
-     */
-    public static void main(String[] args) {
-        new MenuJuego().setVisible(true);
-    }
 
     /**
      * Constructor de la clase

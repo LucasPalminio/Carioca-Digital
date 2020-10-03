@@ -70,13 +70,7 @@ public class MenuPrincipalGUI extends JFrame implements ActionListener {
 
     }
 
-    /**
-     *
-     * @param args se ocupa para enviarle valores al programa
-     */
-    public static void main(String[] args) {
-        new MenuPrincipalGUI().setVisible(true);
-    }
+
 
     /**
      *

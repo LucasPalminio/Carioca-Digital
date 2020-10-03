@@ -23,7 +23,7 @@ public class GestorArchivos {
     /**
      * Este método se encarga de crear una carpeta, verificar su existencia y si existe algún error al crearla
      * @param ruta Es la ruta de la carpeta en donde se almacenaran los datos
-     * @throws Exception e  Evento que ocurre durante la ejecución de un programa que interrumpe el flujo normal de instrucciones.
+     *
      */
     public void crearCarpeta(String ruta){
         try {
@@ -50,7 +50,7 @@ public class GestorArchivos {
     /**
      * Este método se encarga de crear el archivo, obteniendo los datos y usando la ruta para almacenarlo
      * @param ruta Es donde se encuentra el fichero
-     * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta.
+     *
      */
     public void crearArchivo(String ruta){
         try {
@@ -81,7 +81,7 @@ public class GestorArchivos {
      *  Este método es para escribir en un archivo
      * @param mensaje lo que se escribe en el archivo
      * @param ruta Es donde se encuentra el fichero
-     * @throws IOException e Error producido por una operación de entrada o salida que falla o se interpreta
+     *
      */
     public void escribir(String mensaje, String ruta){
         ruta = CARPETA_DATOS + ruta;
