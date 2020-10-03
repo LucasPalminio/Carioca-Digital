@@ -19,9 +19,14 @@ public class UtilidadTest {
     @After
     public void tearDown() throws Exception {
     }
+
+    /**
+     *Este test ingresa una letra cuando el método inicialmente pedía un numero, el método maneja bien
+     * la excepción (no se cayo) y posterior puede ingresar los datos de cada jugador
+     *
+     */
     @Test
     public void ingresarJugadoresTest(){
-        //Este test ingresa una letra cuando el metodo inicialmente pedia un numero, el metodo maneja bien la excepcion (nose cayo) y posterior puede ingresar los datos de cada jugador
         String stringInput = "e\n2\n"+"Lucas\nLorenzo";
         Utilidad.entradaAProbar(stringInput);
 
