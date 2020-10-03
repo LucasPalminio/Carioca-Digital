@@ -8,21 +8,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidad {
+
     /**
-     * @param in se encarga de leer lo escrito por el usuario
-     * @param input ??
-     * @param ANSI_BLACK es el color negro en en ANSI
-     * @param ANSI_RED es el color rojo en ANSI
-     * @param ANSI_YELLOW es el color amarillo en ANSI
-     * @param ANSI_RESET  este color es gris en ANSI, se encarga de resetear el color
+     * in se encarga de leer lo escrito por el usuario
      */
     private static Scanner in;
+
+    /**
+     *
+     * @param input que entrada de texto se va a remplazar
+     */
     private static ByteArrayInputStream input;
 
 
     /**
-     * ???
-     * @param stringInput
+     * @deprecated
+     * a partir de una entrada por teclado es remplaza por un scanner
+     * @param stringInput simula una entrada por consola
      */
     public static void entradaAProbar(String stringInput) {
         input = new ByteArrayInputStream(stringInput.getBytes());
@@ -44,7 +46,7 @@ public class Utilidad {
     }
 
     /**
-     *
+     * Este método se utilizo para hacer pruebas
      * @param in aquí se almacena lo escrito por el usuario
      */
     public static void setIn(Scanner in) {
@@ -76,7 +78,7 @@ public class Utilidad {
 
     /**
      * Este es el menu se muestra solamente una vez y es cuando se comienza jugar el Carioca.
-     * Al comienzo del juego, se llama este m´wtodo para ingresar el nro de jugadores y sus respectivos nombres
+     * Al comienzo del juego, se llama este método para ingresar el nro de jugadores y sus respectivos nombres
      * Básicamente en esta función se ingresa el numero y nombre de cada Jugador (Se crean los Jugadores)
      * @return  ArrayList de los objetos de la clase Jugador
      */
@@ -167,9 +169,9 @@ public class Utilidad {
 
 
     /**
-     * Este metodo sirve para Cuando se quiere ingresar un numero por terminal, ingresando
+     * Este método sirve para Cuando se quiere ingresar un numero por terminal, ingresando
      * un numero dentro de un rango
-     * @param mensaje ??
+     * @param mensaje pregunta que hace la terminal
      * @param min numero maximo aceptado
      * @param max numero maximo aceptado
      * @return
@@ -191,10 +193,10 @@ public class Utilidad {
 
 
     /**
-     *Este método repite un string una cantidad de veces (es un remplazo al metodo repeat de la clase String)
-     * @param stringARepetir
-     * @param nro
-     * @return
+
+     * @param stringARepetir que palabra se va a repetir
+     * @param nro cantidad de veces
+     * @return repite un string una cantidad de veces (es un remplazo al método repeat de la clase String)
      */
     public static String repetirString(String stringARepetir, int nro) {
         String stringADevolver = "";
@@ -275,9 +277,9 @@ public class Utilidad {
 
     /**
      *
-     * @param array
-     * @param target
-     * @return
+     * @param array lista
+     * @param target string a buscar
+     * @return devuelve en que posición esta el string a buscar
      */
     public static int StringArrayindexOf(String[] array,String target){
         for (int i = 0; i < array.length; i++) {

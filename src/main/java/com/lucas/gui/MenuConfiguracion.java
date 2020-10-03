@@ -10,16 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuConfiguracion extends JFrame implements ActionListener {
+
+
     /**
-     * Esta clase se encarga de crear el panel de configuración
-     * @param panel1 Se ocupa para la creación de paneles
-     * @param volverAlMenuPrincipalButton Botón para volver al menu principal
-     * @param modoDiosCheckBox Se ocupa para activar el modo dios
-     * @param siUnJugadorSeCheckBox Se ocupa para activar la opción "Si un jugador se bajó, ¿Puede sacar carta del pozo?"
+     * Se ocupa para la creación de paneles
      */
     private JPanel panel1;
+
+    /**
+     * Botón para volver al menu principal
+     */
     private JButton volverAlMenuPrincipalButton;
+
+    /**
+     * Se ocupa para activar el modo dios
+     */
     private JCheckBox modoDiosCheckBox;
+
+    /**
+     * Se ocupa para activar la opción "Si un jugador se bajó, ¿Puede sacar carta del pozo?"
+     */
     private JCheckBox siUnJugadorSeCheckBox;
 
     /**

@@ -10,22 +10,46 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPrincipalGUI extends JFrame implements ActionListener {
+
+
     /**
-     * @param jugarUnaPartidaButton botón para ir a la pantalla de jugar una
-     * @param mejoresPuntajesButton botón para ir a ver los puntajes
-     * @param salirButton botón para abandonar el programa
-     * @param panelMain panel principal
-     * @param logo etiqueta donde ira el logo del juego
-     * @param tituloLabel etiqueta del titulo
-     * @param imagenLogo logo del juego
+     * botón para ir a la pantalla de jugar una partida
      */
     private JButton jugarUnaPartidaButton;
+
+    /**
+     * botón para ir a ver los puntajes
+     */
     private JButton mejoresPuntajesButton;
+
+    /**
+     * botón para ir a configuracion
+     */
     private JButton configuracionButton;
+
+    /**
+     * botón para abandonar el programa
+     */
     private JButton salirButton;
+
+    /**
+     * panel principal
+     */
     private JPanel panelMain;
+
+    /**
+     * etiqueta donde ira el logo del juego
+     */
     private JLabel logo;
+
+    /**
+     * etiqueta del titulo
+     */
     private JLabel tituloLabel;
+
+    /**
+     * logo del juego
+     */
     ImageIcon imagenLogo = new ImageIcon("src//images//varios//logoPrincipal.png");
 
 

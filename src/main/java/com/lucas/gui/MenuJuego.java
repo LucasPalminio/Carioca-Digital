@@ -15,35 +15,71 @@ import java.util.ArrayList;
 
 public class MenuJuego extends JFrame implements ActionListener {
 
+
+
     /**
-     * @param panel1 variable para crear un panel
-     * @param volverAlMenúPrincipalButton botón para volver al menu principal
-     * @param comenzarLaPartidaButton botón para comenzar la partida
-     * @param rondaInicialComboBox despliega una lista con los niveles con el que deseamos iniciar la partida
-     * @param rondaFinalComboBox  despliega una lista con los niveles con el que deseamos finalizar la partida
-     * @param nroJugadoresComboBox despliega una lista con el numero de personas que pueden jugar
-     * @param jugador1textField aquí ira el nombre del jugador 1
-     * @param jugador2textField aquí ira el nombre del jugador 2
-     * @param jugador3textField aquí ira el nombre del jugador 3
-     * @param jugador4textField aquí ira el nombre del jugador 4
-     * @param blanco se usa para indicar que se puede escribir en el recuadro
-     * @param rojo se usa para indicar que no se puede escribir en el recuadro
-     * @param jugadores Lista con los jugadores
-     * @param nivelInicial
-     * @param nivelFinal
+     * variable para crear un panel
      */
     private JPanel panel1;
+
+    /**
+     * botón para volver al menu principal
+     */
     private JButton volverAlMenúPrincipalButton;
+
+    /**
+     * botón para comenzar la partida
+     */
     private JButton comenzarLaPartidaButton;
+
+    /**
+     *  despliega una lista con los niveles con el que deseamos iniciar la partida
+     */
     private JComboBox rondaInicialComboBox;
+
+    /**
+     *  despliega una lista con los niveles con el que deseamos finalizar la partida
+     */
     private JComboBox rondaFinalComboBox;
+
+    /**
+     * despliega una lista con el numero de personas que pueden jugar
+     */
     private JComboBox nroJugadoresComboBox;
+
+    /**
+     * aquí ira el nombre del jugador 1
+     */
     private JTextField jugador1textField;
+
+    /**
+     * aquí ira el nombre del jugador 2
+     */
     private JTextField jugador2textField;
+
+    /**
+     * aquí ira el nombre del jugador 3
+     */
     private JTextField jugador3textField;
+
+    /**
+     * aquí ira el nombre del jugador 4
+     */
     private JTextField jugador4textField;
+
+    /**
+     * se usa para indicar que se puede escribir en el recuadro
+     */
     private final Color blanco = new Color(255, 255, 255);
+
+    /**
+     * se usa para indicar que no se puede escribir en el recuadro
+     */
     private final Color rojo = new Color(255, 0, 0);
+
+    /**
+     * Lista con los jugadores
+     */
     private final ArrayList<Jugador> jugadores = new ArrayList<>();
     int nivelInicial;
     int nivelFinal;
