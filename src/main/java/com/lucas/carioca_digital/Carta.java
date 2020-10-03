@@ -10,21 +10,21 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-
+/**
+ *
+ */
 public class Carta extends JLabel {
     /**
-     * Esta clase se encarga de de asignar los valores, el palo a las cartas
-     * @param PALOS_SIMBOLOS son los simbolos de los palos de los naipes ingleses pica, diamante, trebol, corazon
-     * @param PALOS deff es la inicial de cada palo C = trebol, D = diamente, H = Corazon, S = Pica ; Esto es por su inicial en ingles
-     * @param Valores son los valores de cada carta
-     * @param palo de la carta
-     * @param WIDTH Ancho de la carta
-     * @param HEIGHT Alto de la carta
-     * @param valor son los numeros o letra de la carta
-     * @param precio puntaje de la carta (si es numero es ese valor. Si es J= Q= K= A= JKR=30)
-     * @param imagenCarta es la imagen que le corresponde a  cada carta
-     *
-     *
+     * Esta clase se encarga de de asignar los valores, el palo a las cartas.
+     * @param PALOS_SIMBOLOS son los simbolos de los palos de los naipes ingleses pica, diamante, trébol, corazon.
+     * @param PALOS es la inicial de cada palo C = trébol, D = diamante, H = Corazon, S = Pica ; Esto es por su inicial en ingles.
+     * @param Valores son los valores de cada carta.
+     * @param palo de la carta.
+     * @param WIDTH Ancho de la carta.
+     * @param HEIGHT Alto de la carta.
+     * @param valor son los números o letra de la carta.
+     * @param precio puntaje de la carta (si es numero es ese valor. Si es J= Q= K= A= JKR=30).
+     * @param imagenCarta es la imagen que le corresponde a  cada carta.
      */
     // Colores que se usaran para algunos textos
 
@@ -47,7 +47,7 @@ public class Carta extends JLabel {
     /**
      * se establece el valor y palo a cada carta, ademas de sus dimensiones y color
      * @param palo otorga una clase de palo (corazon, pica, trebol, diamante) pertenese la carta
-     * @param valor otorg un valor numerico a cada carta
+     * @param valor otorga un valor numerico a cada carta
      */
     public Carta(String palo, String valor) {
         this.palo = palo;

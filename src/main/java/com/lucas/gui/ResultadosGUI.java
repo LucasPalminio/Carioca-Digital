@@ -14,30 +14,63 @@ import java.util.ArrayList;
 
 public class ResultadosGUI extends JFrame implements ActionListener {
 
+
+
     /**
-     * @param panel1 Se usa para crear un panel
-     * @param puntaje1Label  etiqueta con el puntaje del jugador 1
-     * @param puntaje2Label  etiqueta con el puntaje del jugador 2
-     * @param puntaje3Label  etiqueta con el puntaje del jugador 3
-     * @param puntaje4Label  etiqueta con el puntaje del jugador 4
-     * @param volverResultadosButton botón para regresar a resultados
-     * @param jugador1Label etiqueta con el nombre del jugador 1
-     * @param jugador2Label etiqueta con el nombre del jugador 2
-     * @param jugador3Label etiqueta con el nombre del jugador 3
-     * @param jugador4Label etiqueta con el nombre del jugador 4
-     * @param icono Es la imagen seleccionada para mostrar
+     * Se usa para crear un panel
      */
     private JPanel panel1;
+
+    /**
+     *  etiqueta con el puntaje del jugador 1
+     */
     private JLabel puntaje1Label;
+
+    /**
+     *  etiqueta con el puntaje del jugador 2
+     */
     private JLabel puntaje2Label;
+
+    /**
+     * etiqueta con el puntaje del jugador 3
+     */
     private JLabel puntaje3Label;
+
+    /**
+     * etiqueta con el puntaje del jugador 4
+     */
     private JLabel puntaje4Label;
+
+    /**
+     * botón para regresar a resultados
+     */
     private JButton volverResultadosButton;
+
+    /**
+     * etiqueta con el nombre del jugador 3
+     */
     private JLabel jugador3Label;
+
+    /**
+     * etiqueta con el nombre del jugador 4
+     */
     private JLabel jugador4Label;
+
     private JLabel iconoLabel;
+
+    /**
+     * etiqueta con el nombre del jugador 1
+     */
     private JLabel jugador1Label;
+
+    /**
+     * etiqueta con el nombre del jugador 1
+     */
     private JLabel jugador2Label;
+
+    /**
+     * Es la imagen seleccionada para mostrar
+     */
     ImageIcon icono = new ImageIcon("src//images//varios//cartasMoviendose.gif");
 
 

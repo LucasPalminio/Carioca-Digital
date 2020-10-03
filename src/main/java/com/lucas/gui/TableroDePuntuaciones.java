@@ -10,18 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TableroDePuntuaciones extends JFrame implements ActionListener {
-    /**
-     *
-     * @param panel1 es para crear un panel
-     * @param volverPuntajesButton
-     * @param table1 es para crear una tabla
-     * @param noDisponibleLabel etiqueta con mensaje
-     *
-     */
 
+
+
+    /**
+     * es para crear un panel
+     */
     private JPanel panel1;
+
+    /**
+     ??
+     */
     private JButton volverPuntajesButton;
+    /**
+     * es para crear una tabla
+     */
     private JTable table1;
+
+    /**
+     * etiqueta con mensaje
+     */
     private JLabel noDisponibleLabel;
 
 

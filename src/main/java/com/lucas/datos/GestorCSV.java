@@ -19,9 +19,9 @@ public class GestorCSV extends GestorArchivos{
 
 
     /**
-     * Sobrecarga del método posterior
-     * @param data
-     * @param ruta
+     * Crea el archivo a guardar solo si no existe
+     * @param data los datos que se escribirá en el archivo
+     * @param ruta lugar donde se almacenara la infromacion
      */
     public void escribirCSV(List<String[]> data, String ruta){
         try {
@@ -41,7 +41,7 @@ public class GestorCSV extends GestorArchivos{
     }
 
     /**
-     * Crea el archivo a guardar si no existe
+     * Crea el archivo a guardar solo si no existe
      * @param fila linea que se edita
      * @param ruta donde se almacena el archivo
      * @throw IOException ex Error producido por una operación de entrada o salida que falla o se interpreta
